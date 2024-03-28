@@ -1,5 +1,5 @@
 <!--
-Country Flags
+SvgToXaml
 Copyright (C) 2022-2024 Dust in the Wind
 
 This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <PropertyGroup>
         <Version>0.1.3.0</Version>
-        <Product>SVG to XAML</Product>
+        <Product>SvgToXaml</Product>
         <Company>Dust in the Wind</Company>
         <Copyright>Copyright © Dust in the Wind 2022-2024</Copyright>
         <Authors>lastunicorn</Authors>

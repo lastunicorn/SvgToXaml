@@ -1,4 +1,4 @@
-﻿// Country Flags
+﻿// SvgToXaml
 // Copyright (C) 2022-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
 
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Xml;
 using DustInTheWind.SvgToXaml.Svg;
 
 namespace DustInTheWind.SvgToXaml.Conversion;

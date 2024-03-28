@@ -1,4 +1,4 @@
-﻿// Country Flags
+﻿// SvgToXaml
 // Copyright (C) 2022-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -28,6 +28,6 @@ public class Stop : Element
 
     [XmlAttribute("stop-opacity")]
     public double StopOpacity { get; set; }
-    
+
     public bool StopOpacitySpecified { get; set; }
 }
