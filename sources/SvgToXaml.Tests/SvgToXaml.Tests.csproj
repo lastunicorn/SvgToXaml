@@ -1,0 +1,269 @@
+﻿<!--
+Country Flags
+Copyright (C) 2022-2024 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <AssemblyName>DustInTheWind.SvgToXaml.Tests</AssemblyName>
+        <RootNamespace>DustInTheWind.SvgToXaml.Tests</RootNamespace>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Conversion\CircleTests\circle-transform.svg" />
+        <None Remove="Conversion\CircleTests\height-from-radius-0.svg" />
+        <None Remove="Conversion\CircleTests\height-from-radius-negative.svg" />
+        <None Remove="Conversion\CircleTests\height-from-radius-positive.svg" />
+        <None Remove="Conversion\CircleTests\left-from-radius-equal-to-x.svg" />
+        <None Remove="Conversion\CircleTests\left-from-radius-greater-than-x.svg" />
+        <None Remove="Conversion\CircleTests\left-from-radius-smaller-than-x.svg" />
+        <None Remove="Conversion\CircleTests\top-from-radius-equal-to-y.svg" />
+        <None Remove="Conversion\CircleTests\top-from-radius-greater-than-y.svg" />
+        <None Remove="Conversion\CircleTests\top-from-radius-smaller-than-y.svg" />
+        <None Remove="Conversion\CircleTests\width-from-radius-0.svg" />
+        <None Remove="Conversion\CircleTests\width-from-radius-negative.svg" />
+        <None Remove="Conversion\CircleTests\width-from-radius-positive.svg" />
+        <None Remove="Conversion\DefsTests\defs-2circles.svg" />
+        <None Remove="Conversion\DefsTests\defs-circle.svg" />
+        <None Remove="Conversion\DefsTests\defs-group-circle.svg" />
+        <None Remove="Conversion\FillTests\ColorTests\circle-fill-argb.svg" />
+        <None Remove="Conversion\FillTests\ColorTests\circle-fill-rgb-full.svg" />
+        <None Remove="Conversion\FillTests\ColorTests\circle-fill-rgb-short.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\01-group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\02-group-use-href-defs-group-circle^.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\03-group-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\04-group-use-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\05-group-use^-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\06-group-use^-href-defs-group-circle.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\07-group^-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\08-group^-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\09-svgroot^-group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\FillTests\UrlTests\circle-fill-url-gradient-href-gradient.svg" />
+        <None Remove="Conversion\FillTests\UrlTests\circle-fill-url-gradient.svg" />
+        <None Remove="Conversion\PolylineTests\points-1.svg" />
+        <None Remove="Conversion\PolylineTests\points-2.svg" />
+        <None Remove="Conversion\PolylineTests\points-3.svg" />
+        <None Remove="Conversion\StrokeTests\CircleDefsClassTests\circle-defs-class^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleDefsClassTests\circle^-defs-class^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleClassTests\circle-class^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleClassTests\circle^-class^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleClassTests\svgroot^-circle-class^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleDefsClassTests\svgroot^-circle-defs-class^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleStyleTests\circle-style^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleStyleTests\circle^-style^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleStyleTests\svgroot^-circle-style^.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\01-group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\02-group-use-href-defs-group-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\03-group-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\04-group-use-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\05-group-use^-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\06-group-use^-href-defs-group-circle.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\07-group^-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\08-group^-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\09-svgroot^-group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\00-use-href-defs-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\01-use-href-defs-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\02-use^-href-defs-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\03-use^-href-defs-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\04-svgroot^-use-href-defs-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\05-svgroot^-use-href-defs-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\06-svgroot^-use^-href-defs-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\07-svgroot^-use^-href-defs-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\01-use-href-defs-group-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\02-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\03-use^-href-defs-group-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\04-use-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\05-use^-href-defs-group-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\06-use^-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\07-use^-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\Transforms\matrix.svg" />
+        <None Remove="Conversion\Transforms\rotate.svg" />
+        <None Remove="Conversion\Transforms\scale.svg" />
+        <None Remove="Conversion\Transforms\translate.svg" />
+        <None Remove="empty.svg" />
+        <None Remove="Conversion\StrokeTests\CircleInGroupTests\svgroot^-group^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\CircleInGroupTests\svgroot^-group^-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\CircleTests\svgroot^-circle.svg" />
+        <None Remove="Conversion\StrokeTests\CircleTests\svgroot^-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\stroke-circle-group-svgroot^.svg" />
+        <None Remove="Conversion\StrokeTests\stroke-circle-group^.svg" />
+        <None Remove="Conversion\StrokeTests\stroke-circle.svg" />
+        <None Remove="Conversion\StrokeTests\stroke-circle^-group.svg" />
+        <None Remove="Conversion\StrokeTests\stroke-circle^-group^.svg" />
+        <None Remove="Conversion\StrokeTests\stroke-circle^.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\group^-use-references-defs-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\group^-use^-references-defs-circle.svg" />
+        <None Remove="Conversion\StrokeTests\UseHrefDefsCircleTests\group^-use^-references-defs-circle^.svg" />
+        <None Remove="Conversion\UseTests\use-references-circle-after.svg" />
+        <None Remove="Conversion\UseTests\use-references-circle-before.svg" />
+        <None Remove="Conversion\UseTests\use-references-defs-circle.svg" />
+        <None Remove="svg-width-negativevalue.svg" />
+        <None Remove="svg-width-none.svg" />
+        <None Remove="svg-width-value.svg" />
+        <None Remove="svg-width-zero.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightPxTests\svg-height-negative-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightPxTests\svg-height-positive-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightPxTests\svg-height-zero.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightTests\svg-height-negative-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightTests\svg-height-none.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightTests\svg-height-positive-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightTests\svg-height-zero.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgWidthPxTests\svg-width-negative-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgWidthPxTests\svg-width-positive-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgWidthPxTests\svg-width-zero.svg" />
+        <None Remove="Conversion\UseTests\use-references-defs-group-circle.svg" />
+        <None Remove="Conversion\UseTests\UseHrefGroupCircleFromDefsTests\group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\UseTests\UseHrefGroupCircleFromDefsTests\use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\UseTests\UseHrefGroupCircleTests\group-use-href-group-circle.svg" />
+        <None Remove="Conversion\UseTests\UseHrefGroupCircleTests\use-href-group-circle.svg" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="Conversion\CircleTests\top-from-radius-equal-to-y.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\left-from-radius-equal-to-x.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\top-from-radius-greater-than-y.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\left-from-radius-greater-than-x.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\top-from-radius-smaller-than-y.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\left-from-radius-smaller-than-x.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\height-from-radius-0.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\width-from-radius-0.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\height-from-radius-negative.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\width-from-radius-negative.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\height-from-radius-positive.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\width-from-radius-positive.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\circle-transform.svg" />
+        <EmbeddedResource Include="Conversion\DefsTests\defs-2circles.svg" />
+        <EmbeddedResource Include="Conversion\DefsTests\defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\DefsTests\defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\ColorTests\circle-fill-argb.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\ColorTests\circle-fill-rgb-short.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\ColorTests\circle-fill-rgb-full.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\01-group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\02-group-use-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\03-group-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\04-group-use-href-defs-group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\05-group-use^-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\06-group-use^-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\07-group^-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\08-group^-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\09-svgroot^-group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\UrlTests\circle-fill-url-gradient-href-gradient.svg" />
+        <EmbeddedResource Include="Conversion\FillTests\UrlTests\circle-fill-url-gradient.svg" />
+        <EmbeddedResource Include="Conversion\PolylineTests\points-3.svg" />
+        <EmbeddedResource Include="Conversion\PolylineTests\points-2.svg" />
+        <EmbeddedResource Include="Conversion\PolylineTests\points-1.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleDefsClassTests\circle-defs-class^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleDefsClassTests\circle^-defs-class^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleDefsClassTests\svgroot^-circle-defs-class^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleInGroupTests\svgroot^-group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleInGroupTests\svgroot^-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleInGroupTests\svgroot^-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleInGroupTests\group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleClassTests\circle-class^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleClassTests\circle^-class^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleClassTests\svgroot^-circle-class^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleStyleTests\svgroot^-circle-style^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleStyleTests\circle^-style^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleStyleTests\circle-style^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleTests\svgroot^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleTests\circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleInGroupTests\group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleInGroupTests\group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleTests\svgroot^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\CircleTests\circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsCircleTests\group^-use^-href-defs-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsCircleTests\group^-use^-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsCircleTests\group^-use-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\01-group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\02-group-use-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\06-group-use^-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\09-svgroot^-group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\07-group^-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\08-group^-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\05-group-use^-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\04-group-use-href-defs-group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\GroupUseHrefDefsGroupTests\03-group-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\05-svgroot^-use-href-defs-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\06-svgroot^-use^-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\07-svgroot^-use^-href-defs-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\04-svgroot^-use-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\00-use-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\03-use^-href-defs-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\02-use^-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsCircleTests\01-use-href-defs-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\04-use-href-defs-group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\02-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\03-use^-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\07-use^-href-defs-group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\06-use^-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\05-use^-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\StrokeTests\UseHrefDefsGroupWithCircleTests\01-use-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\Transforms\matrix.svg" />
+        <EmbeddedResource Include="Conversion\Transforms\rotate.svg" />
+        <EmbeddedResource Include="Conversion\Transforms\translate.svg" />
+        <EmbeddedResource Include="Conversion\Transforms\scale.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleTests\use-href-circle-after.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleTests\use-href-circle-before.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleFromDefsTests\use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleFromDefsTests\use-href-defs-circle.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightPxTests\svg-height-negative-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightPxTests\svg-height-positive-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightPxTests\svg-height-zero.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightTests\svg-height-negative-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightTests\svg-height-none.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightTests\svg-height-positive-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightTests\svg-height-zero.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthPxTests\svg-width-negative-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthPxTests\svg-width-positive-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthPxTests\svg-width-zero.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthTests\svg-width-negative-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthTests\svg-width-zero.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthTests\svg-width-none.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthTests\svg-width-positive-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\EmptySvgTests\empty.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleTests\group-use-href-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleTests\use-href-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests\use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests\group-use-href-defs-group-circle.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="6.12.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="6.0.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SvgToXaml.Svg\SvgToXaml.Svg.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.Tests.Utils\SvgToXaml.Tests.Utils.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml\SvgToXaml.csproj" PrivateAssets="All" />
+    </ItemGroup>
+
+</Project>
