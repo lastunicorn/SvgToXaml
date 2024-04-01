@@ -14,19 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
+using DustInTheWind.SvgToXaml.Svg.Serialization;
 
-namespace DustInTheWind.SvgToXaml.Svg.Serialization;
+namespace DustInTheWind.SvgToXaml.Svg;
 
-[XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
-public class Svg : G
+public class SvgContainer : SvgElement
 {
-    [XmlAttribute("width")]
-    public string Width { get; set; }
+    public SvgElementCollection<SvgElement> Children { get; }
 
-    [XmlAttribute("height")]
-    public string Height { get; set; }
+    public SvgContainer()
+    {
+        Children = new SvgElementCollection<SvgElement>(this);
+    }
 
-    [XmlAttribute("viewBox")]
-    public string ViewBox { get; set; }
+    public SvgContainer(Element element)
+        : base(element)
+    {
+        Children = new SvgElementCollection<SvgElement>(this);
+    }
+
+    public virtual SvgElement FindChild(string id)
+    {
+        return Children.FindChild(id);
+    }
 }

@@ -14,19 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
+namespace DustInTheWind.SvgToXaml.Svg;
 
-namespace DustInTheWind.SvgToXaml.Svg.Serialization;
-
-[XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
-public class Svg : G
+/// <remarks>
+/// Possible values:
+///     - <clip-source> = <url>
+///     - <basic-shape>
+///     - <geometry-box> = <shape-box> | fill-box | stroke-box | view-box
+/// </remarks>
+public class SvgClipPathReference
 {
-    [XmlAttribute("width")]
-    public string Width { get; set; }
+    public SvgUrl Url { get; }
 
-    [XmlAttribute("height")]
-    public string Height { get; set; }
-
-    [XmlAttribute("viewBox")]
-    public string ViewBox { get; set; }
+    public SvgClipPathReference(string text)
+    {
+        Url = text;
+    }
 }

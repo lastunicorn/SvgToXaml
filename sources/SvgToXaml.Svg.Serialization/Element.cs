@@ -82,4 +82,7 @@ public class Element
     public double Opacity { get; set; }
 
     public bool OpacitySpecified { get; set; }
+
+    [XmlAttribute("clip-path")]
+    public string ClipPath { get; set; }
 }

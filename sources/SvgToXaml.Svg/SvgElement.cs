@@ -23,7 +23,7 @@ public class SvgElement
 {
     public string Id { get; set; }
 
-    public SvgGroup Parent { get; set; }
+    public SvgContainer Parent { get; set; }
 
     public SvgPaint Fill { get; set; }
 
@@ -48,6 +48,8 @@ public class SvgElement
     public SvgTransformList Transforms { get; set; }
 
     public double? Opacity { get; set; }
+
+    public SvgClipPathReference ClipPath { get; set; }
 
     public SvgElement()
     {
@@ -99,11 +101,14 @@ public class SvgElement
         Opacity = element.OpacitySpecified
             ? element.Opacity
             : null;
+
+        if (element.ClipPath != null)
+            ClipPath = new SvgClipPathReference(element.ClipPath);
     }
 
     public Svg GetParentSvg()
     {
-        SvgGroup parent = Parent;
+        SvgContainer parent = Parent;
 
         while (parent != null)
         {

@@ -18,11 +18,14 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.Svg.Serialization;
 
-public class ClipPath
+public class ClipPath : Element
 {
-    [XmlAttribute("id")]
-    public string Id { get; set; }
-
+    [XmlElement("circle", typeof(Circle))]
+    [XmlElement("ellipse", typeof(Ellipse))]
+    [XmlElement("line", typeof(Line))]
     [XmlElement("path", typeof(Path))]
-    public Path Path { get; set; }
+    [XmlElement("polygon", typeof(Polygon))]
+    [XmlElement("polyline", typeof(Polyline))]
+    [XmlElement("rect", typeof(Rect))]
+    public object[] Children { get; set; }
 }

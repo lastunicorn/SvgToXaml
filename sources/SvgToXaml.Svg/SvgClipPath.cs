@@ -19,55 +19,16 @@ using Path = DustInTheWind.SvgToXaml.Svg.Serialization.Path;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgGraphicElement
+public class SvgClipPath : SvgContainer
 {
-}
-
-public class SvgContainerElement
-{
-    // a
-    // clipPath
-    // defs
-    // g
-    // marker
-    // mask
-    // pattern
-    // svg
-    // switch
-    // symbol
-    // unknown
-}
-
-public class SvgStructuralElement
-{
-    // defs
-    // g
-    // svg
-    // symbol
-    // use
-}
-
-public class SvgShapeElement
-{
-    // 
-}
-
-public class SvgGroup : SvgContainer
-{
-    public SvgStyleSheet StyleSheet { get; }
-
-    public SvgGroup()
+    public SvgClipPath(ClipPath clipPath)
+        :base(clipPath)
     {
-    }
+        if (clipPath == null) throw new ArgumentNullException(nameof(clipPath));
 
-    internal SvgGroup(G g)
-        : base(g)
-    {
-        if (g == null) throw new ArgumentNullException(nameof(g));
-
-        if (g.Children != null)
+        if (clipPath.Children != null)
         {
-            foreach (object serializationChild in g.Children)
+            foreach (object serializationChild in clipPath.Children)
             {
                 if (serializationChild is Circle serializationCircle)
                 {
@@ -103,40 +64,6 @@ public class SvgGroup : SvgContainer
                 {
                     SvgPolyline polyline = new(serializationPolyline);
                     Children.Add(polyline);
-                }
-                else if (serializationChild is Defs serializationDefs)
-                {
-                    SvgDefinitions svgDefinitions = new(serializationDefs);
-                    Children.Add(svgDefinitions);
-                }
-                else if (serializationChild is G serializationGChild)
-                {
-                    SvgGroup svgGroupChild = new(serializationGChild);
-                    Children.Add(svgGroupChild);
-                }
-                else if (serializationChild is Use serializationUseChild)
-                {
-                    SvgUse svgUseChild = new(serializationUseChild);
-                    Children.Add(svgUseChild);
-                }
-                else if (serializationChild is Style style)
-                {
-                    StyleSheet = style.Value;
-                }
-                else if (serializationChild is Text serializationText)
-                {
-                    SvgText svgText = new(serializationText);
-                    Children.Add(svgText);
-                }
-                else if (serializationChild is LinearGradient linearGradient)
-                {
-                    SvgLinearGradient svgLinearGradient = new(linearGradient);
-                    Children.Add(svgLinearGradient);
-                }
-                else if (serializationChild is ClipPath clipPath)
-                {
-                    SvgClipPath svgClipPath = new(clipPath);
-                    Children.Add(svgClipPath);
                 }
             }
         }

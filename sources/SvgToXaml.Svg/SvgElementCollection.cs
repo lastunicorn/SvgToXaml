@@ -21,9 +21,9 @@ namespace DustInTheWind.SvgToXaml.Svg;
 public class SvgElementCollection<T> : Collection<T>
     where T : SvgElement
 {
-    private readonly SvgGroup parent;
+    private readonly SvgContainer parent;
 
-    public SvgElementCollection(SvgGroup parent)
+    public SvgElementCollection(SvgContainer parent)
     {
         this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
     }
@@ -68,9 +68,9 @@ public class SvgElementCollection<T> : Collection<T>
             if (svgElement.Id == id)
                 return svgElement;
 
-            if (svgElement is SvgGroup svgGroup)
+            if (svgElement is SvgContainer svgContainer)
             {
-                SvgElement child = svgGroup.Children.FindChild(id);
+                SvgElement child = svgContainer.Children.FindChild(id);
 
                 if (child != null)
                     return child;

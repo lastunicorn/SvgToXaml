@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
+using System.Windows.Media;
 using DustInTheWind.SvgToXaml.Svg;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
@@ -44,6 +45,9 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
             if (SvgElement.Transforms.Count > 0)
                 XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
 
+            if (SvgElement.ClipPath != null)
+                ProcessClipPath();
+
             List<SvgElement> inheritedSvgElements = EnumerateInheritedElements().ToList();
 
             InheritPropertiesFrom(inheritedSvgElements);
@@ -57,6 +61,73 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         catch (Exception ex)
         {
             throw new SvgConversionException(ex);
+        }
+    }
+
+    private void ProcessClipPath()
+    {
+        string referencedId = SvgElement.ClipPath.Url.ReferencedId;
+
+        if (referencedId == null)
+            return;
+
+        SvgElement referencedElement = SvgElement.Parent?.FindChild(referencedId);
+
+        if (referencedElement is not SvgClipPath svgClipPath)
+            return;
+
+        SvgElement firstChild = svgClipPath.Children.FirstOrDefault();
+
+        Geometry geometry = ConvertToGeometry(firstChild);
+
+        if (geometry == null)
+            return;
+
+        XamlElement.Clip = geometry;
+    }
+
+    private static Geometry ConvertToGeometry(SvgElement svgElement)
+    {
+        switch (svgElement)
+        {
+            case SvgCircle svgCircle:
+            {
+                Point centerPoint = new(svgCircle.CenterX, svgCircle.CenterY);
+                return new EllipseGeometry(centerPoint, svgCircle.Radius, svgCircle.Radius);
+            }
+
+            case SvgEllipse svgEllipse:
+            {
+                Point centerPoint = new(svgEllipse.CenterX, svgEllipse.CenterY);
+                return new EllipseGeometry(centerPoint, svgEllipse.RadiusX, svgEllipse.RadiusY);
+            }
+
+            case SvgPath svgPath:
+            {
+                return Geometry.Parse(svgPath.Data);
+            }
+
+            case SvgLine svgLine:
+            {
+                Point startPoint = new(svgLine.X1, svgLine.Y1);
+                Point endPoint = new(svgLine.X2, svgLine.Y2);
+                return new LineGeometry(startPoint, endPoint);
+            }
+
+            case SvgRectangle svgRectangle:
+            {
+                Rect rect = new(svgRectangle.X, svgRectangle.Y, svgRectangle.Width, svgRectangle.Height);
+                return new RectangleGeometry(rect);
+            }
+
+            case SvgPolygon svgPolygon:
+                throw new NotImplementedException();
+
+            case SvgPolyline svgPolyline:
+                throw new NotImplementedException();
+
+            default:
+                throw new UnknownElementTypeException(svgElement?.GetType());
         }
     }
 
