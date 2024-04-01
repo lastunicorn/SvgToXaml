@@ -42,7 +42,7 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
             XamlElement = CreateXamlElement();
 
             if (SvgElement.Transforms.Count > 0)
-                XamlElement.RenderTransform = SvgElement.Transforms.ToXaml();
+                XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
 
             List<SvgElement> inheritedSvgElements = EnumerateInheritedElements().ToList();
 

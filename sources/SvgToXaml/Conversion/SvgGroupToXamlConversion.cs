@@ -38,7 +38,7 @@ internal class SvgGroupToXamlConversion : IConversion<Canvas>
             Canvas canvas = CreateXamlElement();
 
             if (svgGroup.Transforms.Count > 0)
-                canvas.RenderTransform = svgGroup.Transforms.ToXaml();
+                canvas.RenderTransform = svgGroup.Transforms.ToXaml(canvas.RenderTransform);
 
             IEnumerable<UIElement> xamlElements = svgGroup.Children
                 .Where(x => x is not SvgDefinitions)

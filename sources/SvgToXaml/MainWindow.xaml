@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:svgToXaml="clr-namespace:DustInTheWind.SvgToXaml"
 
     mc:Ignorable="d"
-    Title="MainWindow"
+    Title="SVG to XAML"
     Height="450"
     Width="800"
     d:DataContext="{d:DesignInstance svgToXaml:MainViewModel}">

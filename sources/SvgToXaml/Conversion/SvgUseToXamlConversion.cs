@@ -16,6 +16,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using DustInTheWind.SvgToXaml.Svg;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
@@ -36,8 +37,8 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
         IConversion<UIElement> conversion = ConvertReferencedElement(referencedElement);
         UIElement uiElement = conversion.Execute();
 
-        if (svgUse.Transforms.Count > 0)
-            uiElement.RenderTransform = svgUse.Transforms.ToXaml();
+        if (svgUse.Transforms.Count > 0) 
+            uiElement.RenderTransform = svgUse.Transforms.ToXaml(uiElement.RenderTransform);
 
         if (svgUse.X != 0)
             Canvas.SetLeft(uiElement, svgUse.X);

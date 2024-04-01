@@ -15,37 +15,27 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using DustInTheWind.SvgToXaml.Svg;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal static class SvgTransformExtensions
 {
-    public static Transform ToXaml(this IList<ISvgTransform> svgTransformList)
+    public static Transform ToXaml(this IList<ISvgTransform> svgTransformList, Transform existingTransform)
     {
-        switch (svgTransformList.Count)
-        {
-            case 1:
-                return svgTransformList[0].ToXaml();
+        if (svgTransformList == null) throw new ArgumentNullException(nameof(svgTransformList));
 
-            case > 1:
-            {
-                TransformGroup transformGroup = new();
+        TransformGroupBuilder transformGroupBuilder = new(existingTransform);
 
-                for (int i = svgTransformList.Count - 1; i >= 0; i--)
-                {
-                    ISvgTransform svgTransform = svgTransformList[i];
+        IEnumerable<Transform> transforms = svgTransformList
+            .Reverse()
+            .Select(x => x.ToXaml());
 
-                    Transform transform = svgTransform.ToXaml();
-                    transformGroup.Children.Add(transform);
-                }
+        foreach (Transform transform in transforms)
+            transformGroupBuilder.Add(transform);
 
-                return transformGroup;
-            }
-
-            default:
-                return null;
-        }
+        return transformGroupBuilder.RootTransform;
     }
 
     public static Transform ToXaml(this ISvgTransform svgTransform)
