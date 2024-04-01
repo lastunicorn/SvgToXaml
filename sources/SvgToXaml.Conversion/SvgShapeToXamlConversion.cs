@@ -21,7 +21,7 @@ using DustInTheWind.SvgToXaml.Svg;
 namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXamlConversion<TSvg, TXaml>
-    where TSvg : SvgElement
+    where TSvg : SvgShape
     where TXaml : Shape
 {
     protected SvgShapeToXamlConversion(TSvg svgElement, SvgElement referrer = null)

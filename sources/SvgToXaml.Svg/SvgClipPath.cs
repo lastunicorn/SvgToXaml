@@ -65,6 +65,16 @@ public class SvgClipPath : SvgContainer
                     SvgPolyline polyline = new(serializationPolyline);
                     Children.Add(polyline);
                 }
+                else if (serializationChild is Use serializationUseChild)
+                {
+                    SvgUse svgUseChild = new(serializationUseChild);
+                    Children.Add(svgUseChild);
+                }
+                else if (serializationChild is Text serializationText)
+                {
+                    SvgText svgText = new(serializationText);
+                    Children.Add(svgText);
+                }
             }
         }
     }

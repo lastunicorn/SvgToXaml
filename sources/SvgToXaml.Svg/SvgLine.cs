@@ -18,7 +18,7 @@ using DustInTheWind.SvgToXaml.Svg.Serialization;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgLine : SvgElement
+public class SvgLine : SvgShape
 {
     public double X1 { get; set; }
 

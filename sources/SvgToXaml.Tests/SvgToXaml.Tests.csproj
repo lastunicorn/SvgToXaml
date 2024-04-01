@@ -60,6 +60,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\FillTests\GroupUseHrefDefsGroupTests\09-svgroot^-group-use-href-defs-group-circle.svg" />
         <None Remove="Conversion\FillTests\UrlTests\circle-fill-url-gradient-href-gradient.svg" />
         <None Remove="Conversion\FillTests\UrlTests\circle-fill-url-gradient.svg" />
+        <None Remove="Conversion\PathTests\path-data-absent.svg" />
+        <None Remove="Conversion\PathTests\path-data-none.svg" />
+        <None Remove="Conversion\PathTests\path-data.svg" />
         <None Remove="Conversion\PolylineTests\points-1.svg" />
         <None Remove="Conversion\PolylineTests\points-2.svg" />
         <None Remove="Conversion\PolylineTests\points-3.svg" />
@@ -170,6 +173,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\FillTests\GroupUseHrefDefsGroupTests\09-svgroot^-group-use-href-defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\FillTests\UrlTests\circle-fill-url-gradient-href-gradient.svg" />
         <EmbeddedResource Include="Conversion\FillTests\UrlTests\circle-fill-url-gradient.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\path-data.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\path-data-absent.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\path-data-none.svg" />
         <EmbeddedResource Include="Conversion\PolylineTests\points-3.svg" />
         <EmbeddedResource Include="Conversion\PolylineTests\points-2.svg" />
         <EmbeddedResource Include="Conversion\PolylineTests\points-1.svg" />

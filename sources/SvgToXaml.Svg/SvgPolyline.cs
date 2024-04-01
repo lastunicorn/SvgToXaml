@@ -18,7 +18,7 @@ using DustInTheWind.SvgToXaml.Svg.Serialization;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgPolyline : SvgElement
+public class SvgPolyline : SvgShape
 {
     public SvgPointCollection Points { get; } = new();
 

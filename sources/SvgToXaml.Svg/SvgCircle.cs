@@ -18,7 +18,7 @@ using DustInTheWind.SvgToXaml.Svg.Serialization;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgCircle : SvgElement
+public class SvgCircle : SvgShape
 {
     public double Radius { get; set; }
 

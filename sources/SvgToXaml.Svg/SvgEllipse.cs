@@ -18,7 +18,7 @@ using DustInTheWind.SvgToXaml.Svg.Serialization;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgEllipse : SvgElement
+public class SvgEllipse : SvgShape
 {
     public double RadiusX { get; set; }
 

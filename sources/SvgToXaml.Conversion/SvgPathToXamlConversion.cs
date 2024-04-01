@@ -31,7 +31,9 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
     {
         return new Path
         {
-            Data = Geometry.Parse(SvgElement.Data)
+            Data = SvgElement.Data is null or "none"
+                ? Geometry.Empty
+                : Geometry.Parse(SvgElement.Data)
         };
     }
 }

@@ -21,9 +21,17 @@ namespace DustInTheWind.SvgToXaml.Svg;
 
 public class SvgElement
 {
+    public SvgContainer Parent { get; set; }
+
+    // Core Attributes
+
     public string Id { get; set; }
 
-    public SvgContainer Parent { get; set; }
+    public string[] ClassNames { get; set; }
+
+    public SvgStyleDeclarationCollection Style { get; set; }
+
+    // Inherited Attributes
 
     public SvgPaint Fill { get; set; }
 
@@ -41,9 +49,7 @@ public class SvgElement
 
     public double? StrokeMiterLimit { get; set; }
 
-    public SvgStyleDeclarationCollection Style { get; set; }
-
-    public string[] ClassNames { get; set; }
+    //
 
     public SvgTransformList Transforms { get; set; }
 

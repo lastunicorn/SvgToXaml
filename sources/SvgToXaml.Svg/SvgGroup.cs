@@ -19,39 +19,6 @@ using Path = DustInTheWind.SvgToXaml.Svg.Serialization.Path;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgGraphicElement
-{
-}
-
-public class SvgContainerElement
-{
-    // a
-    // clipPath
-    // defs
-    // g
-    // marker
-    // mask
-    // pattern
-    // svg
-    // switch
-    // symbol
-    // unknown
-}
-
-public class SvgStructuralElement
-{
-    // defs
-    // g
-    // svg
-    // symbol
-    // use
-}
-
-public class SvgShapeElement
-{
-    // 
-}
-
 public class SvgGroup : SvgContainer
 {
     public SvgStyleSheet StyleSheet { get; }

@@ -18,28 +18,17 @@ using DustInTheWind.SvgToXaml.Svg.Serialization;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgRectangle : SvgShape
+/// <summary>
+/// A graphics element that is defined by some combination of straight lines and curves.
+/// </summary>
+public class SvgShape : SvgElement
 {
-    public double Width { get; set; }
-
-    public double Height { get; set; }
-
-    public double X { get; set; }
-
-    public double Y { get; set; }
-
-    public SvgRectangle()
+    protected SvgShape()
     {
     }
 
-    internal SvgRectangle(Rect rect)
-        : base(rect)
+    protected SvgShape(Element element)
+        : base(element)
     {
-        if (rect == null) throw new ArgumentNullException(nameof(rect));
-
-        Width = rect.Width;
-        Height = rect.Height;
-        X = rect.X;
-        Y = rect.Y;
     }
 }

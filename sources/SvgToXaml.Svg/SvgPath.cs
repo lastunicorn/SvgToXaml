@@ -18,8 +18,14 @@ using Path = DustInTheWind.SvgToXaml.Svg.Serialization.Path;
 
 namespace DustInTheWind.SvgToXaml.Svg;
 
-public class SvgPath : SvgElement
+public class SvgPath : SvgShape
 {
+    /// <remarks>
+    /// Possible values: none | &lt;string&gt;
+    /// Initial value: none
+    /// Inherited: no
+    /// </remarks>>
+    // todo: allow Data to accept "none".
     public string Data { get; set; }
 
     public SvgPath()
