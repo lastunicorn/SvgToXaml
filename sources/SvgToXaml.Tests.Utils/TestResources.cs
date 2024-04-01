@@ -30,6 +30,10 @@ public static class TestResources
         string callerNamespace = relativeType.Namespace;
 
         using Stream stream = assembly.GetManifestResourceStream(callerNamespace + "." + resourceFileName);
+
+        if (stream == null)
+            throw new Exception($"The resource file was not found: '{resourceFileName}'.");
+
         using StreamReader streamReader = new(stream);
 
         return streamReader.ReadToEnd();

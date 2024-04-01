@@ -19,23 +19,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
         <TargetFramework>net6.0-windows</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
-        <AssemblyName>DustInTheWind.SvgToXaml</AssemblyName>
-        <RootNamespace>DustInTheWind.SvgToXaml</RootNamespace>
+        <AssemblyName>DustInTheWind.SvgToXaml.Conversion</AssemblyName>
+        <RootNamespace>DustInTheWind.SvgToXaml.Conversion</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" />
-      <ProjectReference Include="..\SvgToXaml.Svg\SvgToXaml.Svg.csproj" PrivateAssets="All" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-            <_Parameter1>DustInTheWind.SvgToXaml.Tests</_Parameter1>
-        </AssemblyAttribute>
+      <ProjectReference Include="..\SvgToXaml.Svg\SvgToXaml.Svg.csproj" />
     </ItemGroup>
 
 </Project>

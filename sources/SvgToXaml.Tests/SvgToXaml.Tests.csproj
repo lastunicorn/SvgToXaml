@@ -42,6 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\CircleTests\width-from-radius-0.svg" />
         <None Remove="Conversion\CircleTests\width-from-radius-negative.svg" />
         <None Remove="Conversion\CircleTests\width-from-radius-positive.svg" />
+        <None Remove="Conversion\ClipPathTests\circle-clippath.svg" />
         <None Remove="Conversion\DefsTests\defs-2circles.svg" />
         <None Remove="Conversion\DefsTests\defs-circle.svg" />
         <None Remove="Conversion\DefsTests\defs-group-circle.svg" />
@@ -151,6 +152,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleTests\height-from-radius-positive.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\width-from-radius-positive.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\circle-transform.svg" />
+        <EmbeddedResource Include="Conversion\ClipPathTests\circle-clippath.svg" />
         <EmbeddedResource Include="Conversion\DefsTests\defs-2circles.svg" />
         <EmbeddedResource Include="Conversion\DefsTests\defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\DefsTests\defs-circle.svg" />

@@ -43,7 +43,7 @@ internal class TransformGroupBuilder
     {
         if (transform == null) throw new ArgumentNullException(nameof(transform));
 
-        if (RootTransform == null)
+        if (RootTransform == null || RootTransform == Transform.Identity)
         {
             RootTransform = transform;
         }

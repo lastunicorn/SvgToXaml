@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.Svg;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-internal class SvgConversion : SvgGroupToXamlConversion
+public class SvgConversion : SvgGroupToXamlConversion
 {
     private readonly Svg.Svg svg;
 
