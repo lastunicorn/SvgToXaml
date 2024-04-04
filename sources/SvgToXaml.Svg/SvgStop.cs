@@ -23,6 +23,8 @@ public class SvgStop : SvgElement
     public double Offset { get; set; }
 
     public SvgColor StopColor { get; set; }
+    
+    public SvgOpacity? StopOpacity { get; set; }
 
     public SvgStop(Stop stop)
         : base(stop)
@@ -30,14 +32,37 @@ public class SvgStop : SvgElement
         Offset = stop.Offset;
         StopColor = stop.StopColor;
 
-        if (stop.StopOpacitySpecified)
-        {
-            StopColor.A = stop.StopOpacity switch
-            {
-                < 0 => 0,
-                > 1 => 1,
-                _ => (byte)Math.Round(stop.StopOpacity * 255)
-            };
-        }
+        if (stop.StopOpacitySpecified) 
+            StopOpacity = stop.StopOpacity;
+    }
+
+    public SvgColor ComputeStopColor()
+    {
+        string rawValue = GetStyleValueFromClasses("stop-color");
+
+        if (rawValue != null)
+            return rawValue;
+
+        SvgStyleDeclaration styleDeclaration = Style?["stop-color"];
+
+        if (styleDeclaration != null)
+            return styleDeclaration.Value;
+
+        return StopColor;
+    }
+
+    public SvgOpacity? ComputeStopOpacity()
+    {
+        string rawValue = GetStyleValueFromClasses("stop-opacity");
+
+        if (rawValue != null)
+            return rawValue;
+
+        SvgStyleDeclaration styleDeclaration = Style?["stop-opacity"];
+
+        if (styleDeclaration != null)
+            return styleDeclaration.Value;
+
+        return StopOpacity;
     }
 }

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Svg;
@@ -58,7 +59,8 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         }
         else if (!fill.Color.IsEmpty)
         {
-            XamlElement.Fill = (Brush)new BrushConverter().ConvertFrom(fill.Color.ToString())!;
+            Color color = fill.Color.ToColor();
+            XamlElement.Fill = new SolidColorBrush(color);
         }
         else if (!fill.Url.IsEmpty)
         {
@@ -66,17 +68,49 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
             {
-                IEnumerable<GradientStop> gradientStops = svgLinearGradient.Stops
+                IEnumerable<GradientStop> gradientStops = svgLinearGradient.ComputeStops()
                     .Select(x =>
                     {
-                        //Color color = (Color)ColorConverter.ConvertFromString(x.StopColor);
+                        SvgColor stopColor = x.ComputeStopColor();
 
-                        Color color = Color.FromArgb(x.StopColor.A, x.StopColor.R, x.StopColor.G, x.StopColor.B);
+                        if (!stopColor.AlphaIsSpecified)
+                        {
+                            SvgOpacity? stopOpacity = x.ComputeStopOpacity();
+
+                            if (stopOpacity.HasValue)
+                                stopColor = stopColor.SetAlpha(stopOpacity.Value);
+                        }
+
+                        Color color = Color.FromArgb(stopColor.Alpha, stopColor.Red, stopColor.Green, stopColor.Blue);
                         return new GradientStop(color, x.Offset);
-                    });
+                    })
+                    .ToList();
 
                 GradientStopCollection gradientStopCollection = new(gradientStops);
-                XamlElement.Fill = new LinearGradientBrush(gradientStopCollection);
+                LinearGradientBrush linearGradientBrush = new(gradientStopCollection);
+
+                double x1 = svgLinearGradient.ComputeX1() ?? SvgLength.Zero;
+                double x2 = svgLinearGradient.ComputeX2() ?? SvgLength.Zero;
+                double y1 = svgLinearGradient.ComputeY1() ?? new SvgLength(1);
+                double y2 = svgLinearGradient.ComputeY2() ?? new SvgLength(1);
+
+                linearGradientBrush.StartPoint = new Point(x1, y1);
+                linearGradientBrush.EndPoint = new Point(x2, y2);
+
+                if (svgLinearGradient.GradientUnits != null)
+                {
+                    linearGradientBrush.MappingMode = svgLinearGradient.GradientUnits switch
+                    {
+                        SvgGradientUnits.ObjectBoundingBox => BrushMappingMode.RelativeToBoundingBox,
+                        SvgGradientUnits.UserSpaceOnUse => BrushMappingMode.Absolute,
+                        _ => throw new Exception("Invalid gradient units.")
+                    };
+                }
+
+                if (svgLinearGradient.GradientTransforms.Count > 0)
+                    linearGradientBrush.Transform = svgLinearGradient.GradientTransforms.ToXaml(linearGradientBrush.Transform);
+
+                XamlElement.Fill = linearGradientBrush;
             }
         }
     }

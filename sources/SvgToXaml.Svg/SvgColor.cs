@@ -24,15 +24,33 @@ public record SvgColor
 
     private readonly string rawValue;
 
-    public byte A { get; set; }
+    public byte Red { get; }
 
-    public byte R { get; set; }
+    public byte Green { get; }
 
-    public byte G { get; set; }
+    public byte Blue { get; }
 
-    public byte B { get; set; }
+    public byte Alpha { get; }
+
+    public bool AlphaIsSpecified { get; }
 
     public bool IsEmpty => rawValue == null;
+
+    public SvgColor(byte red, byte green, byte blue)
+    {
+        Red = red;
+        Green = green;
+        Blue = blue;
+        Alpha = byte.MaxValue;
+    }
+
+    public SvgColor(byte red, byte green, byte blue, byte alpha)
+    {
+        Red = red;
+        Green = green;
+        Blue = blue;
+        Alpha = alpha;
+    }
 
     public SvgColor(string text)
     {
@@ -46,24 +64,25 @@ public record SvgColor
 
                 if (rawValue.Length == 3)
                 {
-                    A = byte.MaxValue;
-                    R = GetChanelValue(rawValue[0]);
-                    G = GetChanelValue(rawValue[1]);
-                    B = GetChanelValue(rawValue[2]);
+                    Red = GetChanelValue(rawValue[0]);
+                    Green = GetChanelValue(rawValue[1]);
+                    Blue = GetChanelValue(rawValue[2]);
+                    Alpha = byte.MaxValue;
                 }
                 else if (rawValue.Length == 6)
                 {
-                    A = byte.MaxValue;
-                    R = GetChanelValue(rawValue.Substring(0, 2));
-                    G = GetChanelValue(rawValue.Substring(2, 2));
-                    B = GetChanelValue(rawValue.Substring(4, 2));
+                    Red = GetChanelValue(rawValue.Substring(0, 2));
+                    Green = GetChanelValue(rawValue.Substring(2, 2));
+                    Blue = GetChanelValue(rawValue.Substring(4, 2));
+                    Alpha = byte.MaxValue;
                 }
                 else if (rawValue.Length == 8)
                 {
-                    A = GetChanelValue(rawValue.Substring(0, 2));
-                    R = GetChanelValue(rawValue.Substring(2, 2));
-                    G = GetChanelValue(rawValue.Substring(4, 2));
-                    B = GetChanelValue(rawValue.Substring(6, 2));
+                    Red = GetChanelValue(rawValue.Substring(0, 2));
+                    Green = GetChanelValue(rawValue.Substring(2, 2));
+                    Blue = GetChanelValue(rawValue.Substring(4, 2));
+                    Alpha = GetChanelValue(rawValue.Substring(6, 2));
+                    AlphaIsSpecified = true;
                 }
             }
         }
@@ -82,13 +101,16 @@ public record SvgColor
 
     public override string ToString()
     {
-        return string.IsNullOrEmpty(rawValue)
-            ? string.Empty
-            : $"#{rawValue}";
+        return "#" + Convert.ToHexString(new[] { Red, Green, Blue, Alpha });
     }
 
     public static implicit operator SvgColor(string text)
     {
         return new SvgColor(text);
+    }
+
+    public SvgColor SetAlpha(SvgOpacity opacity)
+    {
+        return new SvgColor(Red, Green, Blue, opacity);
     }
 }

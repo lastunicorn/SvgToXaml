@@ -51,7 +51,7 @@ public class SvgElement
 
     //
 
-    public SvgTransformList Transforms { get; set; }
+    public SvgTransformList Transforms { get; } = new();
 
     public double? Opacity { get; set; }
 
@@ -98,8 +98,6 @@ public class SvgElement
         Style = element.Style;
 
         ClassNames = element.Class?.Split(new[] { ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-
-        Transforms = new SvgTransformList();
 
         if (element.Transform != null)
             Transforms.ParseAndAdd(element.Transform);
@@ -152,7 +150,7 @@ public class SvgElement
             .Reverse();
     }
 
-    private string GetStyleValueFromClasses(string name)
+    protected string GetStyleValueFromClasses(string name)
     {
         IEnumerable<SvgStyleRuleSet> applicableClasses = GetApplicableClasses();
 
