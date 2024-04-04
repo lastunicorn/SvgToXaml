@@ -22,7 +22,7 @@ public record SvgColor
 {
     private static readonly Regex Regex = new(@"^\s*#([\dabcdef]{3}|[\dabcdef]{6}|[\dabcdef]{8})\s*$", RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
-    private readonly string rawValue;
+    public bool IsEmpty { get; }
 
     public byte Red { get; }
 
@@ -30,18 +30,20 @@ public record SvgColor
 
     public byte Blue { get; }
 
-    public byte Alpha { get; }
+    public byte? Alpha { get; }
 
-    public bool AlphaIsSpecified { get; }
+    public static SvgColor Empty { get; } = new();
 
-    public bool IsEmpty => rawValue == null;
+    private SvgColor()
+    {
+        IsEmpty = true;
+    }
 
     public SvgColor(byte red, byte green, byte blue)
     {
         Red = red;
         Green = green;
         Blue = blue;
-        Alpha = byte.MaxValue;
     }
 
     public SvgColor(byte red, byte green, byte blue, byte alpha)
@@ -52,39 +54,52 @@ public record SvgColor
         Alpha = alpha;
     }
 
-    public SvgColor(string text)
+    public static SvgColor Parse(string text)
     {
-        if (text != null)
+        if (string.IsNullOrEmpty(text))
+            return Empty;
+
+        SvgColor namedColor = SvgNamedColors.Get(text);
+
+        if (namedColor != null)
+            return namedColor;
+
+        Match match = Regex.Match(text);
+
+        if (!match.Success)
+            throw new NotAColorException(text);
+
+        string rawValue = match.Groups[1].Value;
+
+        switch (rawValue.Length)
         {
-            Match match = Regex.Match(text);
+            case 3:
+                {
+                    byte red = GetChanelValue(rawValue[0]);
+                    byte green = GetChanelValue(rawValue[1]);
+                    byte blue = GetChanelValue(rawValue[2]);
+                    return new SvgColor(red, green, blue);
+                }
 
-            if (match.Success)
-            {
-                rawValue = match.Groups[1].Value;
+            case 6:
+                {
+                    byte red = GetChanelValue(rawValue.Substring(0, 2));
+                    byte green = GetChanelValue(rawValue.Substring(2, 2));
+                    byte blue = GetChanelValue(rawValue.Substring(4, 2));
+                    return new SvgColor(red, green, blue);
+                }
 
-                if (rawValue.Length == 3)
+            case 8:
                 {
-                    Red = GetChanelValue(rawValue[0]);
-                    Green = GetChanelValue(rawValue[1]);
-                    Blue = GetChanelValue(rawValue[2]);
-                    Alpha = byte.MaxValue;
+                    byte red = GetChanelValue(rawValue.Substring(0, 2));
+                    byte green = GetChanelValue(rawValue.Substring(2, 2));
+                    byte blue = GetChanelValue(rawValue.Substring(4, 2));
+                    byte alpha = GetChanelValue(rawValue.Substring(6, 2));
+                    return new SvgColor(red, green, blue, alpha);
                 }
-                else if (rawValue.Length == 6)
-                {
-                    Red = GetChanelValue(rawValue.Substring(0, 2));
-                    Green = GetChanelValue(rawValue.Substring(2, 2));
-                    Blue = GetChanelValue(rawValue.Substring(4, 2));
-                    Alpha = byte.MaxValue;
-                }
-                else if (rawValue.Length == 8)
-                {
-                    Red = GetChanelValue(rawValue.Substring(0, 2));
-                    Green = GetChanelValue(rawValue.Substring(2, 2));
-                    Blue = GetChanelValue(rawValue.Substring(4, 2));
-                    Alpha = GetChanelValue(rawValue.Substring(6, 2));
-                    AlphaIsSpecified = true;
-                }
-            }
+
+            default:
+                throw new NotAColorException(text);
         }
     }
 
@@ -99,18 +114,23 @@ public record SvgColor
         return Convert.ToByte(hexValue, 16);
     }
 
+    public SvgColor SetAlpha(SvgOpacity opacity)
+    {
+        return new SvgColor(Red, Green, Blue, opacity);
+    }
+
     public override string ToString()
     {
-        return "#" + Convert.ToHexString(new[] { Red, Green, Blue, Alpha });
+        if (IsEmpty)
+            return string.Empty;
+
+        return Alpha.HasValue
+            ? "#" + Convert.ToHexString(new[] { Red, Green, Blue, Alpha.Value })
+            : "#" + Convert.ToHexString(new[] { Red, Green, Blue });
     }
 
     public static implicit operator SvgColor(string text)
     {
-        return new SvgColor(text);
-    }
-
-    public SvgColor SetAlpha(SvgOpacity opacity)
-    {
-        return new SvgColor(Red, Green, Blue, opacity);
+        return Parse(text);
     }
 }

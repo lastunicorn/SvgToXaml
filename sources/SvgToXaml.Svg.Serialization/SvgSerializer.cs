@@ -32,7 +32,7 @@ public class SvgSerializer
         object deserializedObject = xmlSerializer.Deserialize(stream);
 
         if (deserializedObject is not Svg svgObject)
-            throw new Exception("Invalid svg document.");
+            throw new InvalidSvgException();
 
         return svgObject;
     }
@@ -43,7 +43,7 @@ public class SvgSerializer
         object deserializedObject = xmlSerializer.Deserialize(textReader);
 
         if (deserializedObject is not Svg svgObject)
-            throw new Exception("Invalid svg document.");
+            throw new InvalidSvgException();
 
         return svgObject;
     }

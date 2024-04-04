@@ -53,7 +53,7 @@ public class ColorTests : SvgFileTestsBase
             Ellipse ellipse = canvas
                 .GetElementByIndex<Ellipse>(0);
 
-            ellipse.Fill.Should().Be("#12345678");
+            ellipse.Fill.Should().Be("#78123456");
         });
     }
 }

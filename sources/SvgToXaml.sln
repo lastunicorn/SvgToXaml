@@ -18,7 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.build.props = Directory.build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgToXaml.Conversion", "SvgToXaml.Conversion\SvgToXaml.Conversion.csproj", "{8AD0266D-55C5-4AFF-83F3-4D8092F091FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.Conversion", "SvgToXaml.Conversion\SvgToXaml.Conversion.csproj", "{8AD0266D-55C5-4AFF-83F3-4D8092F091FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssColors", "CssColors\CssColors.csproj", "{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{8AD0266D-55C5-4AFF-83F3-4D8092F091FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AD0266D-55C5-4AFF-83F3-4D8092F091FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AD0266D-55C5-4AFF-83F3-4D8092F091FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

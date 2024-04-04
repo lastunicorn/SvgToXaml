@@ -67,52 +67,55 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
             SvgElement referencedElement = SvgElement.GetParentSvg().FindChild(fill.Url.ReferencedId);
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
+                XamlElement.Fill = TransformLinearGradient(svgLinearGradient);
+        }
+    }
+
+    private static LinearGradientBrush TransformLinearGradient(SvgLinearGradient svgLinearGradient)
+    {
+        IEnumerable<GradientStop> gradientStops = svgLinearGradient.ComputeStops()
+            .Select(x =>
             {
-                IEnumerable<GradientStop> gradientStops = svgLinearGradient.ComputeStops()
-                    .Select(x =>
-                    {
-                        SvgColor stopColor = x.ComputeStopColor();
+                SvgColor stopColor = x.ComputeStopColor();
 
-                        if (!stopColor.AlphaIsSpecified)
-                        {
-                            SvgOpacity? stopOpacity = x.ComputeStopOpacity();
-
-                            if (stopOpacity.HasValue)
-                                stopColor = stopColor.SetAlpha(stopOpacity.Value);
-                        }
-
-                        Color color = Color.FromArgb(stopColor.Alpha, stopColor.Red, stopColor.Green, stopColor.Blue);
-                        return new GradientStop(color, x.Offset);
-                    })
-                    .ToList();
-
-                GradientStopCollection gradientStopCollection = new(gradientStops);
-                LinearGradientBrush linearGradientBrush = new(gradientStopCollection);
-
-                double x1 = svgLinearGradient.ComputeX1() ?? SvgLength.Zero;
-                double x2 = svgLinearGradient.ComputeX2() ?? SvgLength.Zero;
-                double y1 = svgLinearGradient.ComputeY1() ?? new SvgLength(1);
-                double y2 = svgLinearGradient.ComputeY2() ?? new SvgLength(1);
-
-                linearGradientBrush.StartPoint = new Point(x1, y1);
-                linearGradientBrush.EndPoint = new Point(x2, y2);
-
-                if (svgLinearGradient.GradientUnits != null)
+                if (stopColor.Alpha == null)
                 {
-                    linearGradientBrush.MappingMode = svgLinearGradient.GradientUnits switch
-                    {
-                        SvgGradientUnits.ObjectBoundingBox => BrushMappingMode.RelativeToBoundingBox,
-                        SvgGradientUnits.UserSpaceOnUse => BrushMappingMode.Absolute,
-                        _ => throw new Exception("Invalid gradient units.")
-                    };
+                    SvgOpacity? stopOpacity = x.ComputeStopOpacity();
+
+                    if (stopOpacity.HasValue)
+                        stopColor = stopColor.SetAlpha(stopOpacity.Value);
                 }
 
-                if (svgLinearGradient.GradientTransforms.Count > 0)
-                    linearGradientBrush.Transform = svgLinearGradient.GradientTransforms.ToXaml(linearGradientBrush.Transform);
+                Color color = stopColor.ToColor();
+                return new GradientStop(color, x.Offset);
+            })
+            .ToList();
 
-                XamlElement.Fill = linearGradientBrush;
-            }
+        GradientStopCollection gradientStopCollection = new(gradientStops);
+        LinearGradientBrush linearGradientBrush = new(gradientStopCollection);
+
+        double x1 = svgLinearGradient.ComputeX1() ?? SvgLength.Zero;
+        double x2 = svgLinearGradient.ComputeX2() ?? SvgLength.Zero;
+        double y1 = svgLinearGradient.ComputeY1() ?? new SvgLength(1);
+        double y2 = svgLinearGradient.ComputeY2() ?? new SvgLength(1);
+
+        linearGradientBrush.StartPoint = new Point(x1, y1);
+        linearGradientBrush.EndPoint = new Point(x2, y2);
+
+        if (svgLinearGradient.GradientUnits != null)
+        {
+            linearGradientBrush.MappingMode = svgLinearGradient.GradientUnits switch
+            {
+                SvgGradientUnits.ObjectBoundingBox => BrushMappingMode.RelativeToBoundingBox,
+                SvgGradientUnits.UserSpaceOnUse => BrushMappingMode.Absolute,
+                _ => throw new Exception("Unknown gradient units.")
+            };
         }
+
+        if (svgLinearGradient.GradientTransforms.Count > 0)
+            linearGradientBrush.Transform = svgLinearGradient.GradientTransforms.ToXaml(linearGradientBrush.Transform);
+
+        return linearGradientBrush;
     }
 
     private void SetStroke(IEnumerable<SvgElement> svgElements)

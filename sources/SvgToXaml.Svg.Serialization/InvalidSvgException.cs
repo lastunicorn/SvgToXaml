@@ -14,17 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Media;
-using DustInTheWind.SvgToXaml.Svg;
+using System.Runtime.Serialization;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Svg.Serialization;
 
-internal static class SvgColorExtensions
+[Serializable]
+public class InvalidSvgException : Exception
 {
-    public static Color ToColor(this SvgColor svgColor)
+    private const string DefaultMessage = "Invalid svg document.";
+
+    public InvalidSvgException()
+        : base(DefaultMessage)
     {
-        return svgColor.Alpha == null
-            ? Color.FromRgb(svgColor.Red, svgColor.Green, svgColor.Blue)
-            : Color.FromArgb(svgColor.Alpha.Value, svgColor.Red, svgColor.Green, svgColor.Blue);
+    }
+
+    public InvalidSvgException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
     }
 }
