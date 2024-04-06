@@ -14,47 +14,50 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
 using System.Windows.Shapes;
+using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests.WidthTests;
 
-public class TopTests : SvgFileTestsBase
+public class WidthTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithCenterY200AndRadius50_WhenSvgIsParsed_ThenResultedEllipseHasTop150()
+    public void HavingCircleWithRadius0_WhenSvgIsParsed_ThenResultedEllipseHasWidth0()
     {
-        TestConvertSvgFile("top-from-radius-smaller-than-y.svg", canvas =>
+        TestConvertSvgFile("width-from-radius-0.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            double actualTop = Canvas.GetTop(ellipse);
-            actualTop.Should().Be(150);
+            ellipse.Width.Should().Be(0);
         });
     }
 
     [Fact]
-    public void HavingCircleWithCenterY200AndRadius200_WhenSvgIsParsed_ThenResultedEllipseHasTopNaN()
+    public void HavingCircleWithRadius50_WhenSvgIsParsed_ThenResultedEllipseHasWidth100()
     {
-        TestConvertSvgFile("top-from-radius-equal-to-y.svg", canvas =>
+        TestConvertSvgFile("width-from-radius-positive.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            double actualTop = Canvas.GetTop(ellipse);
-            actualTop.Should().Be(double.NaN);
+            ellipse.Width.Should().Be(100);
         });
     }
 
     [Fact]
-    public void HavingCircleWithCenterY200AndRadius400_WhenSvgIsParsed_ThenResultedEllipseHasTopNegative200()
+    public void HavingCircleWithRadiusMinus50_WhenSvgIsParsed_ThenThrows()
     {
-        TestConvertSvgFile("top-from-radius-greater-than-y.svg", canvas =>
+        Action action = () =>
         {
-            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
+            TestConvertSvgFile("width-from-radius-negative.svg", canvas =>
+            {
+                Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            double actualTop = Canvas.GetTop(ellipse);
-            actualTop.Should().Be(-200);
-        });
+                ellipse.Width.Should().Be(100);
+            });
+        };
+
+        action.Should().Throw<StaEnvironmentException>()
+            .WithInnerException<SvgConversionException>();
     }
 }

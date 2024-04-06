@@ -27,8 +27,7 @@ public class UrlTests : SvgFileTestsBase
     {
         TestConvertSvgFile("circle-fill-url-gradient.svg", canvas =>
         {
-            Ellipse ellipse = canvas
-                .GetElementByIndex<Ellipse>(0);
+            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
             ellipse.Fill.Should().BeOfType<LinearGradientBrush>();
 
@@ -47,8 +46,7 @@ public class UrlTests : SvgFileTestsBase
     {
         TestConvertSvgFile("circle-fill-url-gradient-href-gradient.svg", canvas =>
         {
-            Ellipse ellipse = canvas
-                .GetElementByIndex<Ellipse>(0);
+            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
             ellipse.Fill.Should().BeOfType<LinearGradientBrush>();
 

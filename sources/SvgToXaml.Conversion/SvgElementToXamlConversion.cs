@@ -43,13 +43,12 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
             XamlElement = CreateXamlElement();
 
             if (SvgElement.Transforms.Count > 0)
-                XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
+                ApplyTransforms();
 
             if (SvgElement.ClipPath != null)
-                ProcessClipPath();
+                ApplyClipPath();
 
             List<SvgElement> inheritedSvgElements = EnumerateInheritedElements().ToList();
-
             InheritPropertiesFrom(inheritedSvgElements);
 
             return XamlElement;
@@ -64,7 +63,12 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         }
     }
 
-    private void ProcessClipPath()
+    protected virtual void ApplyTransforms()
+    {
+        XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
+    }
+
+    private void ApplyClipPath()
     {
         string referencedId = SvgElement.ClipPath.Url.ReferencedId;
 

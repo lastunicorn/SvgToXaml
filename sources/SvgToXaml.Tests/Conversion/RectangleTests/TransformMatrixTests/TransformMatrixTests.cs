@@ -18,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectangleTests.TransformMatrixTests;
 
 /*
  * |   M11     M12     0 |
@@ -31,18 +31,18 @@ namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
  *
  */
 
-public class CircleTransformTests : SvgFileTestsBase
+public class TransformMatrixTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithTransformMatrix_WhenSvgIsParsed_ThenResultedEllipseHasCorrectRenderTransformInformation()
+    public void HavingRectWithTransformMatrix_WhenSvgIsParsed_ThenResultedRectangleHasCorrectRenderTransformInformation()
     {
-        TestConvertSvgFile("circle-transform.svg", canvas =>
+        TestConvertSvgFile("transform-matrix.svg", canvas =>
         {
-            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
+            Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            ellipse.RenderTransform.Should().BeOfType<MatrixTransform>();
+            rectangle.RenderTransform.Should().BeOfType<MatrixTransform>();
 
-            MatrixTransform matrixTransform = ellipse.RenderTransform as MatrixTransform;
+            MatrixTransform matrixTransform = rectangle.RenderTransform as MatrixTransform;
             matrixTransform.Matrix.M11.Should().Be(1);
             matrixTransform.Matrix.M12.Should().Be(2);
             matrixTransform.Matrix.M21.Should().Be(3);

@@ -14,34 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using DustInTheWind.SvgToXaml.Svg;
+using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectangleTests.TransformTranslateTests;
 
-internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectangle, Rectangle>
+public class TransformTranslateTests : SvgFileTestsBase
 {
-    public SvgRectangleToXamlConversion(SvgRectangle svgRectangle, SvgElement referrer = null)
-        : base(svgRectangle, referrer)
+    [Fact]
+    public void HavingRectWithTransformTranslate_WhenSvgIsParsed_ThenResultedRectangleHasCorrectRenderTransformInformation()
     {
-    }
-
-    protected override Rectangle CreateXamlElement()
-    {
-        Rectangle rectangle = new()
+        TestConvertSvgFile("transform-translate.svg", canvas =>
         {
-            Width = SvgElement.Width,
-            Height = SvgElement.Height
-        };
+            Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-        if (SvgElement.X != 0)
-            Canvas.SetLeft(rectangle, SvgElement.X);
+            rectangle.RenderTransform.Should().BeOfType<TranslateTransform>();
 
-        if (SvgElement.Y != 0)
-            Canvas.SetTop(rectangle, SvgElement.Y);
-
-        return rectangle;
+            TranslateTransform translateTransform = rectangle.RenderTransform as TranslateTransform;
+            translateTransform.X.Should().Be(10);
+            translateTransform.Y.Should().Be(20);
+        });
     }
 }

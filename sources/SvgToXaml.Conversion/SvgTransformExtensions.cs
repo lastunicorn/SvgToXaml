@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
 using DustInTheWind.SvgToXaml.Svg;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
@@ -26,76 +25,109 @@ internal static class SvgTransformExtensions
     {
         if (svgTransformList == null) throw new ArgumentNullException(nameof(svgTransformList));
 
-        TransformGroupBuilder transformGroupBuilder = new(existingTransform);
-
         IEnumerable<Transform> transforms = svgTransformList
             .Reverse()
             .Select(x => x.ToXaml());
 
-        foreach (Transform transform in transforms)
-            transformGroupBuilder.Add(transform);
+        TransformGroupBuilder transformGroupBuilder = new(existingTransform);
+        transformGroupBuilder.AddRange(transforms);
 
         return transformGroupBuilder.RootTransform;
     }
 
     public static Transform ToXaml(this ISvgTransform svgTransform)
     {
-        switch (svgTransform)
+        return svgTransform switch
         {
-            case SvgTranslateTransform svgTranslateTransform:
-                return new TranslateTransform
-                {
-                    X = svgTranslateTransform.X,
-                    Y = svgTranslateTransform.Y
-                };
+            SvgTranslateTransform svgTranslateTransform => svgTranslateTransform.ToXaml(),
+            SvgScaleTransform svgScaleTransform => svgScaleTransform.ToXaml(),
+            SvgRotateTransform svgRotateTransform => svgRotateTransform.ToXaml(),
+            SvgMatrixTransform svgMatrixTransform => svgMatrixTransform.ToXaml(),
+            _ => throw new ArgumentException("Unrecognized transformation object.", nameof(svgTransform))
+        };
+    }
 
-            case SvgScaleTransform svgScaleTransform:
-                ScaleTransform xaml = new();
+    private static Transform ToXaml(this SvgTranslateTransform svgTranslateTransform)
+    {
+        return new TranslateTransform
+        {
+            X = svgTranslateTransform.X,
+            Y = svgTranslateTransform.Y
+        };
+    }
 
-                if (svgScaleTransform.CenterX != null)
-                    xaml.CenterX = svgScaleTransform.CenterX.Value;
+    private static Transform ToXaml(this SvgScaleTransform svgScaleTransform)
+    {
+        ScaleTransform xaml = new();
 
-                if (svgScaleTransform.CenterY != null)
-                    xaml.CenterY = svgScaleTransform.CenterY.Value;
+        if (svgScaleTransform.CenterX != null)
+            xaml.CenterX = svgScaleTransform.CenterX.Value;
 
-                if (svgScaleTransform.ScaleX != null)
-                    xaml.ScaleX = svgScaleTransform.ScaleX.Value;
+        if (svgScaleTransform.CenterY != null)
+            xaml.CenterY = svgScaleTransform.CenterY.Value;
 
-                if (svgScaleTransform.ScaleY != null)
-                    xaml.ScaleY = svgScaleTransform.ScaleY.Value;
+        if (svgScaleTransform.ScaleX != null)
+            xaml.ScaleX = svgScaleTransform.ScaleX.Value;
 
-                return xaml;
+        if (svgScaleTransform.ScaleY != null)
+            xaml.ScaleY = svgScaleTransform.ScaleY.Value;
 
-            case SvgRotateTransform svgRotateTransform:
-                RotateTransform transform = new()
-                {
-                    Angle = svgRotateTransform.Angle
-                };
+        return xaml;
+    }
 
-                if (svgRotateTransform.CenterX != null)
-                    transform.CenterX = svgRotateTransform.CenterX.Value;
+    private static Transform ToXaml(this SvgRotateTransform svgRotateTransform)
+    {
+        RotateTransform transform = new()
+        {
+            Angle = svgRotateTransform.Angle
+        };
 
-                if (svgRotateTransform.CenterY != null)
-                    transform.CenterY = svgRotateTransform.CenterY.Value;
+        if (svgRotateTransform.CenterX != null)
+            transform.CenterX = svgRotateTransform.CenterX.Value;
 
-                return transform;
+        if (svgRotateTransform.CenterY != null)
+            transform.CenterY = svgRotateTransform.CenterY.Value;
 
-            case SvgMatrixTransform svgMatrixTransform:
-                return new MatrixTransform
-                {
-                    Matrix = new Matrix
-                    {
-                        M11 = svgMatrixTransform.M11,
-                        M12 = svgMatrixTransform.M12,
-                        M21 = svgMatrixTransform.M21,
-                        M22 = svgMatrixTransform.M22,
-                        OffsetX = svgMatrixTransform.OffsetX,
-                        OffsetY = svgMatrixTransform.OffsetY
-                    }
-                };
+        return transform;
+    }
 
-            default:
-                throw new ArgumentException("Unrecognized transformation object.", nameof(svgTransform));
+    private static Transform ToXaml(this SvgMatrixTransform svgMatrixTransform)
+    {
+        return new MatrixTransform
+        {
+            Matrix = new Matrix
+            {
+                M11 = svgMatrixTransform.M11,
+                M12 = svgMatrixTransform.M12,
+                M21 = svgMatrixTransform.M21,
+                M22 = svgMatrixTransform.M22,
+                OffsetX = svgMatrixTransform.OffsetX,
+                OffsetY = svgMatrixTransform.OffsetY
+            }
+        };
+    }
+
+    public static void TranslateOriginRecursively(this Transform transform, double x, double y)
+    {
+        if (transform is RotateTransform rotateTransform)
+        {
+            rotateTransform.TranslateOrigin(x, y);
         }
+        else if (transform is TransformGroup transformGroup)
+        {
+            foreach (Transform childTransforms in transformGroup.Children)
+                TranslateOriginRecursively(childTransforms, x, y);
+        }
+    }
+
+    public static void TranslateOrigin(this RotateTransform rotateTransform, double x, double y)
+    {
+        bool xIsAbsent = double.IsNaN(x) || x == 0;
+        if (!xIsAbsent)
+            rotateTransform.CenterX -= x;
+
+        bool yIsAbsent = double.IsNaN(y) || y == 0;
+        if (!yIsAbsent)
+            rotateTransform.CenterY -= y;
     }
 }

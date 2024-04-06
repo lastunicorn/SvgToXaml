@@ -18,43 +18,38 @@ using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectangleTests.HeightTests;
 
 public class HeightTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithRadius0_WhenSvgIsParsed_ThenResultedEllipseHasHeight0()
+    public void HavingRectWithHeight0_WhenSvgIsParsed_ThenResultedRectangleHasHeight0()
     {
-        TestConvertSvgFile("height-from-radius-0.svg", canvas =>
+        TestConvertSvgFile("height-0.svg", canvas =>
         {
-            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
+            Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            ellipse.Width.Should().Be(0);
+            rectangle.Height.Should().Be(0);
         });
     }
 
     [Fact]
-    public void HavingCircleWithRadius50_WhenSvgIsParsed_ThenResultedEllipseHasHeight100()
+    public void HavingRectWithWidth50_WhenSvgIsParsed_ThenResultedRectangleHasHeight50()
     {
-        TestConvertSvgFile("height-from-radius-positive.svg", canvas =>
+        TestConvertSvgFile("height-positive.svg", canvas =>
         {
-            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
+            Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            ellipse.Width.Should().Be(100);
+            rectangle.Height.Should().Be(50);
         });
     }
 
     [Fact]
-    public void HavingCircleWithRadiusMinus50_WhenSvgIsParsed_ThenThrows()
+    public void HavingRectWithWithNegative50_WhenSvgIsParsed_ThenThrows()
     {
         Action action = () =>
         {
-            TestConvertSvgFile("height-from-radius-negative.svg", canvas =>
-            {
-                Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
-
-                ellipse.Width.Should().Be(100);
-            });
+            TestConvertSvgFile("height-negative.svg");
         };
 
         action.Should().Throw<StaEnvironmentException>()

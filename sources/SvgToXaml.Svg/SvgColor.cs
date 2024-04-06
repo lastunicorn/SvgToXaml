@@ -54,6 +54,44 @@ public record SvgColor
         Alpha = alpha;
     }
 
+    public static bool TryParse(string text, out SvgColor value)
+    {
+        if (string.IsNullOrEmpty(text))
+        {
+            value = null;
+            return false;
+        }
+
+        SvgColor namedColor = SvgNamedColors.Get(text);
+
+        if (namedColor != null)
+        {
+            value = namedColor;
+            return true;
+        }
+
+        Match match = Regex.Match(text);
+
+        if (!match.Success)
+        {
+            value = null;
+            return false;
+        }
+
+        string rawValue = match.Groups[1].Value;
+
+        SvgColor svgColor = ParseRgb(rawValue);
+
+        if (svgColor == null)
+        {
+            value = null;
+            return false;
+        }
+
+        value = svgColor;
+        return true;
+    }
+
     public static SvgColor Parse(string text)
     {
         if (string.IsNullOrEmpty(text))
@@ -71,6 +109,16 @@ public record SvgColor
 
         string rawValue = match.Groups[1].Value;
 
+        SvgColor svgColor = ParseRgb(rawValue);
+
+        if (svgColor == null)
+            throw new NotAColorException(text);
+
+        return svgColor;
+    }
+
+    private static SvgColor ParseRgb(string rawValue)
+    {
         switch (rawValue.Length)
         {
             case 3:
@@ -99,7 +147,7 @@ public record SvgColor
                 }
 
             default:
-                throw new NotAColorException(text);
+                return null;
         }
     }
 

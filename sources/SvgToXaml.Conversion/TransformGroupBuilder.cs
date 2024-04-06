@@ -39,10 +39,26 @@ internal class TransformGroupBuilder
         }
     }
 
+    public void AddRange(IEnumerable<Transform> transforms)
+    {
+        if (transforms == null) throw new ArgumentNullException(nameof(transforms));
+
+        IEnumerable<Transform> safeTransforms = transforms
+            .Where(x => x != null);
+
+        foreach (Transform transform in safeTransforms)
+            AddInternal(transform);
+    }
+
     public void Add(Transform transform)
     {
         if (transform == null) throw new ArgumentNullException(nameof(transform));
 
+        AddInternal(transform);
+    }
+
+    private void AddInternal(Transform transform)
+    {
         if (RootTransform == null || RootTransform == Transform.Identity)
         {
             RootTransform = transform;
@@ -54,7 +70,7 @@ internal class TransformGroupBuilder
         else
         {
             TransformGroup newRootTransformGroup = new();
-            
+
             newRootTransformGroup.Children.Add(RootTransform);
             newRootTransformGroup.Children.Add(transform);
 

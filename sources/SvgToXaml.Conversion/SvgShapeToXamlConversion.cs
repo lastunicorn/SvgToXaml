@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Svg;
@@ -57,12 +58,12 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         {
             XamlElement.Fill = null;
         }
-        else if (!fill.Color.IsEmpty)
+        else if (fill.Color is { IsEmpty: false })
         {
             Color color = fill.Color.ToColor();
             XamlElement.Fill = new SolidColorBrush(color);
         }
-        else if (!fill.Url.IsEmpty)
+        else if (fill.Url is { IsEmpty: false })
         {
             SvgElement referencedElement = SvgElement.GetParentSvg().FindChild(fill.Url.ReferencedId);
 
@@ -202,5 +203,23 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
         if (strokeMiterLimit != null)
             XamlElement.StrokeMiterLimit = strokeMiterLimit.Value;
+    }
+
+    protected override void ApplyTransforms()
+    {
+        base.ApplyTransforms();
+
+        double x = Canvas.GetLeft(XamlElement);
+        double y = Canvas.GetTop(XamlElement);
+
+        bool xIsAbsent = double.IsNaN(x) || x == 0;
+        if (xIsAbsent)
+        {
+            bool yIsAbsent = double.IsNaN(y) || y == 0;
+            if (yIsAbsent)
+                return;
+        }
+
+        XamlElement.RenderTransform.TranslateOriginRecursively(x, y);
     }
 }

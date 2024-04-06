@@ -38,8 +38,12 @@ public class SvgPaint
         }
         else
         {
-            Color = text;
-            Url = text;
+            bool success = SvgColor.TryParse(text, out SvgColor svgColor);
+
+            if (success)
+                Color = text;
+            else
+                Url = text;
         }
     }
 

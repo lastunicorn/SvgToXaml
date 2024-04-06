@@ -14,34 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using DustInTheWind.SvgToXaml.Svg;
+using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests.TransformScaleTests;
 
-internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectangle, Rectangle>
+public class TransformScaleTests : SvgFileTestsBase
 {
-    public SvgRectangleToXamlConversion(SvgRectangle svgRectangle, SvgElement referrer = null)
-        : base(svgRectangle, referrer)
+    [Fact]
+    public void HavingCircleWithScaleTransform_WhenSvgIsParsed_ThenResultedEllipseHasOneScaleTransformWithCorrectValues()
     {
-    }
-
-    protected override Rectangle CreateXamlElement()
-    {
-        Rectangle rectangle = new()
+        TestConvertSvgFile("transform-scale.svg", canvas =>
         {
-            Width = SvgElement.Width,
-            Height = SvgElement.Height
-        };
+            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-        if (SvgElement.X != 0)
-            Canvas.SetLeft(rectangle, SvgElement.X);
+            ellipse.RenderTransform.Should().BeOfType<ScaleTransform>();
 
-        if (SvgElement.Y != 0)
-            Canvas.SetTop(rectangle, SvgElement.Y);
+            ScaleTransform scaleTransform = ellipse.RenderTransform as ScaleTransform;
 
-        return rectangle;
+            scaleTransform.ScaleX.Should().Be(-1);
+            scaleTransform.ScaleY.Should().Be(2);
+        });
     }
 }
