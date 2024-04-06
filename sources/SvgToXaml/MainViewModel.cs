@@ -20,7 +20,7 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Xml;
 using DustInTheWind.SvgToXaml.Conversion;
-using DustInTheWind.SvgToXaml.Svg;
+using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml;
 

@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Shapes;
-using DustInTheWind.SvgToXaml.Svg;
+using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

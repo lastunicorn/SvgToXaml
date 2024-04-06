@@ -16,15 +16,15 @@
 
 using System.Windows.Controls;
 using System.Windows.Media;
-using DustInTheWind.SvgToXaml.Svg;
+using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
 public class SvgConversion : SvgGroupToXamlConversion
 {
-    private readonly Svg.Svg svg;
+    private readonly Svg svg;
 
-    public SvgConversion(Svg.Svg svg)
+    public SvgConversion(Svg svg)
         : base(svg)
     {
         this.svg = svg ?? throw new ArgumentNullException(nameof(svg));

@@ -28,8 +28,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" />
-      <ProjectReference Include="..\SvgToXaml.Svg\SvgToXaml.Svg.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.SvgModel\SvgToXaml.SvgModel.csproj" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>

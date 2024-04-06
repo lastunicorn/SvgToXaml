@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.Svg.Serialization", "SvgToXaml.Svg.Serialization\SvgToXaml.Svg.Serialization.csproj", "{C2033855-C555-40B9-A1C3-9CDAC2D6A57E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.SvgSerialization", "SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj", "{C2033855-C555-40B9-A1C3-9CDAC2D6A57E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.Svg", "SvgToXaml.Svg\SvgToXaml.Svg.csproj", "{A6D2F574-6DDC-4C33-85F0-6A9ECD2AE7AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.SvgModel", "SvgToXaml.SvgModel\SvgToXaml.SvgModel.csproj", "{A6D2F574-6DDC-4C33-85F0-6A9ECD2AE7AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml", "SvgToXaml\SvgToXaml.csproj", "{C34C9769-3BA8-4826-8A59-3DEF67516E90}"
 EndProject
@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.Conversion", "SvgToXaml.Conversion\SvgToXaml.Conversion.csproj", "{8AD0266D-55C5-4AFF-83F3-4D8092F091FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CssColors", "CssColors\CssColors.csproj", "{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CssColors", "CssColors\CssColors.csproj", "{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
