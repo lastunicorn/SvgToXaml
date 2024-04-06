@@ -79,13 +79,13 @@ public class SvgElement
             ? element.StrokeWidth
             : null;
 
-        StrokeLineJoin = element.StrokeLineJoin == null
-            ? null
-            : Convert(element.StrokeLineJoin);
+        StrokeLineJoin = element.StrokeLineJoinSpecified
+            ? Convert(element.StrokeLineJoin)
+            : null;
 
-        StrokeLineCap = element.StrokeLineCap == null
-            ? null
-            : Convert(element.StrokeLineCap);
+        StrokeLineCap = element.StrokeLineCapSpecified
+            ? Convert(element.StrokeLineCap)
+            : null;
 
         StrokeDashOffset = element.StrokeDashOffsetSpecified
             ? element.StrokeDashOffset

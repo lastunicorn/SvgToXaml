@@ -35,10 +35,18 @@ public class SvgTransformList : Collection<ISvgTransform>
                     Items.Add(svgTranslateTransform);
                     break;
 
+                case "translateX":
+                case "translateY":
+                    throw new NotImplementedException();
+
                 case "scale":
                     SvgScaleTransform svgScaleTransform = new(item.Value);
                     Items.Add(svgScaleTransform);
                     break;
+
+                case "scaleX":
+                case "scaleY":
+                    throw new NotImplementedException();
 
                 case "rotate":
                     SvgRotateTransform svgRotateTransform = new(item.Value);
@@ -49,6 +57,12 @@ public class SvgTransformList : Collection<ISvgTransform>
                     SvgMatrixTransform svgMatrixTransform = new(item.Value);
                     Items.Add(svgMatrixTransform);
                     break;
+
+                case "skew":
+                case "skewX":
+                case "skewY":
+                    throw new NotImplementedException();
+
             }
         }
     }
