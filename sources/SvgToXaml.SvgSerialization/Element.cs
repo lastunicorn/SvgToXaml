@@ -55,10 +55,10 @@ public class Element
     public bool StrokeWidthSpecified { get; set; }
 
     [XmlAttribute("stroke-linecap")]
-    public string StrokeLineCap { get; set; }
+    public StrokeLineCap StrokeLineCap { get; set; }
 
     [XmlAttribute("stroke-linejoin")]
-    public string StrokeLineJoin { get; set; }
+    public StrokeLineJoin StrokeLineJoin { get; set; }
 
     [XmlAttribute("stroke-miterlimit")]
     public double StrokeMiterLimit { get; set; }

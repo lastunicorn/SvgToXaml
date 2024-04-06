@@ -18,17 +18,20 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Use : Element
+public enum StrokeLineJoin
 {
-    [XmlAttribute("href")]
-    public string Href { get; set; }
+    [XmlEnum(Name = "miter")]
+    Miter,
 
-    [XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")]
-    public string HrefLink { get; set; }
+    [XmlEnum(Name = "miter-clip")]
+    MiterClip,
 
-    [XmlAttribute("x")]
-    public double X { get; set; }
+    [XmlEnum(Name = "round")]
+    Round,
 
-    [XmlAttribute("y")]
-    public double Y { get; set; }
+    [XmlEnum(Name = "bevel")]
+    Bevel,
+
+    [XmlEnum(Name = "arcs")]
+    Arcs
 }

@@ -113,6 +113,10 @@ internal static class SvgTransformExtensions
         {
             rotateTransform.TranslateOrigin(x, y);
         }
+        if (transform is ScaleTransform scaleTransform)
+        {
+            scaleTransform.TranslateOrigin(x, y);
+        }
         else if (transform is TransformGroup transformGroup)
         {
             foreach (Transform childTransforms in transformGroup.Children)
@@ -129,5 +133,16 @@ internal static class SvgTransformExtensions
         bool yIsAbsent = double.IsNaN(y) || y == 0;
         if (!yIsAbsent)
             rotateTransform.CenterY -= y;
+    }
+
+    public static void TranslateOrigin(this ScaleTransform scaleTransform, double x, double y)
+    {
+        bool xIsAbsent = double.IsNaN(x) || x == 0;
+        if (!xIsAbsent)
+            scaleTransform.CenterX -= x;
+
+        bool yIsAbsent = double.IsNaN(y) || y == 0;
+        if (!yIsAbsent)
+            scaleTransform.CenterY -= y;
     }
 }

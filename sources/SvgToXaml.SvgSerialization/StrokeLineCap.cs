@@ -18,17 +18,14 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Use : Element
+public enum StrokeLineCap
 {
-    [XmlAttribute("href")]
-    public string Href { get; set; }
+    [XmlEnum(Name = "butt")]
+    Butt,
 
-    [XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")]
-    public string HrefLink { get; set; }
+    [XmlEnum(Name = "square")]
+    Square,
 
-    [XmlAttribute("x")]
-    public double X { get; set; }
-
-    [XmlAttribute("y")]
-    public double Y { get; set; }
+    [XmlEnum(Name = "round")]
+    Round
 }

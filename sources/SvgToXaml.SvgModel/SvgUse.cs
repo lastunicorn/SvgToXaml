@@ -35,7 +35,7 @@ public class SvgUse : SvgElement
     {
         if (use == null) throw new ArgumentNullException(nameof(use));
 
-        Href = use.Href;
+        Href = use.Href ?? use.HrefLink;
         X = use.X;
         Y = use.Y;
     }

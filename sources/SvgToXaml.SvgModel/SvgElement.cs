@@ -81,11 +81,11 @@ public class SvgElement
 
         StrokeLineJoin = element.StrokeLineJoin == null
             ? null
-            : (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), element.StrokeLineJoin, true);
+            : Convert(element.StrokeLineJoin);
 
         StrokeLineCap = element.StrokeLineCap == null
             ? null
-            : (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), element.StrokeLineCap, true);
+            : Convert(element.StrokeLineCap);
 
         StrokeDashOffset = element.StrokeDashOffsetSpecified
             ? element.StrokeDashOffset
@@ -108,6 +108,30 @@ public class SvgElement
 
         if (element.ClipPath != null)
             ClipPath = new SvgClipPathReference(element.ClipPath);
+    }
+
+    private static StrokeLineJoin Convert(SvgSerialization.StrokeLineJoin value)
+    {
+        return value switch
+        {
+            SvgSerialization.StrokeLineJoin.Miter => SvgModel.StrokeLineJoin.Miter,
+            SvgSerialization.StrokeLineJoin.MiterClip => SvgModel.StrokeLineJoin.MiterClip,
+            SvgSerialization.StrokeLineJoin.Round => SvgModel.StrokeLineJoin.Round,
+            SvgSerialization.StrokeLineJoin.Bevel => SvgModel.StrokeLineJoin.Bevel,
+            SvgSerialization.StrokeLineJoin.Arcs => SvgModel.StrokeLineJoin.Arcs,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
+
+    private static StrokeLineCap Convert(SvgSerialization.StrokeLineCap value)
+    {
+        return value switch
+        {
+            SvgSerialization.StrokeLineCap.Butt => SvgModel.StrokeLineCap.Butt,
+            SvgSerialization.StrokeLineCap.Square => SvgModel.StrokeLineCap.Square,
+            SvgSerialization.StrokeLineCap.Round => SvgModel.StrokeLineCap.Round,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
     }
 
     public Svg GetParentSvg()
