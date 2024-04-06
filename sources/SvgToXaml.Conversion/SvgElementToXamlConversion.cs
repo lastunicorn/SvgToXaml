@@ -139,10 +139,10 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
 
     protected virtual IEnumerable<SvgElement> EnumerateInheritedElements()
     {
+        yield return SvgElement;
+
         if (referrer == null)
         {
-            yield return SvgElement;
-
             IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors();
 
             foreach (SvgElement ancestor in ancestors)
@@ -150,8 +150,6 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         }
         else
         {
-            yield return SvgElement;
-
             IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors()
                 .TakeWhile(x => x.GetType() != typeof(SvgDefinitions));
 
@@ -175,7 +173,7 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
     private void SetOpacity(IEnumerable<SvgElement> svgElements)
     {
         double? opacity = svgElements
-            .Select(x => x.CalculateOpacity())
+            .Select(x => x.ComputeOpacity())
             .FirstOrDefault(x => x != null);
 
         if (opacity != null)

@@ -43,28 +43,25 @@ public class Svg : SvgGroup
             ViewBox = SvgViewBox.Parse(svg.ViewBox);
     }
 
-    public IEnumerable<SvgStyleRuleSet> GetAllCssClasses()
+    public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets()
     {
-        IEnumerable<SvgGroup> svgGroups = GetAllGroups();
+        IEnumerable<SvgGroup> svgGroups = GetAllSvgGroups();
 
         foreach (SvgGroup svgGroup in svgGroups)
         {
             if (svgGroup.StyleSheet == null)
                 continue;
 
-            foreach (SvgStyleRuleSet cssClass in svgGroup.StyleSheet)
-                yield return cssClass;
+            foreach (SvgStyleRuleSet styleRuleSet in svgGroup.StyleSheet)
+                yield return styleRuleSet;
         }
     }
 
-    private IEnumerable<SvgGroup> GetAllGroups()
+    private IEnumerable<SvgGroup> GetAllSvgGroups()
     {
         yield return this;
 
-        foreach (SvgElement svgElement in Children)
-        {
-            if (svgElement is SvgGroup svgGroup)
-                yield return svgGroup;
-        }
+        foreach (SvgGroup childSvgGroup in GetChildSvgGroups())
+            yield return childSvgGroup;
     }
 }

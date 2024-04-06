@@ -47,7 +47,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private void SetFill(IEnumerable<SvgElement> svgElements)
     {
         SvgPaint fill = svgElements
-            .Select(x => x.CalculateFill())
+            .Select(x => x.ComputeFill())
             .FirstOrDefault(x => x != null);
 
         if (fill == null)
@@ -56,7 +56,6 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         }
         else if (fill.IsNone)
         {
-            XamlElement.Fill = null;
         }
         else if (fill.Color is { IsEmpty: false })
         {
@@ -75,21 +74,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private static LinearGradientBrush TransformLinearGradient(SvgLinearGradient svgLinearGradient)
     {
         IEnumerable<GradientStop> gradientStops = svgLinearGradient.ComputeStops()
-            .Select(x =>
-            {
-                SvgColor stopColor = x.ComputeStopColor();
-
-                if (stopColor.Alpha == null)
-                {
-                    SvgOpacity? stopOpacity = x.ComputeStopOpacity();
-
-                    if (stopOpacity.HasValue)
-                        stopColor = stopColor.SetAlpha(stopOpacity.Value);
-                }
-
-                Color color = stopColor.ToColor();
-                return new GradientStop(color, x.Offset);
-            })
+            .Select(Transform)
             .ToList();
 
         GradientStopCollection gradientStopCollection = new(gradientStops);
@@ -119,10 +104,26 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         return linearGradientBrush;
     }
 
+    private static GradientStop Transform(SvgStop svgStop)
+    {
+        SvgColor stopColor = svgStop.ComputeStopColor();
+
+        if (stopColor.Alpha == null)
+        {
+            SvgOpacity? stopOpacity = svgStop.ComputeStopOpacity();
+
+            if (stopOpacity.HasValue)
+                stopColor = stopColor.SetAlpha(stopOpacity.Value);
+        }
+
+        Color color = stopColor.ToColor();
+        return new GradientStop(color, svgStop.Offset);
+    }
+
     private void SetStroke(IEnumerable<SvgElement> svgElements)
     {
         string stroke = svgElements
-            .Select(x => x.CalculateStroke())
+            .Select(x => x.ComputeStroke())
             .FirstOrDefault(x => x != null);
 
         if (stroke != null)
@@ -137,7 +138,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private void SetStrokeThickness(IEnumerable<SvgElement> svgElements)
     {
         double? strokeWidth = svgElements
-            .Select(x => x.CalculateStrokeWidth())
+            .Select(x => x.ComputeStrokeWidth())
             .FirstOrDefault(x => x != null);
 
         if (strokeWidth != null)
@@ -147,7 +148,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private void SetStrokeLineCap(IEnumerable<SvgElement> svgElements)
     {
         StrokeLineCap? strokeLineCap = svgElements
-            .Select(x => x.CalculateStrokeLineCap())
+            .Select(x => x.ComputeStrokeLineCap())
             .FirstOrDefault(x => x != null);
 
         if (strokeLineCap != null)
@@ -168,7 +169,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private void SetStrokeLineJoin(IEnumerable<SvgElement> svgElements)
     {
         StrokeLineJoin? strokeLineJoin = svgElements
-            .Select(x => x.CalculateStrokeLineJoin())
+            .Select(x => x.ComputeStrokeLineJoin())
             .FirstOrDefault(x => x != null);
 
         if (strokeLineJoin != null)
@@ -188,7 +189,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private void SetStrokeDashOffset(IEnumerable<SvgElement> svgElements)
     {
         double? strokeDashOffset = svgElements
-            .Select(x => x.CalculateStrokeDashOffset())
+            .Select(x => x.ComputeStrokeDashOffset())
             .FirstOrDefault(x => x != null);
 
         if (strokeDashOffset != null)
@@ -198,7 +199,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
     private void SetStrokeMiterLimit(IEnumerable<SvgElement> svgElements)
     {
         double? strokeMiterLimit = svgElements
-            .Select(x => x.CalculateStrokeMiterLimit())
+            .Select(x => x.ComputeStrokeMiterLimit())
             .FirstOrDefault(x => x != null);
 
         if (strokeMiterLimit != null)

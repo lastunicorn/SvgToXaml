@@ -40,7 +40,7 @@ internal class SvgPolygonToXamlConversion : SvgShapeToXamlConversion<SvgPolygon,
 
     private static void SetFillRule(Polygon polygon, SvgPolygon svgPolygon)
     {
-        FillRule? fillRule = svgPolygon.CalculateFillRule();
+        FillRule? fillRule = svgPolygon.ComputeFillRule();
 
         if (fillRule != null)
         {

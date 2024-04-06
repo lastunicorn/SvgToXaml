@@ -160,39 +160,7 @@ public class SvgElement
         }
     }
 
-    private IEnumerable<SvgStyleRuleSet> GetApplicableClasses()
-    {
-        if (ClassNames == null)
-            return null;
-
-        Svg parentSvg = GetParentSvg();
-        IEnumerable<SvgStyleRuleSet> cssClasses = parentSvg?.GetAllCssClasses();
-
-        return cssClasses?
-            .Where(x => ClassNames.Contains(x.Selector))
-            .Where(x => x.Declarations != null)
-            .Reverse();
-    }
-
-    protected string GetStyleValueFromClasses(string name)
-    {
-        IEnumerable<SvgStyleRuleSet> applicableClasses = GetApplicableClasses();
-
-        if (applicableClasses == null)
-            return null;
-
-        foreach (SvgStyleRuleSet svgStyleClass in applicableClasses)
-        {
-            SvgStyleDeclaration styleItem1 = svgStyleClass.Declarations?[name];
-
-            if (styleItem1 != null)
-                return styleItem1.Value;
-        }
-
-        return null;
-    }
-
-    public SvgPaint CalculateFill()
+    public SvgPaint ComputeFill()
     {
         string rawValue = GetStyleValueFromClasses("fill");
 
@@ -207,7 +175,7 @@ public class SvgElement
         return Fill;
     }
 
-    public FillRule? CalculateFillRule()
+    public FillRule? ComputeFillRule()
     {
         string rawValue = GetStyleValueFromClasses("fill-rule");
 
@@ -222,7 +190,7 @@ public class SvgElement
         return FillRule;
     }
 
-    public string CalculateStroke()
+    public string ComputeStroke()
     {
         string rawValue = GetStyleValueFromClasses("stroke");
 
@@ -237,7 +205,7 @@ public class SvgElement
         return Stroke;
     }
 
-    public double? CalculateStrokeWidth()
+    public double? ComputeStrokeWidth()
     {
         string rawValue = GetStyleValueFromClasses("stroke-width");
 
@@ -259,7 +227,7 @@ public class SvgElement
         return StrokeWidth;
     }
 
-    public StrokeLineCap? CalculateStrokeLineCap()
+    public StrokeLineCap? ComputeStrokeLineCap()
     {
         string rawValue = GetStyleValueFromClasses("stroke-linecap");
 
@@ -274,7 +242,7 @@ public class SvgElement
         return StrokeLineCap;
     }
 
-    public StrokeLineJoin? CalculateStrokeLineJoin()
+    public StrokeLineJoin? ComputeStrokeLineJoin()
     {
         string rawValue = GetStyleValueFromClasses("stroke-linejoin");
 
@@ -289,7 +257,7 @@ public class SvgElement
         return StrokeLineJoin;
     }
 
-    public double? CalculateStrokeDashOffset()
+    public double? ComputeStrokeDashOffset()
     {
         string rawValue = GetStyleValueFromClasses("stroke-dashoffset");
 
@@ -304,7 +272,7 @@ public class SvgElement
         return StrokeDashOffset;
     }
 
-    public double? CalculateStrokeMiterLimit()
+    public double? ComputeStrokeMiterLimit()
     {
         string rawValue = GetStyleValueFromClasses("stroke-miterlimit");
 
@@ -319,8 +287,40 @@ public class SvgElement
         return StrokeMiterLimit;
     }
 
-    public double? CalculateOpacity()
+    public double? ComputeOpacity()
     {
         return Opacity;
+    }
+
+    protected string GetStyleValueFromClasses(string name)
+    {
+        IEnumerable<SvgStyleRuleSet> applicableStyleRuleSets = GetApplicableStyleRuleSets();
+
+        if (applicableStyleRuleSets == null)
+            return null;
+
+        foreach (SvgStyleRuleSet styleRuleSet in applicableStyleRuleSets)
+        {
+            SvgStyleDeclaration styleDeclaration = styleRuleSet.Declarations?[name];
+
+            if (styleDeclaration != null)
+                return styleDeclaration.Value;
+        }
+
+        return null;
+    }
+
+    private IEnumerable<SvgStyleRuleSet> GetApplicableStyleRuleSets()
+    {
+        if (ClassNames == null)
+            return null;
+
+        Svg parentSvg = GetParentSvg();
+        IEnumerable<SvgStyleRuleSet> styleRuleSets = parentSvg?.GetAllStyleRuleSets();
+
+        return styleRuleSets?
+            .Where(x => ClassNames.Contains(x.Selector))
+            .Where(x => x.Declarations != null)
+            .Reverse();
     }
 }

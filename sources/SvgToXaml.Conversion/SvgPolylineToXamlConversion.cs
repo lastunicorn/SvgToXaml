@@ -40,7 +40,7 @@ internal class SvgPolylineToXamlConversion : SvgShapeToXamlConversion<SvgPolylin
 
     private static void SetFillRule(Polyline polyline, SvgPolyline svgPolyline)
     {
-        FillRule? fillRule = svgPolyline.CalculateFillRule();
+        FillRule? fillRule = svgPolyline.ComputeFillRule();
 
         if (fillRule != null)
         {
