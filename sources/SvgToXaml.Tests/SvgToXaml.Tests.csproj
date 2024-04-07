@@ -335,8 +335,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" />
+        <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.SvgModel\SvgToXaml.SvgModel.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj" />
         <ProjectReference Include="..\SvgToXaml.Tests.Utils\SvgToXaml.Tests.Utils.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml\SvgToXaml.csproj" PrivateAssets="All" />
     </ItemGroup>

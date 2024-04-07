@@ -63,7 +63,7 @@ public class MainViewModel : ViewModelBase
                 return;
             }
 
-            Svg svg = Parse(svgText);
+            SvgModel.Svg svg = Parse(svgText);
 
             SvgConversion svgConversion = new(svg);
             Canvas canvas = svgConversion.Execute();
@@ -76,7 +76,7 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public static Svg Parse(string svg)
+    public static SvgModel.Svg Parse(string svg)
     {
         using StringReader stringReader = new(svg);
 

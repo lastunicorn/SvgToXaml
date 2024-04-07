@@ -25,12 +25,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <RootNamespace>DustInTheWind.SvgToXaml.SvgModel</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj" PrivateAssets="All" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Conversion\" />
-    </ItemGroup>
-
 </Project>

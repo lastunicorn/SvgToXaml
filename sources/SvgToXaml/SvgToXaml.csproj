@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <ItemGroup>
         <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.SvgModel\SvgToXaml.SvgModel.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj" />
     </ItemGroup>
 
     <ItemGroup>
