@@ -27,7 +27,7 @@ internal static class LineExtensions
             return null;
 
         SvgLine svgLine = new();
-        svgLine.PopulateFrom(xmlLine);
+        svgLine.PopulateFromElement(xmlLine);
 
         svgLine.X1 = xmlLine.X1;
         svgLine.Y1 = xmlLine.Y1;

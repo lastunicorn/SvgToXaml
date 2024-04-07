@@ -27,7 +27,7 @@ internal static class RectExtensions
             return null;
 
         SvgRectangle model = new();
-        model.PopulateFrom(xmlRect);
+        model.PopulateFromElement(xmlRect);
 
         model.Width = xmlRect.Width;
         model.Height = xmlRect.Height;

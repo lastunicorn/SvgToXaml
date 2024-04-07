@@ -43,7 +43,8 @@ public class SvgGroupToXamlConversion : IConversion<Canvas>
             IEnumerable<UIElement> xamlElements = svgGroup.Children
                 .Where(x => x is not SvgDefinitions)
                 .Select(CreateConversion)
-                .Select(x => x.Execute());
+                .Select(x => x.Execute())
+                .Where(x => x != null);
 
             foreach (UIElement uiElement in xamlElements)
                 canvas.Children.Add(uiElement);

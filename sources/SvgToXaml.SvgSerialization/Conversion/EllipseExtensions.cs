@@ -27,7 +27,7 @@ internal static class EllipseExtensions
             return null;
 
         SvgEllipse svgEllipse = new();
-        svgEllipse.PopulateFrom(xmlEllipse);
+        svgEllipse.PopulateFromElement(xmlEllipse);
 
         svgEllipse.RadiusX = xmlEllipse.Rx;
         svgEllipse.RadiusY = xmlEllipse.Ry;

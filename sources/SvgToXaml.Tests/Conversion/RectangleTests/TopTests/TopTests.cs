@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
@@ -47,26 +48,30 @@ public class TopTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingRectWithY250_WhenSvgIsParsed_ThenResultedRectangleHasTop250()
+    public void HavingRectWithY250_WhenSvgIsParsed_ThenResultedRectangleHasTranslateTransformWithTop250()
     {
         TestConvertSvgFile("top-positive.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            double actualLeft = Canvas.GetTop(rectangle);
-            actualLeft.Should().Be(250);
+            rectangle.RenderTransform.Should().BeOfType<TranslateTransform>();
+
+            TranslateTransform translateTransform = rectangle.RenderTransform as TranslateTransform;
+            translateTransform.Y.Should().Be(250);
         });
     }
 
     [Fact]
-    public void HavingRectWithYNegative250_WhenSvgIsParsed_ThenResultedRectangleHasTopNegative250()
+    public void HavingRectWithYNegative250_WhenSvgIsParsed_ThenResultedRectangleHasTranslateTransformWithTopNegative250()
     {
         TestConvertSvgFile("top-negative.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            double actualLeft = Canvas.GetTop(rectangle);
-            actualLeft.Should().Be(-250);
+            rectangle.RenderTransform.Should().BeOfType<TranslateTransform>();
+
+            TranslateTransform translateTransform = rectangle.RenderTransform as TranslateTransform;
+            translateTransform.Y.Should().Be(-250);
         });
     }
 }

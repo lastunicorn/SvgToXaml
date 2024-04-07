@@ -27,7 +27,7 @@ internal static class DefsExtensions
             return null;
 
         SvgDefinitions svgDefinitions = new();
-        svgDefinitions.PopulateFrom(xmlDefs);
+        svgDefinitions.PopulateFromGroup(xmlDefs);
 
 
         return svgDefinitions;

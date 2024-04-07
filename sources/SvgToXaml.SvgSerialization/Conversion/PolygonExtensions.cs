@@ -27,7 +27,7 @@ internal static class PolygonExtensions
             return null;
 
         SvgPolygon svgPolygon = new();
-        svgPolygon.PopulateFrom(xmlPolygon);
+        svgPolygon.PopulateFromElement(xmlPolygon);
 
         if (xmlPolygon.Points != null)
         {

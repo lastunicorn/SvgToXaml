@@ -27,7 +27,7 @@ internal static class StopExtensions
             return null;
 
         SvgStop svgStop = new();
-        svgStop.PopulateFrom(xmlStop);
+        svgStop.PopulateFromElement(xmlStop);
 
         svgStop.Offset = xmlStop.Offset;
         svgStop.StopColor = xmlStop.StopColor;

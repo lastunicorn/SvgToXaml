@@ -61,10 +61,9 @@ public class TransformRotateTests : SvgFileTestsBase
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            rectangle.RenderTransform.Should().BeOfType<RotateTransform>();
-
-            RotateTransform rotateTransform = rectangle.RenderTransform as RotateTransform;
-            rotateTransform.CenterX.Should().Be(-150);
+            TransformGroup transformGroup = rectangle.RenderTransform as TransformGroup;
+            RotateTransform rotateTransform = transformGroup.Children[1] as RotateTransform;
+            rotateTransform.CenterX.Should().Be(0);
             rotateTransform.CenterY.Should().Be(0);
         });
     }

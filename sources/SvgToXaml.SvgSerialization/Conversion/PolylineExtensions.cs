@@ -27,7 +27,7 @@ internal static class PolylineExtensions
             return null;
 
         SvgPolyline svgPolygon = new();
-        svgPolygon.PopulateFrom(xmlPolyline);
+        svgPolygon.PopulateFromElement(xmlPolyline);
 
         if (xmlPolyline.Points != null)
         {

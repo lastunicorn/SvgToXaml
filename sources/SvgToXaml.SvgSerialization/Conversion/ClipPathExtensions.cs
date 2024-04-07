@@ -27,7 +27,7 @@ internal static class ClipPathExtensions
             return null;
 
         SvgClipPath svgClipPath = new();
-        svgClipPath.PopulateFrom(xmlClipPath);
+        svgClipPath.PopulateFromElement(xmlClipPath);
 
         if (xmlClipPath.Children != null)
         {

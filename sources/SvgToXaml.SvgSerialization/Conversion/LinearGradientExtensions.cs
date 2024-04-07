@@ -27,7 +27,7 @@ internal static class LinearGradientExtensions
             return null;
 
         SvgLinearGradient svgLinearGradient = new();
-        svgLinearGradient.PopulateFrom(xmlLinearGradient);
+        svgLinearGradient.PopulateFromElement(xmlLinearGradient);
 
         if (xmlLinearGradient.X1Specified)
             svgLinearGradient.X1 = xmlLinearGradient.X1;

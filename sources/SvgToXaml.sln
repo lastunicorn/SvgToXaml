@@ -22,6 +22,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.Conversion", "Svg
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CssColors", "CssColors\CssColors.csproj", "{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3A633B30-9880-4DF6-BBFD-BFAB7FCC9FC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{C17D34E9-B9F1-49F5-AAD5-8BA62961487C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3BA10058-436C-44FA-B7F5-8C2EFDF43636} = {3A633B30-9880-4DF6-BBFD-BFAB7FCC9FC2}
+		{45113D41-262E-47FD-A2C7-4E397CB3AC85} = {3A633B30-9880-4DF6-BBFD-BFAB7FCC9FC2}
+		{6DCAFE0B-0746-43FE-B91F-480FE0AE7BD8} = {C17D34E9-B9F1-49F5-AAD5-8BA62961487C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5252BD5F-48C8-432B-BC88-B093B544447D}

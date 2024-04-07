@@ -35,6 +35,9 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
     {
         SvgElement referencedElement = svgUse.GetReferencedElement();
 
+        if (referencedElement == null)
+            return null;
+
         IConversion<UIElement> conversion = ConvertReferencedElement(referencedElement);
         UIElement uiElement = conversion.Execute();
 

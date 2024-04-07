@@ -27,7 +27,7 @@ internal static class UseExtensions
             return null;
 
         SvgUse svgUse = new();
-        svgUse.PopulateFrom(xmlUse);
+        svgUse.PopulateFromElement(xmlUse);
         
         svgUse.Href = xmlUse.Href ?? xmlUse.HrefLink;
         svgUse.X = xmlUse.X;

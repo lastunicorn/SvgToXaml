@@ -24,7 +24,7 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class ElementExtensions
 {
-    public static void PopulateFrom(this SvgElement svgElement, XmlElement xmlElement)
+    public static void PopulateFromElement(this SvgElement svgElement, XmlElement xmlElement)
     {
         if (xmlElement == null)
             return;

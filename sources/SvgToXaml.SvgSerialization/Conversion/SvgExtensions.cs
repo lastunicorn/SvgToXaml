@@ -27,7 +27,7 @@ internal static class SvgExtensions
             return null;
 
         Svg modelSvg = new();
-        modelSvg.PopulateFrom(xmlSvg);
+        modelSvg.PopulateFromGroup(xmlSvg);
 
         if (xmlSvg.Width != null)
             modelSvg.Width = xmlSvg.Width;

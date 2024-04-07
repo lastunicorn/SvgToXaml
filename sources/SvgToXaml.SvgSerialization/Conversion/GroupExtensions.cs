@@ -30,13 +30,15 @@ internal static class GroupExtensions
             return null;
 
         SvgGroup svgGroup = new();
-        svgGroup.PopulateFrom(xmlG);
+        svgGroup.PopulateFromGroup(xmlG);
 
         return svgGroup;
     }
 
-    public static void PopulateFrom(this SvgGroup svgGroup, XmlG xmlG)
+    public static void PopulateFromGroup(this SvgGroup svgGroup, XmlG xmlG)
     {
+        svgGroup.PopulateFromElement(xmlG);
+
         if (xmlG.Children != null)
         {
             foreach (object serializationChild in xmlG.Children)

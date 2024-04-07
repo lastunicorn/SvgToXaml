@@ -27,7 +27,7 @@ internal static class PathExtensions
             return null;
 
         SvgPath model = new();
-        model.PopulateFrom(xmlPath);
+        model.PopulateFromElement(xmlPath);
 
         model.Data = xmlPath.D;
 

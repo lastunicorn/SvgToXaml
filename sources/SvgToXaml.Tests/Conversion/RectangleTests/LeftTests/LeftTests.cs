@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
@@ -47,26 +48,30 @@ public class LeftTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingRectWithX150_WhenSvgIsParsed_ThenResultedRectangleHasLeft150()
+    public void HavingRectWithX150_WhenSvgIsParsed_ThenResultedRectangleHasTranslateTransformWithLeft150()
     {
         TestConvertSvgFile("left-positive.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            double actualLeft = Canvas.GetLeft(rectangle);
-            actualLeft.Should().Be(150);
+            rectangle.RenderTransform.Should().BeOfType<TranslateTransform>();
+
+            TranslateTransform translateTransform = rectangle.RenderTransform as TranslateTransform;
+            translateTransform.X.Should().Be(150);
         });
     }
 
     [Fact]
-    public void HavingRectWithXNegative150_WhenSvgIsParsed_ThenResultedRectangleHasLeftNegative150()
+    public void HavingRectWithXNegative150_WhenSvgIsParsed_ThenResultedRectangleHasTranslateTransformWithLeftNegative150()
     {
         TestConvertSvgFile("left-negative.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            double actualLeft = Canvas.GetLeft(rectangle);
-            actualLeft.Should().Be(-150);
+            rectangle.RenderTransform.Should().BeOfType<TranslateTransform>();
+
+            TranslateTransform translateTransform = rectangle.RenderTransform as TranslateTransform;
+            translateTransform.X.Should().Be(-150);
         });
     }
 }

@@ -30,6 +30,9 @@ public static class CanvasExtensions
     public static T GetElementByIndex<T>(this Canvas canvas, int index)
         where T : UIElement
     {
+        if (index < 0 || index >= canvas.Children.Count)
+            throw new Exception($"Element was expected at index {index}, but it does not exist.");
+
         return canvas.Children[index] as T;
     }
 

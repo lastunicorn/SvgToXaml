@@ -27,7 +27,7 @@ internal static class CircleExtensions
             return null;
 
         SvgCircle svgCircle = new();
-        svgCircle.PopulateFrom(xmlCircle);
+        svgCircle.PopulateFromElement(xmlCircle);
 
         svgCircle.Radius = xmlCircle.R;
         svgCircle.CenterX = xmlCircle.Cx;
