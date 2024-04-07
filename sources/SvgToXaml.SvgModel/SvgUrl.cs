@@ -24,26 +24,46 @@ public record SvgUrl
 
     public string ReferencedId { get; }
 
-    public bool IsEmpty => ReferencedId == null;
+    public bool IsEmpty { get; }
 
-    public SvgUrl(string text)
+    public static SvgUrl Empty { get; } = new();
+
+    private SvgUrl()
     {
-        if (text != null)
-        {
-            Match match = UrlRegex.Match(text);
+        IsEmpty = true;
+    }
 
-            if (match.Success)
-                ReferencedId = match.Groups[1].Value;
+    public SvgUrl(string referencedId)
+    {
+        ReferencedId = referencedId ?? throw new ArgumentNullException(nameof(referencedId));
+        IsEmpty = false;
+    }
+
+    public static SvgUrl Parse(string text)
+    {
+        if (text == null)
+            return Empty;
+
+        Match match = UrlRegex.Match(text);
+
+        if (match.Success)
+        {
+            string referencedId = match.Groups[1].Value;
+            return new SvgUrl(referencedId);
         }
+
+        return Empty;
     }
 
     public override string ToString()
     {
-        return $"url(#{ReferencedId})";
+        return IsEmpty
+            ? string.Empty
+            : $"url(#{ReferencedId})";
     }
 
     public static implicit operator SvgUrl(string text)
     {
-        return new SvgUrl(text);
+        return Parse(text);
     }
 }

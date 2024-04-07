@@ -122,16 +122,24 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
     private void SetStroke(IEnumerable<SvgElement> svgElements)
     {
-        string stroke = svgElements
+        SvgPaint stroke = svgElements
             .Select(x => x.ComputeStroke())
             .FirstOrDefault(x => x != null);
 
-        if (stroke != null)
+        if (stroke == null || stroke.IsNone)
         {
-            bool isNone = string.Compare(stroke, "none", StringComparison.OrdinalIgnoreCase) == 0;
+        }
+        else if (stroke.Color is { IsEmpty: false })
+        {
+            Color color = stroke.Color.ToColor();
+            XamlElement.Stroke = new SolidColorBrush(color);
+        }
+        else if (stroke.Url is { IsEmpty: false })
+        {
+            SvgElement referencedElement = SvgElement.GetParentSvg().FindChild(stroke.Url.ReferencedId);
 
-            if (!isNone)
-                XamlElement.Stroke = (Brush)new BrushConverter().ConvertFrom(stroke)!;
+            if (referencedElement is SvgLinearGradient svgLinearGradient)
+                XamlElement.Stroke = ConvertLinearGradient(svgLinearGradient);
         }
     }
 

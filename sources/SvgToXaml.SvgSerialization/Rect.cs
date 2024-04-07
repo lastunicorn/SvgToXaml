@@ -31,4 +31,10 @@ public class Rect : Shape
 
     [XmlAttribute("y")]
     public double Y { get; set; }
+
+    [XmlAttribute("rx")]
+    public double Rx { get; set; }
+
+    [XmlAttribute("ry")]
+    public double Ry { get; set; }
 }

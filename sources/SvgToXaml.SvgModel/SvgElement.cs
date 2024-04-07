@@ -37,7 +37,7 @@ public class SvgElement
 
     public FillRule? FillRule { get; set; }
 
-    public string Stroke { get; set; }
+    public SvgPaint Stroke { get; set; }
 
     public double? StrokeWidth { get; set; }
 
@@ -200,7 +200,7 @@ public class SvgElement
         return FillRule;
     }
 
-    public string ComputeStroke()
+    public SvgPaint ComputeStroke()
     {
         string rawValue = GetStyleValueFromClasses("stroke");
 

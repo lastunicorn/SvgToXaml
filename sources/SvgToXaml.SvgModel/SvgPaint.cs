@@ -20,37 +20,65 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 /// 
 /// </summary>
 /// <remarks>
-/// Possible Values = none | <color> | <url> [none | <color>]? | context-fill | context-stroke 
+/// Possible Values = none | {color} | {url} [none | {color}]? | context-fill | context-stroke 
 /// </remarks>
 public class SvgPaint
 {
-    public SvgColor Color { get; }
+    public SvgColor Color { get; private init; }
 
-    public SvgUrl Url { get; }
+    public SvgUrl Url { get; private init; }
 
-    public bool IsNone { get; }
+    public bool IsNone { get; private init; }
 
-    public SvgPaint(string text)
+    public static SvgPaint Parse(string text)
     {
-        if (text?.Trim() == "none")
-        {
-            IsNone = true;
-        }
-        else
-        {
-            bool success = SvgColor.TryParse(text, out SvgColor svgColor);
+        if (text == null)
+            return null;
 
-            if (success)
-                Color = text;
-            else
-                Url = text;
+        bool isNone = text.Trim().Equals("none", StringComparison.InvariantCultureIgnoreCase);
+
+        if (isNone)
+        {
+            return new SvgPaint
+            {
+                IsNone = true
+            };
         }
+
+        bool isColor = SvgColor.TryParse(text, out SvgColor svgColor);
+
+        if (isColor)
+        {
+            return new SvgPaint
+            {
+                Color = svgColor
+            };
+        }
+
+        return new SvgPaint
+        {
+            Url = text
+        };
+    }
+
+    public override string ToString()
+    {
+        if (IsNone)
+            return "none";
+
+        if (!Color.IsEmpty)
+            return Color.ToString();
+
+        if (!Url.IsEmpty)
+            return Url.ToString();
+
+        return string.Empty;
     }
 
     public static implicit operator SvgPaint(string text)
     {
         return text == null
             ? null
-            : new SvgPaint(text);
+            : Parse(text);
     }
 }

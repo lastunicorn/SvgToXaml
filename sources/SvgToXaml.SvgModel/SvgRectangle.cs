@@ -28,6 +28,10 @@ public class SvgRectangle : SvgShape
 
     public double Y { get; set; }
 
+    public double Rx { get; set; }
+
+    public double Ry { get; set; }
+
     public SvgRectangle()
     {
     }
@@ -41,5 +45,7 @@ public class SvgRectangle : SvgShape
         Height = rect.Height;
         X = rect.X;
         Y = rect.Y;
+        Rx = rect.Rx;
+        Ry = rect.Ry;
     }
 }

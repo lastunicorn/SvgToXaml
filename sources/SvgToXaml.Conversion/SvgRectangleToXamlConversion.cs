@@ -32,7 +32,9 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
         Rectangle rectangle = new()
         {
             Width = SvgElement.Width,
-            Height = SvgElement.Height
+            Height = SvgElement.Height,
+            RadiusX = SvgElement.Rx,
+            RadiusY = SvgElement.Ry
         };
 
         double left = SvgElement.X;
