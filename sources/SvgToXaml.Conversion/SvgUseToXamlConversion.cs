@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using DustInTheWind.SvgToXaml.SvgModel;
 
@@ -24,10 +23,12 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 internal class SvgUseToXamlConversion : IConversion<UIElement>
 {
     private readonly SvgUse svgUse;
+    private readonly SvgElement referrer;
 
-    public SvgUseToXamlConversion(SvgUse svgUse)
+    public SvgUseToXamlConversion(SvgUse svgUse, SvgElement referrer = null)
     {
         this.svgUse = svgUse ?? throw new ArgumentNullException(nameof(svgUse));
+        this.referrer = referrer;
     }
 
     public UIElement Execute()
@@ -37,14 +38,20 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
         IConversion<UIElement> conversion = ConvertReferencedElement(referencedElement);
         UIElement uiElement = conversion.Execute();
 
+        double left = svgUse.X;
+        double top = svgUse.Y;
+
         if (svgUse.Transforms.Count > 0) 
             uiElement.RenderTransform = svgUse.Transforms.ToXaml(uiElement.RenderTransform);
 
-        if (svgUse.X != 0)
-            Canvas.SetLeft(uiElement, svgUse.X);
+        if (left != 0 || top != 0)
+        {
+            TransformGroupBuilder transformGroupBuilder = new(uiElement.RenderTransform);
 
-        if (svgUse.Y != 0)
-            Canvas.SetTop(uiElement, svgUse.Y);
+            TranslateTransform translateTransform = new(left, top);
+            transformGroupBuilder.Add(translateTransform);
+            uiElement.RenderTransform = transformGroupBuilder.RootTransform;
+        }
 
         return uiElement;
     }
@@ -76,6 +83,9 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
 
             case SvgText svgText:
                 return new SvgTextToXamlConversion(svgText, svgUse);
+
+            case SvgUse childSvgUse:
+                return new SvgUseToXamlConversion(childSvgUse, svgUse);
 
             default:
                 Type inheritedElementType = svgElement.GetType();

@@ -215,23 +215,22 @@ public class SvgElement
         return Stroke;
     }
 
-    public double? ComputeStrokeWidth()
+    public SvgLength? ComputeStrokeWidth()
     {
         string rawValue = GetStyleValueFromClasses("stroke-width");
 
         if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
+        {
+            SvgLength svgLength = rawValue;
+            return svgLength.Value;
+        }
 
         SvgStyleDeclaration styleDeclaration = Style?["stroke-width"];
 
         if (styleDeclaration != null)
         {
-            string valueAsString = styleDeclaration.Value.Trim();
-
-            if (valueAsString.EndsWith("px"))
-                valueAsString = valueAsString[..^2];
-
-            return double.Parse(valueAsString, CultureInfo.InvariantCulture);
+            SvgLength length = styleDeclaration.Value.Trim();
+            return length.Value;
         }
 
         return StrokeWidth;

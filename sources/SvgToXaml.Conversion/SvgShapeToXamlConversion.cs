@@ -137,7 +137,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
     private void SetStrokeThickness(IEnumerable<SvgElement> svgElements)
     {
-        double? strokeWidth = svgElements
+        SvgLength? strokeWidth = svgElements
             .Select(x => x.ComputeStrokeWidth())
             .FirstOrDefault(x => x != null);
 
