@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Globalization;
-using DustInTheWind.SvgToXaml.SvgSerialization;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
@@ -56,93 +55,6 @@ public class SvgElement
     public double? Opacity { get; set; }
 
     public SvgClipPathReference ClipPath { get; set; }
-
-    public SvgElement()
-    {
-    }
-
-    protected internal SvgElement(Element element)
-    {
-        if (element == null) throw new ArgumentNullException(nameof(element));
-
-        Id = element.Id;
-
-        Fill = element.Fill;
-
-        FillRule = element.FillRuleSpecified
-            ? Convert(element.FillRule)
-            : null;
-
-        Stroke = element.Stroke;
-
-        StrokeWidth = element.StrokeWidthSpecified
-            ? element.StrokeWidth
-            : null;
-
-        StrokeLineJoin = element.StrokeLineJoinSpecified
-            ? Convert(element.StrokeLineJoin)
-            : null;
-
-        StrokeLineCap = element.StrokeLineCapSpecified
-            ? Convert(element.StrokeLineCap)
-            : null;
-
-        StrokeDashOffset = element.StrokeDashOffsetSpecified
-            ? element.StrokeDashOffset
-            : null;
-
-        StrokeMiterLimit = element.StrokeMiterLimitSpecified
-            ? element.StrokeMiterLimit
-            : null;
-
-        Style = element.Style;
-
-        ClassNames = element.Class?.Split(new[] { ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-
-        if (element.Transform != null)
-            Transforms.ParseAndAdd(element.Transform);
-
-        Opacity = element.OpacitySpecified
-            ? element.Opacity
-            : null;
-
-        if (element.ClipPath != null)
-            ClipPath = new SvgClipPathReference(element.ClipPath);
-    }
-
-    private static FillRule Convert(SvgSerialization.FillRule value)
-    {
-        return value switch
-        {
-            SvgSerialization.FillRule.NonZero => SvgModel.FillRule.Nonzero,
-            SvgSerialization.FillRule.EvenOdd => SvgModel.FillRule.EvenOdd,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-        };
-    }
-
-    private static StrokeLineJoin Convert(SvgSerialization.StrokeLineJoin value)
-    {
-        return value switch
-        {
-            SvgSerialization.StrokeLineJoin.Miter => SvgModel.StrokeLineJoin.Miter,
-            SvgSerialization.StrokeLineJoin.MiterClip => SvgModel.StrokeLineJoin.MiterClip,
-            SvgSerialization.StrokeLineJoin.Round => SvgModel.StrokeLineJoin.Round,
-            SvgSerialization.StrokeLineJoin.Bevel => SvgModel.StrokeLineJoin.Bevel,
-            SvgSerialization.StrokeLineJoin.Arcs => SvgModel.StrokeLineJoin.Arcs,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-        };
-    }
-
-    private static StrokeLineCap Convert(SvgSerialization.StrokeLineCap value)
-    {
-        return value switch
-        {
-            SvgSerialization.StrokeLineCap.Butt => SvgModel.StrokeLineCap.Butt,
-            SvgSerialization.StrokeLineCap.Square => SvgModel.StrokeLineCap.Square,
-            SvgSerialization.StrokeLineCap.Round => SvgModel.StrokeLineCap.Round,
-            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
-        };
-    }
 
     public Svg GetParentSvg()
     {

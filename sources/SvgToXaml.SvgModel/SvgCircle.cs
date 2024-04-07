@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgCircle : SvgShape
@@ -25,18 +23,4 @@ public class SvgCircle : SvgShape
     public double CenterX { get; set; }
 
     public double CenterY { get; set; }
-
-    public SvgCircle()
-    {
-    }
-
-    internal SvgCircle(Circle circle)
-        : base(circle)
-    {
-        if (circle == null) throw new ArgumentNullException(nameof(circle));
-
-        Radius = circle.R;
-        CenterX = circle.Cx;
-        CenterY = circle.Cy;
-    }
 }

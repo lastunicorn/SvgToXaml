@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgRectangle : SvgShape
@@ -31,21 +29,4 @@ public class SvgRectangle : SvgShape
     public double Rx { get; set; }
 
     public double Ry { get; set; }
-
-    public SvgRectangle()
-    {
-    }
-
-    internal SvgRectangle(Rect rect)
-        : base(rect)
-    {
-        if (rect == null) throw new ArgumentNullException(nameof(rect));
-
-        Width = rect.Width;
-        Height = rect.Height;
-        X = rect.X;
-        Y = rect.Y;
-        Rx = rect.Rx;
-        Ry = rect.Ry;
-    }
 }

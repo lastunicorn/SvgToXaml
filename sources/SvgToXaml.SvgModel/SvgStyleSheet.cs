@@ -15,35 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgStyleSheet : Collection<SvgStyleRuleSet>
 {
-    private static readonly Regex Regex = new(@"\.(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
-
     public SvgStyleRuleSet this[string name] => Items.FirstOrDefault(x => x.Selector == name);
-
-    public static implicit operator SvgStyleSheet(string text)
-    {
-        if (text == null)
-            return null;
-
-        MatchCollection matches = Regex.Matches(text);
-
-        IEnumerable<SvgStyleRuleSet> items = matches
-            .Select(x => new SvgStyleRuleSet
-            {
-                Selector = x.Groups[1].Value,
-                Declarations = x.Groups[2].Value
-            });
-
-        SvgStyleSheet svgClasses = new();
-
-        foreach (SvgStyleRuleSet item in items)
-            svgClasses.Add(item);
-
-        return svgClasses;
-    }
 }

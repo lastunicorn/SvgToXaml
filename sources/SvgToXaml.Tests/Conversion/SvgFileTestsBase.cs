@@ -18,7 +18,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Controls;
 using DustInTheWind.SvgToXaml.Conversion;
-using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgToXaml.Tests.Conversion;
@@ -29,12 +29,13 @@ public class SvgFileTestsBase
     {
         Type callerType = GetCallerType();
 
-        string svg = TestResources.ReadTextFile(resourceFileName, callerType);
-        SvgDocument svgDocument = SvgDocument.Parse(svg);
+        string svgText = TestResources.ReadTextFile(resourceFileName, callerType);
+        SvgSerializer svgSerializer = new();
+        SvgModel.Svg svg = svgSerializer.Deserialize(svgText);
 
         StaEnvironment.Run(ExecutionErrorBehavior.ThrowException, () =>
         {
-            SvgConversion svgConversion = new(svgDocument.Content);
+            SvgConversion svgConversion = new(svg);
             Canvas canvas = svgConversion.Execute();
 
             callBack?.Invoke(canvas);

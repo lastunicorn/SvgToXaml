@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 // a
@@ -35,12 +33,6 @@ public class SvgContainer : SvgElement
     public SvgElementCollection<SvgElement> Children { get; }
 
     public SvgContainer()
-    {
-        Children = new SvgElementCollection<SvgElement>(this);
-    }
-
-    public SvgContainer(Element element)
-        : base(element)
     {
         Children = new SvgElementCollection<SvgElement>(this);
     }

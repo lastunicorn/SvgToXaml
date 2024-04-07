@@ -14,26 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgPolygon : SvgShape
 {
     public SvgPointCollection Points { get; } = new();
-
-    public SvgPolygon()
-    {
-    }
-
-    internal SvgPolygon(Polygon polygon)
-        : base(polygon)
-    {
-        if (polygon == null) throw new ArgumentNullException(nameof(polygon));
-
-        if (polygon.Points == null)
-            return;
-
-        Points = new SvgPointCollection(polygon.Points);
-    }
 }

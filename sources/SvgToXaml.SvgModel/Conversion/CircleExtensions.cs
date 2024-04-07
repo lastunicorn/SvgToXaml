@@ -14,15 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class SvgLine : SvgShape
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
+
+internal static class CircleExtensions
 {
-    public double X1 { get; set; }
+    public static SvgCircle ToSvgModel(this Circle circle)
+    {
+        if (circle == null)
+            return null;
 
-    public double Y1 { get; set; }
+        SvgCircle svgCircle = new();
+        svgCircle.PopulateFrom(circle);
 
-    public double X2 { get; set; }
+        svgCircle.Radius = circle.R;
+        svgCircle.CenterX = circle.Cx;
+        svgCircle.CenterY = circle.Cy;
 
-    public double Y2 { get; set; }
+        return svgCircle;
+    }
 }

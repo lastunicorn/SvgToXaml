@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Globalization;
+
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgPoint
@@ -21,4 +23,24 @@ public class SvgPoint
     public double X { get; set; }
 
     public double Y { get; set; }
+
+    public static IEnumerable<SvgPoint> ParseMany(string value)
+    {
+        if (value == null)
+            yield break;
+
+        string[] parts = value.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        if (parts.Length % 2 != 0)
+            throw new ArgumentException("Invalid number of points.", nameof(value));
+
+        for (int i = 0; i < parts.Length; i += 2)
+        {
+            yield return new SvgPoint
+            {
+                X = double.Parse(parts[i], CultureInfo.InvariantCulture),
+                Y = double.Parse(parts[i + 1], CultureInfo.InvariantCulture)
+            };
+        }
+    }
 }

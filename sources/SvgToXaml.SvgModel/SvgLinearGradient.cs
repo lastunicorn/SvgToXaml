@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgLinearGradient : SvgElement
@@ -35,45 +33,6 @@ public class SvgLinearGradient : SvgElement
     public SvgTransformList GradientTransforms { get; } = new();
 
     public HypertextReference? Href { get; set; }
-
-    public SvgLinearGradient(LinearGradient linearGradient)
-        : base(linearGradient)
-    {
-        if (linearGradient.X1Specified)
-            X1 = linearGradient.X1;
-
-        if (linearGradient.Y1Specified)
-            Y1 = linearGradient.Y1;
-
-        if (linearGradient.X2Specified)
-            X2 = linearGradient.X2;
-
-        if (linearGradient.Y2Specified)
-            Y2 = linearGradient.Y2;
-
-        if (linearGradient.GradientUnitsSpecified)
-        {
-            GradientUnits = linearGradient.GradientUnits switch
-            {
-                SvgSerialization.GradientUnits.ObjectBoundingBox => SvgGradientUnits.ObjectBoundingBox,
-                SvgSerialization.GradientUnits.UserSpaceOnUse => SvgGradientUnits.UserSpaceOnUse,
-                _ => throw new Exception("Invalid gradient unit value")
-            };
-        }
-
-        if (linearGradient.Stops != null)
-        {
-            Stops = linearGradient.Stops
-                .Select(x => new SvgStop(x))
-                .ToList();
-        }
-
-        if (linearGradient.GradientTransform != null)
-            GradientTransforms.ParseAndAdd(linearGradient.GradientTransform);
-
-        if (linearGradient.Href != null)
-            Href = linearGradient.Href;
-    }
 
     public SvgLength? ComputeX1()
     {

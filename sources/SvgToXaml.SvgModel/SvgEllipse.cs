@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgEllipse : SvgShape
@@ -27,19 +25,4 @@ public class SvgEllipse : SvgShape
     public double CenterX { get; set; }
 
     public double CenterY { get; set; }
-
-    public SvgEllipse()
-    {
-    }
-
-    internal SvgEllipse(Ellipse ellipse)
-        : base(ellipse)
-    {
-        if (ellipse == null) throw new ArgumentNullException(nameof(ellipse));
-
-        RadiusX = ellipse.Rx;
-        RadiusY = ellipse.Ry;
-        CenterX = ellipse.Cx;
-        CenterY = ellipse.Cy;
-    }
 }

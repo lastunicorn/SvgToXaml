@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Path = DustInTheWind.SvgToXaml.SvgSerialization.Path;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgPath : SvgShape
@@ -27,16 +25,4 @@ public class SvgPath : SvgShape
     /// </remarks>>
     // todo: allow Data to accept "none".
     public string Data { get; set; }
-
-    public SvgPath()
-    {
-    }
-
-    internal SvgPath(Path path)
-        : base(path)
-    {
-        if (path == null) throw new ArgumentNullException(nameof(path));
-
-        Data = path.D;
-    }
 }

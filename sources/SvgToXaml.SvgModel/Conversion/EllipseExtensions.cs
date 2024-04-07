@@ -14,15 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class SvgLine : SvgShape
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
+
+internal static class EllipseExtensions
 {
-    public double X1 { get; set; }
+    public static SvgEllipse ToSvgModel(this Ellipse ellipse)
+    {
+        if (ellipse == null)
+            return null;
 
-    public double Y1 { get; set; }
+        SvgEllipse svgEllipse = new();
+        svgEllipse.PopulateFrom(ellipse);
 
-    public double X2 { get; set; }
+        svgEllipse.RadiusX = ellipse.Rx;
+        svgEllipse.RadiusY = ellipse.Ry;
+        svgEllipse.CenterX = ellipse.Cx;
+        svgEllipse.CenterY = ellipse.Cy;
 
-    public double Y2 { get; set; }
+        return svgEllipse;
+    }
 }

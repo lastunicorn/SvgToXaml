@@ -14,15 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+using Path = DustInTheWind.SvgToXaml.SvgSerialization.Path;
 
-public class SvgLine : SvgShape
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
+
+internal static class PathExtensions
 {
-    public double X1 { get; set; }
+    public static SvgPath ToSvgModel(this Path path)
+    {
+        if (path == null)
+            return null;
 
-    public double Y1 { get; set; }
+        SvgPath model = new();
+        model.PopulateFrom(path);
 
-    public double X2 { get; set; }
+        model.Data = path.D;
 
-    public double Y2 { get; set; }
+        return model;
+    }
 }

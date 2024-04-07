@@ -14,48 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections;
-using System.Globalization;
+using System.Collections.ObjectModel;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgPointCollection : IEnumerable<SvgPoint>
+public class SvgPointCollection : Collection<SvgPoint>
 {
-    private readonly List<SvgPoint> points = new();
-
-    public SvgPointCollection()
-    {
-    }
-
-    public SvgPointCollection(string value)
-    {
-        if (value == null)
-            return;
-
-        string[] parts = value.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-
-        if (parts.Length % 2 != 0)
-            throw new ArgumentException("Invalid number of points.", nameof(value));
-
-        for (int i = 0; i < parts.Length; i += 2)
-        {
-            SvgPoint svgPoint = new()
-            {
-                X = double.Parse(parts[i], CultureInfo.InvariantCulture),
-                Y = double.Parse(parts[i + 1], CultureInfo.InvariantCulture)
-            };
-
-            points.Add(svgPoint);
-        }
-    }
-
-    public IEnumerator<SvgPoint> GetEnumerator()
-    {
-        return points.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
 }

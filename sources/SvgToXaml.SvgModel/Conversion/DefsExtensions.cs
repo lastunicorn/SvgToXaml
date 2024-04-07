@@ -16,22 +16,19 @@
 
 using DustInTheWind.SvgToXaml.SvgSerialization;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
 
-public class SvgDocument
+internal static class DefsExtensions
 {
-    public Svg Content { get; set; }
-
-    public static SvgDocument Parse(string svg)
+    public static SvgDefinitions ToSvgModel(this Defs defs)
     {
-        using StringReader stringReader = new(svg);
+        if (defs == null)
+            return null;
 
-        SvgSerializer serializer = new();
-        SvgSerialization.Svg svgObject = serializer.Deserialize(stringReader);
+        SvgDefinitions svgDefinitions = new();
+        svgDefinitions.PopulateFrom(defs);
 
-        return new SvgDocument
-        {
-            Content = new Svg(svgObject)
-        };
+
+        return svgDefinitions;
     }
 }

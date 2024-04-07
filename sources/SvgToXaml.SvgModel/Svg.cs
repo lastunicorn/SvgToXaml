@@ -24,25 +24,6 @@ public class Svg : SvgGroup
 
     public SvgViewBox ViewBox { get; set; }
 
-    public Svg()
-    {
-    }
-
-    internal Svg(SvgSerialization.Svg svg)
-        : base(svg)
-    {
-        if (svg == null) throw new ArgumentNullException(nameof(svg));
-
-        if (svg.Width != null)
-            Width = svg.Width;
-
-        if (svg.Height != null)
-            Height = svg.Height;
-
-        if (svg.ViewBox != null)
-            ViewBox = SvgViewBox.Parse(svg.ViewBox);
-    }
-
     public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets()
     {
         IEnumerable<SvgGroup> svgGroups = GetAllSvgGroups();

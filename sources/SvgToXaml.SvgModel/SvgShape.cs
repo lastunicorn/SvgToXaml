@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 /// <summary>
@@ -23,12 +21,4 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 /// </summary>
 public class SvgShape : SvgElement
 {
-    protected SvgShape()
-    {
-    }
-
-    protected SvgShape(Element element)
-        : base(element)
-    {
-    }
 }

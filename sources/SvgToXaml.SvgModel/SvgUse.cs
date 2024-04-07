@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgUse : SvgElement
@@ -25,25 +23,6 @@ public class SvgUse : SvgElement
     public double X { get; set; }
 
     public double Y { get; set; }
-
-    public SvgUse()
-    {
-    }
-
-    internal SvgUse(Use use)
-        : base(use)
-    {
-        if (use == null) throw new ArgumentNullException(nameof(use));
-
-        Href = use.Href ?? use.HrefLink;
-        X = use.X;
-        Y = use.Y;
-    }
-
-    public SvgUseInheritanceCollection GetInheritanceList()
-    {
-        return new SvgUseInheritanceCollection(this);
-    }
 
     public SvgElement GetReferencedElement()
     {

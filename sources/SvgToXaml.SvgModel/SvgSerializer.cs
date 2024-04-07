@@ -15,18 +15,26 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Xml.Serialization;
+using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
 public class SvgSerializer
 {
-    public void Serialize(Stream stream, Svg svg)
+    public SvgModel.Svg Deserialize(string text)
     {
+        using StringReader stringReader = new(text);
+
         XmlSerializer xmlSerializer = new(typeof(Svg));
-        xmlSerializer.Serialize(stream, svg);
+        object deserializedObject = xmlSerializer.Deserialize(stringReader);
+
+        if (deserializedObject is not Svg svgObject)
+            throw new InvalidSvgException();
+
+        return svgObject.ToSvgModel();
     }
 
-    public Svg Deserialize(Stream stream)
+    public SvgModel.Svg Deserialize(Stream stream)
     {
         XmlSerializer xmlSerializer = new(typeof(Svg));
         object deserializedObject = xmlSerializer.Deserialize(stream);
@@ -34,10 +42,10 @@ public class SvgSerializer
         if (deserializedObject is not Svg svgObject)
             throw new InvalidSvgException();
 
-        return svgObject;
+        return svgObject.ToSvgModel();
     }
 
-    public Svg Deserialize(TextReader textReader)
+    public SvgModel.Svg Deserialize(TextReader textReader)
     {
         XmlSerializer xmlSerializer = new(typeof(Svg));
         object deserializedObject = xmlSerializer.Deserialize(textReader);
@@ -45,6 +53,6 @@ public class SvgSerializer
         if (deserializedObject is not Svg svgObject)
             throw new InvalidSvgException();
 
-        return svgObject;
+        return svgObject.ToSvgModel();
     }
 }

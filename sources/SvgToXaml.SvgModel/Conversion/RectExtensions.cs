@@ -14,15 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class SvgLine : SvgShape
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
+
+internal static class RectExtensions
 {
-    public double X1 { get; set; }
+    public static SvgRectangle ToSvgModel(this Rect rect)
+    {
+        if (rect == null)
+            return null;
 
-    public double Y1 { get; set; }
+        SvgRectangle model = new();
+        model.PopulateFrom(rect);
 
-    public double X2 { get; set; }
-
-    public double Y2 { get; set; }
+        model.Width = rect.Width;
+        model.Height = rect.Height;
+        model.X = rect.X;
+        model.Y = rect.Y;
+        model.Rx = rect.Rx;
+        model.Ry = rect.Ry;
+ 
+        return model;
+    }
 }

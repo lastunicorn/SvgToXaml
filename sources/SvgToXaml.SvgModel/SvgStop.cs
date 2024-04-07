@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgSerialization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgStop : SvgElement
@@ -23,18 +21,8 @@ public class SvgStop : SvgElement
     public double Offset { get; set; }
 
     public SvgColor StopColor { get; set; }
-    
+
     public SvgOpacity? StopOpacity { get; set; }
-
-    public SvgStop(Stop stop)
-        : base(stop)
-    {
-        Offset = stop.Offset;
-        StopColor = stop.StopColor;
-
-        if (stop.StopOpacitySpecified) 
-            StopOpacity = stop.StopOpacity;
-    }
 
     public SvgColor ComputeStopColor()
     {

@@ -14,15 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class SvgLine : SvgShape
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
+
+internal static class TextExtensions
 {
-    public double X1 { get; set; }
+    public static SvgText ToSvgModel(this Text text)
+    {
+        if (text == null)
+            return null;
 
-    public double Y1 { get; set; }
-
-    public double X2 { get; set; }
-
-    public double Y2 { get; set; }
+        return new SvgText();
+    }
 }

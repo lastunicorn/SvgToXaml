@@ -14,15 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class SvgLine : SvgShape
+namespace DustInTheWind.SvgToXaml.SvgModel.Conversion;
+
+internal static class PolygonExtensions
 {
-    public double X1 { get; set; }
+    public static SvgPolygon ToSvgModel(this Polygon polygon)
+    {
+        if (polygon == null)
+            return null;
 
-    public double Y1 { get; set; }
+        SvgPolygon svgPolygon = new();
+        svgPolygon.PopulateFrom(polygon);
 
-    public double X2 { get; set; }
+        if (polygon.Points != null)
+        {
+            IEnumerable<SvgPoint> points = SvgPoint.ParseMany(polygon.Points);
 
-    public double Y2 { get; set; }
+            foreach (SvgPoint point in points)
+                svgPolygon.Points.Add(point);
+        }
+
+        return svgPolygon;
+    }
 }
