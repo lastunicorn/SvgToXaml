@@ -18,17 +18,11 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Rect : Shape
+public enum FillRule
 {
-    [XmlAttribute("width")]
-    public double Width { get; set; }
+    [XmlEnum(Name = "nonzero")]
+    NonZero = 0,
 
-    [XmlAttribute("height")]
-    public double Height { get; set; }
-
-    [XmlAttribute("x")]
-    public double X { get; set; }
-
-    [XmlAttribute("y")]
-    public double Y { get; set; }
+    [XmlEnum(Name = "evenodd")]
+    EvenOdd = 1
 }

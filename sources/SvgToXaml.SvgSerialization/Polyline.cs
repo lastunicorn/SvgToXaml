@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Polyline : Element
+public class Polyline : Shape
 {
     [XmlAttribute("points")]
     public string Points { get; set; }

@@ -69,9 +69,9 @@ public class SvgElement
 
         Fill = element.Fill;
 
-        FillRule = element.FillRule == null
-            ? null
-            : (FillRule)Enum.Parse(typeof(FillRule), element.FillRule, true);
+        FillRule = element.FillRuleSpecified
+            ? Convert(element.FillRule)
+            : null;
 
         Stroke = element.Stroke;
 
@@ -108,6 +108,16 @@ public class SvgElement
 
         if (element.ClipPath != null)
             ClipPath = new SvgClipPathReference(element.ClipPath);
+    }
+
+    private static FillRule Convert(SvgSerialization.FillRule value)
+    {
+        return value switch
+        {
+            SvgSerialization.FillRule.NonZero => SvgModel.FillRule.Nonzero,
+            SvgSerialization.FillRule.EvenOdd => SvgModel.FillRule.EvenOdd,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
     }
 
     private static StrokeLineJoin Convert(SvgSerialization.StrokeLineJoin value)

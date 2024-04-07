@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Polygon : Element
+public class Polygon : Shape
 {
     [XmlAttribute("points")]
     public string Points { get; set; }

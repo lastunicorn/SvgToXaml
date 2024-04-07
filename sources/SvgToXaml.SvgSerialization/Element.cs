@@ -38,7 +38,9 @@ public class Element
     public string Fill { get; set; }
 
     [XmlAttribute("fill-rule")]
-    public string FillRule { get; set; }
+    public FillRule FillRule { get; set; }
+
+    public bool FillRuleSpecified { get; set; }
 
     //[XmlAttribute("fill-opacity")]
     //public string FillOpacity { get; set; }

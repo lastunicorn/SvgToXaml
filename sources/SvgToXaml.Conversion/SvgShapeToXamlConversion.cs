@@ -67,11 +67,11 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
             SvgElement referencedElement = SvgElement.GetParentSvg().FindChild(fill.Url.ReferencedId);
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
-                XamlElement.Fill = TransformLinearGradient(svgLinearGradient);
+                XamlElement.Fill = ConvertLinearGradient(svgLinearGradient);
         }
     }
 
-    private static LinearGradientBrush TransformLinearGradient(SvgLinearGradient svgLinearGradient)
+    private static LinearGradientBrush ConvertLinearGradient(SvgLinearGradient svgLinearGradient)
     {
         IEnumerable<GradientStop> gradientStops = svgLinearGradient.ComputeStops()
             .Select(Transform)
@@ -204,23 +204,5 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
         if (strokeMiterLimit != null)
             XamlElement.StrokeMiterLimit = strokeMiterLimit.Value;
-    }
-
-    protected override void ApplyTransforms()
-    {
-        base.ApplyTransforms();
-
-        double x = Canvas.GetLeft(XamlElement);
-        double y = Canvas.GetTop(XamlElement);
-
-        bool xIsAbsent = double.IsNaN(x) || x == 0;
-        if (xIsAbsent)
-        {
-            bool yIsAbsent = double.IsNaN(y) || y == 0;
-            if (yIsAbsent)
-                return;
-        }
-
-        XamlElement.RenderTransform.TranslateOriginRecursively(x, y);
     }
 }

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
@@ -36,11 +35,11 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
             Height = SvgElement.Height
         };
 
-        if (SvgElement.X != 0)
-            Canvas.SetLeft(rectangle, SvgElement.X);
+        double left = SvgElement.X;
+        double top = SvgElement.Y;
 
-        if (SvgElement.Y != 0)
-            Canvas.SetTop(rectangle, SvgElement.Y);
+        if (left != 0 || top != 0)
+            rectangle.RenderTransform = new TranslateTransform(left, top);
 
         return rectangle;
     }

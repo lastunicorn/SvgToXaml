@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Line : Element
+public class Line : Shape
 {
     [XmlAttribute("x1")]
     public double X1 { get; set; }

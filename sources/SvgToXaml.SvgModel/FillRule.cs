@@ -18,6 +18,6 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public enum FillRule
 {
-    EvenOdd,
-    Nonzero
+    EvenOdd = 0,
+    Nonzero = 1
 }

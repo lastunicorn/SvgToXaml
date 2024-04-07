@@ -14,21 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
-
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class Rect : Shape
+public class Shape : Element
 {
-    [XmlAttribute("width")]
-    public double Width { get; set; }
-
-    [XmlAttribute("height")]
-    public double Height { get; set; }
-
-    [XmlAttribute("x")]
-    public double X { get; set; }
-
-    [XmlAttribute("y")]
-    public double Y { get; set; }
 }

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
 
@@ -36,12 +37,10 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
         };
 
         double left = SvgElement.CenterX - SvgElement.RadiusX;
-        if (left != 0)
-            Canvas.SetLeft(ellipse, left);
-
         double top = SvgElement.CenterY - SvgElement.RadiusY;
-        if (top != 0)
-            Canvas.SetTop(ellipse, top);
+
+        if (left != 0 || top != 0) 
+            ellipse.RenderTransform = new TranslateTransform(left, top);
 
         return ellipse;
     }

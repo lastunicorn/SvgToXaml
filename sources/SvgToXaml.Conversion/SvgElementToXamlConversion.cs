@@ -63,7 +63,7 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         }
     }
 
-    protected virtual void ApplyTransforms()
+    private void ApplyTransforms()
     {
         XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
     }

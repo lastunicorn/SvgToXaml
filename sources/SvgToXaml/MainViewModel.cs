@@ -18,6 +18,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Xml;
 using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.SvgModel;
@@ -83,7 +84,8 @@ public class MainViewModel : ViewModelBase
         XmlWriterSettings xmlWriterSettings = new()
         {
             Indent = true,
-            NewLineOnAttributes = true
+            NewLineOnAttributes = true,
+            OmitXmlDeclaration = true
         };
         using XmlWriter xmlWriter = XmlWriter.Create(ms, xmlWriterSettings);
 
