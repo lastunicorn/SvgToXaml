@@ -250,9 +250,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data.svg" />
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data-absent.svg" />
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data-none.svg" />
-        <EmbeddedResource Include="Conversion\PolylineTests\PolylineTests.Resources\points-3.svg" />
-        <EmbeddedResource Include="Conversion\PolylineTests\PolylineTests.Resources\points-2.svg" />
-        <EmbeddedResource Include="Conversion\PolylineTests\PolylineTests.Resources\points-1.svg" />
+        <EmbeddedResource Include="Conversion\PolylineTests\PointsTests.Resources\polyline-points-3.svg" />
+        <EmbeddedResource Include="Conversion\PolylineTests\PointsTests.Resources\polyline-points-2.svg" />
+        <EmbeddedResource Include="Conversion\PolylineTests\PointsTests.Resources\polyline-points-1.svg" />
         <EmbeddedResource Include="Conversion\StrokeTests\CircleDefsClassTests.Resources\circle-defs-class^.svg" />
         <EmbeddedResource Include="Conversion\StrokeTests\CircleDefsClassTests.Resources\circle^-defs-class^.svg" />
         <EmbeddedResource Include="Conversion\StrokeTests\CircleDefsClassTests.Resources\svgroot^-circle-defs-class^.svg" />
