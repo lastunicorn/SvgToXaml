@@ -21,18 +21,41 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class CircleExtensions
 {
-    public static SvgCircle ToSvgModel(this XmlCircle xmlCircle)
+    public static SvgCircle ToSvgModel(this XmlCircle xmlCircle, DeserializationContext deserializationContext)
     {
         if (xmlCircle == null)
             return null;
 
-        SvgCircle svgCircle = new();
-        svgCircle.PopulateFromElement(xmlCircle);
+        deserializationContext.Path.Add("circle");
 
-        svgCircle.Radius = xmlCircle.R;
-        svgCircle.CenterX = xmlCircle.Cx;
-        svgCircle.CenterY = xmlCircle.Cy;
+        try
+        {
+            SvgCircle svgCircle = new();
+            svgCircle.PopulateFromElement(xmlCircle);
 
-        return svgCircle;
+            if (xmlCircle.R < 0)
+            {
+                svgCircle.Radius = 0;
+
+                deserializationContext.Path.SetAttributeOnLast("r");
+
+                //NegativeValueIssue issue = new("svg.0(g).3(circle:circle1)@r");
+                NegativeValueIssue issue = new(deserializationContext.Path.ToString());
+                deserializationContext.Warnings.Add(issue);
+            }
+            else
+            {
+                svgCircle.Radius = xmlCircle.R;
+            }
+
+            svgCircle.CenterX = xmlCircle.Cx;
+            svgCircle.CenterY = xmlCircle.Cy;
+
+            return svgCircle;
+        }
+        finally
+        {
+            deserializationContext.Path.RemoveLast();
+        }
     }
 }

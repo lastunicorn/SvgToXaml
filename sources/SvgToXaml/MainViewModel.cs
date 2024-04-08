@@ -18,7 +18,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using System.Windows.Media;
 using System.Xml;
 using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.SvgModel;
@@ -63,7 +62,7 @@ public class MainViewModel : ViewModelBase
                 return;
             }
 
-            SvgModel.Svg svg = Parse(svgText);
+            Svg svg = Parse(svgText);
 
             SvgConversion svgConversion = new(svg);
             Canvas canvas = svgConversion.Execute();
@@ -76,12 +75,13 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public static SvgModel.Svg Parse(string svg)
+    public static Svg Parse(string svg)
     {
         using StringReader stringReader = new(svg);
 
         SvgSerializer serializer = new();
-        return serializer.Deserialize(stringReader);
+        DeserializationResult deserializationResult = serializer.Deserialize(stringReader);
+        return deserializationResult.Svg;
     }
 
     private static string Serialize(Canvas canvas)

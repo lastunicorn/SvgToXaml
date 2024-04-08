@@ -21,7 +21,7 @@ public class DefsTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleInDefinitions_WhenSvgIsParsed_ThenNoChildrenIsCreated()
     {
-        TestConvertSvgFile("defs-circle.svg", canvas =>
+        ConvertSvgFile("defs-circle.svg", canvas =>
         {
             canvas.Children.Count.Should().Be(0);
         });
@@ -30,7 +30,7 @@ public class DefsTests : SvgFileTestsBase
     [Fact]
     public void HavingTwoCirclesInDefinitions_WhenSvgIsParsed_ThenNoChildrenIsCreated()
     {
-        TestConvertSvgFile("defs-2circles.svg", canvas =>
+        ConvertSvgFile("defs-2circles.svg", canvas =>
         {
             canvas.Children.Count.Should().Be(0);
         });
@@ -39,7 +39,7 @@ public class DefsTests : SvgFileTestsBase
     [Fact]
     public void HavingGroupWithCircleInDefinitions_WhenSvgIsParsed_ThenNoChildrenIsCreated()
     {
-        TestConvertSvgFile("defs-group-circle.svg", canvas =>
+        ConvertSvgFile("defs-group-circle.svg", canvas =>
         {
             canvas.Children.Count.Should().Be(0);
         });

@@ -14,28 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-public class SvgCircle : SvgShape
+public class DeserializationResult
 {
-    private double radius;
+    public SvgModel.Svg Svg { get; init; }
 
-    public double Radius
-    {
-        get => radius;
-        set
-        {
-            if (value < 0)
-                throw new ArgumentOutOfRangeException(nameof(value), "Radius cannot be a negative value. It must be a positive, finite number.");
+    public List<DeserializationIssue> Warnings { get; init; } = new();
 
-            if (double.IsNaN(value))
-                throw new ArgumentOutOfRangeException(nameof(value), "Radius must be a positive, finite number.");
-
-            radius = value;
-        }
-    }
-
-    public double CenterX { get; set; }
-
-    public double CenterY { get; set; }
+    public List<DeserializationIssue> Errors { get; init; } = new();
 }

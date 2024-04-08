@@ -14,28 +14,43 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
-using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.ClipPathTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 
-public class ClipPathTests : SvgFileTestsBase
+public class HeightTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleReferencingClipPathWithContainingRectangle_WhenSvgIsConverted_ThenEllipseContainsRectangleGeometryWithCorrectValues()
+    public void HavingCircleWithRadius0_WhenSvgIsParsed_ThenResultedEllipseHasHeight0()
     {
-        ConvertSvgFile("circle-clippath.svg", canvas =>
+        ConvertSvgFile("circle-radius-zero.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            ellipse.Clip.Should().BeOfType<RectangleGeometry>();
+            ellipse.Height.Should().Be(0);
+        });
+    }
 
-            RectangleGeometry rectangleGeometry = ellipse.Clip as RectangleGeometry;
+    [Fact]
+    public void HavingCircleWithRadius50_WhenSvgIsParsed_ThenResultedEllipseHasHeight100()
+    {
+        ConvertSvgFile("circle-radius-positive.svg", canvas =>
+        {
+            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            Rect expectedRect = new(0, 0, 200, 100);
-            rectangleGeometry.Rect.Should().Be(expectedRect);
+            ellipse.Height.Should().Be(100);
+        });
+    }
+
+    [Fact]
+    public void HavingCircleWithRadiusMinus50_WhenSvgIsParsed_ThenThrows()
+    {
+        ConvertSvgFile("circle-radius-negative.svg", canvas =>
+        {
+            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
+
+            ellipse.Height.Should().Be(0);
         });
     }
 }

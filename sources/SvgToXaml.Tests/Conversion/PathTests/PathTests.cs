@@ -25,7 +25,7 @@ public class PathTests : SvgFileTestsBase
     [Fact]
     public void HavingPathWithDataValueNone_WhenSvgIsParsed_ThenResultedPathHasEmptyGeometry()
     {
-        TestConvertSvgFile("path-data-none.svg", canvas =>
+        ConvertSvgFile("path-data-none.svg", canvas =>
         {
             Path path = canvas.GetElementByIndex<Path>(0);
 
@@ -36,7 +36,7 @@ public class PathTests : SvgFileTestsBase
     [Fact]
     public void HavingPathWithoutData_WhenSvgIsParsed_ThenResultedPathHasEmptyGeometry()
     {
-        TestConvertSvgFile("path-data-absent.svg", canvas =>
+        ConvertSvgFile("path-data-absent.svg", canvas =>
         {
             Path path = canvas.GetElementByIndex<Path>(0);
 
@@ -47,7 +47,7 @@ public class PathTests : SvgFileTestsBase
     [Fact]
     public void HavingPathWithData_WhenSvgIsParsed_ThenResultedPathHasPathGeometry()
     {
-        TestConvertSvgFile("path-data.svg", canvas =>
+        ConvertSvgFile("path-data.svg", canvas =>
         {
             Path path = canvas.GetElementByIndex<Path>(0);
 

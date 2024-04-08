@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -39,23 +38,15 @@ public static class TestResources
         return streamReader.ReadToEnd();
     }
 
-    public static string ReadTextFile(string resourceFileName)
+    public static string ReadTextFile(string resourceFileName, Assembly assembly)
     {
-        Assembly assembly = Assembly.GetExecutingAssembly();
-        string callerNamespace = GetCallerNamespace();
+        using Stream stream = assembly.GetManifestResourceStream(resourceFileName);
 
-        using Stream stream = assembly.GetManifestResourceStream(callerNamespace + "." + resourceFileName);
+        if (stream == null)
+            throw new Exception($"The resource file was not found: '{resourceFileName}'.");
+
         using StreamReader streamReader = new(stream);
 
         return streamReader.ReadToEnd();
-    }
-
-    private static string GetCallerNamespace()
-    {
-        StackFrame stackFrame = new(2, false);
-        MethodBase caller = stackFrame.GetMethod();
-        Type callerType = caller.DeclaringType;
-
-        return callerType.Namespace;
     }
 }

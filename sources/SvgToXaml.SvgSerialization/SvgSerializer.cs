@@ -22,7 +22,7 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
 public class SvgSerializer
 {
-    public SvgModel.Svg Deserialize(string text)
+    public DeserializationResult Deserialize(string text)
     {
         using StringReader stringReader = new(text);
 
@@ -32,10 +32,17 @@ public class SvgSerializer
         if (deserializedObject is not XmlSvg svgObject)
             throw new InvalidSvgException();
 
-        return svgObject.ToSvgModel();
+        DeserializationContext deserializationContext = new();
+
+        return new DeserializationResult
+        {
+            Svg = svgObject.ToSvgModel(deserializationContext),
+            Errors = deserializationContext.Errors,
+            Warnings = deserializationContext.Warnings
+        };
     }
 
-    public SvgModel.Svg Deserialize(Stream stream)
+    public DeserializationResult Deserialize(Stream stream)
     {
         XmlSerializer xmlSerializer = new(typeof(XmlSvg));
         object deserializedObject = xmlSerializer.Deserialize(stream);
@@ -43,10 +50,17 @@ public class SvgSerializer
         if (deserializedObject is not XmlSvg svgObject)
             throw new InvalidSvgException();
 
-        return svgObject.ToSvgModel();
+        DeserializationContext deserializationContext = new();
+
+        return new DeserializationResult
+        {
+            Svg = SvgExtensions.ToSvgModel(svgObject, deserializationContext),
+            Errors = deserializationContext.Errors,
+            Warnings = deserializationContext.Warnings
+        };
     }
 
-    public SvgModel.Svg Deserialize(TextReader textReader)
+    public DeserializationResult Deserialize(TextReader textReader)
     {
         XmlSerializer xmlSerializer = new(typeof(XmlSvg));
         object deserializedObject = xmlSerializer.Deserialize(textReader);
@@ -54,6 +68,13 @@ public class SvgSerializer
         if (deserializedObject is not XmlSvg svgObject)
             throw new InvalidSvgException();
 
-        return svgObject.ToSvgModel();
+        DeserializationContext deserializationContext = new();
+
+        return new DeserializationResult
+        {
+            Svg = SvgExtensions.ToSvgModel(svgObject, deserializationContext),
+            Errors = deserializationContext.Errors,
+            Warnings = deserializationContext.Warnings
+        };
     }
 }

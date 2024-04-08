@@ -14,28 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.ClipPathTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 
-public class ClipPathTests : SvgFileTestsBase
+public class TransformScaleTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleReferencingClipPathWithContainingRectangle_WhenSvgIsConverted_ThenEllipseContainsRectangleGeometryWithCorrectValues()
+    public void HavingCircleWithScaleTransform_WhenSvgIsParsed_ThenResultedEllipseHasOneScaleTransformWithCorrectValues()
     {
-        ConvertSvgFile("circle-clippath.svg", canvas =>
+        ConvertSvgFile("transform-scale.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            ellipse.Clip.Should().BeOfType<RectangleGeometry>();
+            TransformGroup transformGroup = ellipse.RenderTransform as TransformGroup;
 
-            RectangleGeometry rectangleGeometry = ellipse.Clip as RectangleGeometry;
+            TranslateTransform translateTransform = transformGroup.Children[0] as TranslateTransform;
+            translateTransform.X.Should().Be(250);
+            translateTransform.Y.Should().Be(150);
 
-            Rect expectedRect = new(0, 0, 200, 100);
-            rectangleGeometry.Rect.Should().Be(expectedRect);
+            ScaleTransform scaleTransform = transformGroup.Children[1] as ScaleTransform;
+            scaleTransform.ScaleX.Should().Be(-1);
+            scaleTransform.ScaleY.Should().Be(2);
         });
     }
 }

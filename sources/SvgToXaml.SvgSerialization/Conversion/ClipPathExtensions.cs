@@ -21,7 +21,7 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class ClipPathExtensions
 {
-    public static SvgClipPath ToSvgModel(this XmlClipPath xmlClipPath)
+    public static SvgClipPath ToSvgModel(this XmlClipPath xmlClipPath, DeserializationContext deserializationContext)
     {
         if (xmlClipPath == null)
             return null;
@@ -35,7 +35,7 @@ internal static class ClipPathExtensions
             {
                 if (serializationChild is XmlCircle circle)
                 {
-                    SvgCircle svgCircle = circle.ToSvgModel();
+                    SvgCircle svgCircle = circle.ToSvgModel(deserializationContext);
                     svgClipPath.Children.Add(svgCircle);
                 }
                 else if (serializationChild is XmlEllipse ellipse)

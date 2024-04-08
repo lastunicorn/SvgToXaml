@@ -1,4 +1,4 @@
-﻿// SvgToXaml
+// SvgToXaml
 // Copyright (C) 2022-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,28 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.SvgRootTests;
 
-public class SvgCircle : SvgShape
+public class EmptySvgTests : SvgFileTestsBase
 {
-    private double radius;
-
-    public double Radius
+    [Fact]
+    public void HavingEmptySvg_WhenParsed_ThenCanvasHasNoChildren()
     {
-        get => radius;
-        set
+        ConvertSvgFile("empty.svg", canvas =>
         {
-            if (value < 0)
-                throw new ArgumentOutOfRangeException(nameof(value), "Radius cannot be a negative value. It must be a positive, finite number.");
-
-            if (double.IsNaN(value))
-                throw new ArgumentOutOfRangeException(nameof(value), "Radius must be a positive, finite number.");
-
-            radius = value;
-        }
+            canvas.Children.Count.Should().Be(0);
+        });
     }
-
-    public double CenterX { get; set; }
-
-    public double CenterY { get; set; }
 }

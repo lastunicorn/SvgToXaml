@@ -24,18 +24,18 @@ internal static class GroupExtensions
 {
     private static readonly Regex Regex = new(@"\.(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
 
-    public static SvgGroup ToSvgModel(this XmlG xmlG)
+    public static SvgGroup ToSvgModel(this XmlG xmlG, DeserializationContext deserializationContext)
     {
         if (xmlG == null)
             return null;
 
         SvgGroup svgGroup = new();
-        svgGroup.PopulateFromGroup(xmlG);
+        svgGroup.PopulateFromGroup(xmlG, deserializationContext);
 
         return svgGroup;
     }
 
-    public static void PopulateFromGroup(this SvgGroup svgGroup, XmlG xmlG)
+    public static void PopulateFromGroup(this SvgGroup svgGroup, XmlG xmlG, DeserializationContext deserializationContext)
     {
         svgGroup.PopulateFromElement(xmlG);
 
@@ -45,7 +45,7 @@ internal static class GroupExtensions
             {
                 if (serializationChild is XmlCircle circle)
                 {
-                    SvgCircle svgCircle = circle.ToSvgModel();
+                    SvgCircle svgCircle = circle.ToSvgModel(deserializationContext);
                     svgGroup.Children.Add(svgCircle);
                 }
                 else if (serializationChild is XmlEllipse ellipse)
@@ -80,12 +80,12 @@ internal static class GroupExtensions
                 }
                 else if (serializationChild is XmlDefs defs)
                 {
-                    SvgDefinitions svgDefinitions = defs.ToSvgModel();
+                    SvgDefinitions svgDefinitions = defs.ToSvgModel(deserializationContext);
                     svgGroup.Children.Add(svgDefinitions);
                 }
                 else if (serializationChild is XmlG gChild)
                 {
-                    SvgGroup svgGroupChild = gChild.ToSvgModel();
+                    SvgGroup svgGroupChild = gChild.ToSvgModel(deserializationContext);
                     svgGroup.Children.Add(svgGroupChild);
                 }
                 else if (serializationChild is XmlUse use)
@@ -112,7 +112,7 @@ internal static class GroupExtensions
                 }
                 else if (serializationChild is XmlClipPath clipPath)
                 {
-                    SvgClipPath svgClipPath = clipPath.ToSvgModel();
+                    SvgClipPath svgClipPath = clipPath.ToSvgModel(deserializationContext);
                     svgGroup.Children.Add(svgClipPath);
                 }
             }

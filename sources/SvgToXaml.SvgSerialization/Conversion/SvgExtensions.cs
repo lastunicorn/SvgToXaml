@@ -21,23 +21,55 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class SvgExtensions
 {
-    public static Svg ToSvgModel(this XmlSvg xmlSvg)
+    public static Svg ToSvgModel(this XmlSvg xmlSvg, DeserializationContext deserializationContext)
     {
         if (xmlSvg == null)
             return null;
 
-        Svg modelSvg = new();
-        modelSvg.PopulateFromGroup(xmlSvg);
+        deserializationContext.Path.Add("svg");
 
-        if (xmlSvg.Width != null)
-            modelSvg.Width = xmlSvg.Width;
+        try
+        {
+            Svg modelSvg = new();
+            modelSvg.PopulateFromGroup(xmlSvg, deserializationContext);
 
-        if (xmlSvg.Height != null)
-            modelSvg.Height = xmlSvg.Height;
+            if (xmlSvg.Width != null)
+                modelSvg.Width = xmlSvg.Width;
 
-        if (xmlSvg.ViewBox != null)
-            modelSvg.ViewBox = SvgViewBox.Parse(xmlSvg.ViewBox);
+            if (xmlSvg.Height != null)
+                modelSvg.Height = xmlSvg.Height;
 
-        return modelSvg;
+            if (xmlSvg.ViewBox != null)
+                modelSvg.ViewBox = SvgViewBox.Parse(xmlSvg.ViewBox);
+
+            return modelSvg;
+        }
+        finally
+        {
+            deserializationContext.Path.RemoveLast();
+        }
     }
 }
+
+//internal class XmlToModelConversionBase
+//{
+//    protected DeserializationContext DeserializationContext { get; }
+
+//    public XmlToModelConversionBase(DeserializationContext deserializationContext)
+//    {
+//        DeserializationContext = deserializationContext ?? throw new ArgumentNullException(nameof(deserializationContext));
+//    }
+//}
+
+//internal class XmlSvgToModelConversion : XmlToModelConversionBase
+//{
+//    public XmlSvgToModelConversion(DeserializationContext deserializationContext)
+//        : base(deserializationContext)
+//    {
+//    }
+
+//    public void Execute()
+//    {
+//        DeserializationContext.Path.Add("svg");
+//    }
+//}

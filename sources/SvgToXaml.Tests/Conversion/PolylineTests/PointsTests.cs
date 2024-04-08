@@ -24,7 +24,7 @@ public class PointsTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleWithRadius0_WhenSvgIsParsed_ThenResultedEllipseHasWidth0()
     {
-        TestConvertSvgFile("points-1.svg", canvas =>
+        ConvertSvgFile("points-1.svg", canvas =>
         {
             Polyline polyline = canvas.GetElementByIndex<Polyline>(0);
 
@@ -35,7 +35,7 @@ public class PointsTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleWithRadius50_WhenSvgIsParsed_ThenResultedEllipseHasWidth100()
     {
-        TestConvertSvgFile("points-2.svg", canvas =>
+        ConvertSvgFile("points-2.svg", canvas =>
         {
             Polyline polyline = canvas.GetElementByIndex<Polyline>(0);
 
@@ -46,7 +46,7 @@ public class PointsTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleWithRadiusMinus50_WhenSvgIsParsed_ThenThrows()
     {
-        TestConvertSvgFile("points-3.svg", canvas =>
+        ConvertSvgFile("points-3.svg", canvas =>
         {
             Polyline polyline = canvas.GetElementByIndex<Polyline>(0);
 

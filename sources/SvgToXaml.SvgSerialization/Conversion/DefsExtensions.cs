@@ -21,13 +21,13 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class DefsExtensions
 {
-    public static SvgDefinitions ToSvgModel(this XmlDefs xmlDefs)
+    public static SvgDefinitions ToSvgModel(this XmlDefs xmlDefs, DeserializationContext deserializationContext)
     {
         if (xmlDefs == null)
             return null;
 
         SvgDefinitions svgDefinitions = new();
-        svgDefinitions.PopulateFromGroup(xmlDefs);
+        svgDefinitions.PopulateFromGroup(xmlDefs, deserializationContext);
 
 
         return svgDefinitions;
