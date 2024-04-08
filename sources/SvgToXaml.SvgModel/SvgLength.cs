@@ -29,19 +29,34 @@ public readonly struct SvgLength
 
     public SvgLengthUnit Unit { get; }
 
-    public SvgLength(string text)
+    public static SvgLength Parse(string text)
     {
         Match match = Regex.Match(text);
 
-        if (match.Success)
-        {
-            Value = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
-            Unit = match.Groups[2].Value.StringToUnit();
-        }
-        else
-        {
+        if (!match.Success)
             throw new ArgumentException("The text is not a length.", nameof(text));
+
+        double value = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+        SvgLengthUnit unit = match.Groups[2].Value.StringToUnit();
+
+        return new SvgLength(value, unit);
+    }
+
+    public static bool TryParse(string text, out SvgLength svgLength)
+    {
+        Match match = Regex.Match(text);
+
+        if (!match.Success)
+        {
+            svgLength = null;
+            return false;
         }
+
+        double value = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+        SvgLengthUnit unit = match.Groups[2].Value.StringToUnit();
+
+        svgLength = new SvgLength(value, unit);
+        return true;
     }
 
     public SvgLength(double value, SvgLengthUnit unit = SvgLengthUnit.Unspecified)
@@ -76,6 +91,6 @@ public readonly struct SvgLength
 
     public static implicit operator SvgLength(string text)
     {
-        return new SvgLength(text);
+        return Parse(text);
     }
 }

@@ -38,7 +38,7 @@ public class SvgElement
 
     public SvgPaint Stroke { get; set; }
 
-    public double? StrokeWidth { get; set; }
+    public SvgLengthPercentage? StrokeWidth { get; set; }
 
     public StrokeLineCap? StrokeLineCap { get; set; }
 
@@ -127,7 +127,7 @@ public class SvgElement
         return Stroke;
     }
 
-    public SvgLength? ComputeStrokeWidth()
+    public SvgLengthPercentage? ComputeStrokeWidth()
     {
         string rawValue = GetStyleValueFromClasses("stroke-width");
 

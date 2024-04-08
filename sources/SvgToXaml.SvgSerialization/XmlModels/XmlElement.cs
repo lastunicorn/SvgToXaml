@@ -52,9 +52,7 @@ public class XmlElement
     //public string StrokeOpacity { get; set; }
 
     [XmlAttribute("stroke-width")]
-    public double StrokeWidth { get; set; }
-
-    public bool StrokeWidthSpecified { get; set; }
+    public string StrokeWidth { get; set; }
 
     [XmlAttribute("stroke-linecap")]
     public XmlStrokeLineCap StrokeLineCap { get; set; }

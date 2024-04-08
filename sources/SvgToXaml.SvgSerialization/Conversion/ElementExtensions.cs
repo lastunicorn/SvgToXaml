@@ -39,9 +39,7 @@ internal static class ElementExtensions
 
         svgElement.Stroke = xmlElement.Stroke;
 
-        svgElement.StrokeWidth = xmlElement.StrokeWidthSpecified
-            ? xmlElement.StrokeWidth
-            : null;
+        svgElement.StrokeWidth = xmlElement.StrokeWidth;
 
         svgElement.StrokeLineJoin = xmlElement.StrokeLineJoinSpecified
             ? Convert(xmlElement.StrokeLineJoin)
