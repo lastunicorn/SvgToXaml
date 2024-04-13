@@ -16,6 +16,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace DustInTheWind.SvgToXaml.Tests.Utils;
 
@@ -42,5 +43,21 @@ public static class CanvasExtensions
         return canvas.Children
             .OfType<T>()
             .FirstOrDefault();
+    }
+
+    public static Transform GetTransform(this UIElement uiElement, params int[] indexes)
+    {
+        Transform transform = uiElement.RenderTransform;
+
+        if (indexes == null || indexes.Length == 0)
+            return transform;
+
+        foreach (int index in indexes)
+        {
+            TransformGroup transformGroup = uiElement.RenderTransform as TransformGroup;
+            transform = transformGroup.Children[index];
+        }
+
+        return transform;
     }
 }

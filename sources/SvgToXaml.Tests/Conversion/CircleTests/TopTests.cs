@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
@@ -24,41 +23,50 @@ namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 public class TopTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithCenterY200AndRadius50_WhenSvgIsParsed_ThenResultedEllipseHasTranslateTransformWithY150()
+    public void HavingCircleWithCenterY200AndRadius50_WhenSvgIsConverted_ThenResultedEllipseHasTranslateTransformWithY150()
     {
         ConvertSvgFile("circle-radius-smaller-than-cy.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
             TranslateTransform translateTransform = ellipse.RenderTransform as TranslateTransform;
-
             translateTransform.Y.Should().Be(150);
         });
     }
 
     [Fact]
-    public void HavingCircleWithCenterY200AndRadius200_WhenSvgIsParsed_ThenResultedEllipseHasTranslateTransformWithY0()
+    public void HavingCircleWithCenterY200AndRadius200_WhenSvgIsConverted_ThenResultedEllipseHasTranslateTransformWithY0()
     {
         ConvertSvgFile("circle-radius-equal-to-cy.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
             TranslateTransform translateTransform = ellipse.RenderTransform as TranslateTransform;
-
             translateTransform.Y.Should().Be(0);
         });
     }
 
     [Fact]
-    public void HavingCircleWithCenterY200AndRadius400_WhenSvgIsParsed_ThenResultedEllipseHasTranslateTransformWithYNegative200()
+    public void HavingCircleWithCenterY200AndRadius300_WhenSvgIsConverted_ThenResultedEllipseHasTranslateTransformWithYNegative200()
     {
         ConvertSvgFile("circle-radius-greater-than-cy.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
             TranslateTransform translateTransform = ellipse.RenderTransform as TranslateTransform;
+            translateTransform.Y.Should().Be(-100);
+        });
+    }
 
-            translateTransform.Y.Should().Be(-200);
+    [Fact]
+    public void HavingCircleWithCenterNotSpecifiedAndRadius500_WhenSvgIsConverted_ThenResultedEllipseHasTranslateTransformWithYNegative500()
+    {
+        ConvertSvgFile("circle-missing-cy.svg", canvas =>
+        {
+            Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
+
+            TranslateTransform translateTransform = ellipse.RenderTransform as TranslateTransform;
+            translateTransform.Y.Should().Be(-500);
         });
     }
 }

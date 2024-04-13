@@ -44,7 +44,7 @@ public class SvgFileTestsBase
         });
     }
 
-    protected void ParseSvgFile(string resourceFileName, Action<SvgModel.Svg> callBack = null)
+    protected void ParseSvgFile(string resourceFileName, Action<DustInTheWind.SvgToXaml.SvgModel.Svg> callBack = null)
     {
         Type callerType = GetCallerType();
         DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);

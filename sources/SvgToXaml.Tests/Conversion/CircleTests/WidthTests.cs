@@ -22,7 +22,7 @@ namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 public class WidthTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithRadius0_WhenSvgIsParsed_ThenResultedEllipseHasWidth0()
+    public void HavingCircleWithRadius0_WhenSvgIsConverted_ThenResultedEllipseHasWidth0()
     {
         ConvertSvgFile("circle-radius-zero.svg", canvas =>
         {
@@ -33,7 +33,7 @@ public class WidthTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingCircleWithRadius50_WhenSvgIsParsed_ThenResultedEllipseHasWidth100()
+    public void HavingCircleWithRadius50_WhenSvgIsConverted_ThenResultedEllipseHasWidth100()
     {
         ConvertSvgFile("circle-radius-positive.svg", canvas =>
         {
@@ -44,7 +44,7 @@ public class WidthTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingCircleWithRadiusMinus50_WhenSvgIsParsed_ThenThrows()
+    public void HavingCircleWithRadiusMinus50_WhenSvgIsConverted_ThenResultedEllipseHasWidth0()
     {
         ConvertSvgFile("circle-radius-negative.svg", canvas =>
         {

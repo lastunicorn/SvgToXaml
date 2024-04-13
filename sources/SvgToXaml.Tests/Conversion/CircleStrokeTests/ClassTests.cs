@@ -14,44 +14,43 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleStrokeTests;
 
-public class HeightTests : SvgFileTestsBase
+public class ClassTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithRadius0_WhenSvgIsConverted_ThenResultedEllipseHasHeight0()
+    public void HavingStrokeDeclaredInClass_WhenSvgIsParsed_ThenResultedEllipseHasStrokeFromClass()
     {
-        ConvertSvgFile("circle-radius-zero.svg", canvas =>
+        ConvertSvgFile("circle-class^.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            ellipse.Height.Should().Be(0);
+            ellipse.Stroke.Should().Be("#ff111111");
         });
     }
 
     [Fact]
-    public void HavingCircleWithRadius50_WhenSvgIsConverted_ThenResultedEllipseHasHeight100()
+    public void HavingStrokeDeclaredInCircleAndClass_WhenSvgIsParsed_ThenResultedEllipseHasStrokeFromClass()
     {
-        ConvertSvgFile("circle-radius-positive.svg", canvas =>
+        ConvertSvgFile("circle^-class^.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            ellipse.Height.Should().Be(100);
+            ellipse.Stroke.Should().Be("#ff111111");
         });
     }
 
     [Fact]
-    public void HavingCircleWithRadiusMinus50_WhenSvgIsConverted_ThenResultedEllipseHasHeight0()
+    public void HavingStrokeDeclaredInClassAndSvgRoot_WhenSvgIsParsed_ThenResultedEllipseHasStrokeFromClass()
     {
-        ConvertSvgFile("circle-radius-negative.svg", canvas =>
+        ConvertSvgFile("svgroot^-circle-class^.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            ellipse.Height.Should().Be(0);
+            ellipse.Stroke.Should().Be("#ff111111");
         });
     }
 }
