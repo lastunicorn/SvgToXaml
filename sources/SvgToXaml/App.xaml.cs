@@ -14,23 +14,55 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Reflection;
 using System.Windows;
+using Autofac;
+using DustInTheWind.SvgToXaml.Application.Transform;
+using DustInTheWind.SvgToXaml.FileAccess;
+using DustInTheWind.SvgToXaml.Infrastructure;
+using DustInTheWind.SvgToXaml.Ports.UserAccess;
+using DustInTheWind.SvgToXaml.UserAccess;
+using MediatR.Extensions.Autofac.DependencyInjection;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using SvgToXaml.Ports.FileAccess;
 
 namespace DustInTheWind.SvgToXaml;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        MainViewModel mainViewModel = new();
-        MainWindow mainWindow = new(mainViewModel);
-        mainWindow.Show();
+        ContainerBuilder containerBuilder = new();
+        ConfigureServices(containerBuilder);
+        IContainer container = containerBuilder.Build();
 
-        MainWindow = mainWindow;
+        MainWindow = container.Resolve<MainWindow>();
+        MainWindow.Show();
 
         base.OnStartup(e);
+    }
+
+    private static void ConfigureServices(ContainerBuilder containerBuilder)
+    {
+        Assembly useCasesAssembly = typeof(TransformRequest).Assembly;
+        MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(useCasesAssembly)
+            .WithAllOpenGenericHandlerTypesRegistered()
+            .Build();
+
+        containerBuilder.RegisterMediatR(mediatRConfiguration);
+
+        containerBuilder.RegisterType<EventBus>().SingleInstance();
+        containerBuilder.RegisterType<RequestBus>().As<IRequestBus>().SingleInstance();
+
+        containerBuilder.RegisterType<UserInteractions>().As<IUserInteractions>();
+        containerBuilder.RegisterType<FileSystem>().As<IFileSystem>();
+
+        containerBuilder.RegisterType<OpenFileCommand>();
+
+        containerBuilder.RegisterType<MainViewModel>();
+        containerBuilder.RegisterType<MainWindow>();
     }
 }

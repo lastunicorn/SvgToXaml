@@ -14,31 +14,45 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.IO;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Markup;
-using System.Xml;
-using DustInTheWind.SvgToXaml.Conversion;
-using DustInTheWind.SvgToXaml.SvgModel;
-using DustInTheWind.SvgToXaml.SvgSerialization;
+using System.Windows.Threading;
+using DustInTheWind.SvgToXaml.Application.OpenFile;
+using DustInTheWind.SvgToXaml.Application.Transform;
+using DustInTheWind.SvgToXaml.Infrastructure;
 
 namespace DustInTheWind.SvgToXaml;
 
 public class MainViewModel : ViewModelBase
 {
+    private readonly IRequestBus requestBus;
     private string svgText;
     private string xamlText;
+    private string svgFilePath;
+    private readonly Dispatcher dispatcher;
+
+    public string SvgFilePath
+    {
+        get => svgFilePath;
+        private set
+        {
+            if (value == svgFilePath) return;
+            svgFilePath = value;
+            OnPropertyChanged();
+        }
+    }
 
     public string SvgText
     {
         get => svgText;
         set
         {
+            if (value == svgText) return;
             svgText = value;
             OnPropertyChanged();
 
-            TransformSvgToXaml();
+
+            DispatcherFrame frame = new();
+            _ = TransformSvgToXaml();
+            Dispatcher.PushFrame(frame);
         }
     }
 
@@ -47,67 +61,64 @@ public class MainViewModel : ViewModelBase
         get => xamlText;
         set
         {
+            if (value == xamlText) return;
             xamlText = value;
             OnPropertyChanged();
         }
     }
 
-    private void TransformSvgToXaml()
+    public OpenFileCommand OpenFileCommand { get; }
+
+    public MainViewModel(IRequestBus requestBus, EventBus eventBus, OpenFileCommand openFileCommand)
     {
-        try
-        {
-            if (string.IsNullOrEmpty(svgText))
-            {
-                XamlText = null;
-                return;
-            }
+        if (eventBus == null) throw new ArgumentNullException(nameof(eventBus));
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
 
-            Svg svg = Parse(svgText);
+        OpenFileCommand = openFileCommand;
 
-            SvgConversion svgConversion = new(svg);
-            Canvas canvas = svgConversion.Execute();
+        eventBus.Subscribe<SvgTextChangingEvent>(SvgTextChangingEventHandler);
+        eventBus.Subscribe<SvgTextChangedEvent>(SvgTextChangedEventHandler);
+        eventBus.Subscribe<XamlTextChangedEvent>(XamlTextChangedEventHandler);
 
-            XamlText = Serialize(canvas);
-        }
-        catch (Exception ex)
-        {
-            XamlText = ex.ToString();
-        }
+        dispatcher = Dispatcher.CurrentDispatcher;
     }
 
-    public static Svg Parse(string svg)
+    private Task SvgTextChangingEventHandler(SvgTextChangingEvent ev, CancellationToken cancellationToken)
     {
-        using StringReader stringReader = new(svg);
+        dispatcher.InvokeAsync(() =>
+        {
+            SvgFilePath = ev.FilePath;
+            SvgText = string.Empty;
+        });
 
-        SvgSerializer serializer = new();
-        DeserializationResult deserializationResult = serializer.Deserialize(stringReader);
-        return deserializationResult.Svg;
+        return Task.CompletedTask;
     }
 
-    private static string Serialize(Canvas canvas)
+    private Task SvgTextChangedEventHandler(SvgTextChangedEvent ev, CancellationToken cancellationToken)
     {
-        if (canvas == null)
-            return string.Empty;
-
-        using MemoryStream ms = new();
-        XmlWriterSettings xmlWriterSettings = new()
+        dispatcher.InvokeAsync(() =>
         {
-            Indent = true,
-            NewLineOnAttributes = true,
-            OmitXmlDeclaration = true
-        };
-        using XmlWriter xmlWriter = XmlWriter.Create(ms, xmlWriterSettings);
+            SvgFilePath = ev.FilePath;
+            SvgText = ev.SvgText;
+        });
 
-        ResourceDictionary resourceDictionary = new()
+        return Task.CompletedTask;
+    }
+
+    private Task XamlTextChangedEventHandler(XamlTextChangedEvent ev, CancellationToken cancellationToken)
+    {
+        XamlText = ev.XamlText;
+
+        return Task.CompletedTask;
+    }
+
+    private async Task TransformSvgToXaml()
+    {
+        TransformRequest request = new()
         {
-            { "SvgTransform", canvas }
+            SvgText = svgText
         };
 
-        XamlWriter.Save(resourceDictionary, xmlWriter);
-
-        ms.Position = 0;
-        using StreamReader sr = new(ms);
-
-        return sr.ReadToEnd();
+        await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);
     }
 }

@@ -43,31 +43,53 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Border
-                Grid.Column="0"
-                BorderBrush="#eee"
-                BorderThickness="2"
-                CornerRadius="2">
+            <DockPanel
+                Grid.Column="0">
 
-                <TextBox
-                    Background="#eee"
-                    BorderThickness="0"
-                    Padding="8"
-                    VerticalAlignment="Stretch"
-                    HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollBarVisibility="Auto"
-                    AcceptsReturn="True"
-                    AcceptsTab="True"
-                    Text="{Binding SvgText}"
-                    FontFamily="Consolas"
-                    FontSize="12" />
-            </Border>
+                <StackPanel
+                    DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Margin="0 0 0 8">
+
+                    <Button
+                        Padding="12 4"
+                        Content="Open File..."
+                        Command="{Binding OpenFileCommand}" />
+
+                    <TextBlock
+                        Text="{Binding SvgFilePath}"
+                        VerticalAlignment="Center"
+                        Margin="10 0 0 0"
+                        TextTrimming="CharacterEllipsis" />
+
+                </StackPanel>
+
+                <Border
+                    BorderBrush="#eee"
+                    BorderThickness="2"
+                    CornerRadius="2">
+
+                    <TextBox
+                        Background="#eee"
+                        BorderThickness="0"
+                        Padding="8"
+                        VerticalAlignment="Stretch"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        AcceptsTab="True"
+                        Text="{Binding SvgText}"
+                        FontFamily="Consolas"
+                        FontSize="12" />
+                </Border>
+
+            </DockPanel>
 
             <GridSplitter
                 Grid.Column="1"
                 Width="8"
                 Background="Transparent"
-                HorizontalAlignment="Stretch"/>
+                HorizontalAlignment="Stretch" />
 
             <Border
                 Grid.Column="2"
@@ -86,7 +108,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     AcceptsTab="True"
                     Text="{Binding XamlText}"
                     FontFamily="Consolas"
-                    FontSize="12" />
+                    FontSize="12"
+                    IsReadOnly="True"/>
             </Border>
         </Grid>
 
