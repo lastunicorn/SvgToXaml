@@ -84,9 +84,12 @@ public readonly struct SvgLength
 
     public static implicit operator double(SvgLength length)
     {
-        return length.Unit == SvgLengthUnit.Percentage
-            ? length.Value / 100
-            : length.Value;
+        return length.ToUserUnits().Value;
+    }
+
+    public static implicit operator double(SvgLength? length)
+    {
+        return length?.ToUserUnits().Value ?? 0;
     }
 
     public static implicit operator SvgLength(string text)
@@ -151,9 +154,6 @@ public readonly struct SvgLength
 
             case SvgLengthUnit.Pixels:
                 return Value;
-
-            case SvgLengthUnit.Percentage:
-                throw new NotImplementedException($"Could not transform {ToString()} into user units.");
 
             default:
                 throw new ArgumentOutOfRangeException();

@@ -93,7 +93,5 @@ public enum SvgLengthUnit
     /// <summary>
     /// px - absolute length
     /// </summary>
-    Pixels,
-
-    Percentage
+    Pixels
 }

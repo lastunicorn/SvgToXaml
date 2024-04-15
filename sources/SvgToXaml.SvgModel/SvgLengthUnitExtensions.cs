@@ -41,7 +41,6 @@ internal static class SvgLengthUnitExtensions
             "pc" => SvgLengthUnit.Picas,
             "pt" => SvgLengthUnit.Points,
             "px" => SvgLengthUnit.Pixels,
-            "%" => SvgLengthUnit.Percentage,
             "" => SvgLengthUnit.Unspecified,
             _ => throw new Exception("Invalid unit.")
         };
@@ -66,7 +65,6 @@ internal static class SvgLengthUnitExtensions
             SvgLengthUnit.Picas => "pc",
             SvgLengthUnit.Points => "pt",
             SvgLengthUnit.Pixels => "px",
-            SvgLengthUnit.Percentage => "%",
             SvgLengthUnit.Unspecified => "",
             _ => throw new InvalidEnumArgumentException(nameof(unit), (int)unit, typeof(SvgLengthUnit))
         };
