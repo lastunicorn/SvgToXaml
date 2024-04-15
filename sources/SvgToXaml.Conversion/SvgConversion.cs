@@ -39,10 +39,10 @@ public class SvgConversion : SvgGroupToXamlConversion
             if (svg.ViewBox == null)
             {
                 if (svg.Width != null)
-                    canvas.Width = svg.Width.Value;
+                    canvas.Width = svg.Width.Value.ToUserUnits();
 
                 if (svg.Height != null)
-                    canvas.Height = svg.Height.Value;
+                    canvas.Height = svg.Height.Value.ToUserUnits();
             }
             else
             {

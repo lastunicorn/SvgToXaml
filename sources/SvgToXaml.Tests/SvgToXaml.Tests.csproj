@@ -144,6 +144,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\CircleStrokeTests\UseHrefDefsGroupWithCircleTests.Resources\05-use^-href-defs-group-circle^.svg" />
         <None Remove="Conversion\CircleStrokeTests\UseHrefDefsGroupWithCircleTests.Resources\06-use^-href-defs-group^-circle.svg" />
         <None Remove="Conversion\CircleStrokeTests\UseHrefDefsGroupWithCircleTests.Resources\07-use^-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-negative-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-positive-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-zero.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-negative-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-positive-value.svg" />
+        <None Remove="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-zero.svg" />
         <None Remove="empty.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group^-circle.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group^-circle^.svg" />
@@ -192,6 +198,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-negative.svg" />
         <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-positive.svg" />
         <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-zero.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-cm.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-in.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-mm.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-nounit.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pc.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pt.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-px.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-q.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-cm.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-in.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-missing.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-mm.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-pc.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-pt.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-px.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-q.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-cm.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-in.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-missing.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-mm.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-nounit.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-pc.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-pt.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-px.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-q.svg" />
     </ItemGroup>
     
     <ItemGroup>
@@ -315,6 +346,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleStrokeTests\UseHrefDefsGroupWithCircleTests.Resources\06-use^-href-defs-group^-circle.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\UseHrefDefsGroupWithCircleTests.Resources\05-use^-href-defs-group-circle^.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\UseHrefDefsGroupWithCircleTests.Resources\01-use-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-negative-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-positive-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-zero.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-negative-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-positive-value.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-zero.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleTests.Resources\use-href-circle-after.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleTests.Resources\use-href-circle-before.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleFromDefsTests.Resources\use-href-defs-group-circle.svg" />
@@ -350,6 +387,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-negative.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-zero.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-cm.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-in.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-mm.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-nounit.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-nounit.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pc.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pt.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-px.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-q.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-cm.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-in.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-mm.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-pc.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-pt.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-px.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-q.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-q.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-in.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-cm.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-pc.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-pt.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-px.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-mm.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-nounit.svg" />
     </ItemGroup>
 
     <ItemGroup>

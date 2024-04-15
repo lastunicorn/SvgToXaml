@@ -21,7 +21,7 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public readonly struct SvgLength
 {
-    private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+)(em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|Q|in|pc|pt|px|%)?\s*$", RegexOptions.Singleline);
+    private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+(?:e[+-]?[0-9]+)?)(em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|Q|in|pc|pt|px|%)?\s*$", RegexOptions.Singleline);
 
     public static SvgLength Zero { get; } = new(0);
 
@@ -92,5 +92,71 @@ public readonly struct SvgLength
     public static implicit operator SvgLength(string text)
     {
         return Parse(text);
+    }
+
+    /// <remarks>
+    /// 1 in = 25.4 mm
+    /// 1 in = 2.54 cm
+    /// 1 in = 96 px
+    /// </remarks>
+    public SvgLength ToUserUnits()
+    {
+        switch (Unit)
+        {
+            case SvgLengthUnit.Unspecified:
+                return this;
+
+            case SvgLengthUnit.ElementFontSize:
+            case SvgLengthUnit.ElementFontHeight:
+            case SvgLengthUnit.CharacterAdvanceOfZero:
+            case SvgLengthUnit.RootElementFontSize:
+            case SvgLengthUnit.ViewportWidthPercentage:
+            case SvgLengthUnit.ViewportHeightPercentage:
+            case SvgLengthUnit.ViewportSmallerPercentage:
+            case SvgLengthUnit.ViewportLargerPercentage:
+                throw new NotImplementedException($"Could not transform {ToString()} into user units.");
+
+            case SvgLengthUnit.Centimeters:
+                // 1 in = 96 px
+                // 1 in = 2.54 cm
+                // 
+                // => 2.54 cm = 96 px
+                // => 1 cm = (96 / 2.54) px
+                return Value * 96 / 2.54;
+
+            case SvgLengthUnit.Millimeters:
+                // 1 in = 96 px
+                // 1 in = 25.4 mm
+                // 
+                // => 25.4 mm = 96 px
+                // => 1 mm = (96 / 25.4) px
+                return Value * 96 / 25.4;
+
+            case SvgLengthUnit.QuarterMillimeters:
+                throw new NotImplementedException($"Could not transform {ToString()} into user units.");
+
+            case SvgLengthUnit.Inches:
+                // 1 in = 96 px
+                return Value * 96;
+
+            case SvgLengthUnit.Picas:
+                // 1 pc = 16 px
+                return Value * 16;
+
+            case SvgLengthUnit.Points:
+                // 1 px = 0.75 pt
+                //
+                // => 1 pt = (4 / 3) px
+                return Value * 4 / 3;
+
+            case SvgLengthUnit.Pixels:
+                return Value;
+
+            case SvgLengthUnit.Percentage:
+                throw new NotImplementedException($"Could not transform {ToString()} into user units.");
+
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }

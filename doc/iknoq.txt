@@ -1,0 +1,11 @@
+default stroke-linejoin is bevel for straight lines and miter for arcs.
+
+svg
+having path with two straight lines
+than default stroke-linejoin is bevel
+
+svg
+having path with two arc lines
+than default stroke-linejoin is miter
+
+----------------------------------------------------------------------------------------------------

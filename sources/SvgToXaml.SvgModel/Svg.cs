@@ -18,9 +18,9 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class Svg : SvgGroup
 {
-    public Size Width { get; set; }
+    public SvgLength? Width { get; set; }
 
-    public Size Height { get; set; }
+    public SvgLength? Height { get; set; }
 
     public SvgViewBox ViewBox { get; set; }
 
