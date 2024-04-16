@@ -19,7 +19,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectangleTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectTests;
 
 public class LeftTests : SvgFileTestsBase
 {

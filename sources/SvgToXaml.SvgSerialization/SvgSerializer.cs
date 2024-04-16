@@ -54,7 +54,7 @@ public class SvgSerializer
 
         return new DeserializationResult
         {
-            Svg = SvgExtensions.ToSvgModel(svgObject, deserializationContext),
+            Svg = svgObject.ToSvgModel(deserializationContext),
             Errors = deserializationContext.Errors,
             Warnings = deserializationContext.Warnings
         };
@@ -72,7 +72,7 @@ public class SvgSerializer
 
         return new DeserializationResult
         {
-            Svg = SvgExtensions.ToSvgModel(svgObject, deserializationContext),
+            Svg = svgObject.ToSvgModel(deserializationContext),
             Errors = deserializationContext.Errors,
             Warnings = deserializationContext.Warnings
         };

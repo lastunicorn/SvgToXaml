@@ -18,38 +18,38 @@ using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectangleTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectTests;
 
-public class WidthTests : SvgFileTestsBase
+public class HeightTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingRectWithWidth0_WhenSvgIsParsed_ThenResultedRectangleHasHeight0()
+    public void HavingRectWithHeight0_WhenSvgIsParsed_ThenResultedRectangleHasHeight0()
     {
-        ConvertSvgFile("width-0.svg", canvas =>
+        ConvertSvgFile("height-0.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            rectangle.Width.Should().Be(0);
+            rectangle.Height.Should().Be(0);
         });
     }
 
     [Fact]
-    public void HavingRectWithHeight40_WhenSvgIsParsed_ThenResultedRectangleHasHeight40()
+    public void HavingRectWithWidth50_WhenSvgIsParsed_ThenResultedRectangleHasHeight50()
     {
-        ConvertSvgFile("width-positive.svg", canvas =>
+        ConvertSvgFile("height-positive.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
-            rectangle.Width.Should().Be(40);
+            rectangle.Height.Should().Be(50);
         });
     }
 
     [Fact]
-    public void HavingRectWithHeightNegative40_WhenSvgIsParsed_ThenThrows()
+    public void HavingRectWithWithNegative50_WhenSvgIsParsed_ThenThrows()
     {
         Action action = () =>
         {
-            ConvertSvgFile("width-negative.svg");
+            ConvertSvgFile("height-negative.svg");
         };
 
         action.Should().Throw<StaEnvironmentException>()

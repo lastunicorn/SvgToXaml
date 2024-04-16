@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <g id="group1">
+            <rect x="300" y="200" width="150" height="100"  fill="#333333" />
+        </g>
+    </defs>
+    <g>
+        <use xlink:href="#group1" />
+    </g>
+</svg>

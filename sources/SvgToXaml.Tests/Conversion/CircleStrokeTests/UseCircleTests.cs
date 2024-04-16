@@ -19,7 +19,7 @@ using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleStrokeTests;
 
-public class UseHrefDefsCircleTests : SvgFileTestsBase
+public class UseCircleTests : SvgFileTestsBase
 {
     [Fact]
     public void HavingNoStrokeDeclared_WhenSvgIsParsed_ThenResultedEllipseHasNullStroke()

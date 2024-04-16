@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleStrokeTests;
 
-public class UseHrefDefsGroupWithCircleTests : SvgFileTestsBase
+public class UseGroupContainingCircleTests : SvgFileTestsBase
 {
     [Fact]
     public void HavingStrokeDeclaredOnCircle_WhenSvgIsParsed_ThenResultedEllipseHasStrokeColorFromCircle()
