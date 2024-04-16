@@ -57,11 +57,10 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
             }
 
             Svg svg = Parse(svgText);
-
-            SvgConversion svgConversion = new(svg);
-            Canvas canvas = svgConversion.Execute();
-
-            return Serialize(canvas);
+            Canvas canvas = ConvertToXaml(svg);
+            string xaml = Serialize(canvas);
+            xaml = Alter(xaml);
+            return xaml;
         }
         catch (Exception ex)
         {
@@ -76,6 +75,12 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         SvgSerializer serializer = new();
         DeserializationResult deserializationResult = serializer.Deserialize(stringReader);
         return deserializationResult.Svg;
+    }
+
+    private static Canvas ConvertToXaml(Svg svg)
+    {
+        SvgConversion svgConversion = new(svg);
+        return svgConversion.Execute();
     }
 
     private static string Serialize(Canvas canvas)
@@ -102,6 +107,38 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         ms.Position = 0;
         using StreamReader sr = new(ms);
 
+        return sr.ReadToEnd();
+    }
+
+    private static string Alter(string xml)
+    {
+        XmlDocument xmlDocument = new();
+        xmlDocument.LoadXml(xml);
+
+        MatrixTransformXmlAlteration xmlAlteration = new(xmlDocument);
+        xmlAlteration.Execute();
+
+        return SerializeXmlDocument(xmlDocument);
+    }
+
+    private static string SerializeXmlDocument(XmlDocument xmlDocument)
+    {
+        using MemoryStream ms = new();
+
+        XmlWriterSettings settings = new()
+        {
+            Indent = true,
+            NewLineOnAttributes = true
+        };
+
+        using XmlWriter xmlWriter = XmlWriter.Create(ms, settings);
+
+        xmlDocument.WriteTo(xmlWriter);
+        xmlWriter.Flush();
+
+        ms.Position = 0;
+
+        using StreamReader sr = new(ms);
         return sr.ReadToEnd();
     }
 }
