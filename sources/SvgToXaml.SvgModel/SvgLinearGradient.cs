@@ -116,6 +116,6 @@ public class SvgLinearGradient : SvgElement
                 return templateLinearGradient.ComputeStops();
         }
 
-        return null;
+        return new List<SvgStop>();
     }
 }

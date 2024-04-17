@@ -29,16 +29,16 @@ internal static class LinearGradientExtensions
         SvgLinearGradient svgLinearGradient = new();
         svgLinearGradient.PopulateFromElement(xmlLinearGradient);
 
-        if (xmlLinearGradient.X1Specified)
+        if (xmlLinearGradient.X1 != null)
             svgLinearGradient.X1 = xmlLinearGradient.X1;
 
-        if (xmlLinearGradient.Y1Specified)
+        if (xmlLinearGradient.Y1 != null)
             svgLinearGradient.Y1 = xmlLinearGradient.Y1;
 
-        if (xmlLinearGradient.X2Specified)
+        if (xmlLinearGradient.X2 != null)
             svgLinearGradient.X2 = xmlLinearGradient.X2;
 
-        if (xmlLinearGradient.Y2Specified)
+        if (xmlLinearGradient.Y2 != null)
             svgLinearGradient.Y2 = xmlLinearGradient.Y2;
 
         if (xmlLinearGradient.GradientUnitsSpecified)

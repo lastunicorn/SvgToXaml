@@ -23,22 +23,14 @@ public class XmlLinearGradient : XmlElement
     [XmlAttribute("x1")]
     public string X1 { get; set; }
 
-    public bool X1Specified { get; set; }
-
     [XmlAttribute("y1")]
     public string Y1 { get; set; }
-
-    public bool Y1Specified { get; set; }
 
     [XmlAttribute("x2")]
     public string X2 { get; set; }
 
-    public bool X2Specified { get; set; }
-
     [XmlAttribute("y2")]
     public string Y2 { get; set; }
-
-    public bool Y2Specified { get; set; }
 
     [XmlAttribute("gradientUnits")]
     public XmlGradientUnits GradientUnits { get; set; }

@@ -29,6 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient - Copy.svg" />
+        <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient.svg" />
+        <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient.svg" />
+        <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-radialgradient.svg" />
         <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\01-circle-defs-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\02-circle^-defs-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\03-svgroot^-circle-defs-class^.svg" />
@@ -99,8 +103,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\07-group^-use-href-defs-group-circle.svg" />
         <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\08-group^-use-href-defs-group^-circle.svg" />
         <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\09-svgroot^-group-use-href-defs-group-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-gradient-href-gradient.svg" />
-        <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-gradient.svg" />
         <None Remove="Conversion\PathTests\path-data-absent.svg" />
         <None Remove="Conversion\PathTests\path-data-none.svg" />
         <None Remove="Conversion\PathTests\path-data.svg" />
@@ -204,6 +206,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\circle-r-negative.svg" />
         <None Remove="SvgSerialization\circle-r-positive.svg" />
         <None Remove="SvgSerialization\circle-r-zero.svg" />
+        <None Remove="SvgSerialization\EllipseTests\RadiusTests.Resources\ellipse-rxy-negative.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-missing.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-negative.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-positive.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-zero.svg" />
         <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-missing.svg" />
         <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-negative.svg" />
         <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-positive.svg" />
@@ -258,6 +265,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-style.svg" />
         <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-text.svg" />
         <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-use.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-missing.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-negative.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-positive.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-zero.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-missing.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-negative.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-positive.svg" />
+        <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-zero.svg" />
         <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-circle.svg" />
         <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-clippath.svg" />
         <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-defs.svg" />
@@ -304,6 +319,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
     
     <ItemGroup>
+        <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient - Copy.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-radialgradient.svg" />
         <EmbeddedResource Include="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-rect.svg" />
         <EmbeddedResource Include="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\02-group-use-href-defs-group-rect^.svg" />
         <EmbeddedResource Include="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\03-group-use-href-defs-group^-rect.svg" />
@@ -384,8 +401,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\07-group^-use-href-defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\08-group^-use-href-defs-group^-circle.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\09-svgroot^-group-use-href-defs-group-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-gradient-href-gradient.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-gradient.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient.svg" />
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data.svg" />
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data-absent.svg" />
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data-none.svg" />
@@ -467,6 +484,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleTests.Resources\use-href-group-circle.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests.Resources\use-href-defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests.Resources\group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusTests.Resources\ellipse-rxy-negative.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-negative.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-positive.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-zero.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-negative.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-positive.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-zero.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-negative.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-positive.svg" />
+        <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-zero.svg" />
         <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-negative.svg" />
         <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-positive.svg" />

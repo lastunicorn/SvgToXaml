@@ -26,9 +26,7 @@ internal static class CircleExtensions
         if (xmlCircle == null)
             return null;
 
-        deserializationContext.Path.Add("circle");
-
-        try
+        return deserializationContext.Run("circle", () =>
         {
             SvgCircle svgCircle = new();
             svgCircle.PopulateFromElement(xmlCircle);
@@ -51,10 +49,6 @@ internal static class CircleExtensions
             svgCircle.CenterY = xmlCircle.Cy;
 
             return svgCircle;
-        }
-        finally
-        {
-            deserializationContext.Path.RemoveLast();
-        }
+        });
     }
 }

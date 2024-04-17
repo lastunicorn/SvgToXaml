@@ -14,8 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Xml.Serialization;
+
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 public class XmlRadialGradient : XmlElement
 {
+    [XmlAttribute("cx")]
+    public string Cx { get; set; }
+
+    [XmlAttribute("cy")]
+    public string Cy { get; set; }
+
+    [XmlAttribute("r")]
+    public string R { get; set; }
+
+    [XmlAttribute("gradientUnits")]
+    public XmlGradientUnits GradientUnits { get; set; }
+
+    public bool GradientUnitsSpecified { get; set; }
+
+    [XmlElement("stop")]
+    public List<XmlStop> Stops { get; set; }
+
+    [XmlAttribute("gradientTransform")]
+    public string GradientTransform { get; set; }
+
+    [XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")]
+    public string Href { get; set; }
 }

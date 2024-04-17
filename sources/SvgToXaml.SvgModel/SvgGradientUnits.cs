@@ -18,6 +18,17 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public enum SvgGradientUnits
 {
-    ObjectBoundingBox,
+    /// <summary>
+    /// The user coordinate system for attributes ‘cx’, ‘cy’, ‘r’, ‘fx’, ‘fy’, and ‘fr’ is
+    /// established using the bounding box of the element to which the gradient is applied.
+    /// This is the default value.
+    /// </summary>
+    ObjectBoundingBox = 0,
+
+    /// <summary>
+    /// ‘cx’, ‘cy’, ‘r’, ‘fx’, ‘fy’, and ‘fr’ represent values in the coordinate system that
+    /// results from taking the current user coordinate system in place at the time when the
+    /// gradient element is referenced.
+    /// </summary>
     UserSpaceOnUse
 }

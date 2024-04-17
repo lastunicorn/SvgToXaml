@@ -97,6 +97,13 @@ public readonly struct SvgLength
         return Parse(text);
     }
 
+    public static implicit operator SvgLength?(string text)
+    {
+        return text == null
+            ? (SvgLength?)null
+            : Parse(text);
+    }
+
     /// <remarks>
     /// 1 in = 25.4 mm
     /// 1 in = 2.54 cm

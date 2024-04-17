@@ -26,9 +26,7 @@ internal static class EllipseExtensions
         if (xmlEllipse == null)
             return null;
 
-        deserializationContext.Path.Add("ellipse");
-
-        try
+        return deserializationContext.Run("ellipse", () =>
         {
             SvgEllipse svgEllipse = new();
             svgEllipse.PopulateFromElement(xmlEllipse);
@@ -65,10 +63,6 @@ internal static class EllipseExtensions
             svgEllipse.CenterY = xmlEllipse.Cy;
 
             return svgEllipse;
-        }
-        finally
-        {
-            deserializationContext.Path.RemoveLast();
-        }
+        });
     }
 }

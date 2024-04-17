@@ -23,118 +23,36 @@ internal class DeserializationContext
     public List<DeserializationIssue> Errors { get; } = new();
 
     public SvgTreePath Path { get; } = new();
-}
 
-internal class SvgTreePath
-{
-    private SvgTreePathNode firstNode;
-    private SvgTreePathNode lastNode;
-
-    public void Add(string name, string id = null)
+    public void Run(string name, Action action)
     {
-        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (action == null) throw new ArgumentNullException(nameof(action));
 
-        if (lastNode == null)
+        Path.Add(name);
+
+        try
         {
-            firstNode = new SvgTreePathNode(1, name, id);
-            lastNode = firstNode;
+            action();
         }
-        else
+        finally
         {
-            lastNode.SetNext(name, id);
-            lastNode = lastNode.Next;
+            Path.RemoveLast();
         }
     }
 
-    public void RemoveLast()
+    public T Run<T>(string name, Func<T> action)
     {
-        if (lastNode == null)
-            throw new Exception("Path is empty. Cannot remove nodes.");
+        if (action == null) throw new ArgumentNullException(nameof(action));
 
-        if (lastNode.Previous == null)
+        Path.Add(name);
+
+        try
         {
-            firstNode = null;
-            lastNode = null;
+            return action();
         }
-        else
+        finally
         {
-            lastNode = lastNode.Previous;
-            lastNode.RemoveNext();
+            Path.RemoveLast();
         }
-    }
-
-    public void SetAttributeOnLast(string attributeName)
-    {
-        if (lastNode == null)
-            return;
-
-        lastNode.Attribute = attributeName;
-    }
-
-    public override string ToString()
-    {
-        IEnumerable<SvgTreePathNode> nodes = EnumerateNodes();
-        return string.Join(".", nodes);
-    }
-
-    private IEnumerable<SvgTreePathNode> EnumerateNodes()
-    {
-        SvgTreePathNode node = firstNode;
-
-        while (node != null)
-        {
-            yield return node;
-            node = node.Next;
-        }
-    }
-}
-
-internal class SvgTreePathNode
-{
-    private readonly int index;
-    private readonly string name;
-    private readonly string id;
-    private int childCount;
-
-    public SvgTreePathNode Previous { get; init; }
-
-    public SvgTreePathNode Next { get; private set; }
-
-    public string Attribute { get; set; }
-
-    public SvgTreePathNode(int index, string name, string id = null)
-    {
-        if (index <= 0) throw new ArgumentOutOfRangeException(nameof(index));
-
-        this.index = index;
-        this.name = name ?? throw new ArgumentNullException(nameof(name));
-        this.id = id;
-    }
-
-    public void SetNext(string childName, string childId = null)
-    {
-        childCount++;
-
-        Next = new SvgTreePathNode(childCount, childName, childId)
-        {
-            Previous = this
-        };
-    }
-
-    public override string ToString()
-    {
-        string text = id == null
-            ? $"{index}({name})"
-            : $"{index}({name}:{id})";
-
-        if (Attribute != null)
-            text += $"@{Attribute}";
-
-        return text;
-    }
-
-    public void RemoveNext()
-    {
-        Next = null;
     }
 }

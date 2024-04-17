@@ -68,6 +68,8 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
                 XamlElement.Fill = ConvertLinearGradient(svgLinearGradient);
+            else if (referencedElement is SvgRadialGradient svgRadialGradient)
+                XamlElement.Fill = ConvertRadialGradient(svgRadialGradient);
         }
     }
 
@@ -102,6 +104,38 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
             linearGradientBrush.Transform = svgLinearGradient.GradientTransforms.ToXaml(linearGradientBrush.Transform);
 
         return linearGradientBrush;
+    }
+
+    private static RadialGradientBrush ConvertRadialGradient(SvgRadialGradient svgRadialGradient)
+    {
+        IEnumerable<GradientStop> gradientStops = svgRadialGradient.ComputeStops()
+            .Select(Transform);
+
+        GradientStopCollection gradientStopCollection = new(gradientStops);
+        RadialGradientBrush radialGradientBrush = new(gradientStopCollection);
+
+        double cx = svgRadialGradient.ComputeCenterX() ?? SvgLength.Zero;
+        double cy = svgRadialGradient.ComputeCenterY() ?? SvgLength.Zero;
+        double r = svgRadialGradient.ComputeRadius() ?? SvgLength.Zero;
+
+        radialGradientBrush.Center = new Point(cx, cy);
+        radialGradientBrush.RadiusX = r;
+        radialGradientBrush.RadiusY = r;
+
+        if (svgRadialGradient.GradientUnits != null)
+        {
+            radialGradientBrush.MappingMode = svgRadialGradient.GradientUnits switch
+            {
+                SvgGradientUnits.ObjectBoundingBox => BrushMappingMode.RelativeToBoundingBox,
+                SvgGradientUnits.UserSpaceOnUse => BrushMappingMode.Absolute,
+                _ => throw new Exception("Unknown gradient units.")
+            };
+        }
+
+        if (svgRadialGradient.GradientTransforms.Count > 0)
+            radialGradientBrush.Transform = svgRadialGradient.GradientTransforms.ToXaml(radialGradientBrush.Transform);
+
+        return radialGradientBrush;
     }
 
     private static GradientStop Transform(SvgStop svgStop)

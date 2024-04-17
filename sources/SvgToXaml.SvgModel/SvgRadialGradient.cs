@@ -18,4 +18,100 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgRadialGradient : SvgElement
 {
+    private SvgLength? radius;
+
+    public SvgLength? Radius
+    {
+        get => radius;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value), "Radius cannot be a negative value. It must be a positive, finite number.");
+
+            if (double.IsNaN(value))
+                throw new ArgumentOutOfRangeException(nameof(value), "Radius must be a positive, finite number.");
+
+            radius = value;
+        }
+    }
+
+    public SvgLength? CenterX { get; set; }
+
+    public SvgLength? CenterY { get; set; }
+
+    public SvgGradientUnits? GradientUnits { get; set; }
+
+    public List<SvgStop> Stops { get; } = new();
+
+    public SvgTransformList GradientTransforms { get; } = new();
+
+    public HypertextReference? Href { get; set; }
+
+    public SvgLength? ComputeCenterX()
+    {
+        if (CenterX != null)
+            return CenterX;
+
+        if (Href != null)
+        {
+            Svg svg = GetParentSvg();
+            SvgElement svgElement = svg?.FindChild(Href.Value.Id);
+
+            if (svgElement is SvgRadialGradient templateRadialGradient)
+                return templateRadialGradient.ComputeCenterX();
+        }
+
+        return null;
+    }
+
+    public SvgLength? ComputeCenterY()
+    {
+        if (CenterY != null)
+            return CenterY;
+
+        if (Href != null)
+        {
+            Svg svg = GetParentSvg();
+            SvgElement svgElement = svg?.FindChild(Href.Value.Id);
+
+            if (svgElement is SvgRadialGradient templateRadialGradient)
+                return templateRadialGradient.ComputeCenterY();
+        }
+
+        return null;
+    }
+
+    public SvgLength? ComputeRadius()
+    {
+        if (Radius != null)
+            return Radius;
+
+        if (Href != null)
+        {
+            Svg svg = GetParentSvg();
+            SvgElement svgElement = svg?.FindChild(Href.Value.Id);
+
+            if (svgElement is SvgRadialGradient templateRadialGradient)
+                return templateRadialGradient.ComputeRadius();
+        }
+
+        return null;
+    }
+
+    public List<SvgStop> ComputeStops()
+    {
+        if (Stops.Count > 0)
+            return Stops;
+
+        if (Href != null)
+        {
+            Svg svg = GetParentSvg();
+            SvgElement svgElement = svg?.FindChild(Href.Value.Id);
+
+            if (svgElement is SvgLinearGradient templateLinearGradient)
+                return templateLinearGradient.ComputeStops();
+        }
+
+        return new List<SvgStop>();
+    }
 }

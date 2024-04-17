@@ -112,7 +112,7 @@ internal static class GroupExtensions
                 }
                 else if (serializationChild is XmlRadialGradient radialGradient)
                 {
-                    SvgRadialGradient svgRadialGradient = radialGradient.ToSvgModel();
+                    SvgRadialGradient svgRadialGradient = radialGradient.ToSvgModel(deserializationContext);
                     svgContainer.Children.Add(svgRadialGradient);
                 }
                 else if (serializationChild is XmlClipPath clipPath)

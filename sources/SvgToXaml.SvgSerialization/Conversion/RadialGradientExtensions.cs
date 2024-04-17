@@ -21,14 +21,64 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class RadialGradientExtensions
 {
-    public static SvgRadialGradient ToSvgModel(this XmlRadialGradient xmlRadialGradient)
+    public static SvgRadialGradient ToSvgModel(this XmlRadialGradient xmlRadialGradient, DeserializationContext deserializationContext)
     {
         if (xmlRadialGradient == null)
             return null;
 
-        SvgRadialGradient svgRadialGradient = new();
-        svgRadialGradient.PopulateFromElement(xmlRadialGradient);
+        return deserializationContext.Run("radialGradient", () =>
+        {
+            SvgRadialGradient svgRadialGradient = new();
+            svgRadialGradient.PopulateFromElement(xmlRadialGradient);
 
-        return svgRadialGradient;
+            SvgLength? radius = xmlRadialGradient.R;
+
+            if (radius != null)
+            {
+                if (radius.Value < 0)
+                {
+                    svgRadialGradient.Radius = 0;
+
+                    deserializationContext.Path.SetAttributeOnLast("r");
+
+                    NegativeValueIssue issue = new(deserializationContext.Path.ToString());
+                    deserializationContext.Warnings.Add(issue);
+                }
+                else
+                {
+                    svgRadialGradient.Radius = radius.Value;
+                }
+            }
+
+            svgRadialGradient.CenterX = xmlRadialGradient.Cx;
+            svgRadialGradient.CenterY = xmlRadialGradient.Cy;
+
+            if (xmlRadialGradient.GradientUnitsSpecified)
+            {
+                svgRadialGradient.GradientUnits = xmlRadialGradient.GradientUnits switch
+                {
+                    XmlGradientUnits.ObjectBoundingBox => SvgGradientUnits.ObjectBoundingBox,
+                    XmlGradientUnits.UserSpaceOnUse => SvgGradientUnits.UserSpaceOnUse,
+                    _ => throw new Exception("Invalid gradient unit value.")
+                };
+            }
+
+            if (xmlRadialGradient.Stops != null)
+            {
+                IEnumerable<SvgStop> svgStops = xmlRadialGradient.Stops
+                    .Select(x => x.ToSvgModel());
+
+                foreach (SvgStop svgStop in svgStops)
+                    svgRadialGradient.Stops.Add(svgStop);
+            }
+
+            if (xmlRadialGradient.GradientTransform != null)
+                svgRadialGradient.GradientTransforms.ParseAndAdd(xmlRadialGradient.GradientTransform);
+
+            if (xmlRadialGradient.Href != null)
+                svgRadialGradient.Href = xmlRadialGradient.Href;
+
+            return svgRadialGradient;
+        });
     }
 }
