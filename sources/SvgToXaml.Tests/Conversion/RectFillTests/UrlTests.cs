@@ -23,14 +23,13 @@ namespace DustInTheWind.SvgToXaml.Tests.Conversion.RectFillTests;
 public class UrlTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingFillReferenceGradientFromDefs_WhenSvgIsParsed_ThenResultedRectangleHasGradient()
+    public void HavingFillReferenceGradientFromDefs_WhenSvgIsConverted_ThenResultedRectangleHasGradient()
     {
         ConvertSvgFile("rect-fill-url-gradient.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
             rectangle.Fill.Should().BeOfType<LinearGradientBrush>();
-
             LinearGradientBrush linearGradientBrush = rectangle.Fill as LinearGradientBrush;
 
             linearGradientBrush.GradientStops[0].Offset.Should().Be(0);
@@ -41,15 +40,14 @@ public class UrlTests : SvgFileTestsBase
         });
     }
 
-    [Fact(Skip = "Will implement later.")]
-    public void HavingFillReferenceGradientFromDefsWhichReferencesAnotherGradient_WhenSvgIsParsed_ThenResultedRectangleHasGradient()
+    [Fact]
+    public void HavingFillReferencingGradientFromDefsWhichReferencesAnotherGradient_WhenSvgIsConverted_ThenResultedRectangleHasGradient()
     {
         ConvertSvgFile("rect-fill-url-gradient-href-gradient.svg", canvas =>
         {
             Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
 
             rectangle.Fill.Should().BeOfType<LinearGradientBrush>();
-
             LinearGradientBrush linearGradientBrush = rectangle.Fill as LinearGradientBrush;
 
             linearGradientBrush.GradientStops[0].Offset.Should().Be(0);

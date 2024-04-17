@@ -24,7 +24,7 @@ public class DefsClassTests : SvgFileTestsBase
     [Fact]
     public void HavingStrokeDeclaredInDefsClass_WhenSvgIsParsed_ThenResultedEllipseHasStrokeFromClass()
     {
-        ConvertSvgFile("circle-defs-class^.svg", canvas =>
+        ConvertSvgFile("01-circle-defs-class^.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
@@ -35,7 +35,7 @@ public class DefsClassTests : SvgFileTestsBase
     [Fact]
     public void HavingStrokeDeclaredInCircleAndDefsClass_WhenSvgIsParsed_ThenResultedEllipseHasStrokeFromClass()
     {
-        ConvertSvgFile("circle^-defs-class^.svg", canvas =>
+        ConvertSvgFile("02-circle^-defs-class^.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
@@ -46,7 +46,7 @@ public class DefsClassTests : SvgFileTestsBase
     [Fact]
     public void HavingStrokeDeclaredInDefsClassAndSvgRoot_WhenSvgIsParsed_ThenResultedEllipseHasStrokeFromClass()
     {
-        ConvertSvgFile("svgroot^-circle-defs-class^.svg", canvas =>
+        ConvertSvgFile("03-svgroot^-circle-defs-class^.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 

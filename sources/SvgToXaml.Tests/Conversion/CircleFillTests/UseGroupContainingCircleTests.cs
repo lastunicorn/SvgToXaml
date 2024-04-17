@@ -23,7 +23,7 @@ namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleFillTests;
 public class UseGroupContainingCircleTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingNoFillDeclared_WhenSvgIsParsed_ThenResultedEllipseHasBlackFill()
+    public void HavingNoFillDeclared_WhenSvgIsConverted_ThenResultedEllipseHasBlackFill()
     {
         ConvertSvgFile("01-group-use-href-defs-group-circle.svg", canvas =>
         {
@@ -37,7 +37,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnCircle_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromCircle()
+    public void HavingFillDeclaredOnCircle_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromCircle()
     {
         ConvertSvgFile("02-group-use-href-defs-group-circle^.svg", canvas =>
         {
@@ -51,7 +51,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnGroupContainingCircle_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromGroup()
+    public void HavingFillDeclaredOnGroupContainingCircle_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromGroup()
     {
         ConvertSvgFile("03-group-use-href-defs-group^-circle.svg", canvas =>
         {
@@ -65,7 +65,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnGroupContainingCircleAndCircle_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromCircle()
+    public void HavingFillDeclaredOnGroupContainingCircleAndCircle_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromCircle()
     {
         ConvertSvgFile("04-group-use-href-defs-group^-circle^.svg", canvas =>
         {
@@ -79,7 +79,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnUseAndGroupContainingCircle_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromUse()
+    public void HavingFillDeclaredOnUseAndGroupContainingCircle_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromUse()
     {
         ConvertSvgFile("05-group-use^-href-defs-group^-circle.svg", canvas =>
         {
@@ -93,7 +93,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnUse_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromUse()
+    public void HavingFillDeclaredOnUse_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromUse()
     {
         ConvertSvgFile("06-group-use^-href-defs-group-circle.svg", canvas =>
         {
@@ -107,7 +107,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnGroupContainingUse_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromGroupContainingUse()
+    public void HavingFillDeclaredOnGroupContainingUse_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromGroupContainingUse()
     {
         ConvertSvgFile("07-group^-use-href-defs-group-circle.svg", canvas =>
         {
@@ -121,7 +121,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnGroupContainingUseAndGroupContainingCircle_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromGroupContainingCircle()
+    public void HavingFillDeclaredOnGroupContainingUseAndGroupContainingCircle_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromGroupContainingCircle()
     {
         ConvertSvgFile("08-group^-use-href-defs-group^-circle.svg", canvas =>
         {
@@ -135,7 +135,7 @@ public class UseGroupContainingCircleTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillDeclaredOnSvgRoot_WhenSvgIsParsed_ThenResultedEllipseHasFillColorFromGroupContainingCircle()
+    public void HavingFillDeclaredOnSvgRoot_WhenSvgIsConverted_ThenResultedEllipseHasFillColorFromGroupContainingCircle()
     {
         ConvertSvgFile("09-svgroot^-group-use-href-defs-group-circle.svg", canvas =>
         {

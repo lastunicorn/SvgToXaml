@@ -30,14 +30,14 @@ internal static class GroupExtensions
             return null;
 
         SvgGroup svgGroup = new();
-        svgGroup.PopulateFromGroup(xmlG, deserializationContext);
+        svgGroup.PopulateFromContainer(xmlG, deserializationContext);
 
         return svgGroup;
     }
 
-    public static void PopulateFromGroup(this SvgGroup svgGroup, XmlG xmlG, DeserializationContext deserializationContext)
+    public static void PopulateFromContainer(this SvgContainer svgContainer, XmlG xmlG, DeserializationContext deserializationContext)
     {
-        svgGroup.PopulateFromElement(xmlG);
+        svgContainer.PopulateFromElement(xmlG);
 
         if (xmlG.Children != null)
         {
@@ -46,74 +46,74 @@ internal static class GroupExtensions
                 if (serializationChild is XmlCircle circle)
                 {
                     SvgCircle svgCircle = circle.ToSvgModel(deserializationContext);
-                    svgGroup.Children.Add(svgCircle);
+                    svgContainer.Children.Add(svgCircle);
                 }
                 else if (serializationChild is XmlEllipse ellipse)
                 {
                     SvgEllipse svgEllipse = ellipse.ToSvgModel();
-                    svgGroup.Children.Add(svgEllipse);
+                    svgContainer.Children.Add(svgEllipse);
                 }
                 else if (serializationChild is XmlPath path)
                 {
                     SvgPath svgPath = path.ToSvgModel();
-                    svgGroup.Children.Add(svgPath);
+                    svgContainer.Children.Add(svgPath);
                 }
                 else if (serializationChild is XmlLine line)
                 {
                     SvgLine svgLine = line.ToSvgModel();
-                    svgGroup.Children.Add(svgLine);
+                    svgContainer.Children.Add(svgLine);
                 }
                 else if (serializationChild is XmlRect rect)
                 {
                     SvgRectangle svgRectangle = rect.ToSvgModel();
-                    svgGroup.Children.Add(svgRectangle);
+                    svgContainer.Children.Add(svgRectangle);
                 }
                 else if (serializationChild is XmlPolygon polygon)
                 {
                     SvgPolygon svgPolygon = polygon.ToSvgModel();
-                    svgGroup.Children.Add(svgPolygon);
+                    svgContainer.Children.Add(svgPolygon);
                 }
                 else if (serializationChild is XmlPolyline polyline)
                 {
                     SvgPolyline svgPolyline = polyline.ToSvgModel();
-                    svgGroup.Children.Add(svgPolyline);
+                    svgContainer.Children.Add(svgPolyline);
                 }
                 else if (serializationChild is XmlDefs defs)
                 {
                     SvgDefinitions svgDefinitions = defs.ToSvgModel(deserializationContext);
-                    svgGroup.Children.Add(svgDefinitions);
+                    svgContainer.Children.Add(svgDefinitions);
                 }
                 else if (serializationChild is XmlG gChild)
                 {
                     SvgGroup svgGroupChild = gChild.ToSvgModel(deserializationContext);
-                    svgGroup.Children.Add(svgGroupChild);
+                    svgContainer.Children.Add(svgGroupChild);
                 }
                 else if (serializationChild is XmlUse use)
                 {
                     SvgUse svgUseChild = use.ToSvgModel();
-                    svgGroup.Children.Add(svgUseChild);
+                    svgContainer.Children.Add(svgUseChild);
                 }
                 else if (serializationChild is XmlStyle style)
                 {
                     IEnumerable<SvgStyleRuleSet> ruleSets = ParseStyles(style.Value);
 
                     foreach (SvgStyleRuleSet svgStyleRuleSet in ruleSets)
-                        svgGroup.StyleSheet.Add(svgStyleRuleSet);
+                        svgContainer.StyleSheet.Add(svgStyleRuleSet);
                 }
                 else if (serializationChild is XmlText text)
                 {
                     SvgText svgText = text.ToSvgModel();
-                    svgGroup.Children.Add(svgText);
+                    svgContainer.Children.Add(svgText);
                 }
                 else if (serializationChild is XmlLinearGradient linearGradient)
                 {
                     SvgLinearGradient svgLinearGradient = linearGradient.ToSvgModel();
-                    svgGroup.Children.Add(svgLinearGradient);
+                    svgContainer.Children.Add(svgLinearGradient);
                 }
                 else if (serializationChild is XmlClipPath clipPath)
                 {
                     SvgClipPath svgClipPath = clipPath.ToSvgModel(deserializationContext);
-                    svgGroup.Children.Add(svgClipPath);
+                    svgContainer.Children.Add(svgClipPath);
                 }
             }
         }

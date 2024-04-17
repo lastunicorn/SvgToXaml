@@ -16,33 +16,11 @@
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class Svg : SvgGroup
+public class Svg : SvgContainer
 {
     public SvgLength? Width { get; set; }
 
     public SvgLength? Height { get; set; }
 
     public SvgViewBox ViewBox { get; set; }
-
-    public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets()
-    {
-        IEnumerable<SvgGroup> svgGroups = GetAllSvgGroups();
-
-        foreach (SvgGroup svgGroup in svgGroups)
-        {
-            if (svgGroup.StyleSheet == null)
-                continue;
-
-            foreach (SvgStyleRuleSet styleRuleSet in svgGroup.StyleSheet)
-                yield return styleRuleSet;
-        }
-    }
-
-    private IEnumerable<SvgGroup> GetAllSvgGroups()
-    {
-        yield return this;
-
-        foreach (SvgGroup childSvgGroup in GetChildSvgGroups())
-            yield return childSvgGroup;
-    }
 }

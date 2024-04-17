@@ -18,6 +18,9 @@ using System.Collections.ObjectModel;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
+/// <summary>
+/// Represents the "style" element.
+/// </summary>
 public class SvgStyleSheet : Collection<SvgStyleRuleSet>
 {
     public SvgStyleRuleSet this[string name] => Items.FirstOrDefault(x => x.Selector == name);

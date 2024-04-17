@@ -29,6 +29,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\01-circle-defs-class^.svg" />
+        <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\02-circle^-defs-class^.svg" />
+        <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\03-svgroot^-circle-defs-class^.svg" />
         <None Remove="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-rect.svg" />
         <None Remove="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\02-group-use-href-defs-group-rect^.svg" />
         <None Remove="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\03-group-use-href-defs-group^-rect.svg" />
@@ -125,12 +128,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\RectTransformTests\TransformRotateTests.Resources\04-rect-x-y-transform-rotate-cx-cy.svg" />
         <None Remove="Conversion\RectTransformTests\TransformMatrixTests.Resources\transform-matrix.svg" />
         <None Remove="Conversion\RectTransformTests\TransformTranslateTests.Resources\transform-translate.svg" />
-        <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\circle-defs-class^.svg" />
-        <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\circle^-defs-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\ClassTests.Resources\circle-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\ClassTests.Resources\circle^-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\ClassTests.Resources\svgroot^-circle-class^.svg" />
-        <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\svgroot^-circle-defs-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleStyleTests.Resources\circle-style^.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleStyleTests.Resources\circle^-style^.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleStyleTests.Resources\svgroot^-circle-style^.svg" />
@@ -328,9 +328,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\PolylineTests\PointsTests.Resources\polyline-points-3.svg" />
         <EmbeddedResource Include="Conversion\PolylineTests\PointsTests.Resources\polyline-points-2.svg" />
         <EmbeddedResource Include="Conversion\PolylineTests\PointsTests.Resources\polyline-points-1.svg" />
-        <EmbeddedResource Include="Conversion\CircleStrokeTests\DefsClassTests.Resources\circle-defs-class^.svg" />
-        <EmbeddedResource Include="Conversion\CircleStrokeTests\DefsClassTests.Resources\circle^-defs-class^.svg" />
-        <EmbeddedResource Include="Conversion\CircleStrokeTests\DefsClassTests.Resources\svgroot^-circle-defs-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleStrokeTests\DefsClassTests.Resources\01-circle-defs-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleStrokeTests\DefsClassTests.Resources\02-circle^-defs-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleStrokeTests\DefsClassTests.Resources\03-svgroot^-circle-defs-class^.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group^-circle^.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group^-circle.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group-circle.svg" />

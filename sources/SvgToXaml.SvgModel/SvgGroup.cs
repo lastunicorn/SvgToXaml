@@ -18,16 +18,4 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgGroup : SvgContainer
 {
-    public SvgStyleSheet StyleSheet { get; } = new();
-
-    public IEnumerable<SvgGroup> GetChildSvgGroups()
-    {
-        foreach (SvgGroup childSvgGroup in Children.OfType<SvgGroup>())
-        {
-            yield return childSvgGroup;
-
-            foreach (SvgGroup grandchildSvgGroup in childSvgGroup.GetChildSvgGroups())
-                yield return grandchildSvgGroup;
-        }
-    }
 }

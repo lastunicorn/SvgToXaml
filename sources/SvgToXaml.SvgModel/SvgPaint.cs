@@ -16,9 +16,6 @@
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-/// <summary>
-/// 
-/// </summary>
 /// <remarks>
 /// Possible Values = none | {color} | {url} [none | {color}]? | context-fill | context-stroke 
 /// </remarks>

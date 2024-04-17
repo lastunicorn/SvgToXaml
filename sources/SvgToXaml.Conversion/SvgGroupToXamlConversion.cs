@@ -22,12 +22,12 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 public class SvgGroupToXamlConversion : IConversion<Canvas>
 {
-    private readonly SvgGroup svgGroup;
+    private readonly SvgContainer svgContainer;
     private readonly SvgElement referrer;
 
-    public SvgGroupToXamlConversion(SvgGroup svgGroup, SvgElement referrer = null)
+    public SvgGroupToXamlConversion(SvgContainer svgContainer, SvgElement referrer = null)
     {
-        this.svgGroup = svgGroup ?? throw new ArgumentNullException(nameof(svgGroup));
+        this.svgContainer = svgContainer ?? throw new ArgumentNullException(nameof(svgContainer));
         this.referrer = referrer;
     }
 
@@ -37,10 +37,10 @@ public class SvgGroupToXamlConversion : IConversion<Canvas>
         {
             Canvas canvas = CreateXamlElement();
 
-            if (svgGroup.Transforms.Count > 0)
-                canvas.RenderTransform = svgGroup.Transforms.ToXaml(canvas.RenderTransform);
+            if (svgContainer.Transforms.Count > 0)
+                canvas.RenderTransform = svgContainer.Transforms.ToXaml(canvas.RenderTransform);
 
-            IEnumerable<UIElement> xamlElements = svgGroup.Children
+            IEnumerable<UIElement> xamlElements = svgContainer.Children
                 .Where(x => x is not SvgDefinitions)
                 .Select(CreateConversion)
                 .Select(x => x.Execute())

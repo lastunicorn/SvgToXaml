@@ -27,7 +27,7 @@ internal static class DefsExtensions
             return null;
 
         SvgDefinitions svgDefinitions = new();
-        svgDefinitions.PopulateFromGroup(xmlDefs, deserializationContext);
+        svgDefinitions.PopulateFromContainer(xmlDefs, deserializationContext);
 
 
         return svgDefinitions;

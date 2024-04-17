@@ -31,7 +31,7 @@ internal static class SvgExtensions
         try
         {
             Svg modelSvg = new();
-            modelSvg.PopulateFromGroup(xmlSvg, deserializationContext);
+            modelSvg.PopulateFromContainer(xmlSvg, deserializationContext);
 
             if (xmlSvg.Width != null)
                 modelSvg.Width = xmlSvg.Width;

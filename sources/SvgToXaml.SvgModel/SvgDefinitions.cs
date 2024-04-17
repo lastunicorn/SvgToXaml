@@ -16,6 +16,6 @@
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgDefinitions : SvgGroup
+public class SvgDefinitions : SvgContainer
 {
 }

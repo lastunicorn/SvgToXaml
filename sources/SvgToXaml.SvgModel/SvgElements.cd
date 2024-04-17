@@ -16,16 +16,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.Svg" Collapsed="true">
-    <Position X="7.25" Y="4.75" Width="1.5" />
+    <Position X="6" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAABAAAAEAAAAAAAAAAAACAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAADAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Svg.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgCircle" Collapsed="true">
     <Position X="14" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAIAAAACAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgCircle.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -39,7 +39,7 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgElement" Collapsed="true">
     <Position X="15.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACMAgEAQAEAIKCAAAAQAABEggACsEARACggEAAAAA=</HashCode>
+      <HashCode>AAACMAAECQEgAACAAAAAQEABEggACNkAhAAAgEkBAAA=</HashCode>
       <FileName>SvgElement.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -58,9 +58,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgGroup" Collapsed="true">
-    <Position X="8.5" Y="3.25" Width="1.5" />
+    <Position X="9.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgGroup.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -82,7 +82,7 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgPaint" Collapsed="true">
     <Position X="34" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAACAAAACAAAgAAAAAA=</HashCode>
+      <HashCode>AAAgACAAAAAAAAAEAAAAAAAAAAACAAAACAAAgAAAAAA=</HashCode>
       <FileName>SvgPaint.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -96,17 +96,16 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgPoint" Collapsed="true">
     <Position X="35.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>SvgPoint.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgPointCollection" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="37.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAABAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgPointCollection.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgPolygon" Collapsed="true">
     <Position X="20.75" Y="3.25" Width="1.5" />
@@ -125,7 +124,7 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgRectangle" Collapsed="true">
     <Position X="11.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <HashCode>AAAAAAABBCAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>SvgRectangle.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -169,7 +168,7 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgStyleSheet" Collapsed="true">
     <Position X="39.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAABAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgStyleSheet.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -191,7 +190,7 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgUse" Collapsed="true">
     <Position X="27.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAABAAAAAAAAAYAI=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAABAAAAAAAAAYAA=</HashCode>
       <FileName>SvgUse.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -220,7 +219,7 @@
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgContainer" Collapsed="true">
     <Position X="7.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAIAAAEIAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>SvgContainer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -239,7 +238,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgClipPath" Collapsed="true">
-    <Position X="5" Y="3.25" Width="1.5" />
+    <Position X="4.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgClipPath.cs</FileName>
@@ -260,7 +259,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgToXaml.SvgModel.SvgDefinitions" Collapsed="true">
-    <Position X="9.5" Y="4.75" Width="1.5" />
+    <Position X="7.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgDefinitions.cs</FileName>

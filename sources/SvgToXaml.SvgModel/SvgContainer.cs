@@ -32,6 +32,8 @@ public class SvgContainer : SvgElement
 {
     public SvgElementCollection<SvgElement> Children { get; }
 
+    public SvgStyleSheet StyleSheet { get; } = new();
+
     public SvgContainer()
     {
         Children = new SvgElementCollection<SvgElement>(this);
@@ -40,5 +42,51 @@ public class SvgContainer : SvgElement
     public virtual SvgElement FindChild(string id)
     {
         return Children.FindChild(id);
+    }
+
+    protected IEnumerable<T> GetChildrenRecursively<T>()
+    {
+        foreach (SvgElement svgElement in Children)
+        {
+            switch (svgElement)
+            {
+                case SvgContainer svgContainer:
+                    {
+                        IEnumerable<T> children = svgContainer.GetChildrenRecursively<T>();
+
+                        foreach (T child in children)
+                            yield return child;
+                        break;
+                    }
+
+                case T tSvgElement:
+                    yield return tSvgElement;
+                    break;
+            }
+        }
+    }
+
+    public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets()
+    {
+        IEnumerable<SvgStyleSheet> svgStyleSheets = GetStyleSheetsRecursively();
+
+        foreach (SvgStyleSheet svgStyleSheet in svgStyleSheets)
+        {
+            foreach (SvgStyleRuleSet styleRuleSet in svgStyleSheet)
+                yield return styleRuleSet;
+        }
+    }
+
+    private IEnumerable<SvgStyleSheet> GetStyleSheetsRecursively()
+    {
+        yield return StyleSheet;
+
+        foreach (SvgContainer svgContainer in Children.OfType<SvgContainer>())
+        {
+            IEnumerable<SvgStyleSheet> styleSheets = svgContainer.GetStyleSheetsRecursively();
+
+            foreach (SvgStyleSheet styleSheet in styleSheets)
+                yield return styleSheet;
+        }
     }
 }
