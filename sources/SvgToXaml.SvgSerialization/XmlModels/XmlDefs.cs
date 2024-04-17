@@ -27,6 +27,6 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 ///     - structural elements — ‘defs’, ‘g’, ‘svg’, ‘symbol’, ‘use’
 ///     - a, audio, canvas, clipPath, filter, foreignObject, iframe, image, marker, mask, script, style, switch, text, video, view
 /// </remarks>
-public class XmlDefs : XmlG
+public class XmlDefs : XmlContainer
 {
 }

@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
-
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 /// <remarks>
@@ -27,21 +25,6 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 ///    - structural elements — ‘defs’, ‘g’, ‘svg’, ‘symbol’, ‘use’
 ///    - a, audio, canvas, clipPath, filter, foreignObject, iframe, image, marker, mask, script, style, switch, text, video, view.
 /// </remarks>
-public class XmlG : XmlElement
+public class XmlG : XmlContainer
 {
-    [XmlElement("circle", typeof(XmlCircle))]
-    [XmlElement("ellipse", typeof(XmlEllipse))]
-    [XmlElement("line", typeof(XmlLine))]
-    [XmlElement("path", typeof(XmlPath))]
-    [XmlElement("polygon", typeof(XmlPolygon))]
-    [XmlElement("polyline", typeof(XmlPolyline))]
-    [XmlElement("rect", typeof(XmlRect))]
-    [XmlElement("defs", typeof(XmlDefs))]
-    [XmlElement("g", typeof(XmlG))]
-    [XmlElement("use", typeof(XmlUse))]
-    [XmlElement("style", typeof(XmlStyle))]
-    [XmlElement("text", typeof(XmlText))]
-    [XmlElement("linearGradient", typeof(XmlLinearGradient))]
-    [XmlElement("clipPath", typeof(XmlClipPath))]
-    public object[] Children { get; set; }
 }

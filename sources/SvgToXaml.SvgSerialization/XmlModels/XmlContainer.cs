@@ -18,18 +18,22 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-[XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
-public class XmlSvg : XmlContainer
+public class XmlContainer : XmlElement
 {
-    [XmlAttribute("version")]
-    public string Version { get; set; }
-
-    [XmlAttribute("width")]
-    public string Width { get; set; }
-
-    [XmlAttribute("height")]
-    public string Height { get; set; }
-
-    [XmlAttribute("viewBox")]
-    public string ViewBox { get; set; }
+    [XmlElement("circle", typeof(XmlCircle))]
+    [XmlElement("ellipse", typeof(XmlEllipse))]
+    [XmlElement("line", typeof(XmlLine))]
+    [XmlElement("path", typeof(XmlPath))]
+    [XmlElement("polygon", typeof(XmlPolygon))]
+    [XmlElement("polyline", typeof(XmlPolyline))]
+    [XmlElement("rect", typeof(XmlRect))]
+    [XmlElement("defs", typeof(XmlDefs))]
+    [XmlElement("g", typeof(XmlG))]
+    [XmlElement("use", typeof(XmlUse))]
+    [XmlElement("style", typeof(XmlStyle))]
+    [XmlElement("text", typeof(XmlText))]
+    [XmlElement("linearGradient", typeof(XmlLinearGradient))]
+    [XmlElement("radialGradient", typeof(XmlRadialGradient))]
+    [XmlElement("clipPath", typeof(XmlClipPath))]
+    public object[] Children { get; set; }
 }

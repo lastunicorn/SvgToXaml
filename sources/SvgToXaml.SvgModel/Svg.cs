@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class Svg : SvgContainer
 {
+    public string Version { get; set; }
+
     public SvgLength? Width { get; set; }
 
     public SvgLength? Height { get; set; }

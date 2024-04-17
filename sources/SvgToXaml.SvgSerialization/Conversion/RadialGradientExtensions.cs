@@ -14,22 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
+using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-[XmlRoot("svg", Namespace = "http://www.w3.org/2000/svg")]
-public class XmlSvg : XmlContainer
+internal static class RadialGradientExtensions
 {
-    [XmlAttribute("version")]
-    public string Version { get; set; }
+    public static SvgRadialGradient ToSvgModel(this XmlRadialGradient xmlRadialGradient)
+    {
+        if (xmlRadialGradient == null)
+            return null;
 
-    [XmlAttribute("width")]
-    public string Width { get; set; }
+        SvgRadialGradient svgRadialGradient = new();
+        svgRadialGradient.PopulateFromElement(xmlRadialGradient);
 
-    [XmlAttribute("height")]
-    public string Height { get; set; }
-
-    [XmlAttribute("viewBox")]
-    public string ViewBox { get; set; }
+        return svgRadialGradient;
+    }
 }

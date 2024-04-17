@@ -35,13 +35,13 @@ internal static class GroupExtensions
         return svgGroup;
     }
 
-    public static void PopulateFromContainer(this SvgContainer svgContainer, XmlG xmlG, DeserializationContext deserializationContext)
+    public static void PopulateFromContainer(this SvgContainer svgContainer, XmlContainer xmlContainer, DeserializationContext deserializationContext)
     {
-        svgContainer.PopulateFromElement(xmlG);
+        svgContainer.PopulateFromElement(xmlContainer);
 
-        if (xmlG.Children != null)
+        if (xmlContainer.Children != null)
         {
-            foreach (object serializationChild in xmlG.Children)
+            foreach (object serializationChild in xmlContainer.Children)
             {
                 if (serializationChild is XmlCircle circle)
                 {
@@ -109,6 +109,11 @@ internal static class GroupExtensions
                 {
                     SvgLinearGradient svgLinearGradient = linearGradient.ToSvgModel();
                     svgContainer.Children.Add(svgLinearGradient);
+                }
+                else if (serializationChild is XmlRadialGradient radialGradient)
+                {
+                    SvgRadialGradient svgRadialGradient = radialGradient.ToSvgModel();
+                    svgContainer.Children.Add(svgRadialGradient);
                 }
                 else if (serializationChild is XmlClipPath clipPath)
                 {

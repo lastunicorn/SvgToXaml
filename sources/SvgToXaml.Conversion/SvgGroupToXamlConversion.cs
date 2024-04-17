@@ -43,6 +43,7 @@ public class SvgGroupToXamlConversion : IConversion<Canvas>
             IEnumerable<UIElement> xamlElements = svgContainer.Children
                 .Where(x => x is not SvgDefinitions)
                 .Select(CreateConversion)
+                .Where(x => x != null)
                 .Select(x => x.Execute())
                 .Where(x => x != null);
 
@@ -91,9 +92,6 @@ public class SvgGroupToXamlConversion : IConversion<Canvas>
             case SvgPolyline svgPolyline:
                 return new SvgPolylineToXamlConversion(svgPolyline, referrer);
 
-            case SvgDefinitions:
-                return null;
-
             case SvgGroup svgGChild:
                 return new SvgGroupToXamlConversion(svgGChild, referrer);
 
@@ -102,6 +100,11 @@ public class SvgGroupToXamlConversion : IConversion<Canvas>
 
             case SvgText svgText:
                 return new SvgTextToXamlConversion(svgText, referrer);
+
+            case SvgDefinitions:
+            case SvgLinearGradient:
+            case SvgRadialGradient:
+                return null;
 
             default:
                 Type inheritedElementType = svgElement.GetType();
