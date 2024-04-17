@@ -40,7 +40,7 @@ internal static class ClipPathExtensions
                 }
                 else if (serializationChild is XmlEllipse ellipse)
                 {
-                    SvgEllipse svgEllipse = ellipse.ToSvgModel();
+                    SvgEllipse svgEllipse = ellipse.ToSvgModel(deserializationContext);
                     svgClipPath.Children.Add(svgEllipse);
                 }
                 else if (serializationChild is XmlPath path)

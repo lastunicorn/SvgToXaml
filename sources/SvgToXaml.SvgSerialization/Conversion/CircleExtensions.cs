@@ -39,7 +39,6 @@ internal static class CircleExtensions
 
                 deserializationContext.Path.SetAttributeOnLast("r");
 
-                //NegativeValueIssue issue = new("svg.0(g).3(circle:circle1)@r");
                 NegativeValueIssue issue = new(deserializationContext.Path.ToString());
                 deserializationContext.Warnings.Add(issue);
             }

@@ -14,21 +14,38 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
+namespace DustInTheWind.SvgToXaml.SvgModel;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
-
-public class XmlEllipse : XmlShape
+public struct NoneValue
 {
-    [XmlAttribute("rx")]
-    public double Rx { get; set; }
+    public bool Value { get; }
 
-    [XmlAttribute("ry")]
-    public double Ry { get; set; }
+    public NoneValue(bool value)
+    {
+        Value = value;
+    }
 
-    [XmlAttribute("cx")]
-    public double Cx { get; set; }
+    public static NoneValue Parse(string text)
+    {
+        bool isNone = text?.Trim().Equals("none") == true;
 
-    [XmlAttribute("cy")]
-    public double Cy { get; set; }
+        return isNone
+            ? new NoneValue(true)
+            : new NoneValue(false);
+    }
+
+    public static implicit operator NoneValue(string text)
+    {
+        return Parse(text);
+    }
+
+    public static implicit operator bool(NoneValue value)
+    {
+        return value.Value;
+    }
+
+    public static implicit operator NoneValue(bool value)
+    {
+        return new NoneValue(value);
+    }
 }

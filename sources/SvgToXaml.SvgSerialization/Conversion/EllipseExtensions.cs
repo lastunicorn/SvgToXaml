@@ -21,19 +21,54 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
 internal static class EllipseExtensions
 {
-    public static SvgEllipse ToSvgModel(this XmlEllipse xmlEllipse)
+    public static SvgEllipse ToSvgModel(this XmlEllipse xmlEllipse, DeserializationContext deserializationContext)
     {
         if (xmlEllipse == null)
             return null;
 
-        SvgEllipse svgEllipse = new();
-        svgEllipse.PopulateFromElement(xmlEllipse);
+        deserializationContext.Path.Add("ellipse");
 
-        svgEllipse.RadiusX = xmlEllipse.Rx;
-        svgEllipse.RadiusY = xmlEllipse.Ry;
-        svgEllipse.CenterX = xmlEllipse.Cx;
-        svgEllipse.CenterY = xmlEllipse.Cy;
+        try
+        {
+            SvgEllipse svgEllipse = new();
+            svgEllipse.PopulateFromElement(xmlEllipse);
 
-        return svgEllipse;
+            if (xmlEllipse.Rx < 0)
+            {
+                svgEllipse.RadiusX = 0;
+
+                deserializationContext.Path.SetAttributeOnLast("rx");
+
+                NegativeValueIssue issue = new(deserializationContext.Path.ToString());
+                deserializationContext.Warnings.Add(issue);
+            }
+            else
+            {
+                svgEllipse.RadiusX = xmlEllipse.Rx;
+            }
+
+            if (xmlEllipse.Ry < 0)
+            {
+                svgEllipse.RadiusY = 0;
+
+                deserializationContext.Path.SetAttributeOnLast("ry");
+
+                NegativeValueIssue issue = new(deserializationContext.Path.ToString());
+                deserializationContext.Warnings.Add(issue);
+            }
+            else
+            {
+                svgEllipse.RadiusY = xmlEllipse.Ry;
+            }
+
+            svgEllipse.CenterX = xmlEllipse.Cx;
+            svgEllipse.CenterY = xmlEllipse.Cy;
+
+            return svgEllipse;
+        }
+        finally
+        {
+            deserializationContext.Path.RemoveLast();
+        }
     }
 }

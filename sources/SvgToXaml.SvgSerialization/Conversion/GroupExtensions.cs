@@ -50,7 +50,7 @@ internal static class GroupExtensions
                 }
                 else if (serializationChild is XmlEllipse ellipse)
                 {
-                    SvgEllipse svgEllipse = ellipse.ToSvgModel();
+                    SvgEllipse svgEllipse = ellipse.ToSvgModel(deserializationContext);
                     svgContainer.Children.Add(svgEllipse);
                 }
                 else if (serializationChild is XmlPath path)
