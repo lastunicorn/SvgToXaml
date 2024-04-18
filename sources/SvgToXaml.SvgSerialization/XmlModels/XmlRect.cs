@@ -34,7 +34,11 @@ public class XmlRect : XmlShape
 
     [XmlAttribute("rx")]
     public double Rx { get; set; }
+    
+    public bool RxSpecified { get; set; }
 
     [XmlAttribute("ry")]
     public double Ry { get; set; }
+
+    public bool RySpecified { get; set; }
 }

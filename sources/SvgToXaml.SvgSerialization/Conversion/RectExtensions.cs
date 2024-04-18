@@ -26,16 +26,20 @@ internal static class RectExtensions
         if (xmlRect == null)
             return null;
 
-        SvgRectangle model = new();
-        model.PopulateFromElement(xmlRect);
+        SvgRectangle svgRectangle = new();
+        svgRectangle.PopulateFromElement(xmlRect);
 
-        model.Width = xmlRect.Width;
-        model.Height = xmlRect.Height;
-        model.X = xmlRect.X;
-        model.Y = xmlRect.Y;
-        model.Rx = xmlRect.Rx;
-        model.Ry = xmlRect.Ry;
- 
-        return model;
+        svgRectangle.Width = xmlRect.Width;
+        svgRectangle.Height = xmlRect.Height;
+        svgRectangle.X = xmlRect.X;
+        svgRectangle.Y = xmlRect.Y;
+
+        if (xmlRect.RxSpecified)
+            svgRectangle.Rx = xmlRect.Rx;
+
+        if (xmlRect.RySpecified)
+            svgRectangle.Ry = xmlRect.Ry;
+
+        return svgRectangle;
     }
 }

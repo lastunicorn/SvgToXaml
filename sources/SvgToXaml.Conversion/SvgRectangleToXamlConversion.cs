@@ -29,13 +29,20 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
     protected override Rectangle CreateXamlElement()
     {
+        double? radiusX = SvgElement.Rx ?? SvgElement.Ry;
+        double? radiusY = SvgElement.Ry ?? SvgElement.Rx;
+
         Rectangle rectangle = new()
         {
             Width = SvgElement.Width,
-            Height = SvgElement.Height,
-            RadiusX = SvgElement.Rx,
-            RadiusY = SvgElement.Ry
+            Height = SvgElement.Height
         };
+
+        if (radiusX != null)
+            rectangle.RadiusX = radiusX.Value;
+
+        if (radiusY != null)
+            rectangle.RadiusY = radiusY.Value;
 
         double left = SvgElement.X;
         double top = SvgElement.Y;
