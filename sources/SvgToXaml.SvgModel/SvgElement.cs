@@ -106,12 +106,12 @@ public class SvgElement
         string rawValue = GetStyleValueFromClasses("fill-opacity");
 
         if (rawValue != null)
-            return double.Parse(rawValue);
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         SvgStyleDeclaration styleDeclaration = Style?["fill-opacity"];
 
         if (styleDeclaration != null)
-            return double.Parse(styleDeclaration.Value);
+            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
 
         return FillOpacity;
     }
@@ -151,12 +151,12 @@ public class SvgElement
         string rawValue = GetStyleValueFromClasses("stroke-opacity");
 
         if (rawValue != null)
-            return double.Parse(rawValue);
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         SvgStyleDeclaration styleDeclaration = Style?["stroke-opacity"];
 
         if (styleDeclaration != null)
-            return double.Parse(styleDeclaration.Value);
+            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
 
         return StrokeOpacity;
     }
@@ -244,6 +244,16 @@ public class SvgElement
 
     public double? ComputeOpacity()
     {
+        string rawValue = GetStyleValueFromClasses("opacity");
+
+        if (rawValue != null)
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
+
+        SvgStyleDeclaration styleDeclaration = Style?["opacity"];
+
+        if (styleDeclaration != null)
+            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
         return Opacity;
     }
 

@@ -72,8 +72,16 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
                 XamlElement.Fill = ConvertLinearGradient(svgLinearGradient);
-            else if (referencedElement is SvgRadialGradient svgRadialGradient)
+            else if (referencedElement is SvgRadialGradient svgRadialGradient) 
                 XamlElement.Fill = ConvertRadialGradient(svgRadialGradient);
+
+            if (XamlElement.Fill != null)
+            {
+                double? fillOpacity = SvgElement.ComputeFillOpacity();
+
+                if(fillOpacity != null)
+                    XamlElement.Fill.Opacity = fillOpacity.Value;
+            }
         }
     }
 
@@ -186,6 +194,14 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
                 XamlElement.Stroke = ConvertLinearGradient(svgLinearGradient);
             else if (referencedElement is SvgRadialGradient svgRadialGradient)
                 XamlElement.Stroke = ConvertRadialGradient(svgRadialGradient);
+
+            if (XamlElement.Fill != null)
+            {
+                double? strokeOpacity = SvgElement.ComputeStrokeOpacity();
+
+                if (strokeOpacity != null)
+                    XamlElement.Stroke.Opacity = strokeOpacity.Value;
+            }
         }
     }
 
