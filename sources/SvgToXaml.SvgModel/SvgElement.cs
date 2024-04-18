@@ -33,10 +33,14 @@ public class SvgElement
     // Inherited Attributes
 
     public SvgPaint Fill { get; set; }
+    
+    public double? FillOpacity { get; set; }
 
     public FillRule? FillRule { get; set; }
 
     public SvgPaint Stroke { get; set; }
+    
+    public double? StrokeOpacity { get; set; }
 
     public SvgLengthPercentage? StrokeWidth { get; set; }
 
@@ -97,6 +101,21 @@ public class SvgElement
         return Fill;
     }
 
+    public double? ComputeFillOpacity()
+    {
+        string rawValue = GetStyleValueFromClasses("fill-opacity");
+
+        if (rawValue != null)
+            return double.Parse(rawValue);
+
+        SvgStyleDeclaration styleDeclaration = Style?["fill-opacity"];
+
+        if (styleDeclaration != null)
+            return double.Parse(styleDeclaration.Value);
+
+        return FillOpacity;
+    }
+
     public FillRule? ComputeFillRule()
     {
         string rawValue = GetStyleValueFromClasses("fill-rule");
@@ -125,6 +144,21 @@ public class SvgElement
             return styleDeclaration.Value;
 
         return Stroke;
+    }
+
+    public double? ComputeStrokeOpacity()
+    {
+        string rawValue = GetStyleValueFromClasses("stroke-opacity");
+
+        if (rawValue != null)
+            return double.Parse(rawValue);
+
+        SvgStyleDeclaration styleDeclaration = Style?["stroke-opacity"];
+
+        if (styleDeclaration != null)
+            return double.Parse(styleDeclaration.Value);
+
+        return StrokeOpacity;
     }
 
     public SvgLengthPercentage? ComputeStrokeWidth()

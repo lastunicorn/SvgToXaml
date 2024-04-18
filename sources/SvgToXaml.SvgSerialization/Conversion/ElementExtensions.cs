@@ -33,11 +33,19 @@ internal static class ElementExtensions
 
         svgElement.Fill = xmlElement.Fill;
 
+        svgElement.FillOpacity = xmlElement.FillOpacitySpecified
+            ? xmlElement.FillOpacity
+            : null;
+
         svgElement.FillRule = xmlElement.FillRuleSpecified
             ? Convert(xmlElement.FillRule)
             : null;
 
         svgElement.Stroke = xmlElement.Stroke;
+
+        svgElement.StrokeOpacity = xmlElement.StrokeOpacitySpecified
+            ? xmlElement.StrokeOpacity
+            : null;
 
         svgElement.StrokeWidth = xmlElement.StrokeWidth;
 

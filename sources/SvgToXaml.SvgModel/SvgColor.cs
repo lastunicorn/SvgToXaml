@@ -20,7 +20,8 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public record SvgColor
 {
-    private static readonly Regex Regex = new(@"^\s*#([\dabcdef]{3}|[\dabcdef]{6}|[\dabcdef]{8})\s*$", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+    private static readonly Regex HashtagRegex = new(@"^\s*#([\dabcdef]{3}|[\dabcdef]{6}|[\dabcdef]{8})\s*$", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+    private static readonly Regex RgbRegex = new(@"^\s*rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$", RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
     public bool IsEmpty { get; }
 
@@ -70,26 +71,59 @@ public record SvgColor
             return true;
         }
 
-        Match match = Regex.Match(text);
+        Match hashTagMatch = HashtagRegex.Match(text);
 
-        if (!match.Success)
+        if (hashTagMatch.Success)
         {
-            value = null;
-            return false;
+            string rawValue = hashTagMatch.Groups[1].Value;
+
+            SvgColor svgColor = ParseHashtagRgb(rawValue);
+
+            if (svgColor != null)
+            {
+                value = svgColor;
+                return true;
+            }
         }
 
-        string rawValue = match.Groups[1].Value;
+        Match rgbMatch = RgbRegex.Match(text);
 
-        SvgColor svgColor = ParseRgb(rawValue);
-
-        if (svgColor == null)
+        if (rgbMatch.Success)
         {
-            value = null;
-            return false;
+            string redRaw = rgbMatch.Groups[1].Value;
+            string greenRaw = rgbMatch.Groups[2].Value;
+            string blueRaw = rgbMatch.Groups[3].Value;
+
+            bool success = byte.TryParse(redRaw, out byte red);
+
+            if (!success)
+            {
+                value = null;
+                return true;
+            }
+
+            success  = byte.TryParse(greenRaw, out byte green);
+
+            if (!success)
+            {
+                value = null;
+                return true;
+            }
+
+            success = byte.TryParse(blueRaw, out byte blue);
+
+            if (!success)
+            {
+                value = null;
+                return true;
+            }
+
+            value = new SvgColor(red, green, blue);
+            return true;
         }
 
-        value = svgColor;
-        return true;
+        value = null;
+        return false;
     }
 
     public static SvgColor Parse(string text)
@@ -102,22 +136,37 @@ public record SvgColor
         if (namedColor != null)
             return namedColor;
 
-        Match match = Regex.Match(text);
+        Match hashtagMatch = HashtagRegex.Match(text);
 
-        if (!match.Success)
-            throw new NotAColorException(text);
+        if (hashtagMatch.Success)
+        {
+            string rawValue = hashtagMatch.Groups[1].Value;
 
-        string rawValue = match.Groups[1].Value;
+            SvgColor svgColor = ParseHashtagRgb(rawValue);
 
-        SvgColor svgColor = ParseRgb(rawValue);
+            if (svgColor != null)
+                return svgColor;
+        }
 
-        if (svgColor == null)
-            throw new NotAColorException(text);
+        Match rgbMatch = RgbRegex.Match(text);
 
-        return svgColor;
+        if (rgbMatch.Success)
+        {
+            string redRaw = rgbMatch.Groups[1].Value;
+            string greenRaw = rgbMatch.Groups[2].Value;
+            string blueRaw = rgbMatch.Groups[3].Value;
+
+            byte red = byte.Parse(redRaw);
+            byte green = byte.Parse(greenRaw);
+            byte blue = byte.Parse(blueRaw);
+
+            return new SvgColor(red, green, blue);
+        }
+        
+        throw new NotAColorException(text);
     }
 
-    private static SvgColor ParseRgb(string rawValue)
+    private static SvgColor ParseHashtagRgb(string rawValue)
     {
         switch (rawValue.Length)
         {

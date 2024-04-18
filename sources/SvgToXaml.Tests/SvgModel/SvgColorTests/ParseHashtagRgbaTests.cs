@@ -18,7 +18,7 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Tests.SvgModel.SvgColorTests;
 
-public class ParseRgbaTests
+public class ParseHashtagRgbaTests
 {
     private readonly SvgColor svgColor = SvgColor.Parse("#32b06f35");
 

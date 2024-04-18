@@ -18,26 +18,26 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Tests.SvgModel.SvgColorTests;
 
-public class ParseRgbTests
+public class ParseHashtagRgbTests
 {
-    private readonly SvgColor svgColor = SvgColor.Parse("rgb(100,40,27)");
+    private readonly SvgColor svgColor = SvgColor.Parse("#32b06f");
 
     [Fact]
     public void WhenParsingRgbText_ThenRedValueIsTheProvidedOne()
     {
-        svgColor.Red.Should().Be(100);
+        svgColor.Red.Should().Be(0x32);
     }
 
     [Fact]
     public void WhenParsingRgbText_ThenGreenValueIsTheProvidedOne()
     {
-        svgColor.Green.Should().Be(40);
+        svgColor.Green.Should().Be(0xb0);
     }
 
     [Fact]
     public void WhenParsingRgbText_ThenBlueValueIsTheProvidedOne()
     {
-        svgColor.Blue.Should().Be(27);
+        svgColor.Blue.Should().Be(0x6f);
     }
 
     [Fact]
@@ -49,52 +49,6 @@ public class ParseRgbTests
     [Fact]
     public void WhenParsingRgbText_ThenIsEmptyIsFalse()
     {
-        svgColor.IsEmpty.Should().BeFalse();
-    }
-}
-
-public class TryParseRgbTests
-{
-    private readonly SvgColor svgColor;
-    private readonly bool parseSuccess;
-
-    public TryParseRgbTests()
-    {
-        parseSuccess = SvgColor.TryParse("rgb(100,40,27)", out svgColor);
-    }
-
-    [Fact]
-    public void WhenParsingRgbText_ThenRedValueIsTheProvidedOne()
-    {
-        parseSuccess.Should().BeTrue();
-        svgColor.Red.Should().Be(100);
-    }
-
-    [Fact]
-    public void WhenParsingRgbText_ThenGreenValueIsTheProvidedOne()
-    {
-        parseSuccess.Should().BeTrue();
-        svgColor.Green.Should().Be(40);
-    }
-
-    [Fact]
-    public void WhenParsingRgbText_ThenBlueValueIsTheProvidedOne()
-    {
-        parseSuccess.Should().BeTrue();
-        svgColor.Blue.Should().Be(27);
-    }
-
-    [Fact]
-    public void WhenParsingRgbText_ThenAlphaValueIsNull()
-    {
-        parseSuccess.Should().BeTrue();
-        svgColor.Alpha.Should().BeNull();
-    }
-
-    [Fact]
-    public void WhenParsingRgbText_ThenIsEmptyIsFalse()
-    {
-        parseSuccess.Should().BeTrue();
         svgColor.IsEmpty.Should().BeFalse();
     }
 }

@@ -27,4 +27,17 @@ internal static class SvgColorExtensions
             ? Color.FromRgb(svgColor.Red, svgColor.Green, svgColor.Blue)
             : Color.FromArgb(svgColor.Alpha.Value, svgColor.Red, svgColor.Green, svgColor.Blue);
     }
+
+    public static Color ToColor(this SvgColor svgColor, double opacity)
+    {
+        if (opacity < 0)
+            opacity = 0;
+
+        if (opacity > 1)
+            opacity = 1;
+
+        byte alpha = (byte)(opacity * 255);
+
+        return Color.FromArgb(alpha, svgColor.Red, svgColor.Green, svgColor.Blue);
+    }
 }

@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
@@ -59,7 +58,12 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         }
         else if (fill.Color is { IsEmpty: false })
         {
-            Color color = fill.Color.ToColor();
+            double? fillOpacity = SvgElement.ComputeFillOpacity();
+
+            Color color = fillOpacity == null
+                ? fill.Color.ToColor()
+                : fill.Color.ToColor(fillOpacity.Value);
+
             XamlElement.Fill = new SolidColorBrush(color);
         }
         else if (fill.Url is { IsEmpty: false })
@@ -166,7 +170,12 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         }
         else if (stroke.Color is { IsEmpty: false })
         {
-            Color color = stroke.Color.ToColor();
+            double? strokeOpacity = SvgElement.ComputeStrokeOpacity();
+
+            Color color = strokeOpacity == null
+                ? stroke.Color.ToColor()
+                : stroke.Color.ToColor(strokeOpacity.Value);
+
             XamlElement.Stroke = new SolidColorBrush(color);
         }
         else if (stroke.Url is { IsEmpty: false })
@@ -175,6 +184,8 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
                 XamlElement.Stroke = ConvertLinearGradient(svgLinearGradient);
+            else if (referencedElement is SvgRadialGradient svgRadialGradient)
+                XamlElement.Stroke = ConvertRadialGradient(svgRadialGradient);
         }
     }
 
