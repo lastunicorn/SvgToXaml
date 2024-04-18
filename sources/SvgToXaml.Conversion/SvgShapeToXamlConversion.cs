@@ -119,6 +119,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         double r = svgRadialGradient.ComputeRadius() ?? SvgLength.Zero;
 
         radialGradientBrush.Center = new Point(cx, cy);
+        radialGradientBrush.GradientOrigin = new Point(cx, cy);
         radialGradientBrush.RadiusX = r;
         radialGradientBrush.RadiusY = r;
 

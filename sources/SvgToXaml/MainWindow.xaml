@@ -91,26 +91,46 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 Background="Transparent"
                 HorizontalAlignment="Stretch" />
 
-            <Border
-                Grid.Column="2"
-                BorderBrush="#eee"
-                BorderThickness="2"
-                CornerRadius="2">
+            <DockPanel
+                Grid.Column="2">
 
-                <TextBox
-                    Background="#eee"
-                    BorderThickness="0"
-                    Padding="8"
-                    VerticalAlignment="Stretch"
-                    HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollBarVisibility="Auto"
-                    AcceptsReturn="True"
-                    AcceptsTab="True"
-                    Text="{Binding XamlText}"
-                    FontFamily="Consolas"
-                    FontSize="12"
-                    IsReadOnly="True"/>
-            </Border>
+                <StackPanel
+                    DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    FlowDirection="RightToLeft"
+                    Margin="0 0 0 8">
+
+                    <Button
+                        Padding="12 4"
+                        Content="Copy"
+                        Command="{Binding CopyToClipboardCommand}"
+                        CommandParameter="{Binding Path=Text, ElementName=TextBoxResult, Mode=OneWay}"/>
+
+                </StackPanel>
+
+                <Border
+                    BorderBrush="#eee"
+                    BorderThickness="2"
+                    CornerRadius="2">
+
+                    <TextBox
+                        x:Name="TextBoxResult"
+                        Background="#eee"
+                        BorderThickness="0"
+                        Padding="8"
+                        VerticalAlignment="Stretch"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto"
+                        AcceptsReturn="True"
+                        AcceptsTab="True"
+                        Text="{Binding XamlText}"
+                        FontFamily="Consolas"
+                        FontSize="12"
+                        IsReadOnly="True" />
+                </Border>
+
+            </DockPanel>
+
         </Grid>
 
     </Border>

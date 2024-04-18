@@ -68,8 +68,10 @@ public class MainViewModel : ViewModelBase
     }
 
     public OpenFileCommand OpenFileCommand { get; }
+    
+    public CopyToClipboardCommand CopyToClipboardCommand { get; }
 
-    public MainViewModel(IRequestBus requestBus, EventBus eventBus, OpenFileCommand openFileCommand)
+    public MainViewModel(IRequestBus requestBus, EventBus eventBus, OpenFileCommand openFileCommand, CopyToClipboardCommand copyToClipboardCommand)
     {
         if (eventBus == null) throw new ArgumentNullException(nameof(eventBus));
         this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
@@ -81,6 +83,7 @@ public class MainViewModel : ViewModelBase
         eventBus.Subscribe<XamlTextChangedEvent>(XamlTextChangedEventHandler);
 
         dispatcher = Dispatcher.CurrentDispatcher;
+        CopyToClipboardCommand = copyToClipboardCommand;
     }
 
     private Task SvgTextChangingEventHandler(SvgTextChangingEvent ev, CancellationToken cancellationToken)

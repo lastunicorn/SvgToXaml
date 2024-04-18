@@ -61,6 +61,7 @@ public partial class App : System.Windows.Application
         containerBuilder.RegisterType<FileSystem>().As<IFileSystem>();
 
         containerBuilder.RegisterType<OpenFileCommand>();
+        containerBuilder.RegisterType<CopyToClipboardCommand>();
 
         containerBuilder.RegisterType<MainViewModel>();
         containerBuilder.RegisterType<MainWindow>();
