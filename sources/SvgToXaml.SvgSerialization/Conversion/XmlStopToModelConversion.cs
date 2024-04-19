@@ -19,13 +19,28 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal static class TextExtensions
+internal class XmlStopToModelConversion : XmlElementToModelConversion<XmlStop, SvgStop>
 {
-    public static SvgText ToSvgModel(this XmlText xmlText)
-    {
-        if (xmlText == null)
-            return null;
+    protected override string ElementName => "stop";
 
-        return new SvgText();
+    public XmlStopToModelConversion(XmlStop xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
+    {
+    }
+
+    protected override SvgStop CreateSvgElement()
+    {
+        return new SvgStop();
+    }
+
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        SvgElement.Offset = XmlElement.Offset;
+        SvgElement.StopColor = XmlElement.StopColor;
+
+        if (XmlElement.StopOpacitySpecified)
+            SvgElement.StopOpacity = XmlElement.StopOpacity;
     }
 }

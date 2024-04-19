@@ -19,24 +19,30 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal static class PolylineExtensions
+internal class XmlPolygonToModelConversion : XmlElementToModelConversion<XmlPolygon, SvgPolygon>
 {
-    public static SvgPolyline ToSvgModel(this XmlPolyline xmlPolyline)
+    protected override string ElementName => "polygon";
+
+    public XmlPolygonToModelConversion(XmlPolygon xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
     {
-        if (xmlPolyline == null)
-            return null;
+    }
 
-        SvgPolyline svgPolygon = new();
-        svgPolygon.PopulateFromElement(xmlPolyline);
+    protected override SvgPolygon CreateSvgElement()
+    {
+        return new SvgPolygon();
+    }
 
-        if (xmlPolyline.Points != null)
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        if (XmlElement.Points != null)
         {
-            IEnumerable<SvgPoint> points = SvgPoint.ParseMany(xmlPolyline.Points);
+            IEnumerable<SvgPoint> points = SvgPoint.ParseMany(XmlElement.Points);
 
             foreach (SvgPoint point in points)
-                svgPolygon.Points.Add(point);
+                SvgElement.Points.Add(point);
         }
-
-        return svgPolygon;
     }
 }

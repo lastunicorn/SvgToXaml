@@ -19,20 +19,24 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal static class UseExtensions
+internal class XmlPathToModelConversion : XmlElementToModelConversion<XmlPath, SvgPath>
 {
-    public static SvgUse ToSvgModel(this XmlUse xmlUse)
-    {
-        if (xmlUse == null)
-            return null;
+    protected override string ElementName => "path";
 
-        SvgUse svgUse = new();
-        svgUse.PopulateFromElement(xmlUse);
-        
-        svgUse.Href = xmlUse.Href ?? xmlUse.HrefLink;
-        svgUse.X = xmlUse.X;
-        svgUse.Y = xmlUse.Y;
-        
-        return svgUse;
+    public XmlPathToModelConversion(XmlPath xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
+    {
+    }
+
+    protected override SvgPath CreateSvgElement()
+    {
+        return new SvgPath();
+    }
+
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        SvgElement.Data = XmlElement.D;
     }
 }

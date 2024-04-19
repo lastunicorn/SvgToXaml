@@ -19,37 +19,48 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, Svg>
+internal class XmlCircleToModelConversion : XmlElementToModelConversion<XmlCircle, SvgCircle>
 {
-    protected override string ElementName => "svg";
+    protected override string ElementName => "circle";
 
-    public XmlSvgToModelConversion(XmlSvg xmlSvg, DeserializationContext deserializationContext)
-        : base(xmlSvg, deserializationContext)
+    public XmlCircleToModelConversion(XmlCircle xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
     {
     }
 
-    protected override Svg CreateSvgElement()
+    protected override SvgCircle CreateSvgElement()
     {
-        return new Svg();
+        return new SvgCircle();
     }
 
     protected override void ConvertProperties()
     {
-        if (XmlElement == null)
-            return;
-
         base.ConvertProperties();
 
-        if (XmlElement.Version != null)
-            SvgElement.Version = XmlElement.Version;
+        ConvertRadius();
+        ConvertPosition();
+    }
 
-        if (XmlElement.Width != null)
-            SvgElement.Width = XmlElement.Width;
+    private void ConvertRadius()
+    {
+        if (XmlElement.R < 0)
+        {
+            SvgElement.Radius = 0;
 
-        if (XmlElement.Height != null)
-            SvgElement.Height = XmlElement.Height;
+            DeserializationContext.Path.SetAttributeOnLast("r");
 
-        if (XmlElement.ViewBox != null)
-            SvgElement.ViewBox = XmlElement.ViewBox;
+            NegativeValueIssue issue = new(DeserializationContext.Path.ToString());
+            DeserializationContext.Warnings.Add(issue);
+        }
+        else
+        {
+            SvgElement.Radius = XmlElement.R;
+        }
+    }
+
+    private void ConvertPosition()
+    {
+        SvgElement.CenterX = XmlElement.Cx;
+        SvgElement.CenterY = XmlElement.Cy;
     }
 }

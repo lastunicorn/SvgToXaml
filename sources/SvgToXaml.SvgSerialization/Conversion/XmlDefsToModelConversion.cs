@@ -19,22 +19,17 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal static class StopExtensions
+internal class XmlDefsToModelConversion : XmlContainerToModelConversion<XmlDefs, SvgDefinitions>
 {
-    public static SvgStop ToSvgModel(this XmlStop xmlStop)
+    protected override string ElementName => "defs";
+
+    public XmlDefsToModelConversion(XmlDefs xmlContainer, DeserializationContext deserializationContext)
+        : base(xmlContainer, deserializationContext)
     {
-        if (xmlStop == null)
-            return null;
+    }
 
-        SvgStop svgStop = new();
-        svgStop.PopulateFromElement(xmlStop);
-
-        svgStop.Offset = xmlStop.Offset;
-        svgStop.StopColor = xmlStop.StopColor;
-
-        if (xmlStop.StopOpacitySpecified)
-            svgStop.StopOpacity = xmlStop.StopOpacity;
-
-        return svgStop;
+    protected override SvgDefinitions CreateSvgElement()
+    {
+        return new SvgDefinitions();
     }
 }

@@ -19,21 +19,17 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal static class LineExtensions
+internal class XmlGroupToModelConversion : XmlContainerToModelConversion<XmlG, SvgGroup>
 {
-    public static SvgLine ToSvgModel(this XmlLine xmlLine)
+    protected override string ElementName => "g";
+
+    public XmlGroupToModelConversion(XmlG xmlContainer, DeserializationContext deserializationContext)
+        : base(xmlContainer, deserializationContext)
     {
-        if (xmlLine == null)
-            return null;
+    }
 
-        SvgLine svgLine = new();
-        svgLine.PopulateFromElement(xmlLine);
-
-        svgLine.X1 = xmlLine.X1;
-        svgLine.Y1 = xmlLine.Y1;
-        svgLine.X2 = xmlLine.X2;
-        svgLine.Y2 = xmlLine.Y2;
-
-        return svgLine;
+    protected override SvgGroup CreateSvgElement()
+    {
+        return new SvgGroup();
     }
 }

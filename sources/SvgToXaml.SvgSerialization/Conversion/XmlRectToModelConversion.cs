@@ -19,35 +19,34 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal abstract class ToModelConversionBase<TXml, TSvg>
-    where TXml : XmlElement
-    where TSvg : SvgElement
+internal class XmlRectToModelConversion : XmlElementToModelConversion<XmlRect, SvgRectangle>
 {
-    protected DeserializationContext DeserializationContext { get; }
+    protected override string ElementName => "rect";
 
-    protected abstract string ElementName { get; }
-
-    public TXml XmlElement { get; }
-    
-    protected ToModelConversionBase(TXml xmlElement, DeserializationContext deserializationContext)
+    public XmlRectToModelConversion(XmlRect xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
     {
-        XmlElement = xmlElement;
-        DeserializationContext = deserializationContext ?? throw new ArgumentNullException(nameof(deserializationContext));
     }
 
-    public TSvg Execute()
+    protected override SvgRectangle CreateSvgElement()
     {
-        DeserializationContext.Path.Add(ElementName);
-
-        try
-        {
-            return DoExecute();
-        }
-        finally
-        {
-            DeserializationContext.Path.RemoveLast();
-        }
+        return new SvgRectangle();
     }
 
-    protected abstract TSvg DoExecute();
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        SvgElement.Width = XmlElement.Width;
+        SvgElement.Height = XmlElement.Height;
+
+        SvgElement.X = XmlElement.X;
+        SvgElement.Y = XmlElement.Y;
+
+        if (XmlElement.RxSpecified)
+            SvgElement.Rx = XmlElement.Rx;
+
+        if (XmlElement.RySpecified)
+            SvgElement.Ry = XmlElement.Ry;
+    }
 }

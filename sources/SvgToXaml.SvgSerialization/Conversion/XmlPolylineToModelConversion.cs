@@ -19,27 +19,30 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal static class RectExtensions
+internal class XmlPolylineToModelConversion : XmlElementToModelConversion<XmlPolyline, SvgPolyline>
 {
-    public static SvgRectangle ToSvgModel(this XmlRect xmlRect)
+    protected override string ElementName => "polyline";
+
+    public XmlPolylineToModelConversion(XmlPolyline xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
     {
-        if (xmlRect == null)
-            return null;
+    }
 
-        SvgRectangle svgRectangle = new();
-        svgRectangle.PopulateFromElement(xmlRect);
+    protected override SvgPolyline CreateSvgElement()
+    {
+        return new SvgPolyline();
+    }
 
-        svgRectangle.Width = xmlRect.Width;
-        svgRectangle.Height = xmlRect.Height;
-        svgRectangle.X = xmlRect.X;
-        svgRectangle.Y = xmlRect.Y;
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
 
-        if (xmlRect.RxSpecified)
-            svgRectangle.Rx = xmlRect.Rx;
+        if (XmlElement.Points != null)
+        {
+            IEnumerable<SvgPoint> points = SvgPoint.ParseMany(XmlElement.Points);
 
-        if (xmlRect.RySpecified)
-            svgRectangle.Ry = xmlRect.Ry;
-
-        return svgRectangle;
+            foreach (SvgPoint point in points)
+                SvgElement.Points.Add(point);
+        }
     }
 }
