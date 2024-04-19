@@ -236,6 +236,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+        <None Remove="SvgSerialization\StyleTests\TitleTests.Resources\style-title-missing.svg" />
+        <None Remove="SvgSerialization\StyleTests\TitleTests.Resources\style-title.svg" />
         <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
         <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
         <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
@@ -554,6 +556,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+        <EmbeddedResource Include="SvgSerialization\StyleTests\TitleTests.Resources\style-title-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\StyleTests\TitleTests.Resources\style-title.svg" />
         <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
         <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
         <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
