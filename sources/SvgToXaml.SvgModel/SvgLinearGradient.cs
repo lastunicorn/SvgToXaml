@@ -34,6 +34,8 @@ public class SvgLinearGradient : SvgElement
 
     public HypertextReference? Href { get; set; }
 
+    public SvgSpreadMethod? SpreadMethod { get; set; }
+
     public SvgLength? ComputeX1()
     {
         if (X1 != null)

@@ -47,6 +47,8 @@ public class SvgRadialGradient : SvgElement
 
     public HypertextReference? Href { get; set; }
 
+    public SvgSpreadMethod? SpreadMethod { get; set; }
+
     public SvgLength? ComputeCenterX()
     {
         if (CenterX != null)

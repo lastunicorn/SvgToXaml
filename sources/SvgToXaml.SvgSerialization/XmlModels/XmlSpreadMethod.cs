@@ -18,33 +18,14 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-public class XmlRadialGradient : XmlElement
+public enum XmlSpreadMethod
 {
-    [XmlAttribute("cx")]
-    public string Cx { get; set; }
+    [XmlEnum(Name = "pad")]
+    Pad = 0,
 
-    [XmlAttribute("cy")]
-    public string Cy { get; set; }
+    [XmlEnum(Name = "reflect")]
+    Reflect = 1,
 
-    [XmlAttribute("r")]
-    public string R { get; set; }
-
-    [XmlAttribute("gradientUnits")]
-    public XmlGradientUnits GradientUnits { get; set; }
-
-    public bool GradientUnitsSpecified { get; set; }
-
-    [XmlElement("stop")]
-    public List<XmlStop> Stops { get; set; }
-
-    [XmlAttribute("gradientTransform")]
-    public string GradientTransform { get; set; }
-
-    [XmlAttribute("href", Namespace = Namespaces.XLink)]
-    public string Href { get; set; }
-
-    [XmlAttribute("spreadMethod")]
-    public XmlSpreadMethod SpreadMethod { get; set; }
-
-    public bool SpreadMethodSpecified { get; set; }
+    [XmlEnum(Name = "repeat")]
+    Repeat = 2
 }

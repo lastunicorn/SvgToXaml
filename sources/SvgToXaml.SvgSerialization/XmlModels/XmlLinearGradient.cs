@@ -45,4 +45,9 @@ public class XmlLinearGradient : XmlElement
 
     [XmlAttribute("href", Namespace = Namespaces.XLink)]
     public string Href { get; set; }
+
+    [XmlAttribute("spreadMethod")]
+    public XmlSpreadMethod SpreadMethod { get; set; }
+
+    public bool SpreadMethodSpecified { get; set; }
 }

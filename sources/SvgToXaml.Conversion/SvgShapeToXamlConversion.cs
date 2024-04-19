@@ -72,14 +72,14 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
                 XamlElement.Fill = ConvertLinearGradient(svgLinearGradient);
-            else if (referencedElement is SvgRadialGradient svgRadialGradient) 
+            else if (referencedElement is SvgRadialGradient svgRadialGradient)
                 XamlElement.Fill = ConvertRadialGradient(svgRadialGradient);
 
             if (XamlElement.Fill != null)
             {
                 double? fillOpacity = SvgElement.ComputeFillOpacity();
 
-                if(fillOpacity != null)
+                if (fillOpacity != null)
                     XamlElement.Fill.Opacity = fillOpacity.Value;
             }
         }
@@ -115,6 +115,17 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
         if (svgLinearGradient.GradientTransforms.Count > 0)
             linearGradientBrush.Transform = svgLinearGradient.GradientTransforms.ToXaml(linearGradientBrush.Transform);
 
+        if (svgLinearGradient.SpreadMethod != null)
+        {
+            linearGradientBrush.SpreadMethod = svgLinearGradient.SpreadMethod switch
+            {
+                SvgSpreadMethod.Pad => GradientSpreadMethod.Pad,
+                SvgSpreadMethod.Reflect => GradientSpreadMethod.Reflect,
+                SvgSpreadMethod.Repeat => GradientSpreadMethod.Repeat,
+                _ => throw new Exception("Unknown spread method value.")
+            };
+        }
+
         return linearGradientBrush;
     }
 
@@ -147,6 +158,17 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : SvgElementToXaml
 
         if (svgRadialGradient.GradientTransforms.Count > 0)
             radialGradientBrush.Transform = svgRadialGradient.GradientTransforms.ToXaml(radialGradientBrush.Transform);
+
+        if (svgRadialGradient.SpreadMethod != null)
+        {
+            radialGradientBrush.SpreadMethod = svgRadialGradient.SpreadMethod switch
+            {
+                SvgSpreadMethod.Pad => GradientSpreadMethod.Pad,
+                SvgSpreadMethod.Reflect => GradientSpreadMethod.Reflect,
+                SvgSpreadMethod.Repeat => GradientSpreadMethod.Repeat,
+                _ => throw new Exception("Unknown spread method value.")
+            };
+        }
 
         return radialGradientBrush;
     }

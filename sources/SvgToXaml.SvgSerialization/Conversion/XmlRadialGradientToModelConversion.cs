@@ -43,6 +43,7 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
         ConvertStops();
         ConvertGradientTransform();
         ConvertHref();
+        ConvertSpreadMethod();
     }
 
     private void ConvertRadius()
@@ -112,5 +113,19 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
     {
         if (XmlElement.Href != null)
             SvgElement.Href = XmlElement.Href;
+    }
+
+    private void ConvertSpreadMethod()
+    {
+        if (XmlElement.SpreadMethodSpecified)
+        {
+            SvgElement.SpreadMethod = XmlElement.SpreadMethod switch
+            {
+                XmlSpreadMethod.Pad => SvgSpreadMethod.Pad,
+                XmlSpreadMethod.Reflect => SvgSpreadMethod.Reflect,
+                XmlSpreadMethod.Repeat => SvgSpreadMethod.Repeat,
+                _ => throw new Exception("Invalid spread method value.")
+            };
+        }
     }
 }
