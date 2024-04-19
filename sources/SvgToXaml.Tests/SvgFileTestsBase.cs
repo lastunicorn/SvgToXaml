@@ -33,11 +33,12 @@ public class SvgFileTestsBase
     protected void ConvertSvgFile(string resourceFileName, Action<Canvas> callBack = null)
     {
         Type callerType = GetCallerType();
-        DeserializationResult result = ParseSvgFileInternal(resourceFileName, callerType);
+        DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);
 
         StaEnvironment.Run(ExecutionErrorBehavior.ThrowException, () =>
         {
-            SvgConversion svgConversion = new(result.Svg);
+            ConversionContext conversionContext = new();
+            SvgConversion svgConversion = new(deserializationResult.Svg, conversionContext);
             Canvas canvas = svgConversion.Execute();
 
             callBack?.Invoke(canvas);

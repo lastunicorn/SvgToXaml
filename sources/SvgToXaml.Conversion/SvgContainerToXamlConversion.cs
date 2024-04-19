@@ -23,15 +23,17 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
 {
+    private readonly ConversionContext conversionContext;
     private readonly SvgElement referrer;
 
     public SvgContainer SvgElement { get; }
 
     public Canvas XamlElement { get; private set; }
 
-    protected SvgContainerToXamlConversion(SvgContainer svgContainer, SvgElement referrer = null)
+    protected SvgContainerToXamlConversion(SvgContainer svgContainer, ConversionContext conversionContext, SvgElement referrer = null)
     {
         SvgElement = svgContainer ?? throw new ArgumentNullException(nameof(svgContainer));
+        this.conversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
         this.referrer = referrer;
     }
 
@@ -39,8 +41,36 @@ public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
     {
         try
         {
+            string[] knownSelectors =
+            {
+                "fill",
+                "fill-opacity",
+                "fill-rule",
+                "stroke",
+                "stroke-opacity",
+                "stroke-width",
+                "stroke-linecap",
+                "stroke-linejoin",
+                "stroke-dashoffset",
+                "stroke-miterlimit",
+                "opacity"
+            };
+
+            if (SvgElement.Style != null)
+            {
+                foreach (SvgStyleDeclaration svgStyleDeclaration in SvgElement.Style)
+                {
+                    bool isKnown = knownSelectors.Contains(svgStyleDeclaration.Name);
+                    if (!isKnown)
+                    {
+                        ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in container: {svgStyleDeclaration.Name}");
+                        conversionContext.Errors.Add(conversionIssue);
+                    }
+                }
+            }
+
             XamlElement = CreateXamlElement();
-            
+
             if (XamlElement is FrameworkElement frameworkElement)
                 SetLanguage(frameworkElement);
 
@@ -121,10 +151,10 @@ public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
                 return new SvgPolylineToXamlConversion(svgPolyline, referrer);
 
             case SvgGroup svgGChild:
-                return new SvgGroupToXamlConversion(svgGChild, referrer);
+                return new SvgGroupToXamlConversion(svgGChild, conversionContext, referrer);
 
             case SvgUse svgUse:
-                return new SvgUseToXamlConversion(svgUse);
+                return new SvgUseToXamlConversion(svgUse, conversionContext);
 
             case SvgText svgText:
                 return new SvgTextToXamlConversion(svgText, referrer);

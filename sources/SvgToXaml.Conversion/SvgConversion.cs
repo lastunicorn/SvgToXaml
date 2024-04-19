@@ -24,8 +24,8 @@ public class SvgConversion : SvgContainerToXamlConversion
 {
     private readonly Svg svg;
 
-    public SvgConversion(Svg svg)
-        : base(svg)
+    public SvgConversion(Svg svg, ConversionContext conversionContext)
+        : base(svg, conversionContext)
     {
         this.svg = svg ?? throw new ArgumentNullException(nameof(svg));
     }

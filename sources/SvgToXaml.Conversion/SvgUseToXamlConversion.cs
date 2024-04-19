@@ -23,11 +23,13 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 internal class SvgUseToXamlConversion : IConversion<UIElement>
 {
     private readonly SvgUse svgUse;
+    private readonly ConversionContext conversionContext;
     private readonly SvgElement referrer;
 
-    public SvgUseToXamlConversion(SvgUse svgUse, SvgElement referrer = null)
+    public SvgUseToXamlConversion(SvgUse svgUse, ConversionContext conversionContext, SvgElement referrer = null)
     {
         this.svgUse = svgUse ?? throw new ArgumentNullException(nameof(svgUse));
+        this.conversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
         this.referrer = referrer;
     }
 
@@ -82,13 +84,13 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
                 return new SvgPolygonToXamlConversion(svgPolygon, svgUse);
 
             case SvgGroup svgGChild:
-                return new SvgGroupToXamlConversion(svgGChild, svgUse);
+                return new SvgGroupToXamlConversion(svgGChild, conversionContext, svgUse);
 
             case SvgText svgText:
                 return new SvgTextToXamlConversion(svgText, svgUse);
 
             case SvgUse childSvgUse:
-                return new SvgUseToXamlConversion(childSvgUse, svgUse);
+                return new SvgUseToXamlConversion(childSvgUse,conversionContext, svgUse);
 
             default:
                 Type inheritedElementType = svgElement.GetType();

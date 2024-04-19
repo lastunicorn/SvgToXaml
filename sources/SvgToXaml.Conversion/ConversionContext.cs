@@ -15,19 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Controls;
-using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public class SvgGroupToXamlConversion : SvgContainerToXamlConversion
+public class ConversionContext
 {
-    public SvgGroupToXamlConversion(SvgContainer svgContainer, ConversionContext conversionContext, SvgElement referrer = null)
-        : base(svgContainer, conversionContext, referrer)
-    {
-    }
+    public Canvas Canvas { get; set; }
 
-    protected override Canvas CreateXamlElement()
-    {
-        return new Canvas();
-    }
+    public List<ConversionIssue> Warnings { get; init; } = new();
+
+    public List<ConversionIssue> Errors { get; init; } = new();
 }

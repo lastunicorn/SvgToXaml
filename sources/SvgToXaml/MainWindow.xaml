@@ -120,6 +120,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             Command="{Binding CopyToClipboardCommand}"
                             CommandParameter="{Binding Path=Text, ElementName=TextBoxResult, Mode=OneWay}" />
 
+                        <CheckBox
+                            VerticalAlignment="Center"
+                            Content="Optimize"
+                            FlowDirection="LeftToRight"
+                            Margin="10 0 0 0"
+                            IsChecked="{Binding ShouldOptimize}"/>
+
                     </StackPanel>
 
                     <Border

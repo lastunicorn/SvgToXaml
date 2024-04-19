@@ -29,6 +29,7 @@ public class MainViewModel : ViewModelBase
     private string svgFilePath;
     private readonly Dispatcher dispatcher;
     private string errors;
+    private bool shouldOptimize;
 
     public string SvgFilePath
     {
@@ -76,6 +77,19 @@ public class MainViewModel : ViewModelBase
         }
     }
 
+    public bool ShouldOptimize
+    {
+        get => shouldOptimize;
+        set
+        {
+            if (value == shouldOptimize) return;
+            shouldOptimize = value;
+            OnPropertyChanged();
+
+            _ = TransformSvgToXaml();
+        }
+    }
+
     public OpenFileCommand OpenFileCommand { get; }
 
     public CopyToClipboardCommand CopyToClipboardCommand { get; }
@@ -86,13 +100,14 @@ public class MainViewModel : ViewModelBase
         this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
 
         OpenFileCommand = openFileCommand;
+        CopyToClipboardCommand = copyToClipboardCommand;
+        shouldOptimize = true;
 
         eventBus.Subscribe<SvgTextChangingEvent>(SvgTextChangingEventHandler);
         eventBus.Subscribe<SvgTextChangedEvent>(SvgTextChangedEventHandler);
         eventBus.Subscribe<XamlTextChangedEvent>(XamlTextChangedEventHandler);
 
         dispatcher = Dispatcher.CurrentDispatcher;
-        CopyToClipboardCommand = copyToClipboardCommand;
     }
 
     private Task SvgTextChangingEventHandler(SvgTextChangingEvent ev, CancellationToken cancellationToken)
@@ -132,7 +147,8 @@ public class MainViewModel : ViewModelBase
     {
         TransformRequest request = new()
         {
-            SvgText = svgText
+            SvgText = svgText,
+            ShouldOptimize = ShouldOptimize
         };
 
         await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);

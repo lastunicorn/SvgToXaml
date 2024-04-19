@@ -19,11 +19,11 @@ using System.Xml.XPath;
 
 namespace DustInTheWind.SvgToXaml.Application.Transform;
 
-internal class MatrixTransformXmlAlteration
+internal class MatrixTransformXmlAlterationStep : IXmlAlterationStep
 {
     private readonly XmlDocument xmlDocument;
 
-    public MatrixTransformXmlAlteration(XmlDocument xmlDocument)
+    public MatrixTransformXmlAlterationStep(XmlDocument xmlDocument)
     {
         this.xmlDocument = xmlDocument ?? throw new ArgumentNullException(nameof(xmlDocument));
     }

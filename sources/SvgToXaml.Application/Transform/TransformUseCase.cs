@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -39,13 +40,13 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
     public async Task Handle(TransformRequest request, CancellationToken cancellationToken)
     {
-        xamlTextChangedEvent = new();
+        xamlTextChangedEvent = new XamlTextChangedEvent();
 
-        Transform(request.SvgText);
+        Transform(request.SvgText, request.ShouldOptimize);
         await eventBus.Publish(xamlTextChangedEvent, cancellationToken);
     }
 
-    private void Transform(string svgText)
+    private void Transform(string svgText, bool shouldOptimize)
     {
         try
         {
@@ -64,17 +65,28 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
                 if (deserializationResult.Svg == null)
                     return;
 
-                Canvas canvas = ConvertToXaml(deserializationResult.Svg);
+                ConversionContext conversionContext = ConvertToXaml(deserializationResult.Svg);
+                Canvas canvas = conversionContext.Canvas;
+
+                IEnumerable<ErrorInfo> conversionErrorInfos = conversionContext.Errors
+                    .Select(x => new ErrorInfo
+                    {
+                        Message = $"{x.Path} : {x.Message}"
+                    });
+                xamlTextChangedEvent.Errors.AddRange(conversionErrorInfos);
 
                 if (canvas == null)
                     return;
+
+                if (shouldOptimize)
+                    canvas = Optimize(canvas);
 
                 string xaml = Serialize(canvas);
 
                 if (string.IsNullOrEmpty(xaml))
                     return;
 
-                xaml = Alter(xaml);
+                xaml = XmlAlter(xaml);
 
                 xamlTextChangedEvent.XamlText = xaml;
             }
@@ -95,10 +107,48 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         return serializer.Deserialize(svg);
     }
 
-    private static Canvas ConvertToXaml(Svg svg)
+    private static ConversionContext ConvertToXaml(Svg svg)
     {
-        SvgConversion svgConversion = new(svg);
-        return svgConversion.Execute();
+        ConversionContext conversionContext = new();
+
+        SvgConversion svgConversion = new(svg, conversionContext);
+        conversionContext.Canvas = svgConversion.Execute();
+
+        return conversionContext;
+    }
+
+    private Canvas Optimize(Canvas canvas)
+    {
+        List<UIElement> childrenToRemove = new();
+
+        foreach (UIElement child in canvas.Children)
+        {
+            if (child is Canvas childCanvas)
+            {
+                Optimize(childCanvas);
+
+                if (childCanvas.Children.Count == 0)
+                    childrenToRemove.Add(child);
+            }
+            else if (child is TextBlock textBlock)
+            {
+                if (string.IsNullOrEmpty(textBlock.Text))
+                    childrenToRemove.Add(child);
+            }
+        }
+
+        foreach (UIElement child in childrenToRemove)
+        {
+            canvas.Children.Remove(child);
+
+            ErrorInfo errorInfo = new()
+            {
+                Message = $"Optimization: UIElement removed - {child.GetType().Name}"
+            };
+            xamlTextChangedEvent.Errors.Add(errorInfo);
+        }
+
+        return canvas;
     }
 
     private static string Serialize(Canvas canvas)
@@ -125,35 +175,33 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         return sr.ReadToEnd();
     }
 
-    private static string Alter(string xml)
+    private static string XmlAlter(string xml)
     {
-        XmlDocument xmlDocument = new();
-        xmlDocument.LoadXml(xml);
-
-        MatrixTransformXmlAlteration xmlAlteration = new(xmlDocument);
+        XmlAlteration xmlAlteration = new(xml);
+        xmlAlteration.AddStep(typeof(MatrixTransformXmlAlterationStep));
         xmlAlteration.Execute();
-
-        return SerializeXmlDocument(xmlDocument);
+        return xmlAlteration.SerializeResult();
     }
+}
 
-    private static string SerializeXmlDocument(XmlDocument xmlDocument)
+internal class ConversionResult
+{
+    public Canvas Canvas { get; init; }
+
+    public List<ConversionIssue> Warnings { get; init; } = new();
+
+    public List<ConversionIssue> Errors { get; init; } = new();
+}
+
+internal class ConversionIssue
+{
+    public string Path { get; }
+
+    public string Message { get; }
+
+    public ConversionIssue(string path, string message)
     {
-        using MemoryStream ms = new();
-
-        XmlWriterSettings settings = new()
-        {
-            Indent = true,
-            NewLineOnAttributes = true
-        };
-
-        using XmlWriter xmlWriter = XmlWriter.Create(ms, settings);
-
-        xmlDocument.WriteTo(xmlWriter);
-        xmlWriter.Flush();
-
-        ms.Position = 0;
-
-        using StreamReader sr = new(ms);
-        return sr.ReadToEnd();
+        Path = path;
+        Message = message;
     }
 }

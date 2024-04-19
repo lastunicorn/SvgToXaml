@@ -21,4 +21,6 @@ namespace DustInTheWind.SvgToXaml.Application.Transform;
 public class TransformRequest : IRequest
 {
     public string SvgText { get; set; }
+
+    public bool ShouldOptimize { get; set; }
 }
