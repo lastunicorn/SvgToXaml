@@ -18,7 +18,7 @@ using System.Windows.Markup;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleFillTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 
 public class LanguageTests : SvgFileTestsBase
 {

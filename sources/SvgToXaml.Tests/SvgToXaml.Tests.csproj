@@ -29,10 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
-        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
-        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang.svg" />
-        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-xmllang.svg" />
+        <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
+        <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
+        <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-lang.svg" />
+        <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-xmllang.svg" />
         <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient - Copy.svg" />
         <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient.svg" />
         <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient.svg" />
@@ -351,10 +351,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
     
     <ItemGroup>
-        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-xmllang.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
+        <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-xmllang.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient - Copy.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-radialgradient.svg" />
         <EmbeddedResource Include="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-rect.svg" />
