@@ -16,6 +16,8 @@
 
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
+using FillRule = System.Windows.Media.FillRule;
+using SvgFillRule = DustInTheWind.SvgToXaml.SvgModel.FillRule;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
@@ -33,23 +35,46 @@ internal class SvgPolylineToXamlConversion : SvgShapeToXamlConversion<SvgPolylin
             Points = SvgElement.Points.ToXaml()
         };
 
-        SetFillRule(polyline, SvgElement);
-
         return polyline;
     }
 
-    private static void SetFillRule(Polyline polyline, SvgPolyline svgPolyline)
+    protected override void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
     {
-        FillRule? fillRule = svgPolyline.ComputeFillRule();
+        base.InheritPropertiesFrom(svgElements);
 
-        if (fillRule != null)
+        SetFillRule(svgElements);
+    }
+
+    private void SetFillRule(IEnumerable<SvgElement> svgElements)
+    {
+        SvgFillRule? svgFillRule = svgElements
+            .Select(x => x.ComputeFillRule())
+            .FirstOrDefault(x => x != null);
+
+        FillRule? fillRule = ComputeFillRule(svgFillRule);
+
+        if (fillRule == null)
+            return;
+
+        XamlElement.FillRule = fillRule.Value;
+    }
+
+    private static FillRule? ComputeFillRule(SvgFillRule? fillRule)
+    {
+        // Svg Default = nonzero
+        // Xaml Default = evenodd
+
+        switch (fillRule)
         {
-            polyline.FillRule = fillRule switch
-            {
-                FillRule.EvenOdd => System.Windows.Media.FillRule.EvenOdd,
-                FillRule.Nonzero => System.Windows.Media.FillRule.Nonzero,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            case null:
+            case SvgFillRule.Nonzero:
+                return FillRule.Nonzero;
+
+            case SvgFillRule.EvenOdd:
+                return null;
+
+            default:
+                throw new Exception("Invalid value for FillRule.");
         }
     }
 }

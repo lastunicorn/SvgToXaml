@@ -119,6 +119,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\RectFillTests\LiteralColorTests.Resources\rect-fill-rgb-short.svg" />
         <None Remove="Conversion\RectFillTests\UrlTests.Resources\rect-fill-url-gradient-href-gradient.svg" />
         <None Remove="Conversion\RectFillTests\UrlTests.Resources\rect-fill-url-gradient.svg" />
+        <None Remove="Conversion\RectTests\ClassTests.Resources\class-2-defs.svg" />
         <None Remove="Conversion\RectTests\ClassTests.Resources\class-defs-style-css.svg" />
         <None Remove="Conversion\RectTests\ClassTests.Resources\class-defs-style-html.svg" />
         <None Remove="Conversion\RectTests\ClassTests.Resources\class-defs-style-notype.svg" />
@@ -411,6 +412,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleTests\HeightTests.Resources\circle-radius-positive.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\WidthTests.Resources\circle-radius-positive.svg" />
         <EmbeddedResource Include="Conversion\ClipPathTests\ClipPathTests.Resources\circle-clippath.svg" />
+        <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-2-defs.svg" />
         <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-nonexistent.svg" />
         <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-defs-style-notype.svg" />
         <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-defs-style-html.svg" />

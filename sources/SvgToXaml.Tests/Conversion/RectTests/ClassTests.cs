@@ -64,4 +64,16 @@ public class ClassTests : SvgFileTestsBase
             rectangle.Fill.Should().Be("#000000");
         });
     }
+
+    [Fact]
+    public void HavingRectangleReferTwoClasses_WhenSvgIsParsed_ThenResultedRectangleHasPropertiesFromBothClasses()
+    {
+        ConvertSvgFile("class-2-defs.svg", canvas =>
+        {
+            Rectangle rectangle = canvas.GetElementByIndex<Rectangle>(0);
+
+            rectangle.Fill.Should().Be("#0066CC");
+            rectangle.Stroke.Should().Be("#112233");
+        });
+    }
 }

@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
 using FillRule = System.Windows.Media.FillRule;
+using SvgFillRule = DustInTheWind.SvgToXaml.SvgModel.FillRule;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
@@ -32,69 +33,77 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
     {
         return new Path
         {
-            Data = SvgElement.Data is null or "none" 
+            Data = SvgElement.Data is null or "none"
                 ? Geometry.Empty
-                : ParseGeometry(SvgElement.Data)
+                : Geometry.Parse(SvgElement.Data)
         };
     }
 
-    private Geometry ParseGeometry(string text)
+    protected override void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
     {
-        Geometry geometry = Geometry.Parse(text);
+        base.InheritPropertiesFrom(svgElements);
 
+        SetFillRule(svgElements);
+    }
+
+    private void SetFillRule(IEnumerable<SvgElement> svgElements)
+    {
+        if(XamlElement.Data.IsEmpty())
+            return;
+
+        SvgFillRule? svgFillRule = svgElements
+            .Select(x => x.ComputeFillRule())
+            .FirstOrDefault(x => x != null);
+
+        FillRule? fillRule = ComputeFillRule(svgFillRule);
+
+        if (fillRule == null)
+            return;
+
+        switch (XamlElement.Data)
+        {
+            case GeometryGroup geometryGroup:
+                {
+                    geometryGroup = geometryGroup.Clone();
+                    geometryGroup.FillRule = fillRule.Value;
+                    geometryGroup.Freeze();
+
+                    XamlElement.Data = geometryGroup;
+                    break;
+                }
+
+            case PathGeometry pathGeometry:
+                {
+                    pathGeometry = pathGeometry.Clone();
+                    pathGeometry.FillRule = fillRule.Value;
+                    pathGeometry.Freeze();
+                    XamlElement.Data = pathGeometry;
+                    break;
+                }
+
+            case StreamGeometry streamGeometry:
+                {
+                    streamGeometry = streamGeometry.Clone();
+                    streamGeometry.FillRule = fillRule.Value;
+                    streamGeometry.Freeze();
+                    XamlElement.Data = streamGeometry;
+                    break;
+                }
+        }
+    }
+
+    private static FillRule? ComputeFillRule(SvgFillRule? fillRule)
+    {
         // Svg Default = nonzero
         // Xaml Default = evenodd
 
-        if (geometry is GeometryGroup geometryGroup)
-        {
-            FillRule? fillRule = ComputeFillRule();
-
-            if (fillRule != null)
-            {
-                geometryGroup = geometryGroup.Clone();
-                geometryGroup.FillRule = fillRule.Value;
-                geometryGroup.Freeze();
-                
-                return geometryGroup;
-            }
-        }
-        else if (geometry is PathGeometry pathGeometry)
-        {
-            FillRule? fillRule = ComputeFillRule();
-
-            if (fillRule != null)
-            {
-                pathGeometry = pathGeometry.Clone();
-                pathGeometry.FillRule = fillRule.Value;
-                pathGeometry.Freeze();
-                return pathGeometry;
-            }
-        }
-        else if (geometry is StreamGeometry streamGeometry)
-        {
-            FillRule? fillRule = ComputeFillRule();
-
-            if (fillRule != null)
-            {
-                streamGeometry = streamGeometry.Clone();
-                streamGeometry.FillRule = fillRule.Value;
-                streamGeometry.Freeze();
-                return streamGeometry;
-            }
-        }
-
-        return geometry;
-    }
-
-    private FillRule? ComputeFillRule()
-    {
-        switch (SvgElement.FillRule)
+        switch (fillRule)
         {
             case null:
-            case SvgModel.FillRule.Nonzero:
+            case SvgFillRule.Nonzero:
                 return FillRule.Nonzero;
 
-            case SvgModel.FillRule.EvenOdd:
+            case SvgFillRule.EvenOdd:
                 return null;
 
             default:

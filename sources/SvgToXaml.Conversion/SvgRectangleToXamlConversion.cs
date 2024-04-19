@@ -49,7 +49,7 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
         if (left != 0 || top != 0)
             rectangle.RenderTransform = new TranslateTransform(left, top);
-
+        
         return rectangle;
     }
 }
