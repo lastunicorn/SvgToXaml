@@ -154,4 +154,13 @@ public class ChildrenTests : SvgFileTestsBase
             svg.Children[0].Should().BeOfType<SvgClipPath>();
         });
     }
+
+    [Fact]
+    public void HavingSvgChild_WhenSvgFileIsParsed_ThenSvgContainsChildSvg()
+    {
+        ParseSvgFile("svg-svg.svg", svg =>
+        {
+            svg.Children[0].Should().BeOfType<Svg>();
+        });
+    }
 }

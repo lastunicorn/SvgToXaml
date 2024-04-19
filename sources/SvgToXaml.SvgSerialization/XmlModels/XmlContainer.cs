@@ -38,5 +38,6 @@ public class XmlContainer : XmlElement
     [XmlElement("linearGradient", typeof(XmlLinearGradient))]
     [XmlElement("radialGradient", typeof(XmlRadialGradient))]
     [XmlElement("clipPath", typeof(XmlClipPath))]
+    [XmlElement("svg", typeof(XmlSvg))]
     public object[] Children { get; set; }
 }

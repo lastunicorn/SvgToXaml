@@ -232,6 +232,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+        <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
         <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
         <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang.svg" />
         <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
@@ -542,6 +543,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang.svg" />

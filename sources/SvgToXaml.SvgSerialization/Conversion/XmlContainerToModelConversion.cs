@@ -130,6 +130,12 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
                     SvgClipPath svgClipPath = conversion.Execute();
                     SvgElement.Children.Add(svgClipPath);
                 }
+                else if (serializationChild is XmlSvg childSvg)
+                {
+                    XmlSvgToModelConversion conversion = new(childSvg, DeserializationContext);
+                    Svg svg = conversion.Execute();
+                    SvgElement.Children.Add(svg);
+                }
             }
         }
     }
