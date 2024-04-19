@@ -14,10 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
-using System.Xml.XPath;
+using DustInTheWind.SvgToXaml.SvgModel;
 using DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
@@ -38,7 +36,7 @@ public class SvgSerializer
 
     private void HandleUnknownNode(object sender, XmlNodeEventArgs e)
     {
-        DeserializationIssue deserializationIssue = new(e.Name, $"Unknown xml node ({e.NodeType}). Line: {e.LineNumber}:{e.LinePosition}");
+        DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
         deserializationContext.Warnings.Add(deserializationIssue);
     }
 
@@ -75,7 +73,7 @@ public class SvgSerializer
 
             if (xmlSvg == null)
             {
-                DeserializationIssue deserializationIssue = new("", "The text is not a valid svg.");
+                DeserializationIssue deserializationIssue = new("Xml deserialization", "The text is not a valid svg.");
                 deserializationContext.Errors.Add(deserializationIssue);
             }
 
@@ -83,7 +81,7 @@ public class SvgSerializer
         }
         catch (Exception ex)
         {
-            DeserializationIssue deserializationIssue = new("", ex.ToString());
+            DeserializationIssue deserializationIssue = new("Xml deserialization", ex.ToString());
             deserializationContext.Errors.Add(deserializationIssue);
 
             return null;
@@ -92,9 +90,12 @@ public class SvgSerializer
 
     private DeserializationResult BuildResult(XmlSvg xmlSvg)
     {
+        XmlSvgToModelConversion conversion = new(xmlSvg, deserializationContext);
+        Svg svg = conversion.Execute();
+
         return new DeserializationResult
         {
-            Svg = xmlSvg.ToSvgModel(deserializationContext),
+            Svg = svg,
             Errors = deserializationContext.Errors,
             Warnings = deserializationContext.Warnings
         };

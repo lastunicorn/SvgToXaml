@@ -46,4 +46,9 @@ public class SvgViewBox
             Height = double.Parse(parts[3], CultureInfo.InvariantCulture)
         };
     }
+
+    public static implicit operator SvgViewBox(string text)
+    {
+        return Parse(text);
+    }
 }

@@ -21,7 +21,7 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public readonly struct SvgLength
 {
-    private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+(?:e[+-]?[0-9]+)?)(em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|Q|in|pc|pt|px|%)?\s*$", RegexOptions.Singleline);
+    private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+(?:e[+-]?[0-9]+)?)(em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|Q|in|pc|pt|px)?\s*$", RegexOptions.Singleline);
 
     public static SvgLength Zero { get; } = new(0);
 
