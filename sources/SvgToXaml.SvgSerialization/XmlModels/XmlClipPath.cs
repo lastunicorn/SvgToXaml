@@ -27,5 +27,6 @@ public class XmlClipPath : XmlElement
     [XmlElement("polygon", typeof(XmlPolygon))]
     [XmlElement("polyline", typeof(XmlPolyline))]
     [XmlElement("rect", typeof(XmlRect))]
+    [XmlElement("use", typeof(XmlUse))]
     public object[] Children { get; set; }
 }

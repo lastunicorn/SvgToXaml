@@ -91,7 +91,7 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         if (referencedId == null)
             return;
 
-        SvgElement referencedElement = SvgElement.Parent?.FindChild(referencedId);
+        SvgElement referencedElement = SvgElement.GetParentSvg()?.FindChild(referencedId);
 
         if (referencedElement is not SvgClipPath svgClipPath)
             return;
@@ -145,6 +145,18 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
 
             case SvgPolyline svgPolyline:
                 throw new NotImplementedException();
+
+            case SvgUse svgUse:
+            {
+                string referencedId = svgUse.Href.Id;
+
+                if (referencedId == null)
+                    return Geometry.Empty;
+
+                SvgElement referencedElement = svgElement.GetParentSvg().FindChild(referencedId);
+
+                return ConvertToGeometry(referencedElement);
+            }
 
             default:
                 throw new UnknownElementTypeException(svgElement?.GetType());
