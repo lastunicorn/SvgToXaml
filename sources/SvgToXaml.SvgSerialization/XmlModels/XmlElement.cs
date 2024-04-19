@@ -25,6 +25,12 @@ public class XmlElement
     [XmlAttribute("id")]
     public string Id { get; set; }
 
+    [XmlAttribute("lang")]
+    public string Lang { get; set; }
+
+    [XmlAttribute("lang", Namespace = Namespaces.Xml)]
+    public string XmlLang { get; set; }
+
     [XmlAttribute("class")]
     public string Class { get; set; }
 

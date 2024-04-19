@@ -20,6 +20,9 @@ namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 public class XmlContainer : XmlElement
 {
+    [XmlElement("title")]
+    public XmlTitle[] Titles { get; set; }
+
     [XmlElement("circle", typeof(XmlCircle))]
     [XmlElement("ellipse", typeof(XmlEllipse))]
     [XmlElement("line", typeof(XmlLine))]

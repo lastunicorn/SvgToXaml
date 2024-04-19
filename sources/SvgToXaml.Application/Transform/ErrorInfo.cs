@@ -14,20 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
-using DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgToXaml.Application.Transform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
-
-public class SvgGroupToXamlConversion : SvgContainerToXamlConversion
+public class ErrorInfo
 {
-    public SvgGroupToXamlConversion(SvgContainer svgContainer, SvgElement referrer = null)
-        : base(svgContainer, referrer)
-    {
-    }
-
-    protected override Canvas CreateXamlElement()
-    {
-        return new Canvas();
-    }
+    public string Message { get; set; }
 }

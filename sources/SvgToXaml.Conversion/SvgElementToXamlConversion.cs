@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Media;
 using DustInTheWind.SvgToXaml.SvgModel;
 
@@ -42,6 +43,11 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         {
             XamlElement = CreateXamlElement();
 
+            if (XamlElement is FrameworkElement frameworkElement)
+            {
+                SetLanguage(frameworkElement);
+            }
+
             if (SvgElement.Transforms.Count > 0)
                 ApplyTransforms();
 
@@ -61,6 +67,16 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         {
             throw new SvgConversionException(ex);
         }
+    }
+
+    protected abstract TXaml CreateXamlElement();
+
+    private void SetLanguage(FrameworkElement frameworkElement)
+    {
+        string languageId = SvgElement.Language ?? SvgElement.XmlLanguage;
+
+        if (languageId != null)
+            frameworkElement.Language = XmlLanguage.GetLanguage(languageId);
     }
 
     private void ApplyTransforms()
@@ -95,34 +111,34 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
         switch (svgElement)
         {
             case SvgCircle svgCircle:
-            {
-                Point centerPoint = new(svgCircle.CenterX, svgCircle.CenterY);
-                return new EllipseGeometry(centerPoint, svgCircle.Radius, svgCircle.Radius);
-            }
+                {
+                    Point centerPoint = new(svgCircle.CenterX, svgCircle.CenterY);
+                    return new EllipseGeometry(centerPoint, svgCircle.Radius, svgCircle.Radius);
+                }
 
             case SvgEllipse svgEllipse:
-            {
-                Point centerPoint = new(svgEllipse.CenterX, svgEllipse.CenterY);
-                return new EllipseGeometry(centerPoint, svgEllipse.RadiusX, svgEllipse.RadiusY);
-            }
+                {
+                    Point centerPoint = new(svgEllipse.CenterX, svgEllipse.CenterY);
+                    return new EllipseGeometry(centerPoint, svgEllipse.RadiusX, svgEllipse.RadiusY);
+                }
 
             case SvgPath svgPath:
-            {
-                return Geometry.Parse(svgPath.Data);
-            }
+                {
+                    return Geometry.Parse(svgPath.Data);
+                }
 
             case SvgLine svgLine:
-            {
-                Point startPoint = new(svgLine.X1, svgLine.Y1);
-                Point endPoint = new(svgLine.X2, svgLine.Y2);
-                return new LineGeometry(startPoint, endPoint);
-            }
+                {
+                    Point startPoint = new(svgLine.X1, svgLine.Y1);
+                    Point endPoint = new(svgLine.X2, svgLine.Y2);
+                    return new LineGeometry(startPoint, endPoint);
+                }
 
             case SvgRectangle svgRectangle:
-            {
-                Rect rect = new(svgRectangle.X, svgRectangle.Y, svgRectangle.Width, svgRectangle.Height);
-                return new RectangleGeometry(rect);
-            }
+                {
+                    Rect rect = new(svgRectangle.X, svgRectangle.Y, svgRectangle.Width, svgRectangle.Height);
+                    return new RectangleGeometry(rect);
+                }
 
             case SvgPolygon svgPolygon:
                 throw new NotImplementedException();
@@ -134,8 +150,6 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
                 throw new UnknownElementTypeException(svgElement?.GetType());
         }
     }
-
-    protected abstract TXaml CreateXamlElement();
 
     protected virtual IEnumerable<SvgElement> EnumerateInheritedElements()
     {

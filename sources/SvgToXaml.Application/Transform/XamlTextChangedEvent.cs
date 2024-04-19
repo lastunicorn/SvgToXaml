@@ -18,5 +18,7 @@ namespace DustInTheWind.SvgToXaml.Application.Transform;
 
 public class XamlTextChangedEvent
 {
-    public string XamlText { get; init; }
+    public string XamlText { get; set; }
+
+    public List<ErrorInfo> Errors { get; } = new();
 }

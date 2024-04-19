@@ -30,6 +30,7 @@ namespace DustInTheWind.SvgToXaml.Application.Transform;
 internal class TransformUseCase : IRequestHandler<TransformRequest>
 {
     private readonly EventBus eventBus;
+    private XamlTextChangedEvent xamlTextChangedEvent;
 
     public TransformUseCase(EventBus eventBus)
     {
@@ -38,43 +39,60 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
     public async Task Handle(TransformRequest request, CancellationToken cancellationToken)
     {
-        string xamlText = Transform(request.SvgText);
+        xamlTextChangedEvent = new();
 
-        XamlTextChangedEvent ev = new()
-        {
-            XamlText = xamlText
-        };
-        await eventBus.Publish(ev, cancellationToken);
+        Transform(request.SvgText);
+        await eventBus.Publish(xamlTextChangedEvent, cancellationToken);
     }
 
-    private static string Transform(string svgText)
+    private void Transform(string svgText)
     {
         try
         {
-            if (string.IsNullOrEmpty(svgText))
+            if (!string.IsNullOrEmpty(svgText))
             {
-                return null;
-            }
+                DeserializationResult deserializationResult = Parse(svgText);
 
-            Svg svg = Parse(svgText);
-            Canvas canvas = ConvertToXaml(svg);
-            string xaml = Serialize(canvas);
-            xaml = Alter(xaml);
-            return xaml;
+                IEnumerable<ErrorInfo> errorInfos = deserializationResult.Errors
+                    .Concat(deserializationResult.Warnings)
+                    .Select(x => new ErrorInfo
+                    {
+                        Message = $"{x.Path} : {x.Message}"
+                    });
+                xamlTextChangedEvent.Errors.AddRange(errorInfos);
+
+                if (deserializationResult.Svg == null)
+                    return;
+
+                Canvas canvas = ConvertToXaml(deserializationResult.Svg);
+
+                if (canvas == null)
+                    return;
+
+                string xaml = Serialize(canvas);
+
+                if (string.IsNullOrEmpty(xaml))
+                    return;
+
+                xaml = Alter(xaml);
+
+                xamlTextChangedEvent.XamlText = xaml;
+            }
         }
         catch (Exception ex)
         {
-            return ex.ToString();
+            ErrorInfo errorInfo = new()
+            {
+                Message = ex.ToString()
+            };
+            xamlTextChangedEvent.Errors.Add(errorInfo);
         }
     }
 
-    public static Svg Parse(string svg)
+    public static DeserializationResult Parse(string svg)
     {
-        using StringReader stringReader = new(svg);
-
         SvgSerializer serializer = new();
-        DeserializationResult deserializationResult = serializer.Deserialize(stringReader);
-        return deserializationResult.Svg;
+        return serializer.Deserialize(svg);
     }
 
     private static Canvas ConvertToXaml(Svg svg)
@@ -85,9 +103,6 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
     private static string Serialize(Canvas canvas)
     {
-        if (canvas == null)
-            return string.Empty;
-
         using MemoryStream ms = new();
         XmlWriterSettings xmlWriterSettings = new()
         {

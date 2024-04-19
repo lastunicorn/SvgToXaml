@@ -14,35 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
-
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-public class XmlLinearGradient : XmlElement
+public class Namespaces
 {
-    [XmlAttribute("x1")]
-    public string X1 { get; set; }
+    public const string Html = "http://www.w3.org/1999/xhtml";
 
-    [XmlAttribute("y1")]
-    public string Y1 { get; set; }
+    public const string MathMl = "http://www.w3.org/1998/Math/MathML";
 
-    [XmlAttribute("x2")]
-    public string X2 { get; set; }
+    public const string Svg = "http://www.w3.org/2000/svg";
 
-    [XmlAttribute("y2")]
-    public string Y2 { get; set; }
+    public const string XLink = "http://www.w3.org/1999/xlink";
 
-    [XmlAttribute("gradientUnits")]
-    public XmlGradientUnits GradientUnits { get; set; }
+    public const string Xml = "http://www.w3.org/XML/1998/namespace";
 
-    public bool GradientUnitsSpecified { get; set; }
-
-    [XmlElement("stop")]
-    public List<XmlStop> Stops { get; set; }
-
-    [XmlAttribute("gradientTransform")]
-    public string GradientTransform { get; set; }
-
-    [XmlAttribute("href", Namespace = Namespaces.XLink)]
-    public string Href { get; set; }
+    public const string Xmlns = "http://www.w3.org/2000/xmlns/";
 }

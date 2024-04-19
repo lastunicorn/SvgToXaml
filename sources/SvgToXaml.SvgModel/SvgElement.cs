@@ -26,6 +26,10 @@ public class SvgElement
 
     public string Id { get; set; }
 
+    public string Language { get; set; }
+
+    public string XmlLanguage { get; set; }
+
     public string[] ClassNames { get; set; }
 
     public SvgStyleDeclarationCollection Style { get; set; }

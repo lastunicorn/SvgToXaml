@@ -1,4 +1,4 @@
-﻿// SvgToXaml
+// SvgToXaml
 // Copyright (C) 2022-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,20 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
-using DustInTheWind.SvgToXaml.SvgModel;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml;
 
-public class SvgGroupToXamlConversion : SvgContainerToXamlConversion
+public class NullToVisibilityConverter : IValueConverter
 {
-    public SvgGroupToXamlConversion(SvgContainer svgContainer, SvgElement referrer = null)
-        : base(svgContainer, referrer)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+        return value == null
+            ? Visibility.Collapsed
+            : Visibility.Visible;
     }
 
-    protected override Canvas CreateXamlElement()
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return new Canvas();
+        throw new NotImplementedException();
     }
 }

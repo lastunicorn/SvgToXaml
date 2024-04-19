@@ -29,6 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
+        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
+        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang.svg" />
+        <None Remove="Conversion\CircleFillTests\LanguageTests.Resources\circle-xmllang.svg" />
         <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient - Copy.svg" />
         <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient.svg" />
         <None Remove="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient.svg" />
@@ -160,6 +164,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\CircleStrokeTests\UseGroupContainingCircleTests.Resources\05-use^-href-defs-group-circle^.svg" />
         <None Remove="Conversion\CircleStrokeTests\UseGroupContainingCircleTests.Resources\06-use^-href-defs-group^-circle.svg" />
         <None Remove="Conversion\CircleStrokeTests\UseGroupContainingCircleTests.Resources\07-use^-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\SvgRootTests\LanguageTests.Resources\svg-lang-xmllang-missing.svg" />
+        <None Remove="Conversion\SvgRootTests\LanguageTests.Resources\svg-lang-xmllang.svg" />
+        <None Remove="Conversion\SvgRootTests\LanguageTests.Resources\svg-lang.svg" />
+        <None Remove="Conversion\SvgRootTests\LanguageTests.Resources\svg-xmllang.svg" />
         <None Remove="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-negative-value.svg" />
         <None Remove="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-positive-value.svg" />
         <None Remove="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-zero.svg" />
@@ -206,6 +214,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\circle-r-negative.svg" />
         <None Remove="SvgSerialization\circle-r-positive.svg" />
         <None Remove="SvgSerialization\circle-r-zero.svg" />
+        <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang-missing.svg" />
+        <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang.svg" />
+        <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang-missing.svg" />
+        <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang.svg" />
+        <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang-missing.svg" />
+        <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang-missing.svg" />
+        <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-lang-missing.svg" />
+        <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-lang.svg" />
+        <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang-missing.svg" />
+        <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang.svg" />
+        <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
+        <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang.svg" />
+        <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
+        <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang.svg" />
+        <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang.svg" />
+        <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang.svg" />
         <None Remove="SvgSerialization\EllipseTests\RadiusTests.Resources\ellipse-rxy-negative.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-missing.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-negative.svg" />
@@ -319,6 +343,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
     
     <ItemGroup>
+        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\LanguageTests.Resources\circle-xmllang.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient - Copy.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-radialgradient.svg" />
         <EmbeddedResource Include="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-rect.svg" />
@@ -455,6 +483,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleStrokeTests\UseGroupContainingCircleTests.Resources\06-use^-href-defs-group^-circle.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\UseGroupContainingCircleTests.Resources\05-use^-href-defs-group-circle^.svg" />
         <EmbeddedResource Include="Conversion\CircleStrokeTests\UseGroupContainingCircleTests.Resources\01-use-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\LanguageTests.Resources\svg-lang-xmllang-missing.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\LanguageTests.Resources\svg-lang-xmllang.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\LanguageTests.Resources\svg-lang.svg" />
+        <EmbeddedResource Include="Conversion\SvgRootTests\LanguageTests.Resources\svg-xmllang.svg" />
         <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-negative-value.svg" />
         <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-positive-value.svg" />
         <EmbeddedResource Include="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-zero.svg" />
@@ -484,6 +516,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleTests.Resources\use-href-group-circle.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests.Resources\use-href-defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests.Resources\group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang.svg" />
+        <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-lang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-lang.svg" />
+        <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang.svg" />
+        <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang.svg" />
+        <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang.svg" />
         <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusTests.Resources\ellipse-rxy-negative.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-negative.svg" />

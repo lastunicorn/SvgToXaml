@@ -22,7 +22,7 @@ namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleFillTests;
 public class LiteralColorTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingFillSpecifiedAsRgbColorOf6Digits_WhenSvgIsParsed_ThenResultedEllipseHasCorrectFillColor()
+    public void HavingFillSpecifiedAsRgbColorOf6Digits_WhenSvgIsConverted_ThenResultedEllipseHasCorrectFillColor()
     {
         ConvertSvgFile("circle-fill-rgb-full.svg", canvas =>
         {
@@ -34,7 +34,7 @@ public class LiteralColorTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillSpecifiedAsRgbColorOf3Digits_WhenSvgIsParsed_ThenResultedEllipseHasCorrectFillColor()
+    public void HavingFillSpecifiedAsRgbColorOf3Digits_WhenSvgIsConverted_ThenResultedEllipseHasCorrectFillColor()
     {
         ConvertSvgFile("circle-fill-rgb-short.svg", canvas =>
         {
@@ -46,7 +46,7 @@ public class LiteralColorTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingFillSpecifiedAsArgbColorOf8Digits_WhenSvgIsParsed_ThenResultedEllipseHasCorrectFillColor()
+    public void HavingFillSpecifiedAsArgbColorOf8Digits_WhenSvgIsConverted_ThenResultedEllipseHasCorrectFillColor()
     {
         ConvertSvgFile("circle-fill-argb.svg", canvas =>
         {

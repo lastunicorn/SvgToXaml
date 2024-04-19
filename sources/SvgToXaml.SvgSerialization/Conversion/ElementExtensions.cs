@@ -30,6 +30,9 @@ internal static class ElementExtensions
             return;
 
         svgElement.Id = xmlElement.Id;
+        
+        svgElement.Language = xmlElement.Lang;
+        svgElement.XmlLanguage = xmlElement.XmlLang;
 
         svgElement.Fill = xmlElement.Fill;
 

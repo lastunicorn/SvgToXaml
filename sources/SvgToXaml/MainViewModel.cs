@@ -28,6 +28,7 @@ public class MainViewModel : ViewModelBase
     private string xamlText;
     private string svgFilePath;
     private readonly Dispatcher dispatcher;
+    private string errors;
 
     public string SvgFilePath
     {
@@ -49,10 +50,7 @@ public class MainViewModel : ViewModelBase
             svgText = value;
             OnPropertyChanged();
 
-
-            DispatcherFrame frame = new();
             _ = TransformSvgToXaml();
-            Dispatcher.PushFrame(frame);
         }
     }
 
@@ -67,8 +65,19 @@ public class MainViewModel : ViewModelBase
         }
     }
 
+    public string Errors
+    {
+        get => errors;
+        set
+        {
+            if (value == errors) return;
+            errors = value;
+            OnPropertyChanged();
+        }
+    }
+
     public OpenFileCommand OpenFileCommand { get; }
-    
+
     public CopyToClipboardCommand CopyToClipboardCommand { get; }
 
     public MainViewModel(IRequestBus requestBus, EventBus eventBus, OpenFileCommand openFileCommand, CopyToClipboardCommand copyToClipboardCommand)
@@ -88,7 +97,7 @@ public class MainViewModel : ViewModelBase
 
     private Task SvgTextChangingEventHandler(SvgTextChangingEvent ev, CancellationToken cancellationToken)
     {
-        dispatcher.InvokeAsync(() =>
+        dispatcher.Invoke(() =>
         {
             SvgFilePath = ev.FilePath;
             SvgText = string.Empty;
@@ -99,7 +108,7 @@ public class MainViewModel : ViewModelBase
 
     private Task SvgTextChangedEventHandler(SvgTextChangedEvent ev, CancellationToken cancellationToken)
     {
-        dispatcher.InvokeAsync(() =>
+        dispatcher.Invoke(() =>
         {
             SvgFilePath = ev.FilePath;
             SvgText = ev.SvgText;
@@ -111,6 +120,10 @@ public class MainViewModel : ViewModelBase
     private Task XamlTextChangedEventHandler(XamlTextChangedEvent ev, CancellationToken cancellationToken)
     {
         XamlText = ev.XamlText;
+
+        Errors = ev.Errors.Count > 0
+            ? string.Join(Environment.NewLine, ev.Errors.Select(x => x.Message))
+            : null;
 
         return Task.CompletedTask;
     }

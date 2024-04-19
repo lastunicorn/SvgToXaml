@@ -18,31 +18,8 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-public class XmlLinearGradient : XmlElement
+public class XmlTitle : XmlElement
 {
-    [XmlAttribute("x1")]
-    public string X1 { get; set; }
-
-    [XmlAttribute("y1")]
-    public string Y1 { get; set; }
-
-    [XmlAttribute("x2")]
-    public string X2 { get; set; }
-
-    [XmlAttribute("y2")]
-    public string Y2 { get; set; }
-
-    [XmlAttribute("gradientUnits")]
-    public XmlGradientUnits GradientUnits { get; set; }
-
-    public bool GradientUnitsSpecified { get; set; }
-
-    [XmlElement("stop")]
-    public List<XmlStop> Stops { get; set; }
-
-    [XmlAttribute("gradientTransform")]
-    public string GradientTransform { get; set; }
-
-    [XmlAttribute("href", Namespace = Namespaces.XLink)]
-    public string Href { get; set; }
+    [XmlText]
+    public string Value { get; set; }
 }

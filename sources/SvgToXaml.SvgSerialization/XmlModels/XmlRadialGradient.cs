@@ -40,6 +40,6 @@ public class XmlRadialGradient : XmlElement
     [XmlAttribute("gradientTransform")]
     public string GradientTransform { get; set; }
 
-    [XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")]
+    [XmlAttribute("href", Namespace = Namespaces.XLink)]
     public string Href { get; set; }
 }

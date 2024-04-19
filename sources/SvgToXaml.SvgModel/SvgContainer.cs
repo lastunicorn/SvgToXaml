@@ -30,6 +30,8 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgContainer : SvgElement
 {
+    public List<SvgTitle> Titles { get; }
+
     public SvgElementCollection<SvgElement> Children { get; }
 
     public SvgStyleSheet StyleSheet { get; } = new();

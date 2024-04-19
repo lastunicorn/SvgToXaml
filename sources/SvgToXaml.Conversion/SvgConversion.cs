@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public class SvgConversion : SvgGroupToXamlConversion
+public class SvgConversion : SvgContainerToXamlConversion
 {
     private readonly Svg svg;
 
@@ -32,31 +32,32 @@ public class SvgConversion : SvgGroupToXamlConversion
 
     protected override Canvas CreateXamlElement()
     {
+        return new Canvas();
+    }
+
+    protected override void ConvertSpecificAttributes()
+    {
         try
         {
-            Canvas canvas = new();
-
             if (svg.ViewBox == null)
             {
                 if (svg.Width != null)
-                    canvas.Width = svg.Width.Value.ToUserUnits();
+                    XamlElement.Width = svg.Width.Value.ToUserUnits();
 
                 if (svg.Height != null)
-                    canvas.Height = svg.Height.Value.ToUserUnits();
+                    XamlElement.Height = svg.Height.Value.ToUserUnits();
             }
             else
             {
-                canvas.Width = svg.ViewBox.Width.Value;
-                canvas.Height = svg.ViewBox.Height.Value;
+                XamlElement.Width = svg.ViewBox.Width.Value;
+                XamlElement.Height = svg.ViewBox.Height.Value;
 
                 bool viewBoxIsTranslated = svg.ViewBox.OriginX is { Value: not 0 } ||
                                            svg.ViewBox.OriginY is { Value: not 0 };
 
                 if (viewBoxIsTranslated)
-                    canvas.RenderTransform = CreateRenderTransform(svg.ViewBox);
+                    XamlElement.RenderTransform = CreateRenderTransform(svg.ViewBox);
             }
-
-            return canvas;
         }
         catch (SvgConversionException)
         {

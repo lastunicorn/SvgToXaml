@@ -23,7 +23,7 @@ public class XmlUse : XmlElement
     [XmlAttribute("href")]
     public string Href { get; set; }
 
-    [XmlAttribute("href", Namespace = "http://www.w3.org/1999/xlink")]
+    [XmlAttribute("href", Namespace = Namespaces.XLink)]
     public string HrefLink { get; set; }
 
     [XmlAttribute("x")]
