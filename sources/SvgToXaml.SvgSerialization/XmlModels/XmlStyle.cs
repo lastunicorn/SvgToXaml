@@ -18,8 +18,14 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-public class XmlStyle
+public class XmlStyle : XmlElement
 {
+    [XmlAttribute("type")]
+    public string Type { get; set; }
+
+    [XmlAttribute("title")]
+    public string Title { get; set; }
+
     [XmlText]
     public string Value { get; set; }
 }

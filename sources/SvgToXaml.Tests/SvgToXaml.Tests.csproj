@@ -119,6 +119,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\RectFillTests\LiteralColorTests.Resources\rect-fill-rgb-short.svg" />
         <None Remove="Conversion\RectFillTests\UrlTests.Resources\rect-fill-url-gradient-href-gradient.svg" />
         <None Remove="Conversion\RectFillTests\UrlTests.Resources\rect-fill-url-gradient.svg" />
+        <None Remove="Conversion\RectTests\ClassTests.Resources\class-defs-style-css.svg" />
+        <None Remove="Conversion\RectTests\ClassTests.Resources\class-defs-style-html.svg" />
+        <None Remove="Conversion\RectTests\ClassTests.Resources\class-defs-style-notype.svg" />
+        <None Remove="Conversion\RectTests\ClassTests.Resources\class-nonexistent.svg" />
         <None Remove="Conversion\RectTests\left-0.svg" />
         <None Remove="Conversion\RectTests\left-absent.svg" />
         <None Remove="Conversion\RectTests\left-negative.svg" />
@@ -232,6 +236,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+        <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
+        <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
+        <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
         <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
         <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
         <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang.svg" />
@@ -402,6 +409,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleTests\HeightTests.Resources\circle-radius-positive.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\WidthTests.Resources\circle-radius-positive.svg" />
         <EmbeddedResource Include="Conversion\ClipPathTests\ClipPathTests.Resources\circle-clippath.svg" />
+        <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-nonexistent.svg" />
+        <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-defs-style-notype.svg" />
+        <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-defs-style-html.svg" />
         <EmbeddedResource Include="Conversion\RectTests\TopTests.Resources\top-0.svg" />
         <EmbeddedResource Include="Conversion\RectTests\TopTests.Resources\top-absent.svg" />
         <EmbeddedResource Include="Conversion\RectTests\LeftTests.Resources\left-absent.svg" />
@@ -409,6 +419,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\RectTests\LeftTests.Resources\left-negative.svg" />
         <EmbeddedResource Include="Conversion\RectTests\LeftTests.Resources\left-0.svg" />
         <EmbeddedResource Include="Conversion\RectTests\TopTests.Resources\top-positive.svg" />
+        <EmbeddedResource Include="Conversion\RectTests\ClassTests.Resources\class-defs-style-css.svg" />
         <EmbeddedResource Include="Conversion\RectTransformTests\TransformRotateTests.Resources\04-rect-x-y-transform-rotate-cx-cy.svg" />
         <EmbeddedResource Include="Conversion\RectTransformTests\TransformRotateTests.Resources\03-rect-x-y-transform-rotate.svg" />
         <EmbeddedResource Include="Conversion\RectTransformTests\TransformRotateTests.Resources\02-transform-rotate-angle-cx-cy.svg" />
@@ -543,6 +554,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+        <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
+        <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
+        <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />

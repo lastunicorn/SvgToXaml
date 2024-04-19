@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Text.RegularExpressions;
 using DustInTheWind.SvgToXaml.SvgModel;
 using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
@@ -24,8 +23,6 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
     where TXml : XmlContainer
     where TSvg : SvgContainer
 {
-    private static readonly Regex Regex = new(@"\.(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
-
     protected XmlContainerToModelConversion(TXml xmlContainer, DeserializationContext deserializationContext)
         : base(xmlContainer, deserializationContext)
     {
@@ -101,10 +98,9 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
                 }
                 else if (serializationChild is XmlStyle style)
                 {
-                    IEnumerable<SvgStyleRuleSet> ruleSets = ParseStyles(style.Value);
-
-                    foreach (SvgStyleRuleSet svgStyleRuleSet in ruleSets)
-                        SvgElement.StyleSheet.Add(svgStyleRuleSet);
+                    XmlStyleToModelConversion conversion = new(style, DeserializationContext);
+                    SvgStyleSheet svgStyleSheet = conversion.Execute();
+                    SvgElement.Children.Add(svgStyleSheet);
                 }
                 else if (serializationChild is XmlText text)
                 {
@@ -138,20 +134,5 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
                 }
             }
         }
-    }
-
-    private static IEnumerable<SvgStyleRuleSet> ParseStyles(string text)
-    {
-        if (text == null)
-            return Enumerable.Empty<SvgStyleRuleSet>();
-
-        MatchCollection matches = Regex.Matches(text);
-
-        return matches
-            .Select(x => new SvgStyleRuleSet
-            {
-                Selector = x.Groups[1].Value,
-                Declarations = x.Groups[2].Value
-            });
     }
 }

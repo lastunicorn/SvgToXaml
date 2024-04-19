@@ -34,8 +34,6 @@ public class SvgContainer : SvgElement
 
     public SvgElementCollection<SvgElement> Children { get; }
 
-    public SvgStyleSheet StyleSheet { get; } = new();
-
     public SvgContainer()
     {
         Children = new SvgElementCollection<SvgElement>(this);
@@ -53,13 +51,13 @@ public class SvgContainer : SvgElement
             switch (svgElement)
             {
                 case SvgContainer svgContainer:
-                    {
-                        IEnumerable<T> children = svgContainer.GetChildrenRecursively<T>();
+                {
+                    IEnumerable<T> children = svgContainer.GetChildrenRecursively<T>();
 
-                        foreach (T child in children)
-                            yield return child;
-                        break;
-                    }
+                    foreach (T child in children)
+                        yield return child;
+                    break;
+                }
 
                 case T tSvgElement:
                     yield return tSvgElement;
@@ -68,9 +66,9 @@ public class SvgContainer : SvgElement
         }
     }
 
-    public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets()
+    public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets(string mimeType = null)
     {
-        IEnumerable<SvgStyleSheet> svgStyleSheets = GetStyleSheetsRecursively();
+        IEnumerable<SvgStyleSheet> svgStyleSheets = GetStyleSheetsRecursively(mimeType);
 
         foreach (SvgStyleSheet svgStyleSheet in svgStyleSheets)
         {
@@ -79,16 +77,31 @@ public class SvgContainer : SvgElement
         }
     }
 
-    private IEnumerable<SvgStyleSheet> GetStyleSheetsRecursively()
+    private IEnumerable<SvgStyleSheet> GetStyleSheetsRecursively(string mimeType)
     {
-        yield return StyleSheet;
-
-        foreach (SvgContainer svgContainer in Children.OfType<SvgContainer>())
+        foreach (SvgElement svgElement in Children)
         {
-            IEnumerable<SvgStyleSheet> styleSheets = svgContainer.GetStyleSheetsRecursively();
+            if (svgElement is SvgStyleSheet svgStyleSheet)
+            {
+                switch (mimeType)
+                {
+                    case null:
+                        yield return svgStyleSheet;
+                        break;
 
-            foreach (SvgStyleSheet styleSheet in styleSheets)
-                yield return styleSheet;
+                    case "text/css":
+                        if (svgStyleSheet.Type is null or "text/css")
+                            yield return svgStyleSheet;
+                        break;
+                }
+            }
+            else if (svgElement is SvgContainer svgContainer)
+            {
+                IEnumerable<SvgStyleSheet> styleSheets = svgContainer.GetStyleSheetsRecursively(mimeType);
+
+                foreach (SvgStyleSheet styleSheet in styleSheets)
+                    yield return styleSheet;
+            }
         }
     }
 }

@@ -285,7 +285,7 @@ public class SvgElement
             return null;
 
         Svg parentSvg = GetParentSvg();
-        IEnumerable<SvgStyleRuleSet> styleRuleSets = parentSvg?.GetAllStyleRuleSets();
+        IEnumerable<SvgStyleRuleSet> styleRuleSets = parentSvg?.GetAllStyleRuleSets("text/css");
 
         return styleRuleSets?
             .Where(x => ClassNames.Contains(x.Selector))
