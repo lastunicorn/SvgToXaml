@@ -92,89 +92,81 @@ public class SvgElement
 
     public SvgPaint ComputeFill()
     {
-        string rawValue = GetStyleValueFromClasses("fill");
-
-        if (rawValue != null)
-            return rawValue;
-
         SvgStyleDeclaration styleDeclaration = Style?["fill"];
 
         if (styleDeclaration != null)
             return styleDeclaration.Value;
+
+        string rawValue = GetStyleValueFromClasses("fill");
+
+        if (rawValue != null)
+            return rawValue;
 
         return Fill;
     }
 
     public double? ComputeFillOpacity()
     {
-        string rawValue = GetStyleValueFromClasses("fill-opacity");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
-
         SvgStyleDeclaration styleDeclaration = Style?["fill-opacity"];
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
+        string rawValue = GetStyleValueFromClasses("fill-opacity");
+
+        if (rawValue != null)
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         return FillOpacity;
     }
 
     public FillRule? ComputeFillRule()
     {
-        string rawValue = GetStyleValueFromClasses("fill-rule");
-
-        if (rawValue != null)
-            return (FillRule)Enum.Parse(typeof(FillRule), rawValue, true);
-
         SvgStyleDeclaration styleDeclaration = Style?["fill-rule"];
 
         if (styleDeclaration != null)
             return (FillRule)Enum.Parse(typeof(FillRule), styleDeclaration.Value, true);
+
+        string rawValue = GetStyleValueFromClasses("fill-rule");
+
+        if (rawValue != null)
+            return (FillRule)Enum.Parse(typeof(FillRule), rawValue, true);
 
         return FillRule;
     }
 
     public SvgPaint ComputeStroke()
     {
-        string rawValue = GetStyleValueFromClasses("stroke");
-
-        if (rawValue != null)
-            return rawValue;
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke"];
 
         if (styleDeclaration != null)
             return styleDeclaration.Value;
+
+        string rawValue = GetStyleValueFromClasses("stroke");
+
+        if (rawValue != null)
+            return rawValue;
 
         return Stroke;
     }
 
     public double? ComputeStrokeOpacity()
     {
-        string rawValue = GetStyleValueFromClasses("stroke-opacity");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke-opacity"];
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
+        string rawValue = GetStyleValueFromClasses("stroke-opacity");
+
+        if (rawValue != null)
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         return StrokeOpacity;
     }
 
     public SvgLengthPercentage? ComputeStrokeWidth()
     {
-        string rawValue = GetStyleValueFromClasses("stroke-width");
-
-        if (rawValue != null)
-        {
-            SvgLength svgLength = rawValue;
-            return svgLength.Value;
-        }
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke-width"];
 
         if (styleDeclaration != null)
@@ -183,80 +175,88 @@ public class SvgElement
             return length.Value;
         }
 
+        string rawValue = GetStyleValueFromClasses("stroke-width");
+
+        if (rawValue != null)
+        {
+            SvgLength svgLength = rawValue;
+            return svgLength.Value;
+        }
+
         return StrokeWidth;
     }
 
     public StrokeLineCap? ComputeStrokeLineCap()
     {
-        string rawValue = GetStyleValueFromClasses("stroke-linecap");
-
-        if (rawValue != null)
-            return (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), rawValue, true);
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke-linecap"];
 
         if (styleDeclaration != null)
             return (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), styleDeclaration.Value, true);
+
+        string rawValue = GetStyleValueFromClasses("stroke-linecap");
+
+        if (rawValue != null)
+            return (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), rawValue, true);
 
         return StrokeLineCap;
     }
 
     public StrokeLineJoin? ComputeStrokeLineJoin()
     {
-        string rawValue = GetStyleValueFromClasses("stroke-linejoin");
-
-        if (rawValue != null)
-            return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), rawValue, true);
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke-linejoin"];
 
         if (styleDeclaration != null)
             return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), styleDeclaration.Value, true);
+
+        string rawValue = GetStyleValueFromClasses("stroke-linejoin");
+
+        if (rawValue != null)
+            return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), rawValue, true);
 
         return StrokeLineJoin;
     }
 
     public double? ComputeStrokeDashOffset()
     {
-        string rawValue = GetStyleValueFromClasses("stroke-dashoffset");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke-dashoffset"];
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
+        string rawValue = GetStyleValueFromClasses("stroke-dashoffset");
+
+        if (rawValue != null)
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         return StrokeDashOffset;
     }
 
     public double? ComputeStrokeMiterLimit()
     {
-        string rawValue = GetStyleValueFromClasses("stroke-miterlimit");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
-
         SvgStyleDeclaration styleDeclaration = Style?["stroke-miterlimit"];
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
+        string rawValue = GetStyleValueFromClasses("stroke-miterlimit");
+
+        if (rawValue != null)
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         return StrokeMiterLimit;
     }
 
     public double? ComputeOpacity()
     {
-        string rawValue = GetStyleValueFromClasses("opacity");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
-
         SvgStyleDeclaration styleDeclaration = Style?["opacity"];
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
+        string rawValue = GetStyleValueFromClasses("opacity");
+
+        if (rawValue != null)
+            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         return Opacity;
     }

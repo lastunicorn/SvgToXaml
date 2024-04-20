@@ -29,6 +29,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\01-attr^-style-class.svg" />
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\02-attr-style^-class.svg" />
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\03-attr-style-class^.svg" />
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\04-attr^-style^-class.svg" />
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\05-attr^-style-class^.svg" />
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\06-attr-style^-class^.svg" />
+        <None Remove="Conversion\CircleFillTests\StyleTests.Resources\07-attr^-style^-class^.svg" />
         <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
         <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
         <None Remove="Conversion\CircleTests\LanguageTests.Resources\circle-lang.svg" />
@@ -98,15 +105,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\CircleFillTests\LiteralColorTests.Resources\circle-fill-argb.svg" />
         <None Remove="Conversion\CircleFillTests\LiteralColorTests.Resources\circle-fill-rgb-full.svg" />
         <None Remove="Conversion\CircleFillTests\LiteralColorTests.Resources\circle-fill-rgb-short.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\02-group-use-href-defs-group-circle^.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\03-group-use-href-defs-group^-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\04-group-use-href-defs-group^-circle^.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\05-group-use^-href-defs-group^-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\06-group-use^-href-defs-group-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\07-group^-use-href-defs-group-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\08-group^-use-href-defs-group^-circle.svg" />
-        <None Remove="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\09-svgroot^-group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\01-group-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\02-group-use-href-defs-group-circle^.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\03-group-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\04-group-use-href-defs-group^-circle^.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\05-group-use^-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\06-group-use^-href-defs-group-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\07-group^-use-href-defs-group-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\08-group^-use-href-defs-group^-circle.svg" />
+        <None Remove="Conversion\CircleFillTests\UseTests.Resources\09-svgroot^-group-use-href-defs-group-circle.svg" />
         <None Remove="Conversion\PathTests\path-data-absent.svg" />
         <None Remove="Conversion\PathTests\path-data-none.svg" />
         <None Remove="Conversion\PathTests\path-data.svg" />
@@ -362,6 +369,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
     
     <ItemGroup>
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\01-attr^-style-class.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\07-attr^-style^-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\06-attr-style^-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\05-attr^-style-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\04-attr^-style^-class.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\03-attr-style-class^.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\02-attr-style^-class.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
@@ -444,15 +458,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleFillTests\LiteralColorTests.Resources\circle-fill-argb.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\LiteralColorTests.Resources\circle-fill-rgb-short.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\LiteralColorTests.Resources\circle-fill-rgb-full.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\02-group-use-href-defs-group-circle^.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\03-group-use-href-defs-group^-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\04-group-use-href-defs-group^-circle^.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\05-group-use^-href-defs-group^-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\06-group-use^-href-defs-group-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\07-group^-use-href-defs-group-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\08-group^-use-href-defs-group^-circle.svg" />
-        <EmbeddedResource Include="Conversion\CircleFillTests\UseGroupContainingCircleTests.Resources\09-svgroot^-group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\01-group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\02-group-use-href-defs-group-circle^.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\03-group-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\04-group-use-href-defs-group^-circle^.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\05-group-use^-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\06-group-use^-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\07-group^-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\08-group^-use-href-defs-group^-circle.svg" />
+        <EmbeddedResource Include="Conversion\CircleFillTests\UseTests.Resources\09-svgroot^-group-use-href-defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient-href-lineargradient.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\UrlTests.Resources\circle-fill-url-lineargradient.svg" />
         <EmbeddedResource Include="Conversion\PathTests\PathTests.Resources\path-data.svg" />

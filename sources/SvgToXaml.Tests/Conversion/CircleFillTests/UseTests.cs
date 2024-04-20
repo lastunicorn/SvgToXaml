@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleFillTests;
 
-public class UseGroupContainingCircleTests : SvgFileTestsBase
+public class UseTests : SvgFileTestsBase
 {
     [Fact]
     public void HavingNoFillDeclared_WhenSvgIsConverted_ThenResultedEllipseHasBlackFill()
