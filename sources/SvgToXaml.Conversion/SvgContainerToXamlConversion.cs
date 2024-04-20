@@ -63,7 +63,7 @@ public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
                     bool isKnown = knownSelectors.Contains(svgStyleDeclaration.Name);
                     if (!isKnown)
                     {
-                        ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in container: {svgStyleDeclaration.Name}");
+                        ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
                         conversionContext.Errors.Add(conversionIssue);
                     }
                 }

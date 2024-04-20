@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
@@ -71,9 +70,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
             SvgElement referencedElement = SvgElement.GetParentSvg().FindChild(fill.Url.ReferencedId);
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
-                XamlElement.Fill = ConvertLinearGradient(svgLinearGradient);
+                XamlElement.Fill = svgLinearGradient.Transform();
             else if (referencedElement is SvgRadialGradient svgRadialGradient)
-                XamlElement.Fill = ConvertRadialGradient(svgRadialGradient);
+                XamlElement.Fill = svgRadialGradient.Transform();
 
             if (XamlElement.Fill != null)
             {
@@ -83,110 +82,6 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
                     XamlElement.Fill.Opacity = fillOpacity.Value;
             }
         }
-    }
-
-    private static LinearGradientBrush ConvertLinearGradient(SvgLinearGradient svgLinearGradient)
-    {
-        IEnumerable<GradientStop> gradientStops = svgLinearGradient.ComputeStops()
-            .Select(Transform)
-            .ToList();
-
-        GradientStopCollection gradientStopCollection = new(gradientStops);
-        LinearGradientBrush linearGradientBrush = new(gradientStopCollection);
-
-        double x1 = svgLinearGradient.ComputeX1() ?? SvgLength.Zero;
-        double x2 = svgLinearGradient.ComputeX2() ?? SvgLength.Zero;
-        double y1 = svgLinearGradient.ComputeY1() ?? new SvgLength(1);
-        double y2 = svgLinearGradient.ComputeY2() ?? new SvgLength(1);
-
-        linearGradientBrush.StartPoint = new Point(x1, y1);
-        linearGradientBrush.EndPoint = new Point(x2, y2);
-
-        if (svgLinearGradient.GradientUnits != null)
-        {
-            linearGradientBrush.MappingMode = svgLinearGradient.GradientUnits switch
-            {
-                SvgGradientUnits.ObjectBoundingBox => BrushMappingMode.RelativeToBoundingBox,
-                SvgGradientUnits.UserSpaceOnUse => BrushMappingMode.Absolute,
-                _ => throw new Exception("Unknown gradient units.")
-            };
-        }
-
-        if (svgLinearGradient.GradientTransforms.Count > 0)
-            linearGradientBrush.Transform = svgLinearGradient.GradientTransforms.ToXaml(linearGradientBrush.Transform);
-
-        if (svgLinearGradient.SpreadMethod != null)
-        {
-            linearGradientBrush.SpreadMethod = svgLinearGradient.SpreadMethod switch
-            {
-                SvgSpreadMethod.Pad => GradientSpreadMethod.Pad,
-                SvgSpreadMethod.Reflect => GradientSpreadMethod.Reflect,
-                SvgSpreadMethod.Repeat => GradientSpreadMethod.Repeat,
-                _ => throw new Exception("Unknown spread method value.")
-            };
-        }
-
-        return linearGradientBrush;
-    }
-
-    private static RadialGradientBrush ConvertRadialGradient(SvgRadialGradient svgRadialGradient)
-    {
-        IEnumerable<GradientStop> gradientStops = svgRadialGradient.ComputeStops()
-            .Select(Transform);
-
-        GradientStopCollection gradientStopCollection = new(gradientStops);
-        RadialGradientBrush radialGradientBrush = new(gradientStopCollection);
-
-        double cx = svgRadialGradient.ComputeCenterX() ?? SvgLength.Zero;
-        double cy = svgRadialGradient.ComputeCenterY() ?? SvgLength.Zero;
-        double r = svgRadialGradient.ComputeRadius() ?? SvgLength.Zero;
-
-        radialGradientBrush.Center = new Point(cx, cy);
-        radialGradientBrush.GradientOrigin = new Point(cx, cy);
-        radialGradientBrush.RadiusX = r;
-        radialGradientBrush.RadiusY = r;
-
-        if (svgRadialGradient.GradientUnits != null)
-        {
-            radialGradientBrush.MappingMode = svgRadialGradient.GradientUnits switch
-            {
-                SvgGradientUnits.ObjectBoundingBox => BrushMappingMode.RelativeToBoundingBox,
-                SvgGradientUnits.UserSpaceOnUse => BrushMappingMode.Absolute,
-                _ => throw new Exception("Unknown gradient units.")
-            };
-        }
-
-        if (svgRadialGradient.GradientTransforms.Count > 0)
-            radialGradientBrush.Transform = svgRadialGradient.GradientTransforms.ToXaml(radialGradientBrush.Transform);
-
-        if (svgRadialGradient.SpreadMethod != null)
-        {
-            radialGradientBrush.SpreadMethod = svgRadialGradient.SpreadMethod switch
-            {
-                SvgSpreadMethod.Pad => GradientSpreadMethod.Pad,
-                SvgSpreadMethod.Reflect => GradientSpreadMethod.Reflect,
-                SvgSpreadMethod.Repeat => GradientSpreadMethod.Repeat,
-                _ => throw new Exception("Unknown spread method value.")
-            };
-        }
-
-        return radialGradientBrush;
-    }
-
-    private static GradientStop Transform(SvgStop svgStop)
-    {
-        SvgColor stopColor = svgStop.ComputeStopColor();
-
-        if (stopColor.Alpha == null)
-        {
-            SvgOpacity? stopOpacity = svgStop.ComputeStopOpacity();
-
-            if (stopOpacity.HasValue)
-                stopColor = stopColor.SetAlpha(stopOpacity.Value);
-        }
-
-        Color color = stopColor.ToColor();
-        return new GradientStop(color, svgStop.Offset);
     }
 
     private void SetStroke(IEnumerable<SvgElement> svgElements)
@@ -213,9 +108,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
             SvgElement referencedElement = SvgElement.GetParentSvg().FindChild(stroke.Url.ReferencedId);
 
             if (referencedElement is SvgLinearGradient svgLinearGradient)
-                XamlElement.Stroke = ConvertLinearGradient(svgLinearGradient);
+                XamlElement.Stroke = svgLinearGradient.Transform();
             else if (referencedElement is SvgRadialGradient svgRadialGradient)
-                XamlElement.Stroke = ConvertRadialGradient(svgRadialGradient);
+                XamlElement.Stroke = svgRadialGradient.Transform();
 
             if (XamlElement.Fill != null)
             {

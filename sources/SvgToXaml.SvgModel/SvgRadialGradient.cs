@@ -20,6 +20,12 @@ public class SvgRadialGradient : SvgElement
 {
     private SvgLength? radius;
 
+    public SvgGradientUnits? GradientUnits { get; set; }
+
+    public SvgLength? CenterX { get; set; }
+
+    public SvgLength? CenterY { get; set; }
+
     public SvgLength? Radius
     {
         get => radius;
@@ -35,11 +41,9 @@ public class SvgRadialGradient : SvgElement
         }
     }
 
-    public SvgLength? CenterX { get; set; }
+    public SvgLength? Fx { get; set; }
 
-    public SvgLength? CenterY { get; set; }
-
-    public SvgGradientUnits? GradientUnits { get; set; }
+    public SvgLength? Fy { get; set; }
 
     public List<SvgStop> Stops { get; } = new();
 
@@ -98,6 +102,16 @@ public class SvgRadialGradient : SvgElement
         }
 
         return null;
+    }
+
+    public SvgLength? ComputeFx()
+    {
+        return Fx;
+    }
+
+    public SvgLength? ComputeFy()
+    {
+        return Fy;
     }
 
     public List<SvgStop> ComputeStops()

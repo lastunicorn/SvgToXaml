@@ -37,13 +37,27 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
     {
         base.ConvertProperties();
 
+        ConvertGradientUnits();
         ConvertRadius();
         ConvertCenter();
-        ConvertGradientUnits();
+        ConvertGradientOrigin();
         ConvertStops();
         ConvertGradientTransform();
         ConvertHref();
         ConvertSpreadMethod();
+    }
+
+    private void ConvertGradientUnits()
+    {
+        if (XmlElement.GradientUnitsSpecified)
+        {
+            SvgElement.GradientUnits = XmlElement.GradientUnits switch
+            {
+                XmlGradientUnits.ObjectBoundingBox => SvgGradientUnits.ObjectBoundingBox,
+                XmlGradientUnits.UserSpaceOnUse => SvgGradientUnits.UserSpaceOnUse,
+                _ => throw new Exception("Invalid gradient unit value.")
+            };
+        }
     }
 
     private void ConvertRadius()
@@ -70,21 +84,20 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
 
     private void ConvertCenter()
     {
-        SvgElement.CenterX = XmlElement.Cx;
-        SvgElement.CenterY = XmlElement.Cy;
+        if (XmlElement.Cx != null)
+            SvgElement.CenterX = XmlElement.Cx;
+
+        if (XmlElement.Cx != null)
+            SvgElement.CenterY = XmlElement.Cy;
     }
 
-    private void ConvertGradientUnits()
+    private void ConvertGradientOrigin()
     {
-        if (XmlElement.GradientUnitsSpecified)
-        {
-            SvgElement.GradientUnits = XmlElement.GradientUnits switch
-            {
-                XmlGradientUnits.ObjectBoundingBox => SvgGradientUnits.ObjectBoundingBox,
-                XmlGradientUnits.UserSpaceOnUse => SvgGradientUnits.UserSpaceOnUse,
-                _ => throw new Exception("Invalid gradient unit value.")
-            };
-        }
+        if (XmlElement.Fx != null)
+            SvgElement.Fx = XmlElement.Fx;
+
+        if (XmlElement.Fy != null)
+            SvgElement.Fy = XmlElement.Fy;
     }
 
     private void ConvertStops()

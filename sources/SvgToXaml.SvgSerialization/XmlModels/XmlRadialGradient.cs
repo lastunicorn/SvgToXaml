@@ -29,6 +29,12 @@ public class XmlRadialGradient : XmlElement
     [XmlAttribute("r")]
     public string R { get; set; }
 
+    [XmlAttribute("fx")]
+    public string Fx { get; set; }
+
+    [XmlAttribute("fy")]
+    public string Fy { get; set; }
+
     [XmlAttribute("gradientUnits")]
     public XmlGradientUnits GradientUnits { get; set; }
 

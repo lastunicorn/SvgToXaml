@@ -62,7 +62,12 @@ public class SvgSerializer
         deserializationContext = new DeserializationContext();
 
         XmlSvg xmlSvg = DeserializeSvgObject(textReader);
-        return BuildResult(xmlSvg);
+        
+        Svg svg = xmlSvg == null
+            ? null
+            : Convert(xmlSvg);
+
+        return BuildResult(svg);
     }
 
     private XmlSvg DeserializeSvgObject(TextReader textReader)
@@ -88,11 +93,14 @@ public class SvgSerializer
         }
     }
 
-    private DeserializationResult BuildResult(XmlSvg xmlSvg)
+    private Svg Convert(XmlSvg xmlSvg)
     {
         XmlSvgToModelConversion conversion = new(xmlSvg, deserializationContext);
-        Svg svg = conversion.Execute();
+        return conversion.Execute();
+    }
 
+    private DeserializationResult BuildResult(Svg svg)
+    {
         return new DeserializationResult
         {
             Svg = svg,
