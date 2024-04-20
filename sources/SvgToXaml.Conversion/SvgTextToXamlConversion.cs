@@ -16,19 +16,34 @@
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Xml;
 using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, UIElement>
+internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
 {
     public SvgTextToXamlConversion(SvgText svgText, SvgElement referrer = null)
         : base(svgText, referrer)
     {
     }
 
-    protected override UIElement CreateXamlElement()
+    protected override TextBlock CreateXamlElement()
     {
         return new TextBlock();
+    }
+
+    protected override void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
+    {
+        base.InheritPropertiesFrom(svgElements);
+
+        XamlElement.Text = SvgElement.Text;
+
+        double left = SvgElement.X;
+        double top = SvgElement.Y;
+
+        if (left != 0 || top != 0)
+            XamlElement.RenderTransform = new TranslateTransform(left, top);
     }
 }

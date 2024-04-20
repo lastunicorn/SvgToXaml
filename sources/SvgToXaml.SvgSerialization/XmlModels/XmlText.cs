@@ -14,8 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Xml.Serialization;
+
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 public class XmlText : XmlElement
 {
+    [XmlText]
+    public string Text { get; set; }
+
+    [XmlAttribute("x")]
+    public string X { get; set; }
+
+    public bool XSpecified { get; set; }
+
+    [XmlAttribute("y")]
+    public string Y { get; set; }
+    
+    public bool YSpecified { get; set; }
 }

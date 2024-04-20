@@ -32,4 +32,17 @@ internal class XmlTextToModelConversion : XmlElementToModelConversion<XmlText, S
     {
         return new SvgText();
     }
+
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        SvgElement.Text = XmlElement.Text;
+
+        if (XmlElement.XSpecified)
+            SvgElement.X = XmlElement.X;
+
+        if (XmlElement.YSpecified)
+            SvgElement.Y = XmlElement.Y;
+    }
 }
