@@ -34,104 +34,90 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
 
         if (XmlElement.Children != null)
         {
-            foreach (object serializationChild in XmlElement.Children)
+            IEnumerable<IToModelConversion<SvgElement>> conversions = CreateConversionsForAllChildren();
+
+            foreach (IToModelConversion<SvgElement> conversion in conversions)
             {
-                if (serializationChild is XmlCircle circle)
-                {
-                    XmlCircleToModelConversion conversion = new(circle, DeserializationContext);
-                    SvgCircle svgCircle = conversion.Execute();
-                    SvgElement.Children.Add(svgCircle);
-                }
-                else if (serializationChild is XmlEllipse ellipse)
-                {
-                    XmlEllipseToModelConversion conversion = new(ellipse, DeserializationContext);
-                    SvgEllipse svgEllipse = conversion.Execute();
-                    SvgElement.Children.Add(svgEllipse);
-                }
-                else if (serializationChild is XmlPath path)
-                {
-                    XmlPathToModelConversion conversion = new(path, DeserializationContext);
-                    SvgPath svgPath = conversion.Execute();
-                    SvgElement.Children.Add(svgPath);
-                }
-                else if (serializationChild is XmlLine line)
-                {
-                    XmlLineToModelConversion conversion = new(line, DeserializationContext);
-                    SvgLine svgLine = conversion.Execute();
-                    SvgElement.Children.Add(svgLine);
-                }
-                else if (serializationChild is XmlRect rect)
-                {
-                    XmlRectToModelConversion conversion = new(rect, DeserializationContext);
-                    SvgRectangle svgRectangle = conversion.Execute();
-                    SvgElement.Children.Add(svgRectangle);
-                }
-                else if (serializationChild is XmlPolygon polygon)
-                {
-                    XmlPolygonToModelConversion conversion = new(polygon, DeserializationContext);
-                    SvgPolygon svgPolygon = conversion.Execute();
-                    SvgElement.Children.Add(svgPolygon);
-                }
-                else if (serializationChild is XmlPolyline polyline)
-                {
-                    XmlPolylineToModelConversion conversion = new(polyline, DeserializationContext);
-                    SvgPolyline svgPolyline = conversion.Execute();
-                    SvgElement.Children.Add(svgPolyline);
-                }
-                else if (serializationChild is XmlDefs defs)
-                {
-                    XmlDefsToModelConversion conversion = new(defs, DeserializationContext);
-                    SvgDefinitions svgDefinitions = conversion.Execute();
-                    SvgElement.Children.Add(svgDefinitions);
-                }
-                else if (serializationChild is XmlG gChild)
-                {
-                    XmlGroupToModelConversion conversion = new(gChild, DeserializationContext);
-                    SvgGroup svgGroupChild = conversion.Execute();
-                    SvgElement.Children.Add(svgGroupChild);
-                }
-                else if (serializationChild is XmlUse use)
-                {
-                    XmlUseToModelConversion conversion = new(use, DeserializationContext);
-                    SvgUse svgUseChild = conversion.Execute();
-                    SvgElement.Children.Add(svgUseChild);
-                }
-                else if (serializationChild is XmlStyle style)
-                {
-                    XmlStyleToModelConversion conversion = new(style, DeserializationContext);
-                    SvgStyleSheet svgStyleSheet = conversion.Execute();
-                    SvgElement.Children.Add(svgStyleSheet);
-                }
-                else if (serializationChild is XmlText text)
-                {
-                    XmlTextToModelConversion conversion = new(text, DeserializationContext);
-                    SvgText svgText = conversion.Execute();
-                    SvgElement.Children.Add(svgText);
-                }
-                else if (serializationChild is XmlLinearGradient linearGradient)
-                {
-                    XmlLinearGradientToModelConversion conversion = new(linearGradient, DeserializationContext);
-                    SvgLinearGradient svgLinearGradient = conversion.Execute();
-                    SvgElement.Children.Add(svgLinearGradient);
-                }
-                else if (serializationChild is XmlRadialGradient radialGradient)
-                {
-                    XmlRadialGradientToModelConversion conversion = new(radialGradient, DeserializationContext);
-                    SvgRadialGradient svgRadialGradient = conversion.Execute();
-                    SvgElement.Children.Add(svgRadialGradient);
-                }
-                else if (serializationChild is XmlClipPath clipPath)
-                {
-                    XmlClipPathToModelConversion conversion = new(clipPath, DeserializationContext);
-                    SvgClipPath svgClipPath = conversion.Execute();
-                    SvgElement.Children.Add(svgClipPath);
-                }
-                else if (serializationChild is XmlSvg childSvg)
-                {
-                    XmlSvgToModelConversion conversion = new(childSvg, DeserializationContext);
-                    Svg svg = conversion.Execute();
-                    SvgElement.Children.Add(svg);
-                }
+                SvgElement childSvgElement = conversion.Execute();
+                SvgElement.Children.Add(childSvgElement);
+            }
+        }
+    }
+
+    protected IEnumerable<IToModelConversion<SvgElement>> CreateConversionsForAllChildren()
+    {
+        foreach (object serializationChild in XmlElement.Children)
+        {
+            switch (serializationChild)
+            {
+                case XmlCircle circle:
+                    yield return new XmlCircleToModelConversion(circle, DeserializationContext);
+                    break;
+
+                case XmlEllipse ellipse:
+                    yield return new XmlEllipseToModelConversion(ellipse, DeserializationContext);
+                    break;
+
+                case XmlPath path:
+                    yield return new XmlPathToModelConversion(path, DeserializationContext);
+                    break;
+
+                case XmlLine line:
+                    yield return new XmlLineToModelConversion(line, DeserializationContext);
+                    break;
+
+                case XmlRect rect:
+                    yield return new XmlRectToModelConversion(rect, DeserializationContext);
+                    break;
+
+                case XmlPolygon polygon:
+                    yield return new XmlPolygonToModelConversion(polygon, DeserializationContext);
+                    break;
+
+                case XmlPolyline polyline:
+                    yield return new XmlPolylineToModelConversion(polyline, DeserializationContext);
+                    break;
+
+                case XmlDefs defs:
+                    yield return new XmlDefsToModelConversion(defs, DeserializationContext);
+                    break;
+
+                case XmlG gChild:
+                    yield return new XmlGroupToModelConversion(gChild, DeserializationContext);
+                    break;
+
+                case XmlUse use:
+                    yield return new XmlUseToModelConversion(use, DeserializationContext);
+                    break;
+
+                case XmlStyle style:
+                    yield return new XmlStyleToModelConversion(style, DeserializationContext);
+                    break;
+
+                case XmlText text:
+                    yield return new XmlTextToModelConversion(text, DeserializationContext);
+                    break;
+
+                case XmlLinearGradient linearGradient:
+                    yield return new XmlLinearGradientToModelConversion(linearGradient, DeserializationContext);
+                    break;
+
+                case XmlRadialGradient radialGradient:
+                    yield return new XmlRadialGradientToModelConversion(radialGradient, DeserializationContext);
+                    break;
+
+                case XmlClipPath clipPath:
+                    yield return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
+                    break;
+
+                case XmlSvg childSvg:
+                    yield return new XmlSvgToModelConversion(childSvg, DeserializationContext);
+                    break;
+
+                default:
+                    DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
+                    DeserializationContext.Errors.Add(deserializationIssue);
+                    break;
             }
         }
     }

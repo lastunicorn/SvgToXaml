@@ -21,7 +21,7 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
+internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     where TSvg : SvgElement
     where TXaml : UIElement
 {
@@ -31,7 +31,7 @@ internal abstract class SvgElementToXamlConversion<TSvg, TXaml> : IConversion<TX
 
     protected TXaml XamlElement { get; private set; }
 
-    protected SvgElementToXamlConversion(TSvg svgElement, SvgElement referrer = null)
+    protected ToXamlConversion(TSvg svgElement, SvgElement referrer = null)
     {
         SvgElement = svgElement ?? throw new ArgumentNullException(nameof(svgElement));
         this.referrer = referrer;

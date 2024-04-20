@@ -19,7 +19,7 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal abstract class ToModelConversion<TXml, TSvg>
+internal abstract class ToModelConversion<TXml, TSvg> : IToModelConversion<TSvg>
     where TXml : XmlElement
     where TSvg : SvgElement
 {

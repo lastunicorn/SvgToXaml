@@ -14,21 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
-using System.Windows.Controls;
 using DustInTheWind.SvgToXaml.SvgModel;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, UIElement>
+internal interface IToModelConversion<out TSvg>
+    where TSvg : SvgElement
 {
-    public SvgTextToXamlConversion(SvgText svgText, SvgElement referrer = null)
-        : base(svgText, referrer)
-    {
-    }
-
-    protected override UIElement CreateXamlElement()
-    {
-        return new TextBlock();
-    }
+    TSvg Execute();
 }
