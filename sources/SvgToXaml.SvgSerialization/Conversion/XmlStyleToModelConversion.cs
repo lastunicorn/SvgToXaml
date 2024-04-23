@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal class XmlStyleToModelConversion : ToModelConversion<XmlStyle, SvgStyleSheet>
+internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle, SvgStyleSheet>
 {
     private static readonly Regex Regex = new(@"\.(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
 

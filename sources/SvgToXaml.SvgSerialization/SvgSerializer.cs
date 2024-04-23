@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Xml;
 using System.Xml.Serialization;
 using DustInTheWind.SvgToXaml.SvgModel;
 using DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
@@ -36,6 +37,9 @@ public class SvgSerializer
 
     private void HandleUnknownNode(object sender, XmlNodeEventArgs e)
     {
+        if (e.NodeType is XmlNodeType.Attribute or XmlNodeType.Element)
+            return;
+
         DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
         deserializationContext.Warnings.Add(deserializationIssue);
     }
@@ -62,7 +66,7 @@ public class SvgSerializer
         deserializationContext = new DeserializationContext();
 
         XmlSvg xmlSvg = DeserializeSvgObject(textReader);
-        
+
         Svg svg = xmlSvg == null
             ? null
             : Convert(xmlSvg);
