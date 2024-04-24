@@ -36,25 +36,36 @@ public class SvgElement
 
     // Inherited Attributes
 
-    public SvgPaint Fill { get; set; }
-    
-    public double? FillOpacity { get; set; }
+    public Paint Fill { get; set; }
 
+    /// <summary>
+    /// The fill-rule property indicates the algorithm (or winding rule) which is to be used to
+    /// determine what parts of the canvas are included inside the shape. For a simple,
+    /// non-intersecting path, it is intuitively clear what region lies "inside"; however, for a
+    /// more complex path, such as a path that intersects itself or where one subpath encloses
+    /// another, the interpretation of "inside" is not so obvious.
+    /// 
+    /// The fill-rule property provides two options for how the inside of a shape is determined:
+    /// - nonzero
+    /// - evenodd
+    /// </summary>
     public FillRule? FillRule { get; set; }
 
-    public SvgPaint Stroke { get; set; }
-    
+    public double? FillOpacity { get; set; }
+
+    public Paint Stroke { get; set; }
+
     public double? StrokeOpacity { get; set; }
 
-    public SvgLengthPercentage? StrokeWidth { get; set; }
+    public LengthPercentage? StrokeWidth { get; set; }
 
     public StrokeLineCap? StrokeLineCap { get; set; }
 
     public StrokeLineJoin? StrokeLineJoin { get; set; }
 
-    public double? StrokeDashOffset { get; set; }
-
     public double? StrokeMiterLimit { get; set; }
+
+    public LengthPercentage? StrokeDashOffset { get; set; }
 
     //
 
@@ -90,7 +101,7 @@ public class SvgElement
         }
     }
 
-    public SvgPaint ComputeFill()
+    public Paint ComputeFill()
     {
         SvgStyleDeclaration styleDeclaration = Style?["fill"];
 
@@ -135,7 +146,7 @@ public class SvgElement
         return FillRule;
     }
 
-    public SvgPaint ComputeStroke()
+    public Paint ComputeStroke()
     {
         SvgStyleDeclaration styleDeclaration = Style?["stroke"];
 
@@ -165,7 +176,7 @@ public class SvgElement
         return StrokeOpacity;
     }
 
-    public SvgLengthPercentage? ComputeStrokeWidth()
+    public LengthPercentage? ComputeStrokeWidth()
     {
         SvgStyleDeclaration styleDeclaration = Style?["stroke-width"];
 
@@ -216,17 +227,23 @@ public class SvgElement
         return StrokeLineJoin;
     }
 
-    public double? ComputeStrokeDashOffset()
+    public LengthPercentage? ComputeStrokeDashOffset()
     {
         SvgStyleDeclaration styleDeclaration = Style?["stroke-dashoffset"];
 
         if (styleDeclaration != null)
-            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+        {
+            LengthPercentage length = styleDeclaration.Value.Trim();
+            return length;
+        }
 
         string rawValue = GetStyleValueFromClasses("stroke-dashoffset");
 
         if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
+        {
+            LengthPercentage length = rawValue;
+            return length;
+        }
 
         return StrokeDashOffset;
     }

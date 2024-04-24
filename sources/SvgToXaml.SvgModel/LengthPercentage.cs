@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public readonly record struct SvgLengthPercentage
+public readonly record struct LengthPercentage
 {
     public SvgLength? Length { get; }
 
@@ -24,30 +24,44 @@ public readonly record struct SvgLengthPercentage
 
     public bool IsEmpty { get; }
 
-    public static SvgLengthPercentage Empty { get; } = new();
+    public static LengthPercentage Empty { get; } = new();
 
-    public SvgLengthPercentage()
+    public LengthPercentage()
     {
         Length = null;
         Percentage = null;
         IsEmpty = true;
     }
 
-    public SvgLengthPercentage(SvgLength svgLength)
+    public LengthPercentage(SvgLength svgLength)
     {
         Length = svgLength;
         Percentage = null;
         IsEmpty = false;
     }
 
-    public SvgLengthPercentage(SvgPercentage svgPercentage)
+    public LengthPercentage(SvgPercentage svgPercentage)
     {
         Length = null;
         Percentage = svgPercentage;
         IsEmpty = false;
     }
 
-    public static SvgLengthPercentage Parse(string text)
+    public double ComputeValue()
+    {
+        if (IsEmpty)
+            return 0;
+
+        if (Length != null)
+            return Length.Value.Value;
+
+        if (Percentage != null)
+            return Percentage.Value.Value;
+
+        return 0;
+    }
+
+    public static LengthPercentage Parse(string text)
     {
         if (text == null)
             return Empty;
@@ -55,42 +69,42 @@ public readonly record struct SvgLengthPercentage
         bool isLength = SvgLength.TryParse(text, out SvgLength svgLength);
 
         if (isLength)
-            return new SvgLengthPercentage(svgLength);
+            return new LengthPercentage(svgLength);
 
         bool isPercentage = SvgPercentage.TryParse(text, out SvgPercentage svgPercentage);
 
         if (isPercentage)
-            return new SvgLengthPercentage(svgPercentage);
+            return new LengthPercentage(svgPercentage);
 
         return Empty;
     }
 
-    public static implicit operator SvgLengthPercentage(SvgLength svgLength)
+    public static implicit operator LengthPercentage(SvgLength svgLength)
     {
-        return new SvgLengthPercentage(svgLength);
+        return new LengthPercentage(svgLength);
     }
 
-    public static implicit operator SvgLengthPercentage(SvgPercentage svgPercentage)
+    public static implicit operator LengthPercentage(SvgPercentage svgPercentage)
     {
-        return new SvgLengthPercentage(svgPercentage);
+        return new LengthPercentage(svgPercentage);
     }
 
-    public static implicit operator SvgLengthPercentage(double value)
+    public static implicit operator LengthPercentage(double value)
     {
         SvgLength svgLength = new(value);
-        return new SvgLengthPercentage(svgLength);
+        return new LengthPercentage(svgLength);
     }
 
-    public static implicit operator SvgLengthPercentage(string text)
+    public static implicit operator LengthPercentage(string text)
     {
         return Parse(text);
     }
 
-    public static implicit operator SvgLengthPercentage?(string text)
+    public static implicit operator LengthPercentage?(string text)
     {
         if (text == null)
-            return (SvgLengthPercentage?)null;
-        
+            return (LengthPercentage?)null;
+
         return Parse(text);
     }
 }

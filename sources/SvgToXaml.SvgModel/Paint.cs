@@ -19,7 +19,7 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 /// <remarks>
 /// Possible Values = none | {color} | {url} [none | {color}]? | context-fill | context-stroke 
 /// </remarks>
-public class SvgPaint
+public class Paint
 {
     public SvgColor Color { get; private init; }
 
@@ -27,7 +27,7 @@ public class SvgPaint
 
     public bool IsNone { get; private init; }
 
-    public static SvgPaint Parse(string text)
+    public static Paint Parse(string text)
     {
         if (text == null)
             return null;
@@ -36,7 +36,7 @@ public class SvgPaint
 
         if (isNone)
         {
-            return new SvgPaint
+            return new Paint
             {
                 IsNone = true
             };
@@ -46,13 +46,13 @@ public class SvgPaint
 
         if (isColor)
         {
-            return new SvgPaint
+            return new Paint
             {
                 Color = svgColor
             };
         }
 
-        return new SvgPaint
+        return new Paint
         {
             Url = text
         };
@@ -72,7 +72,7 @@ public class SvgPaint
         return string.Empty;
     }
 
-    public static implicit operator SvgPaint(string text)
+    public static implicit operator Paint(string text)
     {
         return text == null
             ? null

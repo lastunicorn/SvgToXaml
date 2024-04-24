@@ -18,10 +18,29 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public enum StrokeLineCap
 {
-    //Flat,
+    /// <summary>
+    /// This value indicates that the stroke for each subpath does not extend beyond its two
+    /// endpoints. A zero length subpath will therefore not have any stroke.
+    /// </summary>
     Butt,
-    Square,
 
-    Round
-    //Triangle
+    /// <summary>
+    /// This value indicates that at each end of each subpath, the shape representing the stroke
+    /// will be extended by a half circle with a diameter equal to the stroke width. If a subpath,
+    /// whether open or closed, has zero length, then the resulting effect is that the stroke for
+    /// that subpath consists solely of a full circle centered at the subpath's point.
+    /// </summary>
+    Round,
+
+    /// <summary>
+    /// This value indicates that at the end of each subpath, the shape representing the stroke
+    /// will be extended by a rectangle with the same width as the stroke width and whose length is
+    /// half of the stroke width. If a subpath, whether open or closed, has zero length, then the
+    /// resulting effect is that the stroke for that subpath consists solely of a square with side
+    /// length equal to the stroke width, centered at the subpath's point, and oriented such that
+    /// two of its sides are parallel to the effective tangent at that subpath's point. See ‘path’
+    /// element implementation notes for details on how to determine the tangent at a zero-length
+    /// subpath.
+    /// </summary>
+    Square
 }

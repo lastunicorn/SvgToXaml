@@ -44,7 +44,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
     private void SetFill(IEnumerable<SvgElement> svgElements)
     {
-        SvgPaint fill = svgElements
+        Paint fill = svgElements
             .Select(x => x.ComputeFill())
             .FirstOrDefault(x => x != null);
 
@@ -86,7 +86,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
     private void SetStroke(IEnumerable<SvgElement> svgElements)
     {
-        SvgPaint stroke = svgElements
+        Paint stroke = svgElements
             .Select(x => x.ComputeStroke())
             .FirstOrDefault(x => x != null);
 
@@ -124,7 +124,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
     private void SetStrokeThickness(IEnumerable<SvgElement> svgElements)
     {
-        SvgLengthPercentage? strokeWidth = svgElements
+        LengthPercentage? strokeWidth = svgElements
             .Select(x => x.ComputeStrokeWidth())
             .FirstOrDefault(x => x != null);
 
@@ -175,12 +175,12 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
     private void SetStrokeDashOffset(IEnumerable<SvgElement> svgElements)
     {
-        double? strokeDashOffset = svgElements
+        LengthPercentage? strokeDashOffset = svgElements
             .Select(x => x.ComputeStrokeDashOffset())
             .FirstOrDefault(x => x != null);
 
         if (strokeDashOffset != null)
-            XamlElement.StrokeDashOffset = strokeDashOffset.Value;
+            XamlElement.StrokeDashOffset = strokeDashOffset.Value.ComputeValue();
     }
 
     private void SetStrokeMiterLimit(IEnumerable<SvgElement> svgElements)

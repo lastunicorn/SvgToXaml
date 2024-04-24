@@ -29,8 +29,17 @@ public readonly struct SvgLength
 
     public SvgLengthUnit Unit { get; }
 
+    public SvgLength(double value, SvgLengthUnit unit = SvgLengthUnit.Unspecified)
+    {
+        Value = value;
+        Unit = unit;
+    }
+
     public static SvgLength Parse(string text)
     {
+        if (text == null)
+            return Zero;
+
         Match match = Regex.Match(text);
 
         if (!match.Success)
@@ -57,12 +66,6 @@ public readonly struct SvgLength
 
         svgLength = new SvgLength(value, unit);
         return true;
-    }
-
-    public SvgLength(double value, SvgLengthUnit unit = SvgLengthUnit.Unspecified)
-    {
-        Value = value;
-        Unit = unit;
     }
 
     public override string ToString()

@@ -83,9 +83,7 @@ public class XmlElement
     //public double StrokeDashArray { get; set; }
 
     [XmlAttribute("stroke-dashoffset")]
-    public double StrokeDashOffset { get; set; }
-
-    public bool StrokeDashOffsetSpecified { get; set; }
+    public string StrokeDashOffset { get; set; }
 
     //
 
