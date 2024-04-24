@@ -16,13 +16,15 @@
 
 namespace DustInTheWind.SvgToXaml.Application.Transform;
 
-public class XamlTextChangedEvent
+internal class ConversionIssue
 {
-    public string XamlText { get; set; }
+    public string Path { get; }
 
-    public List<ErrorInfo> Info { get; } = new();
-    
-    public List<ErrorInfo> Warning { get; } = new();
-    
-    public List<ErrorInfo> Errors { get; } = new();
+    public string Message { get; }
+
+    public ConversionIssue(string path, string message)
+    {
+        Path = path;
+        Message = message;
+    }
 }

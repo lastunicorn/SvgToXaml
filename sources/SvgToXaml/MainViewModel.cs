@@ -136,8 +136,12 @@ public class MainViewModel : ViewModelBase
     {
         XamlText = ev.XamlText;
 
-        Errors = ev.Errors.Count > 0
-            ? string.Join(Environment.NewLine, ev.Errors.Select(x => x.Message))
+        IEnumerable<ErrorInfo> logItems = ev.Errors
+            .Concat(ev.Warning)
+            .Concat(ev.Info);
+
+        Errors = logItems.Any()
+            ? string.Join(Environment.NewLine, logItems.Select(x => x.Message))
             : null;
 
         return Task.CompletedTask;

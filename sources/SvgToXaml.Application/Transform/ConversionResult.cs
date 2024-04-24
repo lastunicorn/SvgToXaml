@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Windows.Controls;
+
 namespace DustInTheWind.SvgToXaml.Application.Transform;
 
-public class XamlTextChangedEvent
+internal class ConversionResult
 {
-    public string XamlText { get; set; }
+    public Canvas Canvas { get; init; }
 
-    public List<ErrorInfo> Info { get; } = new();
-    
-    public List<ErrorInfo> Warning { get; } = new();
-    
-    public List<ErrorInfo> Errors { get; } = new();
+    public List<ConversionIssue> Warnings { get; init; } = new();
+
+    public List<ConversionIssue> Errors { get; init; } = new();
 }

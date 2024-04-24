@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -119,33 +118,76 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
     private Canvas Optimize(Canvas canvas)
     {
-        List<UIElement> childrenToRemove = new();
+        int i = 0;
 
-        foreach (UIElement child in canvas.Children)
+        while (i < canvas.Children.Count)
         {
+            UIElement child = canvas.Children[i];
+
             if (child is Canvas childCanvas)
             {
                 Optimize(childCanvas);
 
                 if (childCanvas.Children.Count == 0)
-                    childrenToRemove.Add(child);
+                {
+                    canvas.Children.RemoveAt(i);
+
+                    ErrorInfo errorInfo = new()
+                    {
+                        Message = $"Optimization: UIElement removed - {child.GetType().Name}"
+                    };
+                    xamlTextChangedEvent.Info.Add(errorInfo);
+
+                    continue;
+                }
+
+                bool containsTransformations = childCanvas.RenderTransform != null && childCanvas.RenderTransform != System.Windows.Media.Transform.Identity;
+                if (!containsTransformations)
+                {
+                    bool containsLanguage = childCanvas.Language != null && childCanvas.Language != XmlLanguage.Empty && childCanvas.Language != XmlLanguage.GetLanguage("en-US");
+                    if (!containsLanguage)
+                    {
+                        int grandChildrenCount = childCanvas.Children.Count;
+
+                        while (childCanvas.Children.Count > 0)
+                        {
+                            UIElement grandChild = childCanvas.Children[0];
+
+                            grandChild.RemoveFromParent(out DependencyObject _, out int? _);
+                            grandChild.AddToParent(canvas, i);
+
+                            i++;
+                        }
+
+                        canvas.Children.RemoveAt(i);
+
+                        ErrorInfo errorInfo = new()
+                        {
+                            Message = $"Optimization: {grandChildrenCount} children moved outside of container. Container removed - {child.GetType().Name}."
+                        };
+                        xamlTextChangedEvent.Info.Add(errorInfo);
+
+                        continue;
+                    }
+                }
             }
             else if (child is TextBlock textBlock)
             {
                 if (string.IsNullOrEmpty(textBlock.Text))
-                    childrenToRemove.Add(child);
+                {
+                    canvas.Children.RemoveAt(i);
+
+                    ErrorInfo errorInfo = new()
+                    {
+                        Message = $"Optimization: UIElement removed - {child.GetType().Name}"
+                    };
+                    xamlTextChangedEvent.Info.Add(errorInfo);
+
+                    continue;
+                }
             }
-        }
 
-        foreach (UIElement child in childrenToRemove)
-        {
-            canvas.Children.Remove(child);
-
-            ErrorInfo errorInfo = new()
-            {
-                Message = $"Optimization: UIElement removed - {child.GetType().Name}"
-            };
-            xamlTextChangedEvent.Errors.Add(errorInfo);
+            i++;
         }
 
         return canvas;
@@ -181,27 +223,5 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         xmlAlteration.AddStep(typeof(MatrixTransformXmlAlterationStep));
         xmlAlteration.Execute();
         return xmlAlteration.SerializeResult();
-    }
-}
-
-internal class ConversionResult
-{
-    public Canvas Canvas { get; init; }
-
-    public List<ConversionIssue> Warnings { get; init; } = new();
-
-    public List<ConversionIssue> Errors { get; init; } = new();
-}
-
-internal class ConversionIssue
-{
-    public string Path { get; }
-
-    public string Message { get; }
-
-    public ConversionIssue(string path, string message)
-    {
-        Path = path;
-        Message = message;
     }
 }
