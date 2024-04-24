@@ -17,6 +17,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using DustInTheWind.SvgToXaml.SvgModel;
+using TranslateTransform = System.Windows.Media.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

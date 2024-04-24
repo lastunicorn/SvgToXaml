@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
-public class Namespaces
+public static class Namespaces
 {
     public const string Html = "http://www.w3.org/1999/xhtml";
 

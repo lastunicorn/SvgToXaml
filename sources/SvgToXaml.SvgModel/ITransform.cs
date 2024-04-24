@@ -16,14 +16,6 @@
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgStyleRuleSet
+public interface ITransform
 {
-    public string Selector { get; init; }
-
-    public SvgStyleDeclarationCollection Declarations { get; init; }
-
-    public override string ToString()
-    {
-        return $".{Selector}{{{Declarations}}}";
-    }
 }

@@ -14,30 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Globalization;
+
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgStyleDeclaration
+public class TranslateTransform : ITransform
 {
-    public string Name { get; init; }
+    public double X { get; set; }
 
-    public string Value { get; init; }
+    public double Y { get; set; }
 
-    public static implicit operator SvgStyleDeclaration(string text)
+    public TranslateTransform(string text)
     {
-        int pos = text.IndexOf(':');
+        if (text == null)
+            return;
 
-        if (pos == -1)
-            return null;
+        string[] parts = text.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-        return new SvgStyleDeclaration
+        if (parts.Length >= 1)
         {
-            Name = text[..pos].Trim(),
-            Value = text[(pos + 1)..].Trim()
-        };
-    }
+            X = double.Parse(parts[0], CultureInfo.InvariantCulture);
+        }
 
-    public override string ToString()
-    {
-        return $"{Name}:{Value}";
+        if (parts.Length >= 2)
+        {
+            Y = double.Parse(parts[1], CultureInfo.InvariantCulture);
+        }
     }
 }

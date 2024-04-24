@@ -66,13 +66,13 @@ public class SvgContainer : SvgElement
         }
     }
 
-    public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets(string mimeType = null)
+    public IEnumerable<StyleRuleSet> GetAllStyleRuleSets(string mimeType = null)
     {
         IEnumerable<SvgStyle> svgStyles = GetStyleSheetsRecursively(mimeType);
 
         foreach (SvgStyle svgStyle in svgStyles)
         {
-            foreach (SvgStyleRuleSet styleRuleSet in svgStyle.RuleSets)
+            foreach (StyleRuleSet styleRuleSet in svgStyle.RuleSets)
                 yield return styleRuleSet;
         }
     }

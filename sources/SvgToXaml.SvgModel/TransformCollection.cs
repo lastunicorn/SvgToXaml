@@ -18,7 +18,7 @@ using System.Collections.ObjectModel;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class TransformCollection : Collection<ISvgTransform>
+public class TransformCollection : Collection<ITransform>
 {
     public void ParseAndAdd(string text)
     {
@@ -31,8 +31,8 @@ public class TransformCollection : Collection<ISvgTransform>
             switch (item.Key)
             {
                 case "translate":
-                    SvgTranslateTransform svgTranslateTransform = new(item.Value);
-                    Items.Add(svgTranslateTransform);
+                    TranslateTransform translateTransform = new(item.Value);
+                    Items.Add(translateTransform);
                     break;
 
                 case "translateX":
@@ -40,8 +40,8 @@ public class TransformCollection : Collection<ISvgTransform>
                     throw new NotImplementedException();
 
                 case "scale":
-                    SvgScaleTransform svgScaleTransform = new(item.Value);
-                    Items.Add(svgScaleTransform);
+                    ScaleTransform scaleTransform = new(item.Value);
+                    Items.Add(scaleTransform);
                     break;
 
                 case "scaleX":
@@ -49,13 +49,13 @@ public class TransformCollection : Collection<ISvgTransform>
                     throw new NotImplementedException();
 
                 case "rotate":
-                    SvgRotateTransform svgRotateTransform = new(item.Value);
-                    Items.Add(svgRotateTransform);
+                    RotateTransform rotateTransform = new(item.Value);
+                    Items.Add(rotateTransform);
                     break;
 
                 case "matrix":
-                    SvgMatrixTransform svgMatrixTransform = new(item.Value);
-                    Items.Add(svgMatrixTransform);
+                    MatrixTransform matrixTransform = new(item.Value);
+                    Items.Add(matrixTransform);
                     break;
 
                 case "skew":

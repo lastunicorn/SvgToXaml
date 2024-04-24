@@ -57,6 +57,9 @@ public record struct AlphaValue
         if (text == null)
             return Zero;
 
+        if (string.IsNullOrWhiteSpace(text))
+            return Zero;
+
         Match match = Regex.Match(text);
 
         if (!match.Success)
@@ -74,6 +77,12 @@ public record struct AlphaValue
         {
             alphaValue = Zero;
             return false;
+        }
+
+        if (text.Length == 0)
+        {
+            alphaValue = Zero;
+            return true;
         }
 
         Match match = Regex.Match(text);
@@ -112,7 +121,7 @@ public record struct AlphaValue
     public static implicit operator AlphaValue?(string text)
     {
         if (text == null)
-            return (AlphaValue?)null;
+            return null;
 
         return Parse(text);
     }

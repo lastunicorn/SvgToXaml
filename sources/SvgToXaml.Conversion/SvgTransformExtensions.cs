@@ -16,12 +16,16 @@
 
 using System.Windows.Media;
 using DustInTheWind.SvgToXaml.SvgModel;
+using MatrixTransform = DustInTheWind.SvgToXaml.SvgModel.MatrixTransform;
+using RotateTransform = DustInTheWind.SvgToXaml.SvgModel.RotateTransform;
+using ScaleTransform = DustInTheWind.SvgToXaml.SvgModel.ScaleTransform;
+using TranslateTransform = DustInTheWind.SvgToXaml.SvgModel.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal static class SvgTransformExtensions
 {
-    public static Transform ToXaml(this IList<ISvgTransform> svgTransformList, Transform existingTransform)
+    public static Transform ToXaml(this IList<ITransform> svgTransformList, Transform existingTransform)
     {
         if (svgTransformList == null) throw new ArgumentNullException(nameof(svgTransformList));
 
@@ -35,85 +39,85 @@ internal static class SvgTransformExtensions
         return transformGroupBuilder.RootTransform;
     }
 
-    public static Transform ToXaml(this ISvgTransform svgTransform)
+    public static Transform ToXaml(this ITransform transform)
     {
-        return svgTransform switch
+        return transform switch
         {
-            SvgTranslateTransform svgTranslateTransform => svgTranslateTransform.ToXaml(),
-            SvgScaleTransform svgScaleTransform => svgScaleTransform.ToXaml(),
-            SvgRotateTransform svgRotateTransform => svgRotateTransform.ToXaml(),
-            SvgMatrixTransform svgMatrixTransform => svgMatrixTransform.ToXaml(),
-            _ => throw new ArgumentException("Unrecognized transformation object.", nameof(svgTransform))
+            TranslateTransform svgTranslateTransform => svgTranslateTransform.ToXaml(),
+            ScaleTransform svgScaleTransform => svgScaleTransform.ToXaml(),
+            RotateTransform svgRotateTransform => svgRotateTransform.ToXaml(),
+            MatrixTransform svgMatrixTransform => svgMatrixTransform.ToXaml(),
+            _ => throw new ArgumentException("Unrecognized transformation object.", nameof(transform))
         };
     }
 
-    private static Transform ToXaml(this SvgTranslateTransform svgTranslateTransform)
+    private static Transform ToXaml(this TranslateTransform translateTransform)
     {
-        return new TranslateTransform
+        return new System.Windows.Media.TranslateTransform
         {
-            X = svgTranslateTransform.X,
-            Y = svgTranslateTransform.Y
+            X = translateTransform.X,
+            Y = translateTransform.Y
         };
     }
 
-    private static Transform ToXaml(this SvgScaleTransform svgScaleTransform)
+    private static Transform ToXaml(this ScaleTransform scaleTransform)
     {
-        ScaleTransform xaml = new();
+        System.Windows.Media.ScaleTransform xaml = new();
 
-        if (svgScaleTransform.CenterX != null)
-            xaml.CenterX = svgScaleTransform.CenterX.Value;
+        if (scaleTransform.CenterX != null)
+            xaml.CenterX = scaleTransform.CenterX.Value;
 
-        if (svgScaleTransform.CenterY != null)
-            xaml.CenterY = svgScaleTransform.CenterY.Value;
+        if (scaleTransform.CenterY != null)
+            xaml.CenterY = scaleTransform.CenterY.Value;
 
-        if (svgScaleTransform.ScaleX != null)
-            xaml.ScaleX = svgScaleTransform.ScaleX.Value;
+        if (scaleTransform.ScaleX != null)
+            xaml.ScaleX = scaleTransform.ScaleX.Value;
 
-        if (svgScaleTransform.ScaleY != null)
-            xaml.ScaleY = svgScaleTransform.ScaleY.Value;
+        if (scaleTransform.ScaleY != null)
+            xaml.ScaleY = scaleTransform.ScaleY.Value;
 
         return xaml;
     }
 
-    private static Transform ToXaml(this SvgRotateTransform svgRotateTransform)
+    private static Transform ToXaml(this RotateTransform rotateTransform)
     {
-        RotateTransform transform = new()
+        System.Windows.Media.RotateTransform transform = new()
         {
-            Angle = svgRotateTransform.Angle
+            Angle = rotateTransform.Angle
         };
 
-        if (svgRotateTransform.CenterX != null)
-            transform.CenterX = svgRotateTransform.CenterX.Value;
+        if (rotateTransform.CenterX != null)
+            transform.CenterX = rotateTransform.CenterX.Value;
 
-        if (svgRotateTransform.CenterY != null)
-            transform.CenterY = svgRotateTransform.CenterY.Value;
+        if (rotateTransform.CenterY != null)
+            transform.CenterY = rotateTransform.CenterY.Value;
 
         return transform;
     }
 
-    private static Transform ToXaml(this SvgMatrixTransform svgMatrixTransform)
+    private static Transform ToXaml(this MatrixTransform matrixTransform)
     {
-        return new MatrixTransform
+        return new System.Windows.Media.MatrixTransform
         {
             Matrix = new Matrix
             {
-                M11 = svgMatrixTransform.M11,
-                M12 = svgMatrixTransform.M12,
-                M21 = svgMatrixTransform.M21,
-                M22 = svgMatrixTransform.M22,
-                OffsetX = svgMatrixTransform.OffsetX,
-                OffsetY = svgMatrixTransform.OffsetY
+                M11 = matrixTransform.M11,
+                M12 = matrixTransform.M12,
+                M21 = matrixTransform.M21,
+                M22 = matrixTransform.M22,
+                OffsetX = matrixTransform.OffsetX,
+                OffsetY = matrixTransform.OffsetY
             }
         };
     }
 
     public static void TranslateOriginRecursively(this Transform transform, double x, double y)
     {
-        if (transform is RotateTransform rotateTransform)
+        if (transform is System.Windows.Media.RotateTransform rotateTransform)
         {
             rotateTransform.TranslateOrigin(x, y);
         }
-        if (transform is ScaleTransform scaleTransform)
+        if (transform is System.Windows.Media.ScaleTransform scaleTransform)
         {
             scaleTransform.TranslateOrigin(x, y);
         }
@@ -124,7 +128,7 @@ internal static class SvgTransformExtensions
         }
     }
 
-    public static void TranslateOrigin(this RotateTransform rotateTransform, double x, double y)
+    public static void TranslateOrigin(this System.Windows.Media.RotateTransform rotateTransform, double x, double y)
     {
         bool xIsAbsent = double.IsNaN(x) || x == 0;
         if (!xIsAbsent)
@@ -135,7 +139,7 @@ internal static class SvgTransformExtensions
             rotateTransform.CenterY -= y;
     }
 
-    public static void TranslateOrigin(this ScaleTransform scaleTransform, double x, double y)
+    public static void TranslateOrigin(this System.Windows.Media.ScaleTransform scaleTransform, double x, double y)
     {
         bool xIsAbsent = double.IsNaN(x) || x == 0;
         if (!xIsAbsent)

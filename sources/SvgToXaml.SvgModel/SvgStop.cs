@@ -31,7 +31,7 @@ public class SvgStop : SvgElement
         if (rawValue != null)
             return rawValue;
 
-        SvgStyleDeclaration styleDeclaration = Style?["stop-color"];
+        StyleDeclaration styleDeclaration = Style?["stop-color"];
 
         if (styleDeclaration != null)
             return styleDeclaration.Value;
@@ -46,7 +46,7 @@ public class SvgStop : SvgElement
         if (rawValue != null)
             return rawValue;
 
-        SvgStyleDeclaration styleDeclaration = Style?["stop-opacity"];
+        StyleDeclaration styleDeclaration = Style?["stop-opacity"];
 
         if (styleDeclaration != null)
             return styleDeclaration.Value;

@@ -18,34 +18,34 @@ using System.Collections.ObjectModel;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgStyleDeclarationCollection : Collection<SvgStyleDeclaration>
+public class StyleDeclarationCollection : Collection<StyleDeclaration>
 {
-    public SvgStyleDeclaration this[string name] => Items.FirstOrDefault(x => x.Name == name);
+    public StyleDeclaration this[string name] => Items.FirstOrDefault(x => x.Name == name);
 
     public override string ToString()
     {
         return string.Join(";", Items);
     }
 
-    public static implicit operator SvgStyleDeclarationCollection(string text)
+    public static implicit operator StyleDeclarationCollection(string text)
     {
         if (text == null)
             return null;
 
-        SvgStyleDeclarationCollection svgStyleDeclarationCollection = new();
+        StyleDeclarationCollection styleDeclarationCollection = new();
 
-        IEnumerable<SvgStyleDeclaration> items = ParseItems(text);
+        IEnumerable<StyleDeclaration> items = ParseItems(text);
 
-        foreach (SvgStyleDeclaration item in items)
-            svgStyleDeclarationCollection.Add(item);
+        foreach (StyleDeclaration item in items)
+            styleDeclarationCollection.Add(item);
 
-        return svgStyleDeclarationCollection;
+        return styleDeclarationCollection;
     }
 
-    private static IEnumerable<SvgStyleDeclaration> ParseItems(string text)
+    private static IEnumerable<StyleDeclaration> ParseItems(string text)
     {
         return text.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-            .Select(x => (SvgStyleDeclaration)x)
+            .Select(x => (StyleDeclaration)x)
             .Where(x => x != null)!;
     }
 }

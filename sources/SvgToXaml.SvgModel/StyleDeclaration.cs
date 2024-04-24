@@ -14,32 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Globalization;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgRotateTransform : ISvgTransform
+public class StyleDeclaration
 {
-    public double Angle { get; set; }
+    public string Name { get; init; }
 
-    public double? CenterX { get; set; }
+    public string Value { get; init; }
 
-    public double? CenterY { get; set; }
-
-    public SvgRotateTransform(string text)
+    public static implicit operator StyleDeclaration(string text)
     {
-        if (text == null)
-            return;
+        int pos = text.IndexOf(':');
 
-        string[] parts = text.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        if (pos == -1)
+            return null;
 
-        if (parts.Length >= 1)
-            Angle = double.Parse(parts[0], CultureInfo.InvariantCulture);
-
-        if (parts.Length >= 3)
+        return new StyleDeclaration
         {
-            CenterX = double.Parse(parts[1], CultureInfo.InvariantCulture);
-            CenterY = double.Parse(parts[2], CultureInfo.InvariantCulture);
-        }
+            Name = text[..pos].Trim(),
+            Value = text[(pos + 1)..].Trim()
+        };
+    }
+
+    public override string ToString()
+    {
+        return $"{Name}:{Value}";
     }
 }

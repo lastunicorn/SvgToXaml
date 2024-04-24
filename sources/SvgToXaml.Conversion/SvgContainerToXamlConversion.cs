@@ -58,7 +58,7 @@ public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
 
             if (SvgElement.Style != null)
             {
-                foreach (SvgStyleDeclaration svgStyleDeclaration in SvgElement.Style)
+                foreach (StyleDeclaration svgStyleDeclaration in SvgElement.Style)
                 {
                     bool isKnown = knownSelectors.Contains(svgStyleDeclaration.Name);
                     if (!isKnown)

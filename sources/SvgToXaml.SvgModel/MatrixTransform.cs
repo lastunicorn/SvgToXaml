@@ -18,37 +18,36 @@ using System.Globalization;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgScaleTransform : ISvgTransform
+public class MatrixTransform : ITransform
 {
-    public double? CenterX { get; set; }
+    public double M11 { get; set; }
 
-    public double? CenterY { get; set; }
+    public double M12 { get; set; }
 
-    public double? ScaleX { get; set; }
+    public double M21 { get; set; }
 
-    public double? ScaleY { get; set; }
+    public double M22 { get; set; }
 
-    public SvgScaleTransform(string text)
+    public double OffsetX { get; set; }
+
+    public double OffsetY { get; set; }
+
+    public MatrixTransform(string text)
     {
         if (text == null)
             return;
 
         string[] parts = text.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-        if (parts.Length >= 1)
-        {
-            double scaleValue = double.Parse(parts[0], CultureInfo.InvariantCulture);
-            ScaleX = scaleValue;
-        }
+        if (parts.Length != 6)
+            return;
 
-        if (parts.Length >= 2)
-        {
-            double scaleValue = double.Parse(parts[1], CultureInfo.InvariantCulture);
-            ScaleY = scaleValue;
-        }
-        else
-        {
-            ScaleY = ScaleX;
-        }
+        M11 = double.Parse(parts[0], CultureInfo.InvariantCulture);
+        M12 = double.Parse(parts[1], CultureInfo.InvariantCulture);
+        M21 = double.Parse(parts[2], CultureInfo.InvariantCulture);
+        M22 = double.Parse(parts[3], CultureInfo.InvariantCulture);
+
+        OffsetX = double.Parse(parts[4], CultureInfo.InvariantCulture);
+        OffsetY = double.Parse(parts[5], CultureInfo.InvariantCulture);
     }
 }

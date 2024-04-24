@@ -43,19 +43,19 @@ internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle,
         SvgElement.Title = XmlElement.Title;
         SvgElement.Type = XmlElement.Type;
 
-        IEnumerable<SvgStyleRuleSet> svgStyleRuleSets = ParseStyles(XmlElement.Value);
+        IEnumerable<StyleRuleSet> svgStyleRuleSets = ParseStyles(XmlElement.Value);
         SvgElement.RuleSets.AddRange(svgStyleRuleSets);
     }
 
-    private static IEnumerable<SvgStyleRuleSet> ParseStyles(string text)
+    private static IEnumerable<StyleRuleSet> ParseStyles(string text)
     {
         if (text == null)
-            return Enumerable.Empty<SvgStyleRuleSet>();
+            return Enumerable.Empty<StyleRuleSet>();
 
         MatchCollection matches = Regex.Matches(text);
 
         return matches
-            .Select(x => new SvgStyleRuleSet
+            .Select(x => new StyleRuleSet
             {
                 Selector = x.Groups[1].Value,
                 Declarations = x.Groups[2].Value

@@ -18,27 +18,37 @@ using System.Globalization;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgTranslateTransform : ISvgTransform
+public class ScaleTransform : ITransform
 {
-    public double X { get; set; }
+    public double? CenterX { get; set; }
 
-    public double Y { get; set; }
+    public double? CenterY { get; set; }
 
-    public SvgTranslateTransform(string text)
+    public double? ScaleX { get; set; }
+
+    public double? ScaleY { get; set; }
+
+    public ScaleTransform(string text)
     {
         if (text == null)
             return;
 
-        string[] parts = text.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        string[] parts = text.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         if (parts.Length >= 1)
         {
-            X = double.Parse(parts[0], CultureInfo.InvariantCulture);
+            double scaleValue = double.Parse(parts[0], CultureInfo.InvariantCulture);
+            ScaleX = scaleValue;
         }
 
         if (parts.Length >= 2)
         {
-            Y = double.Parse(parts[1], CultureInfo.InvariantCulture);
+            double scaleValue = double.Parse(parts[1], CultureInfo.InvariantCulture);
+            ScaleY = scaleValue;
+        }
+        else
+        {
+            ScaleY = ScaleX;
         }
     }
 }
