@@ -57,11 +57,11 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
         else if (fill.Color is { IsEmpty: false })
         {
-            double? fillOpacity = SvgElement.ComputeFillOpacity();
+            AlphaValue? fillOpacity = SvgElement.ComputeFillOpacity();
 
             Color color = fillOpacity == null
                 ? fill.Color.ToColor()
-                : fill.Color.ToColor(fillOpacity.Value);
+                : fill.Color.ToColor(fillOpacity.Value.NumberValue);
 
             XamlElement.Fill = new SolidColorBrush(color);
         }
@@ -76,10 +76,10 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
             if (XamlElement.Fill != null)
             {
-                double? fillOpacity = SvgElement.ComputeFillOpacity();
+                AlphaValue? fillOpacity = SvgElement.ComputeFillOpacity();
 
                 if (fillOpacity != null)
-                    XamlElement.Fill.Opacity = fillOpacity.Value;
+                    XamlElement.Fill.Opacity = fillOpacity.Value.NumberValue;
             }
         }
     }
@@ -95,11 +95,11 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
         else if (stroke.Color is { IsEmpty: false })
         {
-            double? strokeOpacity = SvgElement.ComputeStrokeOpacity();
+            AlphaValue? strokeOpacity = SvgElement.ComputeStrokeOpacity();
 
             Color color = strokeOpacity == null
                 ? stroke.Color.ToColor()
-                : stroke.Color.ToColor(strokeOpacity.Value);
+                : stroke.Color.ToColor(strokeOpacity.Value.NumberValue);
 
             XamlElement.Stroke = new SolidColorBrush(color);
         }
@@ -114,10 +114,10 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
             if (XamlElement.Fill != null)
             {
-                double? strokeOpacity = SvgElement.ComputeStrokeOpacity();
+                AlphaValue? strokeOpacity = SvgElement.ComputeStrokeOpacity();
 
                 if (strokeOpacity != null)
-                    XamlElement.Stroke.Opacity = strokeOpacity.Value;
+                    XamlElement.Stroke.Opacity = strokeOpacity.Value.NumberValue;
             }
         }
     }

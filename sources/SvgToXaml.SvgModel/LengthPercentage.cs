@@ -26,6 +26,10 @@ public readonly record struct LengthPercentage
 
     public static LengthPercentage Empty { get; } = new();
 
+    public static LengthPercentage Zero { get; } = new(SvgLength.Zero);
+
+    public bool IsNegative => Length?.Value < 0 || Percentage?.Value < 0;
+
     public LengthPercentage()
     {
         Length = null;

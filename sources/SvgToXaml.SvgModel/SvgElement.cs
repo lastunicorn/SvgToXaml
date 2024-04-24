@@ -51,12 +51,23 @@ public class SvgElement
     /// </summary>
     public FillRule? FillRule { get; set; }
 
-    public double? FillOpacity { get; set; }
+    public AlphaValue? FillOpacity { get; set; }
 
     public Paint Stroke { get; set; }
 
-    public double? StrokeOpacity { get; set; }
+    /// <summary>
+    /// Specifies the opacity of the painting operation used to stroke the current object.
+    /// This value is either a number between 0 and 1 or a percentage.
+    /// Values outside the range [0,1] are not invalid, but are clamped to that range at
+    /// parsed-value time.
+    /// Default value: 100%
+    /// </summary>
+    public AlphaValue? StrokeOpacity { get; set; }
 
+    /// <summary>
+    /// Specifies the width of the stroke on the current object. A zero value causes no stroke to
+    /// be painted. A negative value is invalid.
+    /// </summary>
     public LengthPercentage? StrokeWidth { get; set; }
 
     public StrokeLineCap? StrokeLineCap { get; set; }
@@ -116,17 +127,23 @@ public class SvgElement
         return Fill;
     }
 
-    public double? ComputeFillOpacity()
+    public AlphaValue? ComputeFillOpacity()
     {
         SvgStyleDeclaration styleDeclaration = Style?["fill-opacity"];
 
         if (styleDeclaration != null)
-            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+        {
+            AlphaValue alphaValue = styleDeclaration.Value;
+            return alphaValue;
+        }
 
         string rawValue = GetStyleValueFromClasses("fill-opacity");
 
         if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
+        {
+            AlphaValue alphaValue = rawValue;
+            return alphaValue;
+        }
 
         return FillOpacity;
     }
@@ -161,17 +178,23 @@ public class SvgElement
         return Stroke;
     }
 
-    public double? ComputeStrokeOpacity()
+    public AlphaValue? ComputeStrokeOpacity()
     {
         SvgStyleDeclaration styleDeclaration = Style?["stroke-opacity"];
 
         if (styleDeclaration != null)
-            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+        {
+            AlphaValue alphaValue = styleDeclaration.Value;
+            return alphaValue;
+        }
 
         string rawValue = GetStyleValueFromClasses("stroke-opacity");
 
         if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
+        {
+            AlphaValue alphaValue = rawValue;
+            return alphaValue;
+        }
 
         return StrokeOpacity;
     }

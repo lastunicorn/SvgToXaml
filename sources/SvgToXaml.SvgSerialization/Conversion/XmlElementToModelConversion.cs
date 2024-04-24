@@ -53,7 +53,26 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
             ? XmlElement.StrokeOpacity
             : null;
 
-        SvgElement.StrokeWidth = XmlElement.StrokeWidth;
+        LengthPercentage? strokeWidth = XmlElement.StrokeWidth;
+
+        if (strokeWidth != null)
+        {
+            bool isNegative = strokeWidth.Value.IsNegative;
+
+            if (isNegative)
+            {
+                DeserializationContext.Path.SetAttributeOnLast("stroke-width");
+                string path = DeserializationContext.Path.ToString();
+                NegativeValueIssue negativeValueIssue = new(path);
+                DeserializationContext.Errors.Add(negativeValueIssue);
+
+                SvgElement.StrokeWidth = LengthPercentage.Zero;
+            }
+            else
+            {
+                SvgElement.StrokeWidth = strokeWidth;
+            }
+        }
 
         SvgElement.StrokeLineJoin = XmlElement.StrokeLineJoinSpecified
             ? Convert(XmlElement.StrokeLineJoin)

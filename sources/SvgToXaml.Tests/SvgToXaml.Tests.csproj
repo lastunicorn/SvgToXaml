@@ -238,6 +238,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positive.svg" />
         <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positivepx.svg" />
         <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-zero.svg" />
+        <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-missing.svg" />
+        <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-negative.svg" />
+        <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-percentage.svg" />
+        <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positive.svg" />
+        <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positivepx.svg" />
+        <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-zero.svg" />
         <None Remove="SvgSerialization\DefsTests\IdTests.Resources\defs-id.svg" />
         <None Remove="SvgSerialization\DefsTests\IdTests.Resources\defs-noid.svg" />
         <None Remove="SvgSerialization\DefsTests\LanguageTests.Resources\defs-lang-missing.svg" />
@@ -574,6 +580,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleTests.Resources\use-href-group-circle.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests.Resources\use-href-defs-group-circle.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefGroupCircleFromDefsTests.Resources\group-use-href-defs-group-circle.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-negative.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-percentage.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positive.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positivepx.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-zero.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-percentage.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positivepx.svg" />
