@@ -18,7 +18,7 @@ using System.Collections.ObjectModel;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgTransformList : Collection<ISvgTransform>
+public class TransformCollection : Collection<ISvgTransform>
 {
     public void ParseAndAdd(string text)
     {

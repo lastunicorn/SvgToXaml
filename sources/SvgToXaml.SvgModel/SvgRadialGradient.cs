@@ -47,7 +47,7 @@ public class SvgRadialGradient : SvgElement
 
     public List<SvgStop> Stops { get; } = new();
 
-    public SvgTransformList GradientTransforms { get; } = new();
+    public TransformCollection GradientTransforms { get; } = new();
 
     public HypertextReference? Href { get; set; }
 

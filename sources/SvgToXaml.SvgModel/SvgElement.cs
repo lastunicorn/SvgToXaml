@@ -30,7 +30,7 @@ public class SvgElement
 
     public string XmlLanguage { get; set; }
 
-    public string[] ClassNames { get; set; }
+    public ClassNameCollection ClassNames { get; } = new();
 
     public SvgStyleDeclarationCollection Style { get; set; }
 
@@ -79,7 +79,7 @@ public class SvgElement
 
     //
 
-    public SvgTransformList Transforms { get; } = new();
+    public TransformCollection Transforms { get; } = new();
 
     public double? Opacity { get; set; }
 

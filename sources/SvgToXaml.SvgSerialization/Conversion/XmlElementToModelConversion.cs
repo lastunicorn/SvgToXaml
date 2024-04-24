@@ -90,7 +90,8 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
 
         SvgElement.Style = XmlElement.Style;
 
-        SvgElement.ClassNames = XmlElement.Class?.Split(new[] { ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (XmlElement.Class != null)
+            SvgElement.ClassNames.ParseAndAdd(XmlElement.Class);
 
         if (XmlElement.Transform != null)
             SvgElement.Transforms.ParseAndAdd(XmlElement.Transform);
