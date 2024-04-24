@@ -14,37 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections;
-
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
 /// <summary>
 /// Represents the "style" element.
 /// </summary>
-public class SvgStyleSheet : SvgElement, IEnumerable<SvgStyleRuleSet>
+public class SvgStyle : SvgElement
 {
-    private readonly List<SvgStyleRuleSet> styleRuleSets = new();
-
     public string Title { get; set; }
-    
+
     public string Type { get; set; }
 
-    public SvgStyleRuleSet this[string selector] => styleRuleSets.FirstOrDefault(x => x.Selector == selector);
-    
-    public void Add(SvgStyleRuleSet svgStyleRuleSet)
-    {
-        if (svgStyleRuleSet == null) throw new ArgumentNullException(nameof(svgStyleRuleSet));
+    public List<SvgStyleRuleSet> RuleSets { get; } = new();
 
-        styleRuleSets.Add(svgStyleRuleSet);
-    }
-
-    public IEnumerator<SvgStyleRuleSet> GetEnumerator()
+    public SvgStyleRuleSet GetRuleSet(string selector)
     {
-        return styleRuleSets.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
+        return RuleSets.FirstOrDefault(x => x.Selector == selector);
     }
 }

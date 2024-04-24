@@ -25,9 +25,9 @@ public class IdTests : SvgFileTestsBase
     {
         ParseSvgFile("style-id.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Id.Should().Be("style1");
+            svgStyle.Id.Should().Be("style1");
         });
     }
 
@@ -36,9 +36,9 @@ public class IdTests : SvgFileTestsBase
     {
         ParseSvgFile("style-noid.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Id.Should().BeNull();
+            svgStyle.Id.Should().BeNull();
         });
     }
 }

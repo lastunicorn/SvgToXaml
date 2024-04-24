@@ -163,7 +163,7 @@ public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
             case SvgLinearGradient:
             case SvgRadialGradient:
             case SvgClipPath:
-            case SvgStyleSheet:
+            case SvgStyle:
                 return null;
 
             default:

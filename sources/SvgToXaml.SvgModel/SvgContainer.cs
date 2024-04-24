@@ -68,20 +68,20 @@ public class SvgContainer : SvgElement
 
     public IEnumerable<SvgStyleRuleSet> GetAllStyleRuleSets(string mimeType = null)
     {
-        IEnumerable<SvgStyleSheet> svgStyleSheets = GetStyleSheetsRecursively(mimeType);
+        IEnumerable<SvgStyle> svgStyles = GetStyleSheetsRecursively(mimeType);
 
-        foreach (SvgStyleSheet svgStyleSheet in svgStyleSheets)
+        foreach (SvgStyle svgStyle in svgStyles)
         {
-            foreach (SvgStyleRuleSet styleRuleSet in svgStyleSheet)
+            foreach (SvgStyleRuleSet styleRuleSet in svgStyle.RuleSets)
                 yield return styleRuleSet;
         }
     }
 
-    private IEnumerable<SvgStyleSheet> GetStyleSheetsRecursively(string mimeType)
+    private IEnumerable<SvgStyle> GetStyleSheetsRecursively(string mimeType)
     {
         foreach (SvgElement svgElement in Children)
         {
-            if (svgElement is SvgStyleSheet svgStyleSheet)
+            if (svgElement is SvgStyle svgStyleSheet)
             {
                 switch (mimeType)
                 {
@@ -97,9 +97,9 @@ public class SvgContainer : SvgElement
             }
             else if (svgElement is SvgContainer svgContainer)
             {
-                IEnumerable<SvgStyleSheet> styleSheets = svgContainer.GetStyleSheetsRecursively(mimeType);
+                IEnumerable<SvgStyle> styleSheets = svgContainer.GetStyleSheetsRecursively(mimeType);
 
-                foreach (SvgStyleSheet styleSheet in styleSheets)
+                foreach (SvgStyle styleSheet in styleSheets)
                     yield return styleSheet;
             }
         }

@@ -25,9 +25,9 @@ public class TypeTests : SvgFileTestsBase
     {
         ParseSvgFile("type-missing.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Type.Should().BeNull();
+            svgStyle.Type.Should().BeNull();
         });
     }
 
@@ -36,9 +36,9 @@ public class TypeTests : SvgFileTestsBase
     {
         ParseSvgFile("type-css.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Type.Should().Be("text/css");
+            svgStyle.Type.Should().Be("text/css");
         });
     }
 
@@ -47,9 +47,9 @@ public class TypeTests : SvgFileTestsBase
     {
         ParseSvgFile("type-html.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Type.Should().Be("text/html");
+            svgStyle.Type.Should().Be("text/html");
         });
     }
 }

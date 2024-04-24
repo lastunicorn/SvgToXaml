@@ -18,7 +18,5 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgTitle : SvgElement
 {
-    public string Language { get; set; }
-
     public string Value { get; set; }
 }

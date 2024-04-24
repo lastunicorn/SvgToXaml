@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
 
-internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle, SvgStyleSheet>
+internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle, SvgStyle>
 {
     private static readonly Regex Regex = new(@"\.(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
 
@@ -31,9 +31,9 @@ internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle,
     {
     }
 
-    protected override SvgStyleSheet CreateSvgElement()
+    protected override SvgStyle CreateSvgElement()
     {
-        return new SvgStyleSheet();
+        return new SvgStyle();
     }
 
     protected override void ConvertProperties()
@@ -44,9 +44,7 @@ internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle,
         SvgElement.Type = XmlElement.Type;
 
         IEnumerable<SvgStyleRuleSet> svgStyleRuleSets = ParseStyles(XmlElement.Value);
-
-        foreach (SvgStyleRuleSet svgStyleRuleSet in svgStyleRuleSets)
-            SvgElement.Add(svgStyleRuleSet);
+        SvgElement.RuleSets.AddRange(svgStyleRuleSets);
     }
 
     private static IEnumerable<SvgStyleRuleSet> ParseStyles(string text)

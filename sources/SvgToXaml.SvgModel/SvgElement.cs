@@ -46,8 +46,7 @@ public class SvgElement
     /// another, the interpretation of "inside" is not so obvious.
     /// 
     /// The fill-rule property provides two options for how the inside of a shape is determined:
-    /// - nonzero
-    /// - evenodd
+    /// nonzero, evenodd.
     /// </summary>
     public FillRule? FillRule { get; set; }
 

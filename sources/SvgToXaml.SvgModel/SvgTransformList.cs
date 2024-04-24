@@ -69,7 +69,7 @@ public class SvgTransformList : Collection<ISvgTransform>
 
     private static IEnumerable<KeyValuePair<string, string>> Parse(string text)
     {
-        ParseState parseState = ParseState.ExpectName;
+        ParsingState parsingState = ParsingState.ExpectName;
 
         string name = null;
 
@@ -79,9 +79,9 @@ public class SvgTransformList : Collection<ISvgTransform>
         {
             char c = text[i];
 
-            switch (parseState)
+            switch (parsingState)
             {
-                case ParseState.ExpectName:
+                case ParsingState.ExpectName:
                     if (char.IsWhiteSpace(c))
                     {
                     }
@@ -101,42 +101,42 @@ public class SvgTransformList : Collection<ISvgTransform>
                     else
                     {
                         startIndex = i;
-                        parseState = ParseState.Name;
+                        parsingState = ParsingState.Name;
                     }
 
                     break;
 
-                case ParseState.Name:
+                case ParsingState.Name:
                     if (char.IsWhiteSpace(c))
                     {
                         name = text.Substring(startIndex, i - startIndex);
-                        parseState = ParseState.ExpectValueStart;
+                        parsingState = ParsingState.ExpectValueStart;
                     }
                     else if (c == '(')
                     {
                         name = text.Substring(startIndex, i - startIndex);
-                        parseState = ParseState.ExpectValue;
+                        parsingState = ParsingState.ExpectValue;
                     }
                     else if (c == ')')
                     {
                         name = null;
-                        parseState = ParseState.ExpectName;
+                        parsingState = ParsingState.ExpectName;
                     }
 
                     break;
 
-                case ParseState.ExpectValueStart:
+                case ParsingState.ExpectValueStart:
                     if (char.IsWhiteSpace(c))
                     {
                     }
                     else if (c == '(')
                     {
-                        parseState = ParseState.ExpectValue;
+                        parsingState = ParsingState.ExpectValue;
                     }
                     else if (c == ')')
                     {
                         name = null;
-                        parseState = ParseState.ExpectName;
+                        parsingState = ParsingState.ExpectName;
                     }
                     else
                     {
@@ -146,7 +146,7 @@ public class SvgTransformList : Collection<ISvgTransform>
 
                     break;
 
-                case ParseState.ExpectValue:
+                case ParsingState.ExpectValue:
                     if (char.IsWhiteSpace(c))
                     {
                     }
@@ -161,24 +161,24 @@ public class SvgTransformList : Collection<ISvgTransform>
                         }
 
                         name = null;
-                        parseState = ParseState.ExpectName;
+                        parsingState = ParsingState.ExpectName;
                     }
                     else if (c == ')')
                     {
                         yield return new KeyValuePair<string, string>(name!, string.Empty);
 
                         name = null;
-                        parseState = ParseState.ExpectName;
+                        parsingState = ParsingState.ExpectName;
                     }
                     else
                     {
                         startIndex = i;
-                        parseState = ParseState.Value;
+                        parsingState = ParsingState.Value;
                     }
 
                     break;
 
-                case ParseState.Value:
+                case ParsingState.Value:
                     if (char.IsWhiteSpace(c))
                     {
                     }
@@ -193,7 +193,7 @@ public class SvgTransformList : Collection<ISvgTransform>
                         }
 
                         name = null;
-                        parseState = ParseState.ExpectName;
+                        parsingState = ParsingState.ExpectName;
                     }
                     else if (c == ')')
                     {
@@ -201,7 +201,7 @@ public class SvgTransformList : Collection<ISvgTransform>
                         yield return new KeyValuePair<string, string>(name!, value);
 
                         name = null;
-                        parseState = ParseState.ExpectName;
+                        parsingState = ParsingState.ExpectName;
                     }
 
                     break;
@@ -212,7 +212,7 @@ public class SvgTransformList : Collection<ISvgTransform>
         }
     }
 
-    private enum ParseState
+    private enum ParsingState
     {
         ExpectName,
         Name,

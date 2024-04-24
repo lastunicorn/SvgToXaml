@@ -115,9 +115,9 @@ public class ChildrenTests : SvgFileTestsBase
     {
         ParseSvgFile("svg-style.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Should().NotBeNull();
+            svgStyle.Should().NotBeNull();
         });
     }
 

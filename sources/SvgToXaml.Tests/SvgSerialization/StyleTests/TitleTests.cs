@@ -25,9 +25,9 @@ public class TitleTests : SvgFileTestsBase
     {
         ParseSvgFile("style-title-missing.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Title.Should().BeNull();
+            svgStyle.Title.Should().BeNull();
         });
     }
 
@@ -36,9 +36,9 @@ public class TitleTests : SvgFileTestsBase
     {
         ParseSvgFile("style-title.svg", svg =>
         {
-            SvgStyleSheet svgStyleSheet = svg.Children[0] as SvgStyleSheet;
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
 
-            svgStyleSheet.Title.Should().Be("Default Styles");
+            svgStyle.Title.Should().Be("Default Styles");
         });
     }
 }
