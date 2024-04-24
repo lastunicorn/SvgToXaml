@@ -110,12 +110,12 @@ public class CastStringToNullableAlphaValueTests
     [Fact]
     public void HavingStringContainingZeroPercent_WhenCastToAlphaValue_ThenValueIsZeroAndUnitIsPercent()
     {
-        string text = "0";
+        string text = "0%";
 
         AlphaValue? alphaValue = text;
 
         alphaValue.Value.Value.Should().Be(0);
-        alphaValue.Value.Unit.Should().Be(AlphaValueUnit.Number);
+        alphaValue.Value.Unit.Should().Be(AlphaValueUnit.Percentage);
     }
 
     [Fact]

@@ -191,12 +191,12 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         }
     }
 
-    protected virtual void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
+    protected virtual void InheritPropertiesFrom(List<SvgElement> svgElements)
     {
         SetOpacity(svgElements);
     }
 
-    private void SetOpacity(IEnumerable<SvgElement> svgElements)
+    private void SetOpacity(List<SvgElement> svgElements)
     {
         double? opacity = svgElements
             .Select(x => x.ComputeOpacity())

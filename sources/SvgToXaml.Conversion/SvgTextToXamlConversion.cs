@@ -14,10 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Xml;
 using DustInTheWind.SvgToXaml.SvgModel;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
@@ -35,7 +32,7 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
         return new TextBlock();
     }
 
-    protected override void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
+    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
     {
         base.InheritPropertiesFrom(svgElements);
 

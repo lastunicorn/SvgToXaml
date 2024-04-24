@@ -36,6 +36,9 @@ public class SvgElement
 
     // Inherited Attributes
 
+    /// <summary>
+    /// The color used to paint the interior of the given graphical element.
+    /// </summary>
     public Paint Fill { get; set; }
 
     /// <summary>
@@ -50,8 +53,18 @@ public class SvgElement
     /// </summary>
     public FillRule? FillRule { get; set; }
 
+    /// <summary>
+    /// Specifies the opacity of the painting operation used to paint the fill the current object.
+    /// This value is either a number between 0 and 1 or a percentage.
+    /// Values outside the range [0,1] are not invalid, but are clamped to that range at
+    /// parsed-value time.
+    /// Default value: 100%
+    /// </summary>
     public AlphaValue? FillOpacity { get; set; }
 
+    /// <summary>
+    /// The color used to paint the outline of the given graphical element.
+    /// </summary>
     public Paint Stroke { get; set; }
 
     /// <summary>
@@ -113,34 +126,21 @@ public class SvgElement
 
     public Paint ComputeFill()
     {
-        StyleDeclaration styleDeclaration = Style?["fill"];
+        StyleDeclaration styleDeclaration = Style?["fill"] ?? GetStyleValueFromClasses("fill");
 
         if (styleDeclaration != null)
             return styleDeclaration.Value;
-
-        string rawValue = GetStyleValueFromClasses("fill");
-
-        if (rawValue != null)
-            return rawValue;
 
         return Fill;
     }
 
     public AlphaValue? ComputeFillOpacity()
     {
-        StyleDeclaration styleDeclaration = Style?["fill-opacity"];
+        StyleDeclaration styleDeclaration = Style?["fill-opacity"] ?? GetStyleValueFromClasses("fill-opacity");
 
         if (styleDeclaration != null)
         {
             AlphaValue alphaValue = styleDeclaration.Value;
-            return alphaValue;
-        }
-
-        string rawValue = GetStyleValueFromClasses("fill-opacity");
-
-        if (rawValue != null)
-        {
-            AlphaValue alphaValue = rawValue;
             return alphaValue;
         }
 
@@ -149,49 +149,31 @@ public class SvgElement
 
     public FillRule? ComputeFillRule()
     {
-        StyleDeclaration styleDeclaration = Style?["fill-rule"];
+        StyleDeclaration styleDeclaration = Style?["fill-rule"] ?? GetStyleValueFromClasses("fill-rule");
 
         if (styleDeclaration != null)
             return (FillRule)Enum.Parse(typeof(FillRule), styleDeclaration.Value, true);
-
-        string rawValue = GetStyleValueFromClasses("fill-rule");
-
-        if (rawValue != null)
-            return (FillRule)Enum.Parse(typeof(FillRule), rawValue, true);
 
         return FillRule;
     }
 
     public Paint ComputeStroke()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke"];
+        StyleDeclaration styleDeclaration = Style?["stroke"] ?? GetStyleValueFromClasses("stroke");
 
         if (styleDeclaration != null)
             return styleDeclaration.Value;
-
-        string rawValue = GetStyleValueFromClasses("stroke");
-
-        if (rawValue != null)
-            return rawValue;
 
         return Stroke;
     }
 
     public AlphaValue? ComputeStrokeOpacity()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke-opacity"];
+        StyleDeclaration styleDeclaration = Style?["stroke-opacity"] ?? GetStyleValueFromClasses("stroke-opacity");
 
         if (styleDeclaration != null)
         {
             AlphaValue alphaValue = styleDeclaration.Value;
-            return alphaValue;
-        }
-
-        string rawValue = GetStyleValueFromClasses("stroke-opacity");
-
-        if (rawValue != null)
-        {
-            AlphaValue alphaValue = rawValue;
             return alphaValue;
         }
 
@@ -200,7 +182,7 @@ public class SvgElement
 
     public LengthPercentage? ComputeStrokeWidth()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke-width"];
+        StyleDeclaration styleDeclaration = Style?["stroke-width"] ?? GetStyleValueFromClasses("stroke-width");
 
         if (styleDeclaration != null)
         {
@@ -208,62 +190,36 @@ public class SvgElement
             return length.Value;
         }
 
-        string rawValue = GetStyleValueFromClasses("stroke-width");
-
-        if (rawValue != null)
-        {
-            SvgLength svgLength = rawValue;
-            return svgLength.Value;
-        }
-
         return StrokeWidth;
     }
 
     public StrokeLineCap? ComputeStrokeLineCap()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke-linecap"];
+        StyleDeclaration styleDeclaration = Style?["stroke-linecap"] ?? GetStyleValueFromClasses("stroke-linecap");
 
         if (styleDeclaration != null)
             return (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), styleDeclaration.Value, true);
-
-        string rawValue = GetStyleValueFromClasses("stroke-linecap");
-
-        if (rawValue != null)
-            return (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), rawValue, true);
 
         return StrokeLineCap;
     }
 
     public StrokeLineJoin? ComputeStrokeLineJoin()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke-linejoin"];
+        StyleDeclaration styleDeclaration = Style?["stroke-linejoin"] ?? GetStyleValueFromClasses("stroke-linejoin");
 
         if (styleDeclaration != null)
             return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), styleDeclaration.Value, true);
-
-        string rawValue = GetStyleValueFromClasses("stroke-linejoin");
-
-        if (rawValue != null)
-            return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), rawValue, true);
 
         return StrokeLineJoin;
     }
 
     public LengthPercentage? ComputeStrokeDashOffset()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke-dashoffset"];
+        StyleDeclaration styleDeclaration = Style?["stroke-dashoffset"] ?? GetStyleValueFromClasses("stroke-dashoffset");
 
         if (styleDeclaration != null)
         {
             LengthPercentage length = styleDeclaration.Value.Trim();
-            return length;
-        }
-
-        string rawValue = GetStyleValueFromClasses("stroke-dashoffset");
-
-        if (rawValue != null)
-        {
-            LengthPercentage length = rawValue;
             return length;
         }
 
@@ -272,50 +228,31 @@ public class SvgElement
 
     public double? ComputeStrokeMiterLimit()
     {
-        StyleDeclaration styleDeclaration = Style?["stroke-miterlimit"];
+        StyleDeclaration styleDeclaration = Style?["stroke-miterlimit"] ?? GetStyleValueFromClasses("stroke-miterlimit");
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
-
-        string rawValue = GetStyleValueFromClasses("stroke-miterlimit");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
 
         return StrokeMiterLimit;
     }
 
     public double? ComputeOpacity()
     {
-        StyleDeclaration styleDeclaration = Style?["opacity"];
+        StyleDeclaration styleDeclaration = Style?["opacity"] ?? GetStyleValueFromClasses("opacity");
 
         if (styleDeclaration != null)
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
 
-        string rawValue = GetStyleValueFromClasses("opacity");
-
-        if (rawValue != null)
-            return double.Parse(rawValue, CultureInfo.InvariantCulture);
-
         return Opacity;
     }
 
-    protected string GetStyleValueFromClasses(string name)
+    protected StyleDeclaration GetStyleValueFromClasses(string name)
     {
         IEnumerable<StyleRuleSet> applicableStyleRuleSets = GetApplicableStyleRuleSets();
 
-        if (applicableStyleRuleSets == null)
-            return null;
-
-        foreach (StyleRuleSet styleRuleSet in applicableStyleRuleSets)
-        {
-            StyleDeclaration styleDeclaration = styleRuleSet.Declarations?[name];
-
-            if (styleDeclaration != null)
-                return styleDeclaration.Value;
-        }
-
-        return null;
+        return applicableStyleRuleSets?
+            .Select(x => x.Declarations?[name])
+            .FirstOrDefault(x => x != null);
     }
 
     private IEnumerable<StyleRuleSet> GetApplicableStyleRuleSets()
@@ -324,7 +261,7 @@ public class SvgElement
             return null;
 
         Svg parentSvg = GetParentSvg();
-        IEnumerable<StyleRuleSet> styleRuleSets = parentSvg?.GetAllStyleRuleSets("text/css");
+        IEnumerable<StyleRuleSet> styleRuleSets = parentSvg?.GetAllStyleRuleSets(MimeTypes.TextCss);
 
         return styleRuleSets?
             .Where(x => ClassNames.Contains(x.Selector))

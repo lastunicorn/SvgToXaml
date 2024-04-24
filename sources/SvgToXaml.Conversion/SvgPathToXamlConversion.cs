@@ -39,7 +39,7 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
         };
     }
 
-    protected override void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
+    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
     {
         base.InheritPropertiesFrom(svgElements);
 

@@ -20,13 +20,13 @@ using System.Text.RegularExpressions;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public record struct AlphaValue
+public readonly record struct AlphaValue
 {
     private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+(?:e[+-]?[0-9]+)?)(%)?\s*$", RegexOptions.Singleline);
 
-    public double Value { get; set; }
+    public double Value { get; }
 
-    public AlphaValueUnit Unit { get; set; }
+    public AlphaValueUnit Unit { get; }
 
     public static AlphaValue Zero = new();
 
@@ -79,7 +79,7 @@ public record struct AlphaValue
             return false;
         }
 
-        if (text.Length == 0)
+        if (string.IsNullOrWhiteSpace(text))
         {
             alphaValue = Zero;
             return true;
@@ -102,10 +102,7 @@ public record struct AlphaValue
 
     public static implicit operator AlphaValue(double value)
     {
-        return new AlphaValue
-        {
-            Value = value
-        };
+        return new AlphaValue(value, AlphaValueUnit.Number);
     }
 
     public static implicit operator double(AlphaValue alphaValue)

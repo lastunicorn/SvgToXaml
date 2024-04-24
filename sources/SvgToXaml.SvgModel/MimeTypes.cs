@@ -16,31 +16,7 @@
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
-public class SvgStop : SvgElement
+internal static class MimeTypes
 {
-    public double Offset { get; set; }
-
-    public SvgColor StopColor { get; set; }
-
-    public SvgOpacity? StopOpacity { get; set; }
-
-    public SvgColor ComputeStopColor()
-    {
-        StyleDeclaration styleDeclaration = Style?["stop-color"] ?? GetStyleValueFromClasses("stop-color");
-
-        if (styleDeclaration != null)
-            return styleDeclaration.Value;
-
-        return StopColor;
-    }
-
-    public SvgOpacity? ComputeStopOpacity()
-    {
-        StyleDeclaration styleDeclaration = Style?["stop-opacity"] ?? GetStyleValueFromClasses("stop-opacity");
-
-        if (styleDeclaration != null)
-            return styleDeclaration.Value;
-
-        return StopOpacity;
-    }
+    public const string TextCss = "text/css";
 }

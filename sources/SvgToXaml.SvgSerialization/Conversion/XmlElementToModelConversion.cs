@@ -39,9 +39,7 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
 
         SvgElement.Fill = XmlElement.Fill;
 
-        SvgElement.FillOpacity = XmlElement.FillOpacitySpecified
-            ? XmlElement.FillOpacity
-            : null;
+        SvgElement.FillOpacity = XmlElement.FillOpacity;
 
         SvgElement.FillRule = XmlElement.FillRuleSpecified
             ? Convert(XmlElement.FillRule)
@@ -49,9 +47,7 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
 
         SvgElement.Stroke = XmlElement.Stroke;
 
-        SvgElement.StrokeOpacity = XmlElement.StrokeOpacitySpecified
-            ? XmlElement.StrokeOpacity
-            : null;
+        SvgElement.StrokeOpacity = XmlElement.StrokeOpacity;
 
         LengthPercentage? strokeWidth = XmlElement.StrokeWidth;
 

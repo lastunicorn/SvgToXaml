@@ -49,17 +49,13 @@ public class XmlElement
     public bool FillRuleSpecified { get; set; }
 
     [XmlAttribute("fill-opacity")]
-    public double FillOpacity { get; set; }
-
-    public bool FillOpacitySpecified { get; set; }
+    public string FillOpacity { get; set; }
 
     [XmlAttribute("stroke")]
     public string Stroke { get; set; }
 
     [XmlAttribute("stroke-opacity")]
-    public double StrokeOpacity { get; set; }
-
-    public bool StrokeOpacitySpecified { get; set; }
+    public string StrokeOpacity { get; set; }
 
     [XmlAttribute("stroke-width")]
     public string StrokeWidth { get; set; }

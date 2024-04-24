@@ -18,15 +18,16 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Tests.SvgModel.AlphaValueTests;
 
-public class ParseTests
+public class TryParseTests
 {
     [Fact]
     public void HavingStringContainingNumber10_WhenParsed_ThenValueIs10AndUnitIsNumber()
     {
         string text = "10";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(10);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Number);
     }
@@ -35,9 +36,10 @@ public class ParseTests
     public void HavingStringContainingNumberNegative10_WhenParsed_ThenValueIsNegative10AndUnitIsNumber()
     {
         string text = "-10";
-        
-        AlphaValue alphaValue = AlphaValue.Parse(text);
 
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
+
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(-10);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Number);
     }
@@ -47,8 +49,9 @@ public class ParseTests
     {
         string text = "0";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(0);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Number);
     }
@@ -58,8 +61,9 @@ public class ParseTests
     {
         string text = "";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(0);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Number);
     }
@@ -69,8 +73,9 @@ public class ParseTests
     {
         string text = " ";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(0);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Number);
     }
@@ -80,8 +85,9 @@ public class ParseTests
     {
         string text = "10%";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(10);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Percentage);
     }
@@ -91,8 +97,9 @@ public class ParseTests
     {
         string text = "-10%";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(-10);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Percentage);
     }
@@ -102,8 +109,9 @@ public class ParseTests
     {
         string text = "0%";
 
-        AlphaValue alphaValue = AlphaValue.Parse(text);
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
+        success.Should().BeTrue();
         alphaValue.Value.Should().Be(0);
         alphaValue.Unit.Should().Be(AlphaValueUnit.Percentage);
     }
@@ -113,11 +121,10 @@ public class ParseTests
     {
         string text = "abc";
 
-        Action action = () =>
-        {
-            AlphaValue alphaValue = AlphaValue.Parse(text);
-        };
+        bool success = AlphaValue.TryParse(text, out AlphaValue alphaValue);
 
-        action.Should().Throw<ArgumentException>();
+        success.Should().BeFalse();
+        alphaValue.Value.Should().Be(0);
+        alphaValue.Unit.Should().Be(AlphaValueUnit.Number);
     }
 }

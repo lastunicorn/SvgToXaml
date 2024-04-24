@@ -30,8 +30,6 @@ namespace DustInTheWind.SvgToXaml.SvgModel;
 
 public class SvgContainer : SvgElement
 {
-    public List<SvgTitle> Titles { get; }
-
     public SvgElementCollection<SvgElement> Children { get; }
 
     public SvgContainer()
@@ -71,10 +69,8 @@ public class SvgContainer : SvgElement
         IEnumerable<SvgStyle> svgStyles = GetStyleSheetsRecursively(mimeType);
 
         foreach (SvgStyle svgStyle in svgStyles)
-        {
-            foreach (StyleRuleSet styleRuleSet in svgStyle.RuleSets)
-                yield return styleRuleSet;
-        }
+        foreach (StyleRuleSet styleRuleSet in svgStyle.RuleSets)
+            yield return styleRuleSet;
     }
 
     private IEnumerable<SvgStyle> GetStyleSheetsRecursively(string mimeType)
@@ -89,8 +85,8 @@ public class SvgContainer : SvgElement
                         yield return svgStyleSheet;
                         break;
 
-                    case "text/css":
-                        if (svgStyleSheet.Type is null or "text/css")
+                    case MimeTypes.TextCss:
+                        if (svgStyleSheet.Type is null or MimeTypes.TextCss)
                             yield return svgStyleSheet;
                         break;
                 }

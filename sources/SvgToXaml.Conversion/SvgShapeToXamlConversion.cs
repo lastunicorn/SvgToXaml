@@ -29,7 +29,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
     {
     }
 
-    protected override void InheritPropertiesFrom(IEnumerable<SvgElement> svgElements)
+    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
     {
         base.InheritPropertiesFrom(svgElements);
 
