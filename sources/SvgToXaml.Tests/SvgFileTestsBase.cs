@@ -25,11 +25,6 @@ namespace DustInTheWind.SvgToXaml.Tests;
 
 public class SvgFileTestsBase
 {
-    /// <summary>
-    /// The resource files must be placed in the same directory with the test file or a sub-directory.
-    /// </summary>
-    protected virtual string ResourcesDirectory { get; }
-
     protected void ConvertSvgFile(string resourceFileName, Action<Canvas> callBack = null)
     {
         Type callerType = GetCallerType();
@@ -67,7 +62,7 @@ public class SvgFileTestsBase
         return caller.DeclaringType;
     }
 
-    private DeserializationResult ParseSvgFileInternal(string resourceFileName, Type callerType)
+    private static DeserializationResult ParseSvgFileInternal(string resourceFileName, Type callerType)
     {
         string fullResourceFileName = ComputeFullResourceFileName(resourceFileName, callerType);
 
@@ -76,16 +71,9 @@ public class SvgFileTestsBase
         return svgSerializer.Deserialize(svgText);
     }
 
-    private string ComputeFullResourceFileName(string resourceFileName, Type callerType)
+    private static string ComputeFullResourceFileName(string resourceFileName, Type callerType)
     {
         string callerNamespace = callerType.Namespace;
-
-        if (ResourcesDirectory == null)
-            return $"{callerNamespace}.{callerType.Name}.Resources.{resourceFileName}";
-
-        if (ResourcesDirectory.Length == 0)
-            return $"{callerNamespace}.{resourceFileName}";
-
-        return $"{callerNamespace}.{ResourcesDirectory}.{resourceFileName}";
+        return $"{callerNamespace}.{callerType.Name}.Resources.{resourceFileName}";
     }
 }
