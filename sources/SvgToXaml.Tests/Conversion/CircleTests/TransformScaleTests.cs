@@ -18,36 +18,24 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTransform;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 
-/*
- * |   M11     M12     0 |
- * |                     |
- * |   M21     M22     0 |
- * |                     |
- * | OffsetX OffsetY   1 |
- *
- * - OffsetX and OffsetY => Translate
- *
- */
-
-public class TransformMatrixTests : SvgFileTestsBase
+public class TransformScaleTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleWithTransformMatrix_WhenSvgIsConverted_ThenResultedEllipseHasCorrectRenderTransformInformation()
+    public void HavingCircleWithScaleTransform_WhenSvgIsConverted_ThenResultedEllipseHasOneScaleTransformWithCorrectValues()
     {
-        ConvertSvgFile("transform-matrix.svg", canvas =>
+        ConvertSvgFile("transform-scale.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            MatrixTransform matrixTransform = ellipse.GetTransform(1) as MatrixTransform;
+            TranslateTransform translateTransform = ellipse.GetTransform(0) as TranslateTransform;
+            translateTransform.X.Should().Be(250);
+            translateTransform.Y.Should().Be(150);
 
-            matrixTransform.Matrix.M11.Should().Be(1.1);
-            matrixTransform.Matrix.M12.Should().Be(2.2);
-            matrixTransform.Matrix.M21.Should().Be(3.3);
-            matrixTransform.Matrix.M22.Should().Be(4.4);
-            matrixTransform.Matrix.OffsetX.Should().Be(5.5);
-            matrixTransform.Matrix.OffsetY.Should().Be(6.6);
+            ScaleTransform scaleTransform = ellipse.GetTransform(1) as ScaleTransform;
+            scaleTransform.ScaleX.Should().Be(-1);
+            scaleTransform.ScaleY.Should().Be(2);
         });
     }
 }

@@ -18,7 +18,7 @@ using System.Windows.Controls;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleRenderTests;
+namespace DustInTheWind.SvgToXaml.Tests.Conversion.CircleTests;
 
 public class RenderTests : SvgFileTestsBase
 {
@@ -65,6 +65,33 @@ public class RenderTests : SvgFileTestsBase
             canvas2.Children.Count.Should().Be(2);
             canvas2.Children[0].Should().BeOfType<Ellipse>();
             canvas2.Children[1].Should().BeOfType<Ellipse>();
+        });
+    }
+
+    [Fact]
+    public void HavingCircleInDefinitions_WhenSvgIsConverted_ThenNoChildrenIsCreated()
+    {
+        ConvertSvgFile("05-defs-circle.svg", canvas =>
+        {
+            canvas.Children.Count.Should().Be(0);
+        });
+    }
+
+    [Fact]
+    public void HavingTwoCirclesInDefinitions_WhenSvgIsConverted_ThenNoChildrenIsCreated()
+    {
+        ConvertSvgFile("06-defs-2circles.svg", canvas =>
+        {
+            canvas.Children.Count.Should().Be(0);
+        });
+    }
+
+    [Fact]
+    public void HavingGroupWithCircleInDefinitions_WhenSvgIsConverted_ThenNoChildrenIsCreated()
+    {
+        ConvertSvgFile("07-defs-group-circle.svg", canvas =>
+        {
+            canvas.Children.Count.Should().Be(0);
         });
     }
 }
