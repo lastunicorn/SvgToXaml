@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace DustInTheWind.SvgToXaml.SvgModel;
 
@@ -24,200 +25,72 @@ public class TransformCollection : Collection<ITransform>
     {
         if (text == null) throw new ArgumentNullException(nameof(text));
 
-        IEnumerable<KeyValuePair<string, string>> items = Parse(text);
+        IEnumerable<ITransform> transforms = Parse2(text)
+            .Select(CreateTransform)
+            .Where(x => x != null);
 
-        foreach (KeyValuePair<string, string> item in items)
+        foreach (ITransform transform in transforms)
+            Items.Add(transform);
+    }
+
+    private static ITransform CreateTransform(KeyValuePair<string, string> item)
+    {
+        switch (item.Key)
         {
-            switch (item.Key)
+            case "translate":
+                return new TranslateTransform(item.Value);
+
+            case "translateX":
+            case "translateY":
+                throw new NotImplementedException();
+
+            case "scale":
+                return new ScaleTransform(item.Value);
+
+            case "scaleX":
+            case "scaleY":
+                throw new NotImplementedException();
+
+            case "rotate":
+                return new RotateTransform(item.Value);
+
+            case "matrix":
+                return new MatrixTransform(item.Value);
+
+            case "skew":
+            case "skewX":
+            case "skewY":
+                throw new NotImplementedException();
+
+            default:
+                throw new NotImplementedException();
+        }
+    }
+
+    private static IEnumerable<KeyValuePair<string, string>> Parse1(string text)
+    {
+        Regex regex = new(@"\s*(\w*)\s*\(\s*(.*?)\s*\)\s*");
+
+        MatchCollection matches = regex.Matches(text);
+
+        foreach (Match match in matches)
+        {
+            if (match.Success)
             {
-                case "translate":
-                    TranslateTransform translateTransform = new(item.Value);
-                    Items.Add(translateTransform);
-                    break;
+                string key = match.Groups[1].Value;
+                string value = match.Groups[2].Value;
 
-                case "translateX":
-                case "translateY":
-                    throw new NotImplementedException();
-
-                case "scale":
-                    ScaleTransform scaleTransform = new(item.Value);
-                    Items.Add(scaleTransform);
-                    break;
-
-                case "scaleX":
-                case "scaleY":
-                    throw new NotImplementedException();
-
-                case "rotate":
-                    RotateTransform rotateTransform = new(item.Value);
-                    Items.Add(rotateTransform);
-                    break;
-
-                case "matrix":
-                    MatrixTransform matrixTransform = new(item.Value);
-                    Items.Add(matrixTransform);
-                    break;
-
-                case "skew":
-                case "skewX":
-                case "skewY":
-                    throw new NotImplementedException();
-
+                KeyValuePair<string, string> item = new(key, value);
+                yield return item;
             }
         }
     }
 
-    private static IEnumerable<KeyValuePair<string, string>> Parse(string text)
+    private static IEnumerable<KeyValuePair<string, string>> Parse2(string text)
     {
-        ParsingState parsingState = ParsingState.ExpectName;
+        TransformParser parser = new(text);
 
-        string name = null;
-
-        int startIndex = -1;
-
-        for (int i = 0; i < text.Length; i++)
-        {
-            char c = text[i];
-
-            switch (parsingState)
-            {
-                case ParsingState.ExpectName:
-                    if (char.IsWhiteSpace(c))
-                    {
-                    }
-                    else if (c == '(')
-                    {
-                        // advance until close parenthesis.
-
-                        for (; i < text.Length; i++)
-                        {
-                            if (text[i] == ')')
-                                break;
-                        }
-                    }
-                    else if (c == ')')
-                    {
-                    }
-                    else
-                    {
-                        startIndex = i;
-                        parsingState = ParsingState.Name;
-                    }
-
-                    break;
-
-                case ParsingState.Name:
-                    if (char.IsWhiteSpace(c))
-                    {
-                        name = text.Substring(startIndex, i - startIndex);
-                        parsingState = ParsingState.ExpectValueStart;
-                    }
-                    else if (c == '(')
-                    {
-                        name = text.Substring(startIndex, i - startIndex);
-                        parsingState = ParsingState.ExpectValue;
-                    }
-                    else if (c == ')')
-                    {
-                        name = null;
-                        parsingState = ParsingState.ExpectName;
-                    }
-
-                    break;
-
-                case ParsingState.ExpectValueStart:
-                    if (char.IsWhiteSpace(c))
-                    {
-                    }
-                    else if (c == '(')
-                    {
-                        parsingState = ParsingState.ExpectValue;
-                    }
-                    else if (c == ')')
-                    {
-                        name = null;
-                        parsingState = ParsingState.ExpectName;
-                    }
-                    else
-                    {
-                        name = null;
-                        startIndex = i;
-                    }
-
-                    break;
-
-                case ParsingState.ExpectValue:
-                    if (char.IsWhiteSpace(c))
-                    {
-                    }
-                    else if (c == '(')
-                    {
-                        // advance until close parenthesis.
-
-                        for (; i < text.Length; i++)
-                        {
-                            if (text[i] == ')')
-                                break;
-                        }
-
-                        name = null;
-                        parsingState = ParsingState.ExpectName;
-                    }
-                    else if (c == ')')
-                    {
-                        yield return new KeyValuePair<string, string>(name!, string.Empty);
-
-                        name = null;
-                        parsingState = ParsingState.ExpectName;
-                    }
-                    else
-                    {
-                        startIndex = i;
-                        parsingState = ParsingState.Value;
-                    }
-
-                    break;
-
-                case ParsingState.Value:
-                    if (char.IsWhiteSpace(c))
-                    {
-                    }
-                    else if (c == '(')
-                    {
-                        // advance until close parenthesis.
-
-                        for (; i < text.Length; i++)
-                        {
-                            if (text[i] == ')')
-                                break;
-                        }
-
-                        name = null;
-                        parsingState = ParsingState.ExpectName;
-                    }
-                    else if (c == ')')
-                    {
-                        string value = text.Substring(startIndex, i - startIndex);
-                        yield return new KeyValuePair<string, string>(name!, value);
-
-                        name = null;
-                        parsingState = ParsingState.ExpectName;
-                    }
-
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-    }
-
-    private enum ParsingState
-    {
-        ExpectName,
-        Name,
-        ExpectValueStart,
-        ExpectValue,
-        Value
+        while (parser.MoveNext())
+            yield return parser.Current;
     }
 }

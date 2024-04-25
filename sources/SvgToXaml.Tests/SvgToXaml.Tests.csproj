@@ -47,6 +47,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\01-circle-defs-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\02-circle^-defs-class^.svg" />
         <None Remove="Conversion\CircleStrokeTests\DefsClassTests.Resources\03-svgroot^-circle-defs-class^.svg" />
+        <None Remove="Conversion\PathTests\FillRuleTests.Resources\g^-path.svg" />
+        <None Remove="Conversion\PathTests\FillRuleTests.Resources\g^-path^.svg" />
+        <None Remove="Conversion\PathTests\FillRuleTests.Resources\path-fillrule-evenodd.svg" />
+        <None Remove="Conversion\PathTests\FillRuleTests.Resources\path-fillrule-missing.svg" />
+        <None Remove="Conversion\PathTests\FillRuleTests.Resources\path-fillrule-nonzero.svg" />
         <None Remove="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\01-group-use-href-defs-group-rect.svg" />
         <None Remove="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\02-group-use-href-defs-group-rect^.svg" />
         <None Remove="Conversion\RectFillTests\UseGroupContainingCircleTests.Resources\03-group-use-href-defs-group^-rect.svg" />
@@ -227,6 +232,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-empty.svg" />
         <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-missing.svg" />
         <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-class.svg" />
+        <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-inline.svg" />
+        <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-missing.svg" />
+        <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-none.svg" />
+        <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-inline.svg" />
+        <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-missing.svg" />
         <None Remove="SvgSerialization\CircleTests\IdTests.Resources\circle-id.svg" />
         <None Remove="SvgSerialization\CircleTests\IdTests.Resources\circle-noid.svg" />
         <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang-missing.svg" />
@@ -273,6 +283,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-lang.svg" />
         <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang-missing.svg" />
         <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang.svg" />
+        <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-evenodd.svg" />
+        <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-invalid.svg" />
+        <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-missing.svg" />
+        <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-nonzero.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-2class.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class-empty.svg" />
         <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class-missing.svg" />
@@ -299,6 +313,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-empty.svg" />
         <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-missing.svg" />
         <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ch.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-em.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ex.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-rem.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-ch.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-em.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-ex.svg" />
+        <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-rem.svg" />
         <None Remove="SvgSerialization\SvgTests\IdTests.Resources\svg-id.svg" />
         <None Remove="SvgSerialization\SvgTests\IdTests.Resources\svg-noid.svg" />
         <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
@@ -408,7 +430,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\SvgTests\VersionTests.Resources\version-1-1.svg" />
         <None Remove="SvgSerialization\SvgTests\VersionTests.Resources\version-2.svg" />
         <None Remove="SvgSerialization\SvgTests\VersionTests.Resources\version-missing.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-ch.svg" />
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-cm.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-em.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-ex.svg" />
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-in.svg" />
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-missing.svg" />
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-mm.svg" />
@@ -417,6 +442,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-pt.svg" />
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-px.svg" />
         <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-q.svg" />
+        <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-rem.svg" />
     </ItemGroup>
     
     <ItemGroup>
@@ -427,6 +453,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\04-attr^-style^-class.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\03-attr-style-class^.svg" />
         <EmbeddedResource Include="Conversion\CircleFillTests\StyleTests.Resources\02-attr-style^-class.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\FillRuleTests.Resources\g^-path^.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\FillRuleTests.Resources\g^-path.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\FillRuleTests.Resources\path-fillrule-evenodd.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\FillRuleTests.Resources\path-fillrule-missing.svg" />
+        <EmbeddedResource Include="Conversion\PathTests\FillRuleTests.Resources\path-fillrule-nonzero.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang-missing.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang.svg" />
         <EmbeddedResource Include="Conversion\CircleTests\LanguageTests.Resources\circle-lang-xmllang.svg" />
@@ -609,6 +640,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-empty.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-class.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-invalid.svg" />
+        <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-nonzero.svg" />
+        <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-evenodd.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-inline.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-inline.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-none.svg" />
+        <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-negative.svg" />
         <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-percentage.svg" />
@@ -681,6 +721,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-empty.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-missing.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-rem.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ch.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ex.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-em.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-ch.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-em.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-ex.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-rem.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\IdTests.Resources\svg-id.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\IdTests.Resources\svg-noid.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
@@ -795,6 +843,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="SvgSerialization\SvgTests\VersionTests.Resources\version-2.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\VersionTests.Resources\version-1-1.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\VersionTests.Resources\version-missing.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-ch.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-em.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-ex.svg" />
+        <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-rem.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-q.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-in.svg" />
         <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-missing.svg" />
@@ -826,6 +878,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <ProjectReference Include="..\SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj" />
         <ProjectReference Include="..\SvgToXaml.Tests.Utils\SvgToXaml.Tests.Utils.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml\SvgToXaml.csproj" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="SvgModel\SvgLengthTests\" />
     </ItemGroup>
 
 </Project>

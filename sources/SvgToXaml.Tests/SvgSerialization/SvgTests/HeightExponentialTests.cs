@@ -99,4 +99,44 @@ public class HeightExponentialTests : SvgFileTestsBase
             svg.Height.Should().Be(expected);
         });
     }
+
+    [Fact]
+    public void HavingHeightInElementFontSize_WhenSvgIsParsed_ThenHeightIsInElementFontSize()
+    {
+        ParseSvgFile("height-em.svg", svg =>
+        {
+            SvgLength expected = new(1000, SvgLengthUnit.ElementFontSize);
+            svg.Height.Should().Be(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingHeightInElementFontHeight_WhenSvgIsParsed_ThenHeightIsInElementFontHeight()
+    {
+        ParseSvgFile("height-ex.svg", svg =>
+        {
+            SvgLength expected = new(1000, SvgLengthUnit.ElementFontHeight);
+            svg.Height.Should().Be(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingHeightInCharacterAdvanceOfZero_WhenSvgIsParsed_ThenHeightIsInCharacterAdvanceOfZero()
+    {
+        ParseSvgFile("height-ch.svg", svg =>
+        {
+            SvgLength expected = new(1000, SvgLengthUnit.CharacterAdvanceOfZero);
+            svg.Height.Should().Be(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingHeightInRootElementFontSize_WhenSvgIsParsed_ThenHeightIsInRootElementFontSize()
+    {
+        ParseSvgFile("height-rem.svg", svg =>
+        {
+            SvgLength expected = new(1000, SvgLengthUnit.RootElementFontSize);
+            svg.Height.Should().Be(expected);
+        });
+    }
 }

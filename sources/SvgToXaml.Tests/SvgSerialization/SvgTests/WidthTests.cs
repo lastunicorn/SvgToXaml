@@ -108,4 +108,44 @@ public class WidthTests : SvgFileTestsBase
             svg.Width.Should().Be(expected);
         });
     }
+
+    [Fact]
+    public void HavingWidthInElementFontSize_WhenSvgIsParsed_ThenWidthIsInElementFontSize()
+    {
+        ParseSvgFile("width-em.svg", svg =>
+        {
+            SvgLength expected = new(123, SvgLengthUnit.ElementFontSize);
+            svg.Width.Should().Be(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingWidthInElementFontWidth_WhenSvgIsParsed_ThenWidthIsInElementFontWidth()
+    {
+        ParseSvgFile("width-ex.svg", svg =>
+        {
+            SvgLength expected = new(123, SvgLengthUnit.ElementFontHeight);
+            svg.Width.Should().Be(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingWidthInCharacterAdvanceOfZero_WhenSvgIsParsed_ThenWidthIsInCharacterAdvanceOfZero()
+    {
+        ParseSvgFile("width-ch.svg", svg =>
+        {
+            SvgLength expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
+            svg.Width.Should().Be(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingWidthInRootElementFontSize_WhenSvgIsParsed_ThenWidthIsInRootElementFontSize()
+    {
+        ParseSvgFile("width-rem.svg", svg =>
+        {
+            SvgLength expected = new(123, SvgLengthUnit.RootElementFontSize);
+            svg.Width.Should().Be(expected);
+        });
+    }
 }

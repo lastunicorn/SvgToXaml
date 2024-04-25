@@ -34,91 +34,72 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
 
         if (XmlElement.Children != null)
         {
-            IEnumerable<IToModelConversion<SvgElement>> conversions = CreateConversionsForAllChildren();
+            IEnumerable<SvgElement> elements = XmlElement.Children
+                .Select(CreateConversionFor)
+                .Where(x => x != null)
+                .Select(x => x.Execute());
 
-            foreach (IToModelConversion<SvgElement> conversion in conversions)
-            {
-                SvgElement childSvgElement = conversion.Execute();
-                SvgElement.Children.Add(childSvgElement);
-            }
+            foreach (SvgElement svgElement in elements)
+                SvgElement.Children.Add(svgElement);
         }
     }
 
-    protected IEnumerable<IToModelConversion<SvgElement>> CreateConversionsForAllChildren()
+    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
     {
-        foreach (object serializationChild in XmlElement.Children)
+        switch (objectToConvert)
         {
-            switch (serializationChild)
-            {
-                case XmlCircle circle:
-                    yield return new XmlCircleToModelConversion(circle, DeserializationContext);
-                    break;
+            case XmlCircle circle:
+                return new XmlCircleToModelConversion(circle, DeserializationContext);
 
-                case XmlEllipse ellipse:
-                    yield return new XmlEllipseToModelConversion(ellipse, DeserializationContext);
-                    break;
+            case XmlEllipse ellipse:
+                return new XmlEllipseToModelConversion(ellipse, DeserializationContext);
 
-                case XmlPath path:
-                    yield return new XmlPathToModelConversion(path, DeserializationContext);
-                    break;
+            case XmlPath path:
+                return new XmlPathToModelConversion(path, DeserializationContext);
 
-                case XmlLine line:
-                    yield return new XmlLineToModelConversion(line, DeserializationContext);
-                    break;
+            case XmlLine line:
+                return new XmlLineToModelConversion(line, DeserializationContext);
 
-                case XmlRect rect:
-                    yield return new XmlRectToModelConversion(rect, DeserializationContext);
-                    break;
+            case XmlRect rect:
+                return new XmlRectToModelConversion(rect, DeserializationContext);
 
-                case XmlPolygon polygon:
-                    yield return new XmlPolygonToModelConversion(polygon, DeserializationContext);
-                    break;
+            case XmlPolygon polygon:
+                return new XmlPolygonToModelConversion(polygon, DeserializationContext);
 
-                case XmlPolyline polyline:
-                    yield return new XmlPolylineToModelConversion(polyline, DeserializationContext);
-                    break;
+            case XmlPolyline polyline:
+                return new XmlPolylineToModelConversion(polyline, DeserializationContext);
 
-                case XmlDefs defs:
-                    yield return new XmlDefsToModelConversion(defs, DeserializationContext);
-                    break;
+            case XmlDefs defs:
+                return new XmlDefsToModelConversion(defs, DeserializationContext);
 
-                case XmlG gChild:
-                    yield return new XmlGroupToModelConversion(gChild, DeserializationContext);
-                    break;
+            case XmlG gChild:
+                return new XmlGroupToModelConversion(gChild, DeserializationContext);
 
-                case XmlUse use:
-                    yield return new XmlUseToModelConversion(use, DeserializationContext);
-                    break;
+            case XmlUse use:
+                return new XmlUseToModelConversion(use, DeserializationContext);
 
-                case XmlStyle style:
-                    yield return new XmlStyleToModelConversion(style, DeserializationContext);
-                    break;
+            case XmlStyle style:
+                return new XmlStyleToModelConversion(style, DeserializationContext);
 
-                case XmlText text:
-                    yield return new XmlTextToModelConversion(text, DeserializationContext);
-                    break;
+            case XmlText text:
+                return new XmlTextToModelConversion(text, DeserializationContext);
 
-                case XmlLinearGradient linearGradient:
-                    yield return new XmlLinearGradientToModelConversion(linearGradient, DeserializationContext);
-                    break;
+            case XmlLinearGradient linearGradient:
+                return new XmlLinearGradientToModelConversion(linearGradient, DeserializationContext);
 
-                case XmlRadialGradient radialGradient:
-                    yield return new XmlRadialGradientToModelConversion(radialGradient, DeserializationContext);
-                    break;
+            case XmlRadialGradient radialGradient:
+                return new XmlRadialGradientToModelConversion(radialGradient, DeserializationContext);
 
-                case XmlClipPath clipPath:
-                    yield return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
-                    break;
+            case XmlClipPath clipPath:
+                return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
 
-                case XmlSvg childSvg:
-                    yield return new XmlSvgToModelConversion(childSvg, DeserializationContext);
-                    break;
+            case XmlSvg childSvg:
+                return new XmlSvgToModelConversion(childSvg, DeserializationContext);
 
-                default:
-                    DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
-                    DeserializationContext.Errors.Add(deserializationIssue);
-                    break;
-            }
+            default:
+                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
+                DeserializationContext.Errors.Add(deserializationIssue);
+                return null;
         }
     }
 }

@@ -180,7 +180,7 @@ internal class CanvasOptimization
         return success;
     }
 
-    private bool IsCanvasUseful(Canvas canvas)
+    private static bool IsCanvasUseful(Canvas canvas)
     {
         bool containsTransformations = canvas.RenderTransform != null && canvas.RenderTransform != System.Windows.Media.Transform.Identity;
         if (containsTransformations)
