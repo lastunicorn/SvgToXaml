@@ -42,7 +42,7 @@ public class XmlElement
     
     public bool DisplaySpecified { get; set; }
 
-    // Shape Attributes
+    // Shape Attributes (inheritable)
     // (shapes and text content elements)
 
     [XmlAttribute("fill")]

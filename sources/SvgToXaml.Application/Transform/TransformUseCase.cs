@@ -118,79 +118,16 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
     private Canvas Optimize(Canvas canvas)
     {
-        int i = 0;
+        CanvasOptimization canvasOptimization = new(canvas);
+        canvasOptimization.Execute();
 
-        while (i < canvas.Children.Count)
-        {
-            UIElement child = canvas.Children[i];
+        if (canvasOptimization.Errors.Count > 0)
+            xamlTextChangedEvent.Errors.AddRange(canvasOptimization.Errors);
 
-            if (child is Canvas childCanvas)
-            {
-                Optimize(childCanvas);
+        if (canvasOptimization.Infos.Count > 0)
+            xamlTextChangedEvent.Info.AddRange(canvasOptimization.Infos);
 
-                if (childCanvas.Children.Count == 0)
-                {
-                    canvas.Children.RemoveAt(i);
-
-                    ErrorInfo errorInfo = new()
-                    {
-                        Message = $"Optimization: UIElement removed - {child.GetType().Name}"
-                    };
-                    xamlTextChangedEvent.Info.Add(errorInfo);
-
-                    continue;
-                }
-
-                bool containsTransformations = childCanvas.RenderTransform != null && childCanvas.RenderTransform != System.Windows.Media.Transform.Identity;
-                if (!containsTransformations)
-                {
-                    bool containsLanguage = childCanvas.Language != null && childCanvas.Language != XmlLanguage.Empty && childCanvas.Language != XmlLanguage.GetLanguage("en-US");
-                    if (!containsLanguage)
-                    {
-                        int grandChildrenCount = childCanvas.Children.Count;
-
-                        while (childCanvas.Children.Count > 0)
-                        {
-                            UIElement grandChild = childCanvas.Children[0];
-
-                            grandChild.RemoveFromParent(out DependencyObject _, out int? _);
-                            grandChild.AddToParent(canvas, i);
-
-                            i++;
-                        }
-
-                        canvas.Children.RemoveAt(i);
-
-                        ErrorInfo errorInfo = new()
-                        {
-                            Message = $"Optimization: {grandChildrenCount} children moved outside of container. Container removed - {child.GetType().Name}."
-                        };
-                        xamlTextChangedEvent.Info.Add(errorInfo);
-
-                        continue;
-                    }
-                }
-            }
-            else if (child is TextBlock textBlock)
-            {
-                if (string.IsNullOrEmpty(textBlock.Text))
-                {
-                    canvas.Children.RemoveAt(i);
-
-                    ErrorInfo errorInfo = new()
-                    {
-                        Message = $"Optimization: UIElement removed - {child.GetType().Name}"
-                    };
-                    xamlTextChangedEvent.Info.Add(errorInfo);
-
-                    continue;
-                }
-            }
-
-            i++;
-        }
-
-        return canvas;
+        return canvasOptimization.Canvas;
     }
 
     private static string Serialize(Canvas canvas)

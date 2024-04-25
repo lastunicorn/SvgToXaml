@@ -23,10 +23,22 @@ namespace DustInTheWind.SvgToXaml.Application.Transform;
 
 internal static class UiElementExtensions
 {
+    public static void AddToParent(this IEnumerable<UIElement> children, DependencyObject parent, int? index = null)
+    {
+        if (parent == null)
+            throw new ArgumentNullException(nameof(parent));
+
+        foreach (UIElement child in children)
+        {
+            child.AddToParent(parent, index);
+            index++;
+        }
+    }
+
     public static void AddToParent(this UIElement child, DependencyObject parent, int? index = null)
     {
         if (parent == null)
-            return;
+            throw new ArgumentNullException(nameof(parent));
 
         if (parent is ItemsControl itemsControl)
         {
