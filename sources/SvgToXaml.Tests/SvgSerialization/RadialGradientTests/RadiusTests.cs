@@ -42,7 +42,7 @@ public class RadiusTests : SvgFileTestsBase
             svgRadialGradient.Radius.Should().Be(SvgLength.Zero);
             
             result.Warnings.Should().HaveCount(1);
-            result.Warnings[0].Path.Should().Be("svg.radialGradient(1).@r");
+            result.Warnings[0].Path.Should().Be("svg.(1)radialGradient.@r");
         });
     }
 

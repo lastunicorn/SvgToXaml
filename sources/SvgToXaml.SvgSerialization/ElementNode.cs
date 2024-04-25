@@ -14,34 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Text;
+
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
-
-internal class Node
-{
-    public virtual Node Previous { get; set; }
-
-    public virtual Node Next { get; set; }
-
-    public override string ToString()
-    {
-        return string.Empty;
-    }
-}
-
-internal class AttributeNode : Node
-{
-    private readonly string name;
-
-    public AttributeNode(string name)
-    {
-        this.name = name ?? throw new ArgumentNullException(nameof(name));
-    }
-
-    public override string ToString()
-    {
-        return $"@{name}";
-    }
-}
 
 internal class ElementNode : Node
 {
@@ -78,7 +53,6 @@ internal class ElementNode : Node
                 if (value is ElementNode elementNodeValue)
                 {
                     childCount++;
-
                     elementNodeValue.Index = childCount;
                 }
 
@@ -97,14 +71,16 @@ internal class ElementNode : Node
 
     public override string ToString()
     {
-        string text = $"{name}";
-        
-        if(Index > 0)
-            text += $"({Index})";
+        StringBuilder sb = new();
+
+        if (Index > 0)
+            sb.Append($"({Index})");
+
+        sb.Append(name);
 
         if (id != null)
-            text += $"[{id}]";
+            sb.Append($"[{id}]");
 
-        return text;
+        return sb.ToString();
     }
 }
