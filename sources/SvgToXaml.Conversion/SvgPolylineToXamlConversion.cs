@@ -30,19 +30,20 @@ internal class SvgPolylineToXamlConversion : SvgShapeToXamlConversion<SvgPolylin
 
     protected override Polyline CreateXamlElement()
     {
-        Polyline polyline = new()
-        {
-            Points = SvgElement.Points.ToXaml()
-        };
-
-        return polyline;
+        return new Polyline();
     }
 
-    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        base.InheritPropertiesFrom(svgElements);
+        base.ConvertProperties(inheritedSvgElements);
 
-        SetFillRule(svgElements);
+        SetPoints();
+        SetFillRule(inheritedSvgElements);
+    }
+
+    private void SetPoints()
+    {
+        XamlElement.Points = SvgElement.Points.ToXaml();
     }
 
     private void SetFillRule(IEnumerable<SvgElement> svgElements)

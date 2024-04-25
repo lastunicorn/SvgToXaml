@@ -31,19 +31,22 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
 
     protected override Path CreateXamlElement()
     {
-        return new Path
-        {
-            Data = SvgElement.Data is null or "none"
-                ? Geometry.Empty
-                : Geometry.Parse(SvgElement.Data)
-        };
+        return new Path();
     }
 
-    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        base.InheritPropertiesFrom(svgElements);
+        base.ConvertProperties(inheritedSvgElements);
 
-        SetFillRule(svgElements);
+        SetData();
+        SetFillRule(inheritedSvgElements);
+    }
+
+    private void SetData()
+    {
+        XamlElement.Data = SvgElement.Data is null or "none"
+            ? Geometry.Empty
+            : Geometry.Parse(SvgElement.Data);
     }
 
     private void SetFillRule(IEnumerable<SvgElement> svgElements)

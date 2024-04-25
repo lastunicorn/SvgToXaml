@@ -29,17 +29,17 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
     {
     }
 
-    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        base.InheritPropertiesFrom(svgElements);
+        base.ConvertProperties(inheritedSvgElements);
 
-        SetFill(svgElements);
-        SetStroke(svgElements);
-        SetStrokeThickness(svgElements);
-        SetStrokeLineCap(svgElements);
-        SetStrokeLineJoin(svgElements);
-        SetStrokeDashOffset(svgElements);
-        SetStrokeMiterLimit(svgElements);
+        SetFill(inheritedSvgElements);
+        SetStroke(inheritedSvgElements);
+        SetStrokeThickness(inheritedSvgElements);
+        SetStrokeLineCap(inheritedSvgElements);
+        SetStrokeLineJoin(inheritedSvgElements);
+        SetStrokeDashOffset(inheritedSvgElements);
+        SetStrokeMiterLimit(inheritedSvgElements);
     }
 
     private void SetFill(IEnumerable<SvgElement> svgElements)

@@ -29,18 +29,30 @@ internal class SvgCircleToXamlConversion : SvgShapeToXamlConversion<SvgCircle, E
 
     protected override Ellipse CreateXamlElement()
     {
-        Ellipse ellipse = new()
-        {
-            Width = SvgElement.Radius * 2,
-            Height = SvgElement.Radius * 2
-        };
+        return new Ellipse();
+    }
 
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    {
+        SetPosition();
+
+        base.ConvertProperties(inheritedSvgElements);
+
+        SetSize();
+    }
+
+    private void SetPosition()
+    {
         double left = SvgElement.CenterX - SvgElement.Radius;
         double top = SvgElement.CenterY - SvgElement.Radius;
 
         if (left != 0 || top != 0)
-            ellipse.RenderTransform = new TranslateTransform(left, top);
+            XamlElement.RenderTransform = new TranslateTransform(left, top);
+    }
 
-        return ellipse;
+    private void SetSize()
+    {
+        XamlElement.Width = SvgElement.Radius * 2;
+        XamlElement.Height = SvgElement.Radius * 2;
     }
 }

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
@@ -30,27 +29,43 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
     protected override Rectangle CreateXamlElement()
     {
-        double? radiusX = SvgElement.Rx ?? SvgElement.Ry;
-        double? radiusY = SvgElement.Ry ?? SvgElement.Rx;
+        return new Rectangle();
+    }
 
-        Rectangle rectangle = new()
-        {
-            Width = SvgElement.Width,
-            Height = SvgElement.Height
-        };
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    {
+        SetPosition();
 
-        if (radiusX != null)
-            rectangle.RadiusX = radiusX.Value;
+        base.ConvertProperties(inheritedSvgElements);
 
-        if (radiusY != null)
-            rectangle.RadiusY = radiusY.Value;
+        SetSize();
+        SetCornetRadius();
+    }
 
+    private void SetPosition()
+    {
         double left = SvgElement.X;
         double top = SvgElement.Y;
 
         if (left != 0 || top != 0)
-            rectangle.RenderTransform = new TranslateTransform(left, top);
-        
-        return rectangle;
+            XamlElement.RenderTransform = new TranslateTransform(left, top);
+    }
+
+    private void SetSize()
+    {
+        XamlElement.Width = SvgElement.Width;
+        XamlElement.Height = SvgElement.Height;
+    }
+
+    private void SetCornetRadius()
+    {
+        double? radiusX = SvgElement.Rx ?? SvgElement.Ry;
+        double? radiusY = SvgElement.Ry ?? SvgElement.Rx;
+
+        if (radiusX != null)
+            XamlElement.RadiusX = radiusX.Value;
+
+        if (radiusY != null)
+            XamlElement.RadiusY = radiusY.Value;
     }
 }

@@ -28,12 +28,16 @@ internal class SvgLineToXamlConversion : SvgShapeToXamlConversion<SvgLine, Line>
 
     protected override Line CreateXamlElement()
     {
-        return new Line
-        {
-            X1 = SvgElement.X1,
-            Y1 = SvgElement.Y1,
-            X2 = SvgElement.X2,
-            Y2 = SvgElement.Y2
-        };
+        return new Line();
+    }
+
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    {
+        base.ConvertProperties(inheritedSvgElements);
+
+        XamlElement.X1 = SvgElement.X1;
+        XamlElement.Y1 = SvgElement.Y1;
+        XamlElement.X2 = SvgElement.X2;
+        XamlElement.Y2 = SvgElement.Y2;
     }
 }

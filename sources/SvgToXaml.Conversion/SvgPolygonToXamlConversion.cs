@@ -30,19 +30,20 @@ internal class SvgPolygonToXamlConversion : SvgShapeToXamlConversion<SvgPolygon,
 
     protected override Polygon CreateXamlElement()
     {
-        Polygon polygon = new()
-        {
-            Points = SvgElement.Points.ToXaml()
-        };
-
-        return polygon;
+        return new Polygon();
     }
 
-    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        base.InheritPropertiesFrom(svgElements);
+        base.ConvertProperties(inheritedSvgElements);
 
-        SetFillRule(svgElements);
+        SetPoints();
+        SetFillRule(inheritedSvgElements);
+    }
+
+    private void SetPoints()
+    {
+        XamlElement.Points = SvgElement.Points.ToXaml();
     }
 
     private void SetFillRule(IEnumerable<SvgElement> svgElements)

@@ -32,9 +32,9 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
         return new TextBlock();
     }
 
-    protected override void InheritPropertiesFrom(List<SvgElement> svgElements)
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        base.InheritPropertiesFrom(svgElements);
+        base.ConvertProperties(inheritedSvgElements);
 
         XamlElement.Text = SvgElement.Text;
 

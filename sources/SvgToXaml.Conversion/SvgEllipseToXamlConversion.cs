@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgToXaml.SvgModel;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
@@ -31,18 +29,30 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
 
     protected override Ellipse CreateXamlElement()
     {
-        Ellipse ellipse = new()
-        {
-            Width = SvgElement.RadiusX * 2,
-            Height = SvgElement.RadiusY * 2
-        };
+        return new Ellipse();
+    }
 
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    {
+        SetPosition();
+
+        base.ConvertProperties(inheritedSvgElements);
+
+        SetSize();
+    }
+
+    private void SetPosition()
+    {
         double left = SvgElement.CenterX - SvgElement.RadiusX;
         double top = SvgElement.CenterY - SvgElement.RadiusY;
 
-        if (left != 0 || top != 0) 
-            ellipse.RenderTransform = new TranslateTransform(left, top);
+        if (left != 0 || top != 0)
+            XamlElement.RenderTransform = new TranslateTransform(left, top);
+    }
 
-        return ellipse;
+    private void SetSize()
+    {
+        XamlElement.Width = SvgElement.RadiusX * 2;
+        XamlElement.Height = SvgElement.RadiusY * 2;
     }
 }

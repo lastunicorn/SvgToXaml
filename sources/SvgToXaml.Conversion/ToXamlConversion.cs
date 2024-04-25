@@ -43,19 +43,8 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         {
             XamlElement = CreateXamlElement();
 
-            if (XamlElement is FrameworkElement frameworkElement)
-            {
-                SetLanguage(frameworkElement);
-            }
-
-            if (SvgElement.Transforms.Count > 0)
-                ApplyTransforms();
-
-            if (SvgElement.ClipPath != null)
-                ApplyClipPath();
-
             List<SvgElement> inheritedSvgElements = EnumerateInheritedElements().ToList();
-            InheritPropertiesFrom(inheritedSvgElements);
+            ConvertProperties(inheritedSvgElements);
 
             return XamlElement;
         }
@@ -70,6 +59,48 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     }
 
     protected abstract TXaml CreateXamlElement();
+
+    protected virtual IEnumerable<SvgElement> EnumerateInheritedElements()
+    {
+        yield return SvgElement;
+
+        if (referrer == null)
+        {
+            IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors();
+
+            foreach (SvgElement ancestor in ancestors)
+                yield return ancestor;
+        }
+        else
+        {
+            IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors()
+                .TakeWhile(x => x.GetType() != typeof(SvgDefinitions));
+
+            foreach (SvgElement ancestor in ancestors)
+                yield return ancestor;
+
+            yield return referrer;
+
+            IEnumerable<SvgElement> referrerAncestors = referrer.EnumerateAncestors();
+
+            foreach (SvgElement ancestor in referrerAncestors)
+                yield return ancestor;
+        }
+    }
+
+    protected virtual void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    {
+        if (XamlElement is FrameworkElement frameworkElement)
+            SetLanguage(frameworkElement);
+
+        if (SvgElement.Transforms.Count > 0)
+            ApplyTransforms();
+
+        if (SvgElement.ClipPath != null)
+            ApplyClipPath();
+
+        SetOpacity(inheritedSvgElements);
+    }
 
     private void SetLanguage(FrameworkElement frameworkElement)
     {
@@ -161,39 +192,6 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
             default:
                 throw new UnknownElementTypeException(svgElement?.GetType());
         }
-    }
-
-    protected virtual IEnumerable<SvgElement> EnumerateInheritedElements()
-    {
-        yield return SvgElement;
-
-        if (referrer == null)
-        {
-            IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors();
-
-            foreach (SvgElement ancestor in ancestors)
-                yield return ancestor;
-        }
-        else
-        {
-            IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors()
-                .TakeWhile(x => x.GetType() != typeof(SvgDefinitions));
-
-            foreach (SvgElement ancestor in ancestors)
-                yield return ancestor;
-
-            yield return referrer;
-
-            IEnumerable<SvgElement> referrerAncestors = referrer.EnumerateAncestors();
-
-            foreach (SvgElement ancestor in referrerAncestors)
-                yield return ancestor;
-        }
-    }
-
-    protected virtual void InheritPropertiesFrom(List<SvgElement> svgElements)
-    {
-        SetOpacity(svgElements);
     }
 
     private void SetOpacity(List<SvgElement> svgElements)
