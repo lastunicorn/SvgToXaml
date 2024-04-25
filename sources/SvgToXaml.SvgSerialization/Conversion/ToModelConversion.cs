@@ -39,7 +39,7 @@ internal abstract class ToModelConversion<TXml, TSvg> : IToModelConversion<TSvg>
 
     public TSvg Execute()
     {
-        DeserializationContext.Path.Add(ElementName);
+        DeserializationContext.Path.AddElement(ElementName);
 
         try
         {

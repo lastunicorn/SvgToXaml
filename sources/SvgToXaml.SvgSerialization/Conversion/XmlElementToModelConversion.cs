@@ -57,8 +57,10 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
 
             if (isNegative)
             {
-                DeserializationContext.Path.SetAttributeOnLast("stroke-width");
+                DeserializationContext.Path.AddAttribute("stroke-width");
                 string path = DeserializationContext.Path.ToString();
+                DeserializationContext.Path.RemoveLast();
+
                 NegativeValueIssue negativeValueIssue = new(path);
                 DeserializationContext.Errors.Add(negativeValueIssue);
 

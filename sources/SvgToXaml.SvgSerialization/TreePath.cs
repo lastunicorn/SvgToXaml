@@ -16,24 +16,41 @@
 
 namespace DustInTheWind.SvgToXaml.SvgSerialization;
 
-internal class SvgTreePath
+internal class TreePath
 {
-    private SvgTreePathNode firstNode;
-    private SvgTreePathNode lastNode;
+    private Node firstNode;
+    private Node lastNode;
 
-    public void Add(string name, string id = null)
+    public void AddElement(string name, string id = null)
     {
         if (name == null) throw new ArgumentNullException(nameof(name));
 
-        if (lastNode == null)
+        ElementNode newElementNode = new(name, id);
+        AddNodeInternal(newElementNode);
+    }
+
+    public void AddAttribute(string name)
+    {
+        AttributeNode newAttributeNode = new(name);
+        AddNodeInternal(newAttributeNode);
+    }
+
+    private void AddNodeInternal(Node newNode)
+    {
+        switch (lastNode)
         {
-            firstNode = new SvgTreePathNode(1, name, id);
-            lastNode = firstNode;
-        }
-        else
-        {
-            lastNode.SetNext(name, id);
-            lastNode = lastNode.Next;
+            case null:
+                firstNode = newNode;
+                lastNode = firstNode;
+                break;
+
+            case ElementNode elementLastNode:
+                elementLastNode.Next = newNode;
+                lastNode = newNode;
+                break;
+
+            default:
+                throw new Exception("Cannot add more element nodes. Last element is an attribute.");
         }
     }
 
@@ -49,28 +66,24 @@ internal class SvgTreePath
         }
         else
         {
-            lastNode = lastNode.Previous;
-            lastNode.RemoveNext();
+            Node previousNode = lastNode.Previous;
+
+            lastNode.Previous = null;
+            previousNode.Next = null;
+
+            lastNode = previousNode;
         }
-    }
-
-    public void SetAttributeOnLast(string attributeName)
-    {
-        if (lastNode == null)
-            return;
-
-        lastNode.Attribute = attributeName;
     }
 
     public override string ToString()
     {
-        IEnumerable<SvgTreePathNode> nodes = EnumerateNodes();
+        IEnumerable<Node> nodes = EnumerateNodes();
         return string.Join(".", nodes);
     }
 
-    private IEnumerable<SvgTreePathNode> EnumerateNodes()
+    private IEnumerable<Node> EnumerateNodes()
     {
-        SvgTreePathNode node = firstNode;
+        Node node = firstNode;
 
         while (node != null)
         {

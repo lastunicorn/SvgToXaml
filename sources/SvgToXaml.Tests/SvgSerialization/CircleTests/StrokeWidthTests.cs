@@ -43,7 +43,7 @@ public class StrokeWidthTests : SvgFileTestsBase
             svgCircle.StrokeWidth.Should().Be(expected);
 
             result.Errors.Count.Should().Be(1);
-            result.Errors[0].Path.Should().Be("1(svg).1(circle)@stroke-width");
+            result.Errors[0].Path.Should().Be("svg.circle(1).@stroke-width");
         });
     }
 

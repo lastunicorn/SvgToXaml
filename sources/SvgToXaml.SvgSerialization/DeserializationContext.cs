@@ -22,37 +22,5 @@ internal class DeserializationContext
 
     public List<DeserializationIssue> Errors { get; } = new();
 
-    public SvgTreePath Path { get; } = new();
-
-    public void Run(string name, Action action)
-    {
-        if (action == null) throw new ArgumentNullException(nameof(action));
-
-        Path.Add(name);
-
-        try
-        {
-            action();
-        }
-        finally
-        {
-            Path.RemoveLast();
-        }
-    }
-
-    public T Run<T>(string name, Func<T> action)
-    {
-        if (action == null) throw new ArgumentNullException(nameof(action));
-
-        Path.Add(name);
-
-        try
-        {
-            return action();
-        }
-        finally
-        {
-            Path.RemoveLast();
-        }
-    }
+    public TreePath Path { get; } = new();
 }

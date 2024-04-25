@@ -48,9 +48,11 @@ internal class XmlEllipseToModelConversion : XmlElementToModelConversion<XmlElli
         {
             SvgElement.RadiusX = 0;
 
-            DeserializationContext.Path.SetAttributeOnLast("rx");
+            DeserializationContext.Path.AddAttribute("rx");
+            string path = DeserializationContext.Path.ToString();
+            DeserializationContext.Path.RemoveLast();
 
-            NegativeValueIssue issue = new(DeserializationContext.Path.ToString());
+            NegativeValueIssue issue = new(path);
             DeserializationContext.Warnings.Add(issue);
         }
         else
@@ -65,9 +67,11 @@ internal class XmlEllipseToModelConversion : XmlElementToModelConversion<XmlElli
         {
             SvgElement.RadiusY = 0;
 
-            DeserializationContext.Path.SetAttributeOnLast("ry");
+            DeserializationContext.Path.AddAttribute("ry");
+            string path = DeserializationContext.Path.ToString();
+            DeserializationContext.Path.RemoveLast();
 
-            NegativeValueIssue issue = new(DeserializationContext.Path.ToString());
+            NegativeValueIssue issue = new(path);
             DeserializationContext.Warnings.Add(issue);
         }
         else

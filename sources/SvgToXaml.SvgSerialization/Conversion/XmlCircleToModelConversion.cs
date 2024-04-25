@@ -47,9 +47,11 @@ internal class XmlCircleToModelConversion : XmlElementToModelConversion<XmlCircl
         {
             SvgElement.Radius = 0;
 
-            DeserializationContext.Path.SetAttributeOnLast("r");
+            DeserializationContext.Path.AddAttribute("r");
+            string path = DeserializationContext.Path.ToString();
+            DeserializationContext.Path.RemoveLast();
 
-            NegativeValueIssue issue = new(DeserializationContext.Path.ToString());
+            NegativeValueIssue issue = new(path);
             DeserializationContext.Warnings.Add(issue);
         }
         else

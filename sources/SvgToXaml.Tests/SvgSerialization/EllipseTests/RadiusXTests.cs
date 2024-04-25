@@ -41,7 +41,7 @@ public class RadiusXTests : SvgFileTestsBase
             svgEllipse.RadiusX.Should().Be(0);
             
             result.Warnings.Should().HaveCount(1);
-            result.Warnings[0].Path.Should().Be("1(svg).1(ellipse)@rx");
+            result.Warnings[0].Path.Should().Be("svg.ellipse(1).@rx");
         });
     }
 
