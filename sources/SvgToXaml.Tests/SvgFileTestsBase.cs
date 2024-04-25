@@ -33,8 +33,8 @@ public class SvgFileTestsBase
         StaEnvironment.Run(ExecutionErrorBehavior.ThrowException, () =>
         {
             ConversionContext conversionContext = new();
-            SvgConversion svgConversion = new(deserializationResult.Svg, conversionContext);
-            Canvas canvas = svgConversion.Execute();
+            SvgToXamlConversion svgToXamlConversion = new(deserializationResult.Svg, conversionContext);
+            Canvas canvas = svgToXamlConversion.Execute();
 
             callBack?.Invoke(canvas);
         });

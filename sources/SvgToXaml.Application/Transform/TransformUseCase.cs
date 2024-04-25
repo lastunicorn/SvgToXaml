@@ -110,8 +110,8 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
     {
         ConversionContext conversionContext = new();
 
-        SvgConversion svgConversion = new(svg, conversionContext);
-        conversionContext.Canvas = svgConversion.Execute();
+        SvgToXamlConversion svgToXamlConversion = new(svg, conversionContext);
+        conversionContext.Canvas = svgToXamlConversion.Execute();
 
         return conversionContext;
     }

@@ -22,8 +22,8 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
 {
-    public SvgTextToXamlConversion(SvgText svgText, SvgElement referrer = null)
-        : base(svgText, referrer)
+    public SvgTextToXamlConversion(SvgText svgText, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgText, conversionContext, referrer)
     {
     }
 

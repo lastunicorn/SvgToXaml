@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
-using System.Windows.Media;
 using DustInTheWind.SvgToXaml.SvgModel;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
@@ -67,28 +66,28 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
         switch (svgElement)
         {
             case SvgCircle svgCircle:
-                return new SvgCircleToXamlConversion(svgCircle, svgUse);
+                return new SvgCircleToXamlConversion(svgCircle, conversionContext, svgUse);
 
             case SvgEllipse svgEllipse:
-                return new SvgEllipseToXamlConversion(svgEllipse, svgUse);
+                return new SvgEllipseToXamlConversion(svgEllipse, conversionContext, svgUse);
 
             case SvgPath svgPath:
-                return new SvgPathToXamlConversion(svgPath, svgUse);
+                return new SvgPathToXamlConversion(svgPath, conversionContext, svgUse);
 
             case SvgLine svgLine:
-                return new SvgLineToXamlConversion(svgLine, svgUse);
+                return new SvgLineToXamlConversion(svgLine, conversionContext, svgUse);
 
             case SvgRectangle svgRect:
-                return new SvgRectangleToXamlConversion(svgRect, svgUse);
+                return new SvgRectangleToXamlConversion(svgRect, conversionContext, svgUse);
 
             case SvgPolygon svgPolygon:
-                return new SvgPolygonToXamlConversion(svgPolygon, svgUse);
+                return new SvgPolygonToXamlConversion(svgPolygon, conversionContext, svgUse);
 
             case SvgGroup svgGChild:
                 return new SvgGroupToXamlConversion(svgGChild, conversionContext, svgUse);
 
             case SvgText svgText:
-                return new SvgTextToXamlConversion(svgText, svgUse);
+                return new SvgTextToXamlConversion(svgText, conversionContext, svgUse);
 
             case SvgUse childSvgUse:
                 return new SvgUseToXamlConversion(childSvgUse,conversionContext, svgUse);

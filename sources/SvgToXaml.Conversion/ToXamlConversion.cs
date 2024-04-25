@@ -21,20 +21,23 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
+public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     where TSvg : SvgElement
     where TXaml : UIElement
 {
-    private readonly SvgElement referrer;
+    protected SvgElement Referrer { get; }
 
     protected TSvg SvgElement { get; }
 
+    protected ConversionContext ConversionContext { get; }
+
     protected TXaml XamlElement { get; private set; }
 
-    protected ToXamlConversion(TSvg svgElement, SvgElement referrer = null)
+    protected ToXamlConversion(TSvg svgElement, ConversionContext conversionContext, SvgElement referrer = null)
     {
         SvgElement = svgElement ?? throw new ArgumentNullException(nameof(svgElement));
-        this.referrer = referrer;
+        ConversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
+        this.Referrer = referrer;
     }
 
     public TXaml Execute()
@@ -64,7 +67,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     {
         yield return SvgElement;
 
-        if (referrer == null)
+        if (Referrer == null)
         {
             IEnumerable<SvgElement> ancestors = SvgElement.EnumerateAncestors();
 
@@ -79,9 +82,9 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
             foreach (SvgElement ancestor in ancestors)
                 yield return ancestor;
 
-            yield return referrer;
+            yield return Referrer;
 
-            IEnumerable<SvgElement> referrerAncestors = referrer.EnumerateAncestors();
+            IEnumerable<SvgElement> referrerAncestors = Referrer.EnumerateAncestors();
 
             foreach (SvgElement ancestor in referrerAncestors)
                 yield return ancestor;

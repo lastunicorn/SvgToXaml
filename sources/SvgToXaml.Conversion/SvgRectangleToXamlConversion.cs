@@ -22,8 +22,8 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectangle, Rectangle>
 {
-    public SvgRectangleToXamlConversion(SvgRectangle svgRectangle, SvgElement referrer = null)
-        : base(svgRectangle, referrer)
+    public SvgRectangleToXamlConversion(SvgRectangle svgRectangle, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgRectangle, conversionContext, referrer)
     {
     }
 

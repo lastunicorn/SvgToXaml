@@ -21,79 +21,57 @@ using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
+public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversion<TSvg, TXaml>
+    where TSvg : SvgContainer
+    where TXaml : Panel
 {
-    private readonly ConversionContext conversionContext;
-    private readonly SvgElement referrer;
-
-    public SvgContainer SvgElement { get; }
-
-    public Canvas XamlElement { get; private set; }
-
-    protected SvgContainerToXamlConversion(SvgContainer svgContainer, ConversionContext conversionContext, SvgElement referrer = null)
+    protected SvgContainerToXamlConversion(TSvg svgElement, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgElement, conversionContext, referrer)
     {
-        SvgElement = svgContainer ?? throw new ArgumentNullException(nameof(svgContainer));
-        this.conversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
-        this.referrer = referrer;
     }
 
-    public Canvas Execute()
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        try
-        {
-            string[] knownSelectors =
-            {
-                "fill",
-                "fill-opacity",
-                "fill-rule",
-                "stroke",
-                "stroke-opacity",
-                "stroke-width",
-                "stroke-linecap",
-                "stroke-linejoin",
-                "stroke-dashoffset",
-                "stroke-miterlimit",
-                "opacity"
-            };
+        base.ConvertProperties(inheritedSvgElements);
 
-            if (SvgElement.Style != null)
+        string[] knownSelectors =
+        {
+            "fill",
+            "fill-opacity",
+            "fill-rule",
+            "stroke",
+            "stroke-opacity",
+            "stroke-width",
+            "stroke-linecap",
+            "stroke-linejoin",
+            "stroke-dashoffset",
+            "stroke-miterlimit",
+            "opacity"
+        };
+
+        if (SvgElement.Style != null)
+        {
+            foreach (StyleDeclaration svgStyleDeclaration in SvgElement.Style)
             {
-                foreach (StyleDeclaration svgStyleDeclaration in SvgElement.Style)
+                bool isKnown = knownSelectors.Contains(svgStyleDeclaration.Name);
+                if (!isKnown)
                 {
-                    bool isKnown = knownSelectors.Contains(svgStyleDeclaration.Name);
-                    if (!isKnown)
-                    {
-                        ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
-                        conversionContext.Errors.Add(conversionIssue);
-                    }
+                    ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
+                    ConversionContext.Errors.Add(conversionIssue);
                 }
             }
-
-            XamlElement = CreateXamlElement();
-
-            if (XamlElement is FrameworkElement frameworkElement)
-                SetLanguage(frameworkElement);
-
-            if (SvgElement.Transforms.Count > 0)
-                ApplyTransforms();
-
-            ConvertSpecificAttributes();
-
-            ConvertChildren();
-
-            return XamlElement;
         }
-        catch (SvgConversionException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            throw new SvgConversionException(ex);
-        }
+
+        if (XamlElement is FrameworkElement frameworkElement)
+            SetLanguage(frameworkElement);
+
+        if (SvgElement.Transforms.Count > 0)
+            ApplyTransforms();
+
+        ConvertSpecificAttributes();
+
+        ConvertChildren();
     }
-
-    protected abstract Canvas CreateXamlElement();
 
     private void SetLanguage(FrameworkElement frameworkElement)
     {
@@ -130,34 +108,34 @@ public abstract class SvgContainerToXamlConversion : IConversion<Canvas>
         switch (svgElement)
         {
             case SvgCircle svgCircle:
-                return new SvgCircleToXamlConversion(svgCircle, referrer);
+                return new SvgCircleToXamlConversion(svgCircle, ConversionContext, Referrer);
 
             case SvgEllipse svgEllipse:
-                return new SvgEllipseToXamlConversion(svgEllipse, referrer);
+                return new SvgEllipseToXamlConversion(svgEllipse, ConversionContext, Referrer);
 
             case SvgPath svgPath:
-                return new SvgPathToXamlConversion(svgPath, referrer);
+                return new SvgPathToXamlConversion(svgPath, ConversionContext, Referrer);
 
             case SvgLine svgLine:
-                return new SvgLineToXamlConversion(svgLine, referrer);
+                return new SvgLineToXamlConversion(svgLine, ConversionContext, Referrer);
 
             case SvgRectangle svgRect:
-                return new SvgRectangleToXamlConversion(svgRect, referrer);
+                return new SvgRectangleToXamlConversion(svgRect, ConversionContext, Referrer);
 
             case SvgPolygon svgPolygon:
-                return new SvgPolygonToXamlConversion(svgPolygon, referrer);
+                return new SvgPolygonToXamlConversion(svgPolygon, ConversionContext, Referrer);
 
             case SvgPolyline svgPolyline:
-                return new SvgPolylineToXamlConversion(svgPolyline, referrer);
+                return new SvgPolylineToXamlConversion(svgPolyline, ConversionContext, Referrer);
 
             case SvgGroup svgGChild:
-                return new SvgGroupToXamlConversion(svgGChild, conversionContext, referrer);
+                return new SvgGroupToXamlConversion(svgGChild, ConversionContext, Referrer);
 
             case SvgUse svgUse:
-                return new SvgUseToXamlConversion(svgUse, conversionContext);
+                return new SvgUseToXamlConversion(svgUse, ConversionContext);
 
             case SvgText svgText:
-                return new SvgTextToXamlConversion(svgText, referrer);
+                return new SvgTextToXamlConversion(svgText, ConversionContext, Referrer);
 
             case SvgDefinitions:
             case SvgLinearGradient:

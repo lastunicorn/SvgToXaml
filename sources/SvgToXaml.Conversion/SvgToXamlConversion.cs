@@ -15,17 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Controls;
-using System.Windows.Media;
 using DustInTheWind.SvgToXaml.SvgModel;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public class SvgConversion : SvgContainerToXamlConversion
+public class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
 {
     private readonly Svg svg;
 
-    public SvgConversion(Svg svg, ConversionContext conversionContext)
+    public SvgToXamlConversion(Svg svg, ConversionContext conversionContext)
         : base(svg, conversionContext)
     {
         this.svg = svg ?? throw new ArgumentNullException(nameof(svg));

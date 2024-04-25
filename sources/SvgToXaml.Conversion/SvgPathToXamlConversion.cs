@@ -24,8 +24,8 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
 {
-    public SvgPathToXamlConversion(SvgPath svgPath, SvgElement referrer = null)
-        : base(svgPath, referrer)
+    public SvgPathToXamlConversion(SvgPath svgPath, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgPath, conversionContext, referrer)
     {
     }
 

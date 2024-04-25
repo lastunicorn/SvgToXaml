@@ -23,8 +23,8 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal class SvgPolylineToXamlConversion : SvgShapeToXamlConversion<SvgPolyline, Polyline>
 {
-    public SvgPolylineToXamlConversion(SvgPolyline svgPolyline, SvgElement referrer = null)
-        : base(svgPolyline, referrer)
+    public SvgPolylineToXamlConversion(SvgPolyline svgPolyline, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgPolyline, conversionContext, referrer)
     {
     }
 
