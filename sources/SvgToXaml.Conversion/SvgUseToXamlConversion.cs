@@ -20,22 +20,16 @@ using TranslateTransform = System.Windows.Media.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-internal class SvgUseToXamlConversion : IConversion<UIElement>
+internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
 {
-    private readonly SvgUse svgUse;
-    private readonly ConversionContext conversionContext;
-    private readonly SvgElement referrer;
-
     public SvgUseToXamlConversion(SvgUse svgUse, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgUse, conversionContext, referrer)
     {
-        this.svgUse = svgUse ?? throw new ArgumentNullException(nameof(svgUse));
-        this.conversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
-        this.referrer = referrer;
     }
 
-    public UIElement Execute()
+    protected override UIElement CreateXamlElement()
     {
-        SvgElement referencedElement = svgUse.GetReferencedElement();
+        SvgElement referencedElement = SvgElement.GetReferencedElement();
 
         if (referencedElement == null)
             return null;
@@ -43,58 +37,60 @@ internal class SvgUseToXamlConversion : IConversion<UIElement>
         IConversion<UIElement> conversion = ConvertReferencedElement(referencedElement);
         UIElement uiElement = conversion.Execute();
 
-        double left = svgUse.X;
-        double top = svgUse.Y;
-
-        if (svgUse.Transforms.Count > 0) 
-            uiElement.RenderTransform = svgUse.Transforms.ToXaml(uiElement.RenderTransform);
-
-        if (left != 0 || top != 0)
-        {
-            TransformGroupBuilder transformGroupBuilder = new(uiElement.RenderTransform);
-
-            TranslateTransform translateTransform = new(left, top);
-            transformGroupBuilder.Add(translateTransform);
-            uiElement.RenderTransform = transformGroupBuilder.RootTransform;
-        }
-
         return uiElement;
     }
 
-    private IConversion<UIElement> ConvertReferencedElement(SvgElement svgElement)
+    private IConversion<UIElement> ConvertReferencedElement(SvgElement referencedSvgElement)
     {
-        switch (svgElement)
+        switch (referencedSvgElement)
         {
             case SvgCircle svgCircle:
-                return new SvgCircleToXamlConversion(svgCircle, conversionContext, svgUse);
+                return new SvgCircleToXamlConversion(svgCircle, ConversionContext, SvgElement);
 
             case SvgEllipse svgEllipse:
-                return new SvgEllipseToXamlConversion(svgEllipse, conversionContext, svgUse);
+                return new SvgEllipseToXamlConversion(svgEllipse, ConversionContext, SvgElement);
 
             case SvgPath svgPath:
-                return new SvgPathToXamlConversion(svgPath, conversionContext, svgUse);
+                return new SvgPathToXamlConversion(svgPath, ConversionContext, SvgElement);
 
             case SvgLine svgLine:
-                return new SvgLineToXamlConversion(svgLine, conversionContext, svgUse);
+                return new SvgLineToXamlConversion(svgLine, ConversionContext, SvgElement);
 
             case SvgRectangle svgRect:
-                return new SvgRectangleToXamlConversion(svgRect, conversionContext, svgUse);
+                return new SvgRectangleToXamlConversion(svgRect, ConversionContext, SvgElement);
 
             case SvgPolygon svgPolygon:
-                return new SvgPolygonToXamlConversion(svgPolygon, conversionContext, svgUse);
+                return new SvgPolygonToXamlConversion(svgPolygon, ConversionContext, SvgElement);
 
             case SvgGroup svgGChild:
-                return new SvgGroupToXamlConversion(svgGChild, conversionContext, svgUse);
+                return new SvgGroupToXamlConversion(svgGChild, ConversionContext, SvgElement);
 
             case SvgText svgText:
-                return new SvgTextToXamlConversion(svgText, conversionContext, svgUse);
+                return new SvgTextToXamlConversion(svgText, ConversionContext, SvgElement);
 
             case SvgUse childSvgUse:
-                return new SvgUseToXamlConversion(childSvgUse,conversionContext, svgUse);
+                return new SvgUseToXamlConversion(childSvgUse, ConversionContext, SvgElement);
 
             default:
-                Type inheritedElementType = svgElement.GetType();
+                Type inheritedElementType = referencedSvgElement.GetType();
                 throw new UnknownElementTypeException(inheritedElementType);
+        }
+    }
+
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    {
+        base.ConvertProperties(inheritedSvgElements);
+
+        double left = SvgElement.X;
+        double top = SvgElement.Y;
+
+        if (left != 0 || top != 0)
+        {
+            TransformGroupBuilder transformGroupBuilder = new(XamlElement.RenderTransform);
+
+            TranslateTransform translateTransform = new(left, top);
+            transformGroupBuilder.Add(translateTransform);
+            XamlElement.RenderTransform = transformGroupBuilder.RootTransform;
         }
     }
 }

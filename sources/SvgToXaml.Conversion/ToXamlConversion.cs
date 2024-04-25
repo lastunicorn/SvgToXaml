@@ -37,14 +37,20 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     {
         SvgElement = svgElement ?? throw new ArgumentNullException(nameof(svgElement));
         ConversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
-        this.Referrer = referrer;
+        Referrer = referrer;
     }
 
     public TXaml Execute()
     {
         try
         {
+            Display? display = SvgElement.CalculateDisplay();
+            if (display == Display.None)
+                return null;
+
             XamlElement = CreateXamlElement();
+
+            CheckStyleDeclarations();
 
             List<SvgElement> inheritedSvgElements = EnumerateInheritedElements().ToList();
             ConvertProperties(inheritedSvgElements);
@@ -62,6 +68,37 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     }
 
     protected abstract TXaml CreateXamlElement();
+
+    private void CheckStyleDeclarations()
+    {
+        if (SvgElement.Style == null)
+            return;
+
+        string[] knownSelectors =
+        {
+            "fill",
+            "fill-opacity",
+            "fill-rule",
+            "stroke",
+            "stroke-opacity",
+            "stroke-width",
+            "stroke-linecap",
+            "stroke-linejoin",
+            "stroke-dashoffset",
+            "stroke-miterlimit",
+            "opacity",
+            "display"
+        };
+
+        IEnumerable<StyleDeclaration> unknownStyleDeclarations = SvgElement.Style
+            .Where(x => !knownSelectors.Contains(x.Name));
+
+        foreach (StyleDeclaration svgStyleDeclaration in unknownStyleDeclarations)
+        {
+            ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
+            ConversionContext.Errors.Add(conversionIssue);
+        }
+    }
 
     protected virtual IEnumerable<SvgElement> EnumerateInheritedElements()
     {
@@ -181,16 +218,16 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
                 throw new NotImplementedException();
 
             case SvgUse svgUse:
-            {
-                string referencedId = svgUse.Href.Id;
+                {
+                    string referencedId = svgUse.Href.Id;
 
-                if (referencedId == null)
-                    return Geometry.Empty;
+                    if (referencedId == null)
+                        return Geometry.Empty;
 
-                SvgElement referencedElement = svgElement.GetParentSvg().FindChild(referencedId);
+                    SvgElement referencedElement = svgElement.GetParentSvg().FindChild(referencedId);
 
-                return ConvertToGeometry(referencedElement);
-            }
+                    return ConvertToGeometry(referencedElement);
+                }
 
             default:
                 throw new UnknownElementTypeException(svgElement?.GetType());

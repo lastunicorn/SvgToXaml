@@ -30,6 +30,8 @@ public class SvgElement
 
     public string XmlLanguage { get; set; }
 
+    public Display? Display { get; set; }
+
     public ClassNameCollection ClassNames { get; } = new();
 
     public StyleDeclarationCollection Style { get; set; }
@@ -122,6 +124,16 @@ public class SvgElement
             yield return ancestor;
             ancestor = ancestor.Parent;
         }
+    }
+
+    public Display? CalculateDisplay()
+    {
+        StyleDeclaration styleDeclaration = Style?["display"] ?? GetStyleValueFromClasses("display");
+
+        if (styleDeclaration != null)
+            return (Display)Enum.Parse(typeof(Display), styleDeclaration.Value, true);
+
+        return Display;
     }
 
     public Paint ComputeFill()

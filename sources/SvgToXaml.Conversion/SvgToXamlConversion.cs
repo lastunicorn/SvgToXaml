@@ -35,37 +35,28 @@ public class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
         return new Canvas();
     }
 
-    protected override void ConvertSpecificAttributes()
+    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
-        try
+        base.ConvertProperties(inheritedSvgElements);
+
+        if (svg.ViewBox == null)
         {
-            if (svg.ViewBox == null)
-            {
-                if (svg.Width != null)
-                    XamlElement.Width = svg.Width.Value.ToUserUnits();
+            if (svg.Width != null)
+                XamlElement.Width = svg.Width.Value.ToUserUnits();
 
-                if (svg.Height != null)
-                    XamlElement.Height = svg.Height.Value.ToUserUnits();
-            }
-            else
-            {
-                XamlElement.Width = svg.ViewBox.Width.Value;
-                XamlElement.Height = svg.ViewBox.Height.Value;
-
-                bool viewBoxIsTranslated = svg.ViewBox.OriginX is { Value: not 0 } ||
-                                           svg.ViewBox.OriginY is { Value: not 0 };
-
-                if (viewBoxIsTranslated)
-                    XamlElement.RenderTransform = CreateRenderTransform(svg.ViewBox);
-            }
+            if (svg.Height != null)
+                XamlElement.Height = svg.Height.Value.ToUserUnits();
         }
-        catch (SvgConversionException)
+        else
         {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            throw new SvgConversionException(ex);
+            XamlElement.Width = svg.ViewBox.Width.Value;
+            XamlElement.Height = svg.ViewBox.Height.Value;
+
+            bool viewBoxIsTranslated = svg.ViewBox.OriginX is { Value: not 0 } ||
+                                       svg.ViewBox.OriginY is { Value: not 0 };
+
+            if (viewBoxIsTranslated)
+                XamlElement.RenderTransform = CreateRenderTransform(svg.ViewBox);
         }
     }
 

@@ -37,13 +37,15 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         SvgElement.Language = XmlElement.Lang;
         SvgElement.XmlLanguage = XmlElement.XmlLang;
 
+        if (XmlElement.DisplaySpecified)
+            SvgElement.Display = Convert(XmlElement.Display);
+
         SvgElement.Fill = XmlElement.Fill;
 
         SvgElement.FillOpacity = XmlElement.FillOpacity;
 
-        SvgElement.FillRule = XmlElement.FillRuleSpecified
-            ? Convert(XmlElement.FillRule)
-            : null;
+        if (XmlElement.FillRuleSpecified)
+            SvgElement.FillRule = Convert(XmlElement.FillRule);
 
         SvgElement.Stroke = XmlElement.Stroke;
 
@@ -72,19 +74,16 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
             }
         }
 
-        SvgElement.StrokeLineJoin = XmlElement.StrokeLineJoinSpecified
-            ? Convert(XmlElement.StrokeLineJoin)
-            : null;
+        if (XmlElement.StrokeLineJoinSpecified)
+            SvgElement.StrokeLineJoin = Convert(XmlElement.StrokeLineJoin);
 
-        SvgElement.StrokeLineCap = XmlElement.StrokeLineCapSpecified
-            ? Convert(XmlElement.StrokeLineCap)
-            : null;
+        if (XmlElement.StrokeLineCapSpecified)
+            SvgElement.StrokeLineCap = Convert(XmlElement.StrokeLineCap);
 
         SvgElement.StrokeDashOffset = XmlElement.StrokeDashOffset;
 
-        SvgElement.StrokeMiterLimit = XmlElement.StrokeMiterLimitSpecified
-            ? XmlElement.StrokeMiterLimit
-            : null;
+        if (XmlElement.StrokeMiterLimitSpecified)
+            SvgElement.StrokeMiterLimit = XmlElement.StrokeMiterLimit;
 
         SvgElement.Style = XmlElement.Style;
 
@@ -94,9 +93,8 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         if (XmlElement.Transform != null)
             SvgElement.Transforms.ParseAndAdd(XmlElement.Transform);
 
-        SvgElement.Opacity = XmlElement.OpacitySpecified
-            ? XmlElement.Opacity
-            : null;
+        if (XmlElement.OpacitySpecified)
+            SvgElement.Opacity = XmlElement.Opacity;
 
         if (XmlElement.ClipPath != null)
             SvgElement.ClipPath = new SvgClipPathReference(XmlElement.ClipPath);
@@ -132,6 +130,16 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
             XmlStrokeLineCap.Butt => StrokeLineCap.Butt,
             XmlStrokeLineCap.Square => StrokeLineCap.Square,
             XmlStrokeLineCap.Round => StrokeLineCap.Round,
+            _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+        };
+    }
+
+    private static Display Convert(XmlDisplay value)
+    {
+        return value switch
+        {
+            XmlDisplay.Inline => Display.Inline,
+            XmlDisplay.None => Display.None,
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
         };
     }

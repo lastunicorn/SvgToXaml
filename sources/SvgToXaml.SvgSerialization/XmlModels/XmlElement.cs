@@ -37,6 +37,11 @@ public class XmlElement
     [XmlAttribute("style")]
     public string Style { get; set; }
 
+    [XmlAttribute("display")]
+    public XmlDisplay Display { get; set; }
+    
+    public bool DisplaySpecified { get; set; }
+
     // Shape Attributes
     // (shapes and text content elements)
 

@@ -34,41 +34,11 @@ public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversi
     {
         base.ConvertProperties(inheritedSvgElements);
 
-        string[] knownSelectors =
-        {
-            "fill",
-            "fill-opacity",
-            "fill-rule",
-            "stroke",
-            "stroke-opacity",
-            "stroke-width",
-            "stroke-linecap",
-            "stroke-linejoin",
-            "stroke-dashoffset",
-            "stroke-miterlimit",
-            "opacity"
-        };
-
-        if (SvgElement.Style != null)
-        {
-            foreach (StyleDeclaration svgStyleDeclaration in SvgElement.Style)
-            {
-                bool isKnown = knownSelectors.Contains(svgStyleDeclaration.Name);
-                if (!isKnown)
-                {
-                    ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
-                    ConversionContext.Errors.Add(conversionIssue);
-                }
-            }
-        }
-
         if (XamlElement is FrameworkElement frameworkElement)
             SetLanguage(frameworkElement);
 
         if (SvgElement.Transforms.Count > 0)
             ApplyTransforms();
-
-        ConvertSpecificAttributes();
 
         ConvertChildren();
     }
@@ -84,10 +54,6 @@ public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversi
     private void ApplyTransforms()
     {
         XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
-    }
-
-    protected virtual void ConvertSpecificAttributes()
-    {
     }
 
     private void ConvertChildren()
