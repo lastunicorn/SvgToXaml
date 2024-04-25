@@ -68,6 +68,7 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
                 Canvas canvas = conversionContext.Canvas;
 
                 IEnumerable<ErrorInfo> conversionErrorInfos = conversionContext.Errors
+                    .Concat(conversionContext.Warnings)
                     .Select(x => new ErrorInfo
                     {
                         Message = $"{x.Path} : {x.Message}"

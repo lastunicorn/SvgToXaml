@@ -33,6 +33,22 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
     protected TXaml XamlElement { get; private set; }
 
+    protected List<string> KnownStyleSelectors { get; } = new()
+    {
+        "fill",
+        "fill-opacity",
+        "fill-rule",
+        "stroke",
+        "stroke-opacity",
+        "stroke-width",
+        "stroke-linecap",
+        "stroke-linejoin",
+        "stroke-dashoffset",
+        "stroke-miterlimit",
+        "opacity",
+        "display"
+    };
+
     protected ToXamlConversion(TSvg svgElement, ConversionContext conversionContext, SvgElement referrer = null)
     {
         SvgElement = svgElement ?? throw new ArgumentNullException(nameof(svgElement));
@@ -65,6 +81,10 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         {
             throw new SvgConversionException(ex);
         }
+        finally
+        {
+            OnExecuted();
+        }
     }
 
     protected abstract TXaml CreateXamlElement();
@@ -74,24 +94,8 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         if (SvgElement.Style == null)
             return;
 
-        string[] knownSelectors =
-        {
-            "fill",
-            "fill-opacity",
-            "fill-rule",
-            "stroke",
-            "stroke-opacity",
-            "stroke-width",
-            "stroke-linecap",
-            "stroke-linejoin",
-            "stroke-dashoffset",
-            "stroke-miterlimit",
-            "opacity",
-            "display"
-        };
-
         IEnumerable<StyleDeclaration> unknownStyleDeclarations = SvgElement.Style
-            .Where(x => !knownSelectors.Contains(x.Name));
+            .Where(x => !KnownStyleSelectors.Contains(x.Name));
 
         foreach (StyleDeclaration svgStyleDeclaration in unknownStyleDeclarations)
         {
@@ -139,7 +143,7 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         if (SvgElement.ClipPath != null)
             ApplyClipPath();
 
-        SetOpacity(inheritedSvgElements);
+        SetOpacity();
     }
 
     private void SetLanguage(FrameworkElement frameworkElement)
@@ -234,13 +238,25 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         }
     }
 
-    private void SetOpacity(List<SvgElement> svgElements)
+    private void SetOpacity()
     {
-        double? opacity = svgElements
-            .Select(x => x.ComputeOpacity())
-            .FirstOrDefault(x => x != null);
+        double? opacity = SvgElement.ComputeOpacity();
 
         if (opacity != null)
             XamlElement.Opacity = opacity.Value;
+    }
+
+    protected virtual void OnExecuted()
+    {
+        if (XamlElement == null)
+            return;
+
+        bool isFullTransparent = XamlElement.Opacity == 0;
+
+        if (isFullTransparent)
+        {
+            ConversionIssue conversionIssue = new("Conversion", $"Completely transparent element ({XamlElement.GetType().Name}) present.");
+            ConversionContext.Warnings.Add(conversionIssue);
+        }
     }
 }

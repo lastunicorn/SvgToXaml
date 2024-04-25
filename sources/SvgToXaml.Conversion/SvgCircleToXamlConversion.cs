@@ -55,4 +55,20 @@ internal class SvgCircleToXamlConversion : SvgShapeToXamlConversion<SvgCircle, E
         XamlElement.Width = SvgElement.Radius * 2;
         XamlElement.Height = SvgElement.Radius * 2;
     }
+
+    protected override void OnExecuted()
+    {
+        base.OnExecuted();
+
+        if (XamlElement == null)
+            return;
+
+        bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
+
+        if (isZeroSize)
+        {
+            ConversionIssue conversionIssue = new("Conversion", "Zero-size ellipse (circle) present.");
+            ConversionContext.Warnings.Add(conversionIssue);
+        }
+    }
 }

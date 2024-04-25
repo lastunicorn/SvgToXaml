@@ -37,9 +37,6 @@ public class SvgSerializer
 
     private void HandleUnknownNode(object sender, XmlNodeEventArgs e)
     {
-        if (e.NodeType is XmlNodeType.Attribute or XmlNodeType.Element)
-            return;
-
         DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
         deserializationContext.Warnings.Add(deserializationIssue);
     }

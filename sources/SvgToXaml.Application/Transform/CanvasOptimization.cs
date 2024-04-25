@@ -17,6 +17,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Shapes;
 
 namespace DustInTheWind.SvgToXaml.Application.Transform;
 
@@ -25,7 +26,7 @@ internal class CanvasOptimization
     public Canvas Canvas { get; }
 
     public List<ErrorInfo> Errors { get; } = new();
-    
+
     public List<ErrorInfo> Infos { get; } = new();
 
     public CanvasOptimization(Canvas canvas)
@@ -49,6 +50,14 @@ internal class CanvasOptimization
         {
             UIElement child = canvas.Children[i];
 
+            bool isCompletelyTransparent = child.Opacity == 0;
+            if (isCompletelyTransparent)
+            {
+                bool success = RemoveElement(child, "Completely transparent.");
+                if (success)
+                    continue;
+            }
+
             if (child is Canvas childCanvas)
             {
                 Optimize(childCanvas);
@@ -56,7 +65,7 @@ internal class CanvasOptimization
                 bool canvasHasChildren = childCanvas.Children.Count > 0;
                 if (!canvasHasChildren)
                 {
-                    bool success = RemoveElement(childCanvas);
+                    bool success = RemoveElement(childCanvas, "Empty canvas.");
                     if (success)
                         continue;
                 }
@@ -68,7 +77,30 @@ internal class CanvasOptimization
                     if (success)
                     {
                         i += childCount;
+                        continue;
                     }
+                }
+            }
+            else if (child is Rectangle rectangle)
+            {
+                bool rectangleIsZeroSize = rectangle.Width == 0 || rectangle.Height == 0;
+
+                if (rectangleIsZeroSize)
+                {
+                    bool success = RemoveElement(rectangle, "Zero-size rectangle.");
+                    if (success)
+                        continue;
+                }
+            }
+            else if (child is Ellipse ellipse)
+            {
+                bool rectangleIsZeroSize = ellipse.Width == 0 || ellipse.Height == 0;
+
+                if (rectangleIsZeroSize)
+                {
+                    bool success = RemoveElement(ellipse, "Zero-size ellipse.");
+                    if (success)
+                        continue;
                 }
             }
             else if (child is TextBlock textBlock)
@@ -77,15 +109,13 @@ internal class CanvasOptimization
 
                 if (!textHasContent)
                 {
-                    bool success = RemoveElement(textBlock);
+                    bool success = RemoveElement(textBlock, "Empty text box.");
                     if (success)
                         continue;
                 }
             }
-            else
-            {
-                i++;
-            }
+
+            i++;
         }
     }
 
@@ -137,13 +167,13 @@ internal class CanvasOptimization
         return children;
     }
 
-    private bool RemoveElement(UIElement element)
+    private bool RemoveElement(UIElement element, string reason)
     {
         bool success = element.RemoveFromParent(out DependencyObject _, out int? _);
 
         ErrorInfo errorInfo = new()
         {
-            Message = $"Optimization: UIElement removed - {element.GetType().Name}"
+            Message = $"Optimization: UIElement removed - {element.GetType().Name}. Reason: {reason}"
         };
         Infos.Add(errorInfo);
 
@@ -158,6 +188,10 @@ internal class CanvasOptimization
 
         bool containsLanguage = canvas.Language != null && canvas.Language != XmlLanguage.Empty && canvas.Language != XmlLanguage.GetLanguage("en-US");
         if (containsLanguage)
+            return true;
+
+        bool containsClip = canvas.Clip != null;
+        if (containsClip)
             return true;
 
         return false;

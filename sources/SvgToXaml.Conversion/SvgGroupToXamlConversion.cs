@@ -30,4 +30,28 @@ public class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup, C
     {
         return new Canvas();
     }
+
+    protected override void OnExecuted()
+    {
+        base.OnExecuted();
+
+        if (XamlElement == null)
+            return;
+
+        bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
+
+        if (isZeroSize)
+        {
+            ConversionIssue conversionIssue = new("Conversion", "Zero-size canvas present.");
+            ConversionContext.Warnings.Add(conversionIssue);
+        }
+
+        bool isEmpty = XamlElement.Children.Count == 0;
+
+        if (isEmpty)
+        {
+            ConversionIssue conversionIssue = new("Conversion", "Empty canvas present.");
+            ConversionContext.Warnings.Add(conversionIssue);
+        }
+    }
 }

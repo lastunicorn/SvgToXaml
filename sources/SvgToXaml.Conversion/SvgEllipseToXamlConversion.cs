@@ -55,4 +55,20 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
         XamlElement.Width = SvgElement.RadiusX * 2;
         XamlElement.Height = SvgElement.RadiusY * 2;
     }
+
+    protected override void OnExecuted()
+    {
+        base.OnExecuted();
+
+        if (XamlElement == null)
+            return;
+
+        bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
+
+        if (isZeroSize)
+        {
+            ConversionIssue conversionIssue = new("Conversion", "Zero-size ellipse present.");
+            ConversionContext.Warnings.Add(conversionIssue);
+        }
+    }
 }

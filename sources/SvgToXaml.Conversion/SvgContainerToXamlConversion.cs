@@ -16,7 +16,6 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using DustInTheWind.SvgToXaml.SvgModel;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
@@ -34,26 +33,7 @@ public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversi
     {
         base.ConvertProperties(inheritedSvgElements);
 
-        if (XamlElement is FrameworkElement frameworkElement)
-            SetLanguage(frameworkElement);
-
-        if (SvgElement.Transforms.Count > 0)
-            ApplyTransforms();
-
         ConvertChildren();
-    }
-
-    private void SetLanguage(FrameworkElement frameworkElement)
-    {
-        string languageId = SvgElement.Language ?? SvgElement.XmlLanguage;
-
-        if (languageId != null)
-            frameworkElement.Language = XmlLanguage.GetLanguage(languageId);
-    }
-
-    private void ApplyTransforms()
-    {
-        XamlElement.RenderTransform = SvgElement.Transforms.ToXaml(XamlElement.RenderTransform);
     }
 
     private void ConvertChildren()
