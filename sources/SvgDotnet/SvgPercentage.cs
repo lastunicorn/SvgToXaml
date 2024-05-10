@@ -27,7 +27,7 @@ public readonly struct SvgPercentage
 
     public bool IsEmpty { get; }
 
-    public static SvgPercentage Empty { get; } = new();
+    public static SvgPercentage Zero { get; } = new();
 
     public SvgPercentage()
     {
@@ -44,7 +44,7 @@ public readonly struct SvgPercentage
     public static SvgPercentage Parse(string text)
     {
         if (text == null)
-            return Empty;
+            return Zero;
 
         Match match = Regex.Match(text);
 
@@ -78,7 +78,7 @@ public readonly struct SvgPercentage
     public static implicit operator SvgPercentage(string text)
     {
         return text == null
-            ? Empty
+            ? Zero
             : Parse(text);
     }
 }

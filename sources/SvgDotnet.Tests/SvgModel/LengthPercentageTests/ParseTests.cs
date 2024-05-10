@@ -145,4 +145,14 @@ public class ParseTests
         lengthPercentage.Length.Should().BeNull();
         lengthPercentage.Percentage.Should().Be(expected);
     }
+
+    [Fact]
+    public void HavingInvalidString_WhenParsed_ThenReturnsEmptyInstance()
+    {
+        string text = "abc";
+
+        LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
+
+        lengthPercentage.IsEmpty.Should().BeTrue();
+    }
 }
