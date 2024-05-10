@@ -32,11 +32,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" />
-      <ProjectReference Include="..\SvgToXaml.Infrastructure\SvgToXaml.Infrastructure.csproj" />
-      <ProjectReference Include="..\SvgToXaml.Ports.FileAccess\SvgToXaml.Ports.FileAccess.csproj" />
-      <ProjectReference Include="..\SvgToXaml.Ports.UserAccess\SvgToXaml.Ports.UserAccess.csproj" />
-      <ProjectReference Include="..\SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj" />
+      <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgToXaml.Infrastructure\SvgToXaml.Infrastructure.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgToXaml.Ports.FileAccess\SvgToXaml.Ports.FileAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgToXaml.Ports.UserAccess\SvgToXaml.Ports.UserAccess.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgToXaml.SvgModel\SvgToXaml.SvgModel.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgToXaml.SvgSerialization\SvgToXaml.SvgSerialization.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>

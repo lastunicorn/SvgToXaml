@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SvgToXaml.Ports.UserAccess\SvgToXaml.Ports.UserAccess.csproj" />
+        <ProjectReference Include="..\SvgToXaml.Ports.UserAccess\SvgToXaml.Ports.UserAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>
