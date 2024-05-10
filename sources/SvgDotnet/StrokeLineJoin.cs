@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 /// <summary>
 /// Specifies the shape to be used at the corners of paths or basic shapes when

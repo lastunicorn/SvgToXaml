@@ -17,7 +17,7 @@
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 public class TransformCollection : Collection<ITransform>
 {

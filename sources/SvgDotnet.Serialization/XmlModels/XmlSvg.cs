@@ -16,7 +16,7 @@
 
 using System.Xml.Serialization;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 [XmlRoot("svg", Namespace = Namespaces.Svg)]
 public class XmlSvg : XmlContainer

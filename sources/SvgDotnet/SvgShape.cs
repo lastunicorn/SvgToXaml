@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 /// <summary>
 /// A graphics element that is defined by some combination of straight lines and curves.

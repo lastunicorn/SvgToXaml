@@ -15,11 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Media;
-using DustInTheWind.SvgToXaml.SvgModel;
-using MatrixTransform = DustInTheWind.SvgToXaml.SvgModel.MatrixTransform;
-using RotateTransform = DustInTheWind.SvgToXaml.SvgModel.RotateTransform;
-using ScaleTransform = DustInTheWind.SvgToXaml.SvgModel.ScaleTransform;
-using TranslateTransform = DustInTheWind.SvgToXaml.SvgModel.TranslateTransform;
+using DustInTheWind.SvgDotnet;
+using MatrixTransform = DustInTheWind.SvgDotnet.MatrixTransform;
+using RotateTransform = DustInTheWind.SvgDotnet.RotateTransform;
+using ScaleTransform = DustInTheWind.SvgDotnet.ScaleTransform;
+using TranslateTransform = DustInTheWind.SvgDotnet.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

@@ -16,7 +16,7 @@
 
 using System.ComponentModel;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 internal static class SvgLengthUnitExtensions
 {

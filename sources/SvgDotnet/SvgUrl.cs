@@ -16,7 +16,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 public record SvgUrl
 {

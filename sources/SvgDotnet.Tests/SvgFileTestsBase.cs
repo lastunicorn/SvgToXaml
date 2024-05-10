@@ -16,14 +16,14 @@
 
 using System.Diagnostics;
 using System.Reflection;
-using DustInTheWind.SvgToXaml.SvgSerialization;
+using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgDotnet.Tests;
 
 public class SvgFileTestsBase
 {
-    protected void ParseSvgFile(string resourceFileName, Action<DustInTheWind.SvgToXaml.SvgModel.Svg> callBack = null)
+    protected void ParseSvgFile(string resourceFileName, Action<Svg> callBack = null)
     {
         Type callerType = GetCallerType();
         DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);

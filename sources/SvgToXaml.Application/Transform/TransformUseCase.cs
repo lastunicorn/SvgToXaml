@@ -19,10 +19,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Xml;
+using DustInTheWind.SvgDotnet;
+using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.Infrastructure;
-using DustInTheWind.SvgToXaml.SvgModel;
-using DustInTheWind.SvgToXaml.SvgSerialization;
 using MediatR;
 
 namespace DustInTheWind.SvgToXaml.Application.Transform;

@@ -17,7 +17,7 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 public readonly struct SvgLength
 {

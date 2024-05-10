@@ -17,7 +17,7 @@
 using System.Globalization;
 using System.Runtime.Serialization;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 [Serializable]
 public class NotAColorException : Exception

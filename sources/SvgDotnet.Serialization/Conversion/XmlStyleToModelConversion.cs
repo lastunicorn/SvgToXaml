@@ -15,10 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Text.RegularExpressions;
-using DustInTheWind.SvgToXaml.SvgModel;
-using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
+namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle, SvgStyle>
 {

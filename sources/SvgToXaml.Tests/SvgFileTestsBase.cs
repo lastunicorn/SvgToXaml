@@ -17,8 +17,8 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Controls;
+using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
-using DustInTheWind.SvgToXaml.SvgSerialization;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgToXaml.Tests;

@@ -16,7 +16,7 @@
 
 using System.Globalization;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 public class RotateTransform : ITransform
 {

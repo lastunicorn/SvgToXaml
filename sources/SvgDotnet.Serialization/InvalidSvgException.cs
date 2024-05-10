@@ -16,7 +16,7 @@
 
 using System.Runtime.Serialization;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization;
+namespace DustInTheWind.SvgDotnet.Serialization;
 
 [Serializable]
 public class InvalidSvgException : Exception

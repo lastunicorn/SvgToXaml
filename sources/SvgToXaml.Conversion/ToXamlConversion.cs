@@ -17,7 +17,7 @@
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
-using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgDotnet;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

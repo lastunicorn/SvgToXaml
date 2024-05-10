@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
-using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;

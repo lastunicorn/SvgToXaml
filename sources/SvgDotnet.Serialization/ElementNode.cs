@@ -16,7 +16,7 @@
 
 using System.Text;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization;
+namespace DustInTheWind.SvgDotnet.Serialization;
 
 internal class ElementNode : Node
 {

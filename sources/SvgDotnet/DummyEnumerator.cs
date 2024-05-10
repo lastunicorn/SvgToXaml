@@ -16,7 +16,7 @@
 
 using System.Collections;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 internal class DummyEnumerator<T> : IEnumerator<T>
 {

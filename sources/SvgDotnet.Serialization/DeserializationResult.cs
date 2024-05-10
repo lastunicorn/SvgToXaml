@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization;
+namespace DustInTheWind.SvgDotnet.Serialization;
 
 public class DeserializationResult
 {
-    public SvgModel.Svg Svg { get; init; }
+    public Svg Svg { get; init; }
 
     public List<DeserializationIssue> Warnings { get; init; } = new();
 

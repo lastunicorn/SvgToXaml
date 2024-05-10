@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.SvgModel;
-using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
+namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementToModelConversion<TXml, TSvg>
     where TXml : XmlContainer

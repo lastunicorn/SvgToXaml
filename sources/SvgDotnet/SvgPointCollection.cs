@@ -16,7 +16,7 @@
 
 using System.Collections.ObjectModel;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 public class SvgPointCollection : Collection<SvgPoint>
 {

@@ -16,7 +16,7 @@
 
 using System.Xml.Serialization;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 public class XmlRadialGradient : XmlElement
 {

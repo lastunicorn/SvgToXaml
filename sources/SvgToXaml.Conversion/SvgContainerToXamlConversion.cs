@@ -16,7 +16,7 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgDotnet;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

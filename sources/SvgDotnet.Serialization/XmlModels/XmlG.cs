@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 /// <remarks>
 /// May contain any number of the following elements, in any order:

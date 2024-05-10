@@ -16,7 +16,7 @@
 
 using System.Collections;
 
-namespace DustInTheWind.SvgToXaml.SvgModel;
+namespace DustInTheWind.SvgDotnet;
 
 public class SvgUseInheritanceCollection : IEnumerable<SvgElement>
 {

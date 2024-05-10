@@ -16,7 +16,7 @@
 
 //using System.Xml.Serialization;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 /// <remarks>
 /// May contain any number of the following elements, in any order:

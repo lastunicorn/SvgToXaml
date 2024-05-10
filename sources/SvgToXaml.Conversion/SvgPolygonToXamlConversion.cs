@@ -15,9 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Shapes;
-using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgDotnet;
 using FillRule = System.Windows.Media.FillRule;
-using SvgFillRule = DustInTheWind.SvgToXaml.SvgModel.FillRule;
+using SvgFillRule = DustInTheWind.SvgDotnet.FillRule;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

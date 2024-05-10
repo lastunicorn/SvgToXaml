@@ -14,13 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml;
 using System.Xml.Serialization;
-using DustInTheWind.SvgToXaml.SvgModel;
-using DustInTheWind.SvgToXaml.SvgSerialization.Conversion;
-using DustInTheWind.SvgToXaml.SvgSerialization.XmlModels;
+using DustInTheWind.SvgDotnet.Serialization.Conversion;
+using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-namespace DustInTheWind.SvgToXaml.SvgSerialization;
+namespace DustInTheWind.SvgDotnet.Serialization;
 
 public class SvgSerializer
 {

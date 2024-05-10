@@ -16,9 +16,9 @@
 
 using System.Windows.Media;
 using System.Windows.Shapes;
-using DustInTheWind.SvgToXaml.SvgModel;
+using DustInTheWind.SvgDotnet;
 using FillRule = System.Windows.Media.FillRule;
-using SvgFillRule = DustInTheWind.SvgToXaml.SvgModel.FillRule;
+using SvgFillRule = DustInTheWind.SvgDotnet.FillRule;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
