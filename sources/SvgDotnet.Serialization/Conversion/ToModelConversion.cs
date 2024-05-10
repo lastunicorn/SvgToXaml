@@ -29,7 +29,7 @@ internal abstract class ToModelConversion<TXml, TSvg> : IToModelConversion<TSvg>
     protected TXml XmlElement { get; }
 
     protected TSvg SvgElement { get; private set; }
-    
+
     protected ToModelConversion(TXml xmlElement, DeserializationContext deserializationContext)
     {
         XmlElement = xmlElement ?? throw new ArgumentNullException(nameof(xmlElement));

@@ -21,8 +21,8 @@ public class XamlTextChangedEvent
     public string XamlText { get; set; }
 
     public List<ErrorInfo> Info { get; } = new();
-    
+
     public List<ErrorInfo> Warning { get; } = new();
-    
+
     public List<ErrorInfo> Errors { get; } = new();
 }

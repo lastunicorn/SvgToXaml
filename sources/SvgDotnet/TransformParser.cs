@@ -66,22 +66,22 @@ internal class TransformParser
                     break;
 
                 case ParsingState.BeforeParameters:
-                    {
-                        bool completeFunctionParsed = MoveToParameterStart();
-                        if (completeFunctionParsed)
-                            return true;
+                {
+                    bool completeFunctionParsed = MoveToParameterStart();
+                    if (completeFunctionParsed)
+                        return true;
 
-                        break;
-                    }
+                    break;
+                }
 
                 case ParsingState.Parameters:
-                    {
-                        bool completeFunctionParsed = ReadParameters();
-                        if (completeFunctionParsed)
-                            return true;
+                {
+                    bool completeFunctionParsed = ReadParameters();
+                    if (completeFunctionParsed)
+                        return true;
 
-                        break;
-                    }
+                    break;
+                }
 
                 default:
                     throw new ArgumentOutOfRangeException();

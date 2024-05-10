@@ -30,6 +30,6 @@ public class XmlText : XmlElement
 
     [XmlAttribute("y")]
     public string Y { get; set; }
-    
+
     public bool YSpecified { get; set; }
 }

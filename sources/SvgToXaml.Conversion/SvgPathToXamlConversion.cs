@@ -51,7 +51,7 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
 
     private void SetFillRule(IEnumerable<SvgElement> svgElements)
     {
-        if(XamlElement.Data.IsEmpty())
+        if (XamlElement.Data.IsEmpty())
             return;
 
         SvgFillRule? svgFillRule = svgElements
@@ -66,32 +66,32 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
         switch (XamlElement.Data)
         {
             case GeometryGroup geometryGroup:
-                {
-                    geometryGroup = geometryGroup.Clone();
-                    geometryGroup.FillRule = fillRule.Value;
-                    geometryGroup.Freeze();
+            {
+                geometryGroup = geometryGroup.Clone();
+                geometryGroup.FillRule = fillRule.Value;
+                geometryGroup.Freeze();
 
-                    XamlElement.Data = geometryGroup;
-                    break;
-                }
+                XamlElement.Data = geometryGroup;
+                break;
+            }
 
             case PathGeometry pathGeometry:
-                {
-                    pathGeometry = pathGeometry.Clone();
-                    pathGeometry.FillRule = fillRule.Value;
-                    pathGeometry.Freeze();
-                    XamlElement.Data = pathGeometry;
-                    break;
-                }
+            {
+                pathGeometry = pathGeometry.Clone();
+                pathGeometry.FillRule = fillRule.Value;
+                pathGeometry.Freeze();
+                XamlElement.Data = pathGeometry;
+                break;
+            }
 
             case StreamGeometry streamGeometry:
-                {
-                    streamGeometry = streamGeometry.Clone();
-                    streamGeometry.FillRule = fillRule.Value;
-                    streamGeometry.Freeze();
-                    XamlElement.Data = streamGeometry;
-                    break;
-                }
+            {
+                streamGeometry = streamGeometry.Clone();
+                streamGeometry.FillRule = fillRule.Value;
+                streamGeometry.Freeze();
+                XamlElement.Data = streamGeometry;
+                break;
+            }
         }
     }
 

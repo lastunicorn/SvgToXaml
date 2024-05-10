@@ -102,7 +102,7 @@ public record SvgColor
                 return true;
             }
 
-            success  = byte.TryParse(greenRaw, out byte green);
+            success = byte.TryParse(greenRaw, out byte green);
 
             if (!success)
             {
@@ -162,7 +162,7 @@ public record SvgColor
 
             return new SvgColor(red, green, blue);
         }
-        
+
         throw new NotAColorException(text);
     }
 
@@ -171,29 +171,29 @@ public record SvgColor
         switch (rawValue.Length)
         {
             case 3:
-                {
-                    byte red = GetChanelValue(rawValue[0]);
-                    byte green = GetChanelValue(rawValue[1]);
-                    byte blue = GetChanelValue(rawValue[2]);
-                    return new SvgColor(red, green, blue);
-                }
+            {
+                byte red = GetChanelValue(rawValue[0]);
+                byte green = GetChanelValue(rawValue[1]);
+                byte blue = GetChanelValue(rawValue[2]);
+                return new SvgColor(red, green, blue);
+            }
 
             case 6:
-                {
-                    byte red = GetChanelValue(rawValue.Substring(0, 2));
-                    byte green = GetChanelValue(rawValue.Substring(2, 2));
-                    byte blue = GetChanelValue(rawValue.Substring(4, 2));
-                    return new SvgColor(red, green, blue);
-                }
+            {
+                byte red = GetChanelValue(rawValue.Substring(0, 2));
+                byte green = GetChanelValue(rawValue.Substring(2, 2));
+                byte blue = GetChanelValue(rawValue.Substring(4, 2));
+                return new SvgColor(red, green, blue);
+            }
 
             case 8:
-                {
-                    byte red = GetChanelValue(rawValue.Substring(0, 2));
-                    byte green = GetChanelValue(rawValue.Substring(2, 2));
-                    byte blue = GetChanelValue(rawValue.Substring(4, 2));
-                    byte alpha = GetChanelValue(rawValue.Substring(6, 2));
-                    return new SvgColor(red, green, blue, alpha);
-                }
+            {
+                byte red = GetChanelValue(rawValue.Substring(0, 2));
+                byte green = GetChanelValue(rawValue.Substring(2, 2));
+                byte blue = GetChanelValue(rawValue.Substring(4, 2));
+                byte alpha = GetChanelValue(rawValue.Substring(6, 2));
+                return new SvgColor(red, green, blue, alpha);
+            }
 
             default:
                 return null;

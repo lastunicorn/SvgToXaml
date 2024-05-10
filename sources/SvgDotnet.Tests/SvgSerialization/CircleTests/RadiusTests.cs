@@ -37,7 +37,7 @@ public class RadiusTests : SvgFileTestsBase
             SvgCircle svgCircle = result.Svg.Children[0] as SvgCircle;
 
             svgCircle.Radius.Should().Be(0);
-            
+
             result.Warnings.Should().HaveCount(1);
             result.Warnings[0].Path.Should().Be("svg.(1)circle.@r");
         });

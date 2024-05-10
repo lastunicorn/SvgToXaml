@@ -33,7 +33,7 @@ public class ParseTests
     public void HavingStringContainingNumberNegative10_WhenParsed_ThenValueIsNegative10AndUnitIsNumber()
     {
         string text = "-10";
-        
+
         AlphaValue alphaValue = AlphaValue.Parse(text);
 
         alphaValue.Value.Should().Be(-10);

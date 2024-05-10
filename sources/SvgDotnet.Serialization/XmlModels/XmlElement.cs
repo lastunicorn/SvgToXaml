@@ -39,7 +39,7 @@ public class XmlElement
 
     [XmlAttribute("display")]
     public XmlDisplay Display { get; set; }
-    
+
     public bool DisplaySpecified { get; set; }
 
     // Shape Attributes (inheritable)
