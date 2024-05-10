@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 
 namespace DustInTheWind.SvgDotnet;
 
-public readonly record struct SvgPercentage
+public readonly struct SvgPercentage
 {
     private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+)%\s*$", RegexOptions.Singleline);
 
@@ -43,6 +43,9 @@ public readonly record struct SvgPercentage
 
     public static SvgPercentage Parse(string text)
     {
+        if (text == null)
+            return Empty;
+
         Match match = Regex.Match(text);
 
         if (!match.Success)
@@ -74,6 +77,8 @@ public readonly record struct SvgPercentage
 
     public static implicit operator SvgPercentage(string text)
     {
-        return Parse(text);
+        return text == null
+            ? Empty
+            : Parse(text);
     }
 }

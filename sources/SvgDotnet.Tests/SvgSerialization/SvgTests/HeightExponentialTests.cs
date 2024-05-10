@@ -23,7 +23,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-nounit.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Unspecified);
+            SvgLength expected = new(1000);
             svg.Height.Should().Be(expected);
         });
     }

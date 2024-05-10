@@ -24,11 +24,11 @@ public readonly record struct LengthPercentage
 
     public bool IsEmpty { get; }
 
+    public bool IsNegative => Length?.Value < 0 || Percentage?.Value < 0;
+
     public static LengthPercentage Empty { get; } = new();
 
     public static LengthPercentage Zero { get; } = new(SvgLength.Zero);
-
-    public bool IsNegative => Length?.Value < 0 || Percentage?.Value < 0;
 
     public LengthPercentage()
     {
@@ -67,7 +67,7 @@ public readonly record struct LengthPercentage
 
     public static LengthPercentage Parse(string text)
     {
-        if (text == null)
+        if (string.IsNullOrEmpty(text))
             return Empty;
 
         bool isLength = SvgLength.TryParse(text, out SvgLength svgLength);
@@ -101,7 +101,9 @@ public readonly record struct LengthPercentage
 
     public static implicit operator LengthPercentage(string text)
     {
-        return Parse(text);
+        return text == null
+            ? Empty
+            : Parse(text);
     }
 
     public static implicit operator LengthPercentage?(string text)

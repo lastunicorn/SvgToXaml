@@ -97,7 +97,9 @@ public readonly struct SvgLength
 
     public static implicit operator SvgLength(string text)
     {
-        return Parse(text);
+        return text == null
+            ? Zero
+            : Parse(text);
     }
 
     public static implicit operator SvgLength?(string text)

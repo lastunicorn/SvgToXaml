@@ -32,7 +32,7 @@ public class WidthTests : SvgFileTestsBase
     {
         ParseSvgFile("width-nounit.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Unspecified);
+            SvgLength expected = new(123);
             svg.Width.Should().Be(expected);
         });
     }

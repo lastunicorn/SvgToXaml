@@ -32,7 +32,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-nounit.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Unspecified);
+            SvgLength expected = new(123);
             svg.Height.Should().Be(expected);
         });
     }
