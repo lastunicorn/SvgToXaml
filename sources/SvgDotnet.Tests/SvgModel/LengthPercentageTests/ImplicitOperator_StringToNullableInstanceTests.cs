@@ -16,9 +16,8 @@
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgModel.LengthPercentageTests;
 
-public class Implicitoperator_StringToNullableTests
+public class ImplicitOperator_StringToNullableInstanceTests
 {
-
     [Fact]
     public void HavingNullString_WhenCastToNullableInstance_ThenReturnsNull()
     {
