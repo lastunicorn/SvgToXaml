@@ -42,7 +42,7 @@ public class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup, C
 
         if (isZeroSize)
         {
-            ConversionIssue conversionIssue = new("Conversion", "Zero-size canvas present.");
+            ConversionIssue conversionIssue = new("Conversion", "Zero-size canvas detected.");
             ConversionContext.Warnings.Add(conversionIssue);
         }
 
@@ -50,7 +50,7 @@ public class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup, C
 
         if (isEmpty)
         {
-            ConversionIssue conversionIssue = new("Conversion", "Empty canvas present.");
+            ConversionIssue conversionIssue = new("Conversion", "Empty canvas detected.");
             ConversionContext.Warnings.Add(conversionIssue);
         }
     }

@@ -16,28 +16,25 @@
 
 using System.Diagnostics;
 using System.Reflection;
-using System.Windows.Controls;
-using DustInTheWind.SvgToXaml.Conversion;
 using DustInTheWind.SvgToXaml.SvgSerialization;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
-namespace DustInTheWind.SvgToXaml.Tests;
+namespace DustInTheWind.SvgDotnet.Tests;
 
 public class SvgFileTestsBase
 {
-    protected void ConvertSvgFile(string resourceFileName, Action<Canvas> callBack = null)
+    protected void ParseSvgFile(string resourceFileName, Action<DustInTheWind.SvgToXaml.SvgModel.Svg> callBack = null)
     {
         Type callerType = GetCallerType();
         DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);
+        callBack?.Invoke(deserializationResult.Svg);
+    }
 
-        StaEnvironment.Run(ExecutionErrorBehavior.ThrowException, () =>
-        {
-            ConversionContext conversionContext = new();
-            SvgToXamlConversion svgToXamlConversion = new(deserializationResult.Svg, conversionContext);
-            Canvas canvas = svgToXamlConversion.Execute();
-
-            callBack?.Invoke(canvas);
-        });
+    protected void ParseSvgFile(string resourceFileName, Action<DeserializationResult> callBack = null)
+    {
+        Type callerType = GetCallerType();
+        DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);
+        callBack?.Invoke(deserializationResult);
     }
 
     private static Type GetCallerType()

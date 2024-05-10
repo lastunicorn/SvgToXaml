@@ -1,0 +1,501 @@
+﻿<!--
+SvgToXaml
+Copyright (C) 2022-2024 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <AssemblyName>DustInTheWind.SvgDotnet.Tests</AssemblyName>
+        <RootNamespace>DustInTheWind.SvgDotnet.Tests</RootNamespace>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-negative.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-positive.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-zero.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-negative.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-positive.svg" />
+      <None Remove="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-zero.svg" />
+      <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-2class.svg" />
+      <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-empty.svg" />
+      <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\ClassTests.Resources\circle-class.svg" />
+      <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-inline.svg" />
+      <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-none.svg" />
+      <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-inline.svg" />
+      <None Remove="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\IdTests.Resources\circle-id.svg" />
+      <None Remove="SvgSerialization\CircleTests\IdTests.Resources\circle-noid.svg" />
+      <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang.svg" />
+      <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang.svg" />
+      <None Remove="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-negative.svg" />
+      <None Remove="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-positive.svg" />
+      <None Remove="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-zero.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-negative.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-percentage.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positive.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positivepx.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-zero.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-missing.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-negative.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-percentage.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positive.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positivepx.svg" />
+      <None Remove="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-zero.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-circle.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-clippath.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-defs.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-ellipse.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-g.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-line.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-lineargradient.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-path.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-polygon.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-polyline.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-radialgradient.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-rect.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-style.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-text.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-use.svg" />
+      <None Remove="SvgSerialization\DefsTests\ClassTests.Resources\defs-2class.svg" />
+      <None Remove="SvgSerialization\DefsTests\ClassTests.Resources\defs-class-empty.svg" />
+      <None Remove="SvgSerialization\DefsTests\ClassTests.Resources\defs-class-missing.svg" />
+      <None Remove="SvgSerialization\DefsTests\ClassTests.Resources\defs-class.svg" />
+      <None Remove="SvgSerialization\DefsTests\IdTests.Resources\defs-id.svg" />
+      <None Remove="SvgSerialization\DefsTests\IdTests.Resources\defs-noid.svg" />
+      <None Remove="SvgSerialization\DefsTests\LanguageTests.Resources\defs-lang-missing.svg" />
+      <None Remove="SvgSerialization\DefsTests\LanguageTests.Resources\defs-lang.svg" />
+      <None Remove="SvgSerialization\DefsTests\LanguageTests.Resources\defs-xmllang-missing.svg" />
+      <None Remove="SvgSerialization\DefsTests\LanguageTests.Resources\defs-xmllang.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-negative.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-positive.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-zero.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-negative.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-positive.svg" />
+      <None Remove="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-zero.svg" />
+      <None Remove="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-2class.svg" />
+      <None Remove="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-class-empty.svg" />
+      <None Remove="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-class-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-class.svg" />
+      <None Remove="SvgSerialization\EllipseTests\IdTests.Resources\ellipse-id.svg" />
+      <None Remove="SvgSerialization\EllipseTests\IdTests.Resources\ellipse-noid.svg" />
+      <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang.svg" />
+      <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusTests.Resources\ellipse-rxy-negative.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-negative.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-positive.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-zero.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-missing.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-negative.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-positive.svg" />
+      <None Remove="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-zero.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-circle.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-clippath.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-defs.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-ellipse.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-g.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-line.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-lineargradient.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-path.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-polygon.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-polyline.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-radialgradient.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-rect.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-style.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-text.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-use.svg" />
+      <None Remove="SvgSerialization\GTests\ClassTests.Resources\g-2class.svg" />
+      <None Remove="SvgSerialization\GTests\ClassTests.Resources\g-class-empty.svg" />
+      <None Remove="SvgSerialization\GTests\ClassTests.Resources\g-class-missing.svg" />
+      <None Remove="SvgSerialization\GTests\ClassTests.Resources\g-class.svg" />
+      <None Remove="SvgSerialization\GTests\IdTests.Resources\g-id.svg" />
+      <None Remove="SvgSerialization\GTests\IdTests.Resources\g-noid.svg" />
+      <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-lang-missing.svg" />
+      <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-lang.svg" />
+      <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang-missing.svg" />
+      <None Remove="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang.svg" />
+      <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-evenodd.svg" />
+      <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-invalid.svg" />
+      <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-missing.svg" />
+      <None Remove="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-nonzero.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-missing.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-negative.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-positive.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-zero.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-missing.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-negative.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-positive.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-zero.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-2class.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class-empty.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class-missing.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\IdTests.Resources\radialGradient-id.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\IdTests.Resources\radialGradient-noid.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang-missing.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-missing.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-negative.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-positive.svg" />
+      <None Remove="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-zero.svg" />
+      <None Remove="SvgSerialization\StyleTests\ClassTests.Resources\style-2class.svg" />
+      <None Remove="SvgSerialization\StyleTests\ClassTests.Resources\style-class-empty.svg" />
+      <None Remove="SvgSerialization\StyleTests\ClassTests.Resources\style-class-missing.svg" />
+      <None Remove="SvgSerialization\StyleTests\ClassTests.Resources\style-class.svg" />
+      <None Remove="SvgSerialization\StyleTests\IdTests.Resources\style-id.svg" />
+      <None Remove="SvgSerialization\StyleTests\IdTests.Resources\style-noid.svg" />
+      <None Remove="SvgSerialization\StyleTests\TitleTests.Resources\style-title-missing.svg" />
+      <None Remove="SvgSerialization\StyleTests\TitleTests.Resources\style-title.svg" />
+      <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
+      <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
+      <None Remove="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-circle.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-clippath.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-defs.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-ellipse.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-g.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-line.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-lineargradient.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-path.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-polygon.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-polyline.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-radialgradient.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-rect.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-style.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-text.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-use.svg" />
+      <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-2class.svg" />
+      <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-empty.svg" />
+      <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ch.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-cm.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-em.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ex.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-in.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-mm.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-nounit.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pc.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pt.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-px.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-q.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-rem.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-ch.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-cm.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-em.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-ex.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-in.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-mm.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-nounit.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-pc.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-pt.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-px.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-q.svg" />
+      <None Remove="SvgSerialization\SvgTests\HeightTests.Resources\height-rem.svg" />
+      <None Remove="SvgSerialization\SvgTests\IdTests.Resources\svg-id.svg" />
+      <None Remove="SvgSerialization\SvgTests\IdTests.Resources\svg-noid.svg" />
+      <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang.svg" />
+      <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang.svg" />
+      <None Remove="SvgSerialization\SvgTests\VersionTests.Resources\version-1-1.svg" />
+      <None Remove="SvgSerialization\SvgTests\VersionTests.Resources\version-2.svg" />
+      <None Remove="SvgSerialization\SvgTests\VersionTests.Resources\version-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-ch.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-cm.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-em.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-ex.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-in.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-missing.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-mm.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-nounit.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-pc.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-pt.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-px.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-q.svg" />
+      <None Remove="SvgSerialization\SvgTests\WidthTests.Resources\width-rem.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterXTests.Resources\circle-cx-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\CenterYTests.Resources\circle-cy-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\ClassTests.Resources\circle-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-inline.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\circle-display-none.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-inline.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\DisplayTests.Resources\g-display-none-circle-display-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\IdTests.Resources\circle-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\IdTests.Resources\circle-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-lang.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\LanguageTests.Resources\circle-xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\RadiusTests.Resources\circle-r-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-percentage.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-positivepx.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeDashOffsetTests.Resources\circle-strokedashoffset-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-percentage.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-positivepx.svg" />
+      <EmbeddedResource Include="SvgSerialization\CircleTests\StrokeWidthTests.Resources\circle-strokewidth-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-circle.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-clippath.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-defs.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-ellipse.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-g.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-line.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-lineargradient.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-path.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-polygon.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-polyline.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-radialgradient.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-rect.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-style.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-text.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-use.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ClassTests.Resources\defs-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ClassTests.Resources\defs-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ClassTests.Resources\defs-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ClassTests.Resources\defs-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\IdTests.Resources\defs-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\IdTests.Resources\defs-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\LanguageTests.Resources\defs-lang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\LanguageTests.Resources\defs-lang.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\LanguageTests.Resources\defs-xmllang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\LanguageTests.Resources\defs-xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterXTests.Resources\ellipse-cx-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\CenterYTests.Resources\ellipse-cy-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\ClassTests.Resources\ellipse-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\IdTests.Resources\ellipse-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\IdTests.Resources\ellipse-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-lang.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\LanguageTests.Resources\ellipse-xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusTests.Resources\ellipse-rxy-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusXTests.Resources\ellipse-rx-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-circle.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-clippath.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-defs.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-ellipse.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-g.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-line.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-lineargradient.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-path.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-polygon.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-polyline.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-radialgradient.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-rect.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-style.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-text.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-use.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ClassTests.Resources\g-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ClassTests.Resources\g-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ClassTests.Resources\g-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ClassTests.Resources\g-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\IdTests.Resources\g-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\IdTests.Resources\g-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-lang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-lang.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\LanguageTests.Resources\g-xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-evenodd.svg" />
+      <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-invalid.svg" />
+      <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\PathTests\FillRuleTests.Resources\path-fillrule-nonzero.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterXTests.Resources\radialgradient-cx-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\CenterYTests.Resources\radialgradient-cy-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\ClassTests.Resources\radialgradient-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\IdTests.Resources\radialGradient-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\IdTests.Resources\radialGradient-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-lang.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\LanguageTests.Resources\radialgradient-xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\RadialGradientTests\RadiusTests.Resources\radialgradient-r-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\ClassTests.Resources\style-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\ClassTests.Resources\style-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\ClassTests.Resources\style-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\ClassTests.Resources\style-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\IdTests.Resources\style-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\IdTests.Resources\style-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\TitleTests.Resources\style-title-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\TitleTests.Resources\style-title.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
+      <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-circle.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-clippath.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-defs.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-ellipse.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-g.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-line.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-lineargradient.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-path.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-polygon.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-polyline.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-radialgradient.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-rect.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-style.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-text.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-use.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-2class.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ch.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-cm.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-em.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-ex.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-in.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-mm.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-nounit.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pc.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-pt.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-px.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-q.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightExponentialTests.Resources\height-rem.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-ch.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-cm.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-em.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-ex.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-in.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-mm.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-nounit.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-pc.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-pt.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-px.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-q.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\HeightTests.Resources\height-rem.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\IdTests.Resources\svg-id.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\IdTests.Resources\svg-noid.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-lang.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\svg-xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\VersionTests.Resources\version-1-1.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\VersionTests.Resources\version-2.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\VersionTests.Resources\version-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-ch.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-cm.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-em.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-ex.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-in.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-mm.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-nounit.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-pc.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-pt.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-px.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-q.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\WidthTests.Resources\width-rem.svg" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="6.12.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="6.0.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SvgDotnet.Serialization\SvgDotnet.Serialization.csproj" />
+      <ProjectReference Include="..\SvgDotnet\SvgDotnet.csproj" />
+      <ProjectReference Include="..\SvgToXaml.Tests.Utils\SvgToXaml.Tests.Utils.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="SvgModel\SvgLengthTests\" />
+    </ItemGroup>
+
+</Project>

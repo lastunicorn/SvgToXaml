@@ -19,15 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0-windows</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UseWPF>true</UseWPF>
-        <AssemblyName>DustInTheWind.SvgToXaml.Conversion</AssemblyName>
-        <RootNamespace>DustInTheWind.SvgToXaml.Conversion</RootNamespace>
+        <AssemblyName>DustInTheWind.SvgDotnet.Serialization</AssemblyName>
+        <RootNamespace>DustInTheWind.SvgDotnet.Serialization</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SvgDotNet\SvgDotnet.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgDotnet\SvgDotnet.csproj" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>
