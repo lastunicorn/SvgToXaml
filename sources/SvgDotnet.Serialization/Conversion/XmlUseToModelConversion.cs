@@ -39,5 +39,33 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
         SvgElement.Href = XmlElement.Href ?? XmlElement.HrefLink;
         SvgElement.X = XmlElement.X;
         SvgElement.Y = XmlElement.Y;
+
+        if (XmlElement.Children != null)
+        {
+            IEnumerable<SvgElement> elements = XmlElement.Children
+                .Select(CreateConversionFor)
+                .Where(x => x != null)
+                .Select(x => x.Execute());
+
+            foreach (SvgElement svgElement in elements)
+                SvgElement.Children.Add(svgElement);
+        }
+    }
+
+    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
+    {
+        switch (objectToConvert)
+        {
+            case XmlClipPath clipPath:
+                return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
+
+            case XmlStyle style:
+                return new XmlStyleToModelConversion(style, DeserializationContext);
+
+            default:
+                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
+                DeserializationContext.Errors.Add(deserializationIssue);
+                return null;
+        }
     }
 }

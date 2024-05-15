@@ -16,18 +16,6 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-// a
-// clipPath
-// defs
-// g
-// marker
-// mask
-// pattern
-// svg
-// switch
-// symbol
-// unknown
-
 public class SvgContainer : SvgElement
 {
     public SvgElementCollection<SvgElement> Children { get; }

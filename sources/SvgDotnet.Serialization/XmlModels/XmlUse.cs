@@ -31,4 +31,16 @@ public class XmlUse : XmlElement
 
     [XmlAttribute("y")]
     public double Y { get; set; }
+
+    // Descriptive elements
+    //[XmlElement("desc", typeof())]
+    //[XmlElement("title", typeof())]
+    //[XmlElement("metadata", typeof())]
+
+    // Other elements
+    [XmlElement("clipPath", typeof(XmlClipPath))]
+    //[XmlElement("mask", typeof())]
+    //[XmlElement("script", typeof())]
+    [XmlElement("style", typeof(XmlStyle))]
+    public object[] Children { get; set; }
 }

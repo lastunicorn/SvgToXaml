@@ -349,6 +349,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-positive.svg" />
       <None Remove="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-positivepx.svg" />
       <None Remove="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-zero.svg" />
+      <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
+      <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
     </ItemGroup>
 
     <ItemGroup>
@@ -672,6 +674,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-positive.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-positivepx.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
     </ItemGroup>
 
     <ItemGroup>
