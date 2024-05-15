@@ -18,6 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 /// <summary>
 /// Represents the "style" element.
+/// Never-rendered element.
 /// </summary>
 public class SvgStyle : SvgElement
 {
@@ -25,10 +26,5 @@ public class SvgStyle : SvgElement
 
     public string Type { get; set; }
 
-    public List<StyleRuleSet> RuleSets { get; } = new();
-
-    public StyleRuleSet GetRuleSet(string selector)
-    {
-        return RuleSets.FirstOrDefault(x => x.Selector == selector);
-    }
+    public StyleRuleSetCollection RuleSets { get; } = new();
 }

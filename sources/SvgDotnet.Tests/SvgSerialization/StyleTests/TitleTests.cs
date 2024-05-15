@@ -30,6 +30,17 @@ public class TitleTests : SvgFileTestsBase
     }
 
     [Fact]
+    public void HavingTitleNotSpecified_WhenSvgIsParsed_ThenTitleIsEmptyString()
+    {
+        ParseSvgFile("style-title-empty.svg", svg =>
+        {
+            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
+
+            svgStyle.Title.Should().BeEmpty();
+        });
+    }
+
+    [Fact]
     public void HavingTitle_WhenSvgIsParsed_ThenTypeHasCorrectValue()
     {
         ParseSvgFile("style-title.svg", svg =>

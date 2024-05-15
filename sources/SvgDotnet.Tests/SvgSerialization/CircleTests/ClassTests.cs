@@ -21,7 +21,7 @@ public class ClassTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgContainsCircleWithEmptyClassNames()
     {
-        ParseSvgFile("circle-class-missing.svg", svg =>
+        ParseSvgFile("01-circle-class-missing.svg", svg =>
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
@@ -32,7 +32,7 @@ public class ClassTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleWithEmptyClass_WhenSvgFileIsParsed_ThenSvgContainsCircleWithEmptyClassNames()
     {
-        ParseSvgFile("circle-class-empty.svg", svg =>
+        ParseSvgFile("02-circle-class-empty.svg", svg =>
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
@@ -43,7 +43,7 @@ public class ClassTests : SvgFileTestsBase
     [Fact]
     public void HavingCircleWithOneClass_WhenSvgFileIsParsed_ThenSvgContainsCircleWithThatOneClassName()
     {
-        ParseSvgFile("circle-class.svg", svg =>
+        ParseSvgFile("03-circle-1class.svg", svg =>
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
@@ -56,9 +56,57 @@ public class ClassTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingCircleWithTwoClasses_WhenSvgFileIsParsed_ThenSvgContainsCircleWithThoseTwoClassNames()
+    public void HavingCircleWithTwoClassesSeparatedByOneSpace_WhenSvgFileIsParsed_ThenSvgContainsCircleWithThoseTwoClassNames()
     {
-        ParseSvgFile("circle-2class.svg", svg =>
+        ParseSvgFile("04-circle-2class-1space.svg", svg =>
+        {
+            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
+
+            List<string> expected = new()
+            {
+                "class1",
+                "class2"
+            };
+            svgCircle.ClassNames.Should().Equal(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingCircleWithTwoClassesSeparatedByTwoSpaces_WhenSvgFileIsParsed_ThenSvgContainsCircleWithThoseTwoClassNames()
+    {
+        ParseSvgFile("05-circle-2class-2space.svg", svg =>
+        {
+            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
+
+            List<string> expected = new()
+            {
+                "class1",
+                "class2"
+            };
+            svgCircle.ClassNames.Should().Equal(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingCircleWithTwoClassesSeparatedByOneTab_WhenSvgFileIsParsed_ThenSvgContainsCircleWithThoseTwoClassNames()
+    {
+        ParseSvgFile("06-circle-2class-1tab.svg", svg =>
+        {
+            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
+
+            List<string> expected = new()
+            {
+                "class1",
+                "class2"
+            };
+            svgCircle.ClassNames.Should().Equal(expected);
+        });
+    }
+
+    [Fact]
+    public void HavingCircleWithTwoClassesSeparatedByTwoTabs_WhenSvgFileIsParsed_ThenSvgContainsCircleWithThoseTwoClassNames()
+    {
+        ParseSvgFile("07-circle-2class-2tab.svg", svg =>
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 

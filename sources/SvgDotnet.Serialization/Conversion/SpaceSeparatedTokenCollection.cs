@@ -16,31 +16,24 @@
 
 using System.Collections.ObjectModel;
 
-namespace DustInTheWind.SvgDotnet;
+namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-public class ClassNameCollection : Collection<string>
+internal class SpaceSeparatedTokenCollection : Collection<string>
 {
-    protected override void InsertItem(int index, string item)
+    public SpaceSeparatedTokenCollection()
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
-
-        base.InsertItem(index, item);
     }
 
-    protected override void SetItem(int index, string item)
+    private SpaceSeparatedTokenCollection(IList<string> list)
+        : base(list)
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
-
-        base.SetItem(index, item);
     }
 
-    public void AddRange(IEnumerable<string> classNames)
+    public static SpaceSeparatedTokenCollection Parse(string text)
     {
-        if (classNames == null) throw new ArgumentNullException(nameof(classNames));
+        if (text == null) throw new ArgumentNullException(nameof(text));
 
-        IEnumerable<string> classNamesNotNull = classNames.Where(x => x != null);
-
-        foreach (string className in classNamesNotNull)
-            Items.Add(className);
+        string[] items = text.Split(new[] { ' ' }, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        return new SpaceSeparatedTokenCollection(items);
     }
 }
