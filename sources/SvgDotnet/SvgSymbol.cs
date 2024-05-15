@@ -14,25 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgTests;
+namespace DustInTheWind.SvgDotnet;
 
-public class IdTests : SvgFileTestsBase
+public class SvgSymbol : SvgContainer
 {
-    [Fact]
-    public void HavingSvgWithId_WhenSvgFileIsParsed_ThenSvgHasThatId()
-    {
-        ParseSvgFile("svg-id.svg", svg =>
-        {
-            svg.Id.Should().Be("svg1");
-        });
-    }
+    public LengthPercentage? X { get; set; }
 
-    [Fact]
-    public void HavingSvgWithNoId_WhenSvgFileIsParsed_ThenSvgHasIdNull()
-    {
-        ParseSvgFile("svg-id-missing.svg", svg =>
-        {
-            svg.Id.Should().BeNull();
-        });
-    }
+    public LengthPercentage? Y { get; set; }
+
+    public SvgLength? Width { get; set; }
+
+    public SvgLength? Height { get; set; }
+
+    public SvgViewBox ViewBox { get; set; }
 }

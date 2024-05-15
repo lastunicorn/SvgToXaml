@@ -46,12 +46,25 @@ public class XmlContainer : XmlElement
     [XmlElement("defs", typeof(XmlDefs))]
     [XmlElement("g", typeof(XmlG))]
     [XmlElement("svg", typeof(XmlSvg))]
-    //[XmlElement("symbol", typeof(XmlSymbol))]
+    [XmlElement("symbol", typeof(XmlSymbol))]
     [XmlElement("use", typeof(XmlUse))]
 
     // Other elements
+    //[XmlElement("a", typeof())]
+    //[XmlElement("audio", typeof())]
+    //[XmlElement("canvas", typeof())]
     [XmlElement("clipPath", typeof(XmlClipPath))]
+    //[XmlElement("filter", typeof())]
+    //[XmlElement("foreignObject", typeof())]
+    //[XmlElement("iframe", typeof())]
+    //[XmlElement("image", typeof())]
+    //[XmlElement("marker", typeof())]
+    //[XmlElement("mask", typeof())]
+    //[XmlElement("script", typeof())]
     [XmlElement("style", typeof(XmlStyle))]
+    //[XmlElement("switch", typeof())]
     [XmlElement("text", typeof(XmlText))]
+    //[XmlElement("video", typeof())]
+    //[XmlElement("view", typeof())]
     public object[] Children { get; set; }
 }

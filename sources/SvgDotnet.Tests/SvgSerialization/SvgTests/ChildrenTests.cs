@@ -100,6 +100,24 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
+    public void HavingSvgChild_WhenSvgFileIsParsed_ThenSvgContainsSvg()
+    {
+        ParseSvgFile("svg-svg.svg", svg =>
+        {
+            svg.Children[0].Should().BeOfType<Svg>();
+        });
+    }
+
+    [Fact]
+    public void HavingSymbolChild_WhenSvgFileIsParsed_ThenSvgContainsSymbol()
+    {
+        ParseSvgFile("svg-symbol.svg", svg =>
+        {
+            svg.Children[0].Should().BeOfType<SvgSymbol>();
+        });
+    }
+
+    [Fact]
     public void HavingUseChild_WhenSvgFileIsParsed_ThenSvgContainsUse()
     {
         ParseSvgFile("svg-use.svg", svg =>

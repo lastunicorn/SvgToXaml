@@ -118,6 +118,28 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
+    public void HavingSvgChild_WhenSvgFileIsParsed_ThenSvgContainsSvg()
+    {
+        ParseSvgFile("defs-svg.svg", svg =>
+        {
+            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+
+            svgDefinitions.Children[0].Should().BeOfType<Svg>();
+        });
+    }
+
+    [Fact]
+    public void HavingSymbolChild_WhenSvgFileIsParsed_ThenSvgContainsSymbol()
+    {
+        ParseSvgFile("defs-symbol.svg", svg =>
+        {
+            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+
+            svgDefinitions.Children[0].Should().BeOfType<SvgSymbol>();
+        });
+    }
+
+    [Fact]
     public void HavingUseChild_WhenSvgFileIsParsed_ThenSvgContainsUse()
     {
         ParseSvgFile("defs-use.svg", svg =>

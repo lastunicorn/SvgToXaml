@@ -32,7 +32,7 @@ public class IdTests : SvgFileTestsBase
     [Fact]
     public void HavingGWithNoId_WhenSvgFileIsParsed_ThenSvgGroupHasIdNull()
     {
-        ParseSvgFile("g-noid.svg", svg =>
+        ParseSvgFile("g-id-missing.svg", svg =>
         {
             SvgGroup svgGroup = svg.Children[0] as SvgGroup;
 

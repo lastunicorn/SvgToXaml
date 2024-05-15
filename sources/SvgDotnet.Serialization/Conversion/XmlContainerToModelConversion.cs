@@ -53,14 +53,11 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             case XmlEllipse ellipse:
                 return new XmlEllipseToModelConversion(ellipse, DeserializationContext);
 
-            case XmlPath path:
-                return new XmlPathToModelConversion(path, DeserializationContext);
-
             case XmlLine line:
                 return new XmlLineToModelConversion(line, DeserializationContext);
 
-            case XmlRect rect:
-                return new XmlRectToModelConversion(rect, DeserializationContext);
+            case XmlPath path:
+                return new XmlPathToModelConversion(path, DeserializationContext);
 
             case XmlPolygon polygon:
                 return new XmlPolygonToModelConversion(polygon, DeserializationContext);
@@ -68,11 +65,20 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             case XmlPolyline polyline:
                 return new XmlPolylineToModelConversion(polyline, DeserializationContext);
 
+            case XmlRect rect:
+                return new XmlRectToModelConversion(rect, DeserializationContext);
+
             case XmlDefs defs:
                 return new XmlDefsToModelConversion(defs, DeserializationContext);
 
-            case XmlG gChild:
-                return new XmlGroupToModelConversion(gChild, DeserializationContext);
+            case XmlG childG:
+                return new XmlGroupToModelConversion(childG, DeserializationContext);
+
+            case XmlSvg childSvg:
+                return new XmlSvgToModelConversion(childSvg, DeserializationContext);
+
+            case XmlSymbol symbol:
+                return new XmlSymbolToModelConversion(symbol, DeserializationContext);
 
             case XmlUse use:
                 return new XmlUseToModelConversion(use, DeserializationContext);
@@ -91,9 +97,6 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
 
             case XmlClipPath clipPath:
                 return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
-
-            case XmlSvg childSvg:
-                return new XmlSvgToModelConversion(childSvg, DeserializationContext);
 
             default:
                 DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
