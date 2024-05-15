@@ -39,6 +39,16 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
 
         base.ConvertProperties();
 
+        LengthPercentage? x = XmlElement.X;
+
+        if (x != null)
+            SvgElement.X = x;
+
+        LengthPercentage? y = XmlElement.Y;
+
+        if (y != null)
+            SvgElement.Y = y;
+
         if (XmlElement.Version != null)
             SvgElement.Version = XmlElement.Version;
 

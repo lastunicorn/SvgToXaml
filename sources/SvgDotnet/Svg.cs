@@ -18,6 +18,10 @@ namespace DustInTheWind.SvgDotnet;
 
 public class Svg : SvgContainer
 {
+    public LengthPercentage? X { get; set; }
+    
+    public LengthPercentage? Y { get; set; }
+
     public string Version { get; set; }
 
     public SvgLength? Width { get; set; }

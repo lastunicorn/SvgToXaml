@@ -23,6 +23,17 @@ public class XmlContainer : XmlElement
     [XmlElement("title")]
     public XmlTitle[] Titles { get; set; }
 
+    // Descriptive elements
+    //[XmlElement("desc", typeof())]
+    //[XmlElement("title", typeof())]
+    //[XmlElement("metadata", typeof())]
+
+    // Paint server elements
+    [XmlElement("linearGradient", typeof(XmlLinearGradient))]
+    [XmlElement("radialGradient", typeof(XmlRadialGradient))]
+    //[XmlElement("pattern", typeof(XmlRadialGradient))]
+
+    // Shape elements
     [XmlElement("circle", typeof(XmlCircle))]
     [XmlElement("ellipse", typeof(XmlEllipse))]
     [XmlElement("line", typeof(XmlLine))]
@@ -30,14 +41,17 @@ public class XmlContainer : XmlElement
     [XmlElement("polygon", typeof(XmlPolygon))]
     [XmlElement("polyline", typeof(XmlPolyline))]
     [XmlElement("rect", typeof(XmlRect))]
+
+    // Structural elements
     [XmlElement("defs", typeof(XmlDefs))]
     [XmlElement("g", typeof(XmlG))]
+    [XmlElement("svg", typeof(XmlSvg))]
+    //[XmlElement("symbol", typeof(XmlSymbol))]
     [XmlElement("use", typeof(XmlUse))]
+
+    // Other elements
+    [XmlElement("clipPath", typeof(XmlClipPath))]
     [XmlElement("style", typeof(XmlStyle))]
     [XmlElement("text", typeof(XmlText))]
-    [XmlElement("linearGradient", typeof(XmlLinearGradient))]
-    [XmlElement("radialGradient", typeof(XmlRadialGradient))]
-    [XmlElement("clipPath", typeof(XmlClipPath))]
-    [XmlElement("svg", typeof(XmlSvg))]
     public object[] Children { get; set; }
 }

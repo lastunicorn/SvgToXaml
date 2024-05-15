@@ -21,6 +21,12 @@ namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 [XmlRoot("svg", Namespace = Namespaces.Svg)]
 public class XmlSvg : XmlContainer
 {
+    [XmlAttribute("x")]
+    public string X { get; set; }
+
+    [XmlAttribute("y")]
+    public string Y { get; set; }
+
     [XmlAttribute("version")]
     public string Version { get; set; }
 
