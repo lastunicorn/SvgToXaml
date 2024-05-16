@@ -19,6 +19,17 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 public class ChildrenTests : SvgFileTestsBase
 {
     [Fact]
+    public void HavingTitleChild_WhenSvgFileIsParsed_ThenUseContainsTitle()
+    {
+        ParseSvgFile("use-title.svg", svg =>
+        {
+            SvgUse svgUse = svg.Children[0] as SvgUse;
+
+            svgUse.Children[0].Should().BeOfType<SvgTitle>();
+        });
+    }
+
+    [Fact]
     public void HavingClipPathChild_WhenSvgFileIsParsed_ThenUseContainsClipPath()
     {
         ParseSvgFile("use-clippath.svg", svg =>

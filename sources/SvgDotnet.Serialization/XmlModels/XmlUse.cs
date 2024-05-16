@@ -40,7 +40,7 @@ public class XmlUse : XmlElement
 
     // Descriptive elements
     //[XmlElement("desc", typeof())]
-    //[XmlElement("title", typeof())]
+    [XmlElement("title", typeof(XmlTitle))]
     //[XmlElement("metadata", typeof())]
 
     // Other elements

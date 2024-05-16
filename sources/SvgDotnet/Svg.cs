@@ -33,6 +33,8 @@ public class Svg : SvgContainer
     public Svg()
     {
         Children.AcceptedTypes = new[] {
+            typeof(SvgTitle),
+            
             typeof(SvgLinearGradient),
             typeof(SvgRadialGradient),
 

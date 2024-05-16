@@ -87,6 +87,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-svg.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-symbol.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-text.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-title.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-use.svg" />
       <None Remove="SvgSerialization\DefsTests\ClassTests.Resources\defs-2class.svg" />
       <None Remove="SvgSerialization\DefsTests\ClassTests.Resources\defs-class-empty.svg" />
@@ -141,6 +142,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-svg.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-symbol.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-text.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-title.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-use.svg" />
       <None Remove="SvgSerialization\GTests\ClassTests.Resources\g-2class.svg" />
       <None Remove="SvgSerialization\GTests\ClassTests.Resources\g-class-empty.svg" />
@@ -220,6 +222,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-symbol.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-text.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-title.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-use.svg" />
       <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-2class.svg" />
       <None Remove="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-empty.svg" />
@@ -300,6 +303,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-svg.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-symbol.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-text.svg" />
+      <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-title.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-use.svg" />
       <None Remove="SvgSerialization\SymbolTests\ClassTests.Resources\symbol-2class.svg" />
       <None Remove="SvgSerialization\SymbolTests\ClassTests.Resources\symbol-class-empty.svg" />
@@ -351,6 +355,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-zero.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
+      <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-title.svg" />
       <None Remove="SvgSerialization\UseTests\ClassTests.Resources\SvgUse svgUse = svg.Children[0] as SvgUse;-2class.svg" />
       <None Remove="SvgSerialization\UseTests\ClassTests.Resources\use-class-empty.svg" />
       <None Remove="SvgSerialization\UseTests\ClassTests.Resources\use-class-missing.svg" />
@@ -460,6 +465,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-svg.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-text.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-symbol.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-title.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-use.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ClassTests.Resources\defs-2class.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ClassTests.Resources\defs-class-empty.svg" />
@@ -514,6 +520,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-rect.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-style.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-text.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-title.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-use.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ClassTests.Resources\g-2class.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ClassTests.Resources\g-class-empty.svg" />
@@ -593,6 +600,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-symbol.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-svg.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-text.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-title.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-use.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-2class.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ClassTests.Resources\svg-class-empty.svg" />
@@ -673,6 +681,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-symbol.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-svg.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-text.svg" />
+      <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-title.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-use.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ClassTests.Resources\symbol-2class.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ClassTests.Resources\symbol-class-empty.svg" />
@@ -723,6 +732,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-positivepx.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-zero.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-title.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ClassTests.Resources\use-2class.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ClassTests.Resources\use-class-empty.svg" />

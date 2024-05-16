@@ -19,7 +19,40 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.DefsTests;
 public class ChildrenTests : SvgFileTestsBase
 {
     [Fact]
-    public void HavingCircleChild_WhenSvgFileIsParsed_ThenSvgContainsCircle()
+    public void HavingTitleChild_WhenSvgFileIsParsed_ThenDefinitionsContainsTitle()
+    {
+        ParseSvgFile("defs-title.svg", svg =>
+        {
+            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+
+            svgDefinitions.Children[0].Should().BeOfType<SvgTitle>();
+        });
+    }
+
+    [Fact]
+    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenDefinitionsContainsLinearGradient()
+    {
+        ParseSvgFile("defs-lineargradient.svg", svg =>
+        {
+            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+
+            svgDefinitions.Children[0].Should().BeOfType<SvgLinearGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenDefinitionsContainsRadialGradient()
+    {
+        ParseSvgFile("defs-radialgradient.svg", svg =>
+        {
+            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+
+            svgDefinitions.Children[0].Should().BeOfType<SvgRadialGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingCircleChild_WhenSvgFileIsParsed_ThenDefinitionsContainsCircle()
     {
         ParseSvgFile("defs-circle.svg", svg =>
         {
@@ -30,7 +63,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingEllipseChild_WhenSvgFileIsParsed_ThenSvgContainsEllipse()
+    public void HavingEllipseChild_WhenSvgFileIsParsed_ThenDefinitionsContainsEllipse()
     {
         ParseSvgFile("defs-ellipse.svg", svg =>
         {
@@ -41,7 +74,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingLineChild_WhenSvgFileIsParsed_ThenSvgContainsLine()
+    public void HavingLineChild_WhenSvgFileIsParsed_ThenDefinitionsContainsLine()
     {
         ParseSvgFile("defs-line.svg", svg =>
         {
@@ -52,7 +85,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingPathChild_WhenSvgFileIsParsed_ThenSvgContainsPath()
+    public void HavingPathChild_WhenSvgFileIsParsed_ThenDefinitionsContainsPath()
     {
         ParseSvgFile("defs-path.svg", svg =>
         {
@@ -63,7 +96,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingPolygonChild_WhenSvgFileIsParsed_ThenSvgContainsPolygon()
+    public void HavingPolygonChild_WhenSvgFileIsParsed_ThenDefinitionsContainsPolygon()
     {
         ParseSvgFile("defs-polygon.svg", svg =>
         {
@@ -74,7 +107,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingPolylineChild_WhenSvgFileIsParsed_ThenSvgContainsPolygon()
+    public void HavingPolylineChild_WhenSvgFileIsParsed_ThenDefinitionsContainsPolygon()
     {
         ParseSvgFile("defs-polyline.svg", svg =>
         {
@@ -85,7 +118,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingRectChild_WhenSvgFileIsParsed_ThenSvgContainsRectangle()
+    public void HavingRectChild_WhenSvgFileIsParsed_ThenDefinitionsContainsRectangle()
     {
         ParseSvgFile("defs-rect.svg", svg =>
         {
@@ -96,7 +129,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingDefsChild_WhenSvgFileIsParsed_ThenSvgContainsDefinitions()
+    public void HavingDefsChild_WhenSvgFileIsParsed_ThenDefinitionsContainsDefinitions()
     {
         ParseSvgFile("defs-defs.svg", svg =>
         {
@@ -107,7 +140,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingGChild_WhenSvgFileIsParsed_ThenSvgContainsGroup()
+    public void HavingGChild_WhenSvgFileIsParsed_ThenDefinitionsContainsGroup()
     {
         ParseSvgFile("defs-g.svg", svg =>
         {
@@ -118,7 +151,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingSvgChild_WhenSvgFileIsParsed_ThenSvgContainsSvg()
+    public void HavingSvgChild_WhenSvgFileIsParsed_ThenDefinitionsContainsSvg()
     {
         ParseSvgFile("defs-svg.svg", svg =>
         {
@@ -129,7 +162,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingSymbolChild_WhenSvgFileIsParsed_ThenSvgContainsSymbol()
+    public void HavingSymbolChild_WhenSvgFileIsParsed_ThenDefinitionsContainsSymbol()
     {
         ParseSvgFile("defs-symbol.svg", svg =>
         {
@@ -140,7 +173,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingUseChild_WhenSvgFileIsParsed_ThenSvgContainsUse()
+    public void HavingUseChild_WhenSvgFileIsParsed_ThenDefinitionsContainsUse()
     {
         ParseSvgFile("defs-use.svg", svg =>
         {
@@ -151,7 +184,18 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenSvgContainsStyle()
+    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenDefinitionsContainsClipPath()
+    {
+        ParseSvgFile("defs-clippath.svg", svg =>
+        {
+            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+
+            svgDefinitions.Children[0].Should().BeOfType<SvgClipPath>();
+        });
+    }
+
+    [Fact]
+    public void HavingStyleChild_WhenSvgFileIsParsed_ThenDefinitionsContainsStyle()
     {
         ParseSvgFile("defs-style.svg", svg =>
         {
@@ -163,46 +207,13 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingTextChild_WhenSvgFileIsParsed_ThenSvgContainsText()
+    public void HavingTextChild_WhenSvgFileIsParsed_ThenDefinitionsContainsText()
     {
         ParseSvgFile("defs-text.svg", svg =>
         {
             SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
 
             svgDefinitions.Children[0].Should().BeOfType<SvgText>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenSvgContainsLinearGradient()
-    {
-        ParseSvgFile("defs-lineargradient.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            svgDefinitions.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenSvgContainsRadialGradient()
-    {
-        ParseSvgFile("defs-radialgradient.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            svgDefinitions.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenSvgContainsClipPath()
-    {
-        ParseSvgFile("defs-clippath.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            svgDefinitions.Children[0].Should().BeOfType<SvgClipPath>();
         });
     }
 }

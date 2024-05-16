@@ -20,12 +20,9 @@ namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 public class XmlContainer : XmlElement
 {
-    [XmlElement("title")]
-    public XmlTitle[] Titles { get; set; }
-
     // Descriptive elements
     //[XmlElement("desc", typeof())]
-    //[XmlElement("title", typeof())]
+    [XmlElement("title", typeof(XmlTitle))]
     //[XmlElement("metadata", typeof())]
 
     // Paint server elements

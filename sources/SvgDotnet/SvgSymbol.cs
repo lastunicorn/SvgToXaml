@@ -31,6 +31,8 @@ public class SvgSymbol : SvgContainer
     public SvgSymbol()
     {
         Children.AcceptedTypes = new[] {
+            typeof(SvgTitle),
+
             typeof(SvgLinearGradient),
             typeof(SvgRadialGradient),
 

@@ -70,6 +70,9 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
     {
         switch (objectToConvert)
         {
+            case XmlTitle title:
+                return new XmlTitleToModelConversion(title, DeserializationContext);
+
             case XmlClipPath clipPath:
                 return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
 

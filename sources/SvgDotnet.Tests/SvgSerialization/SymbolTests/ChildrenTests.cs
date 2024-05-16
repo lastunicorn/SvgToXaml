@@ -19,6 +19,39 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SymbolTests;
 public class ChildrenTests : SvgFileTestsBase
 {
     [Fact]
+    public void HavingSymbolWithTitleChild_WhenSvgFileIsParsed_ThenSymbolContainsTitle()
+    {
+        ParseSvgFile("symbol-title.svg", svg =>
+        {
+            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+
+            svgSymbol.Children[0].Should().BeOfType<SvgTitle>();
+        });
+    }
+
+    [Fact]
+    public void HavingSymbolWithLinearGradientChild_WhenSvgFileIsParsed_ThenSymbolContainsLinearGradient()
+    {
+        ParseSvgFile("symbol-lineargradient.svg", svg =>
+        {
+            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+
+            svgSymbol.Children[0].Should().BeOfType<SvgLinearGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingSymbolWithRadialGradientChild_WhenSvgFileIsParsed_ThenSymbolContainsRadialGradient()
+    {
+        ParseSvgFile("symbol-radialgradient.svg", svg =>
+        {
+            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+
+            svgSymbol.Children[0].Should().BeOfType<SvgRadialGradient>();
+        });
+    }
+
+    [Fact]
     public void HavingSymbolWithCircleChild_WhenSvgFileIsParsed_ThenSymbolContainsCircle()
     {
         ParseSvgFile("symbol-circle.svg", svg =>
@@ -118,7 +151,7 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingSvgChild_WhenSvgFileIsParsed_ThenSymbolContainsSvg()
+    public void HavingSymbolWithSvgChild_WhenSvgFileIsParsed_ThenSymbolContainsChildSvg()
     {
         ParseSvgFile("symbol-svg.svg", svg =>
         {
@@ -151,6 +184,17 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
+    public void HavingSymbolWithClipPathChild_WhenSvgFileIsParsed_ThenSymbolContainsClipPath()
+    {
+        ParseSvgFile("symbol-clippath.svg", svg =>
+        {
+            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+
+            svgSymbol.Children[0].Should().BeOfType<SvgClipPath>();
+        });
+    }
+
+    [Fact]
     public void HavingSymbolWithStyleChild_WhenSvgFileIsParsed_ThenSymbolContainsStyle()
     {
         ParseSvgFile("symbol-style.svg", svg =>
@@ -169,50 +213,6 @@ public class ChildrenTests : SvgFileTestsBase
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
             svgSymbol.Children[0].Should().BeOfType<SvgText>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithLinearGradientChild_WhenSvgFileIsParsed_ThenSymbolContainsLinearGradient()
-    {
-        ParseSvgFile("symbol-lineargradient.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithRadialGradientChild_WhenSvgFileIsParsed_ThenSymbolContainsRadialGradient()
-    {
-        ParseSvgFile("symbol-radialgradient.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithClipPathChild_WhenSvgFileIsParsed_ThenSymbolContainsClipPath()
-    {
-        ParseSvgFile("symbol-clippath.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithSvgChild_WhenSvgFileIsParsed_ThenSymbolContainsChildSvg()
-    {
-        ParseSvgFile("symbol-svg.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<Svg>();
         });
     }
 }

@@ -47,6 +47,15 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
     {
         switch (objectToConvert)
         {
+            case XmlTitle title:
+                return new XmlTitleToModelConversion(title, DeserializationContext);
+
+            case XmlLinearGradient linearGradient:
+                return new XmlLinearGradientToModelConversion(linearGradient, DeserializationContext);
+
+            case XmlRadialGradient radialGradient:
+                return new XmlRadialGradientToModelConversion(radialGradient, DeserializationContext);
+
             case XmlCircle circle:
                 return new XmlCircleToModelConversion(circle, DeserializationContext);
 
@@ -83,20 +92,14 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             case XmlUse use:
                 return new XmlUseToModelConversion(use, DeserializationContext);
 
+            case XmlClipPath clipPath:
+                return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
+
             case XmlStyle style:
                 return new XmlStyleToModelConversion(style, DeserializationContext);
 
             case XmlText text:
                 return new XmlTextToModelConversion(text, DeserializationContext);
-
-            case XmlLinearGradient linearGradient:
-                return new XmlLinearGradientToModelConversion(linearGradient, DeserializationContext);
-
-            case XmlRadialGradient radialGradient:
-                return new XmlRadialGradientToModelConversion(radialGradient, DeserializationContext);
-
-            case XmlClipPath clipPath:
-                return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
 
             default:
                 DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
