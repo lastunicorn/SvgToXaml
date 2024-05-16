@@ -31,4 +31,11 @@ internal class XmlTitleToModelConversion : XmlElementToModelConversion<XmlTitle,
     {
         return new SvgTitle();
     }
+
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        SvgElement.Value = XmlElement.Value ?? string.Empty;
+    }
 }

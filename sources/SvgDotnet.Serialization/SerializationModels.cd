@@ -1,192 +1,206 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.Namespaces" Collapsed="true">
-    <Position X="41.25" Y="0.5" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.Namespaces" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAACAAAAABAAAAACAAAAAAAAAAABAAAAAgAAAAACAA=</HashCode>
       <FileName>XmlModels\Namespaces.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlCircle" Collapsed="true">
-    <Position X="29.75" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlCircle" Collapsed="true">
+    <Position X="16.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
       <FileName>XmlModels\XmlCircle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlClipPath" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlClipPath" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlClipPath.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlContainer" Collapsed="true">
-    <Position X="14" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlContainer" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAEAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlContainer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlDefs" Collapsed="true">
-    <Position X="14" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlElement" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>XmlModels\XmlDefs.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlElement" Collapsed="true">
-    <Position X="19.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACCEAAUARAIAAGAAAIgACQBUAgACOAABAAAAAAgAAA=</HashCode>
+      <HashCode>AACCEAAUAQAIAAGAABIgASQBEAgACOAABAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlElement.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlEllipse" Collapsed="true">
-    <Position X="25.25" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlEllipse" Collapsed="true">
+    <Position X="18" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAABACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlEllipse.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlG" Collapsed="true">
-    <Position X="11.75" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>XmlModels\XmlG.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlLine" Collapsed="true">
-    <Position X="36.5" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlLine" Collapsed="true">
+    <Position X="19.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAIABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlLine.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlLinearGradient" Collapsed="true">
-    <Position X="23" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlLinearGradient" Collapsed="true">
+    <Position X="16.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABABAAAAEAgAAAAAAAADAAAAAIIBAABAAAAAEAAAAAA=</HashCode>
       <FileName>XmlModels\XmlLinearGradient.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlPath" Collapsed="true">
-    <Position X="27.5" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlPath" Collapsed="true">
+    <Position X="21.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>XmlModels\XmlPath.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlPolygon" Collapsed="true">
-    <Position X="32" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlPolygon" Collapsed="true">
+    <Position X="23.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlPolygon.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlPolyline" Collapsed="true">
-    <Position X="34.25" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlPolyline" Collapsed="true">
+    <Position X="25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlPolyline.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlRadialGradient" Collapsed="true">
-    <Position X="18.5" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlRadialGradient" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABCRAAAAEAgAQAIAAAAAAAAAAAIAAABAAAAAEAAAAQA=</HashCode>
       <FileName>XmlModels\XmlRadialGradient.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlRect" Collapsed="true">
-    <Position X="38.75" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlRect" Collapsed="true">
+    <Position X="26.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABBCAAIAQAAAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>XmlModels\XmlRect.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlShape" Collapsed="true">
-    <Position X="32" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>XmlModels\XmlShape.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlStop" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlStop" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAACAAAgAI=</HashCode>
       <FileName>XmlModels\XmlStop.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlStyle" Collapsed="true">
-    <Position X="20.75" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlStyle" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlStyle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlSvg" Collapsed="true">
-    <Position X="16.25" Y="3.25" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlSvg" Collapsed="true">
+    <Position X="11" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAABAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAAAAABAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>XmlModels\XmlSvg.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlText" Collapsed="true">
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlText" Collapsed="true">
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAAAAgAAAAAAAAAAAAAAAAAAACAAAYAA=</HashCode>
       <FileName>XmlModels\XmlText.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlTitle" Collapsed="true">
-    <Position X="5" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlTitle" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlTitle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlUse" Collapsed="true">
-    <Position X="9.5" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlUse" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAYAA=</HashCode>
+      <HashCode>AAAgAAAABAAAAAAAAAAEAEAAAAAAAABAAAAAAAAAYAA=</HashCode>
       <FileName>XmlModels\XmlUse.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlFillRule" Collapsed="true">
-    <Position X="41.25" Y="1.75" Width="1.5" />
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlG" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XmlModels\XmlG.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlDefs" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XmlModels\XmlDefs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlShape" Collapsed="true">
+    <Position X="21.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>XmlModels\XmlShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlSymbol" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>XmlModels\XmlSymbol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlFillRule" Collapsed="true">
+    <Position X="29.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AABAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlFillRule.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlGradientUnits" Collapsed="true">
-    <Position X="43" Y="1.75" Width="1.5" />
+  <Enum Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlGradientUnits" Collapsed="true">
+    <Position X="31.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlGradientUnits.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlSpreadMethod" Collapsed="true">
-    <Position X="44.75" Y="1.75" Width="1.5" />
+  <Enum Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlSpreadMethod" Collapsed="true">
+    <Position X="33" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAABAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>XmlModels\XmlSpreadMethod.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlStrokeLineCap" Collapsed="true">
-    <Position X="41.25" Y="2.5" Width="1.5" />
+  <Enum Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlStrokeLineCap" Collapsed="true">
+    <Position X="29.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAgAAIAAAA=</HashCode>
       <FileName>XmlModels\XmlStrokeLineCap.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="DustInTheWind.SvgToXaml.SvgSerialization.XmlModels.XmlStrokeLineJoin" Collapsed="true">
-    <Position X="43" Y="2.5" Width="1.5" />
+  <Enum Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlStrokeLineJoin" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAIEAAA=</HashCode>
       <FileName>XmlModels\XmlStrokeLineJoin.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DustInTheWind.SvgDotnet.Serialization.XmlModels.XmlDisplay" Collapsed="true">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>XmlModels\XmlDisplay.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

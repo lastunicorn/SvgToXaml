@@ -384,12 +384,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\TitleTests\ClassTests.Resources\05-class-2-space-2.svg" />
       <None Remove="SvgSerialization\TitleTests\ClassTests.Resources\06-class-2-tab-1.svg" />
       <None Remove="SvgSerialization\TitleTests\ClassTests.Resources\07-class-2-tab-2.svg" />
+      <None Remove="SvgSerialization\TitleTests\ValueTests.Resources\01-nobody.svg" />
+      <None Remove="SvgSerialization\TitleTests\ValueTests.Resources\02-empty.svg" />
       <None Remove="SvgSerialization\TitleTests\IdTests.Resources\id-missing.svg" />
       <None Remove="SvgSerialization\TitleTests\IdTests.Resources\id.svg" />
       <None Remove="SvgSerialization\TitleTests\LanguageTests.Resources\lang-missing.svg" />
       <None Remove="SvgSerialization\TitleTests\LanguageTests.Resources\lang.svg" />
       <None Remove="SvgSerialization\TitleTests\LanguageTests.Resources\xmllang-missing.svg" />
       <None Remove="SvgSerialization\TitleTests\LanguageTests.Resources\xmllang.svg" />
+      <None Remove="SvgSerialization\TitleTests\ValueTests.Resources\03-value.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-title.svg" />
@@ -802,6 +805,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\TitleTests\ClassTests.Resources\02-class-empty.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\ClassTests.Resources\01-class-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\ClassTests.Resources\03-class-1.svg" />
+      <EmbeddedResource Include="SvgSerialization\TitleTests\ValueTests.Resources\03-value.svg" />
+      <EmbeddedResource Include="SvgSerialization\TitleTests\ValueTests.Resources\02-empty.svg" />
+      <EmbeddedResource Include="SvgSerialization\TitleTests\ValueTests.Resources\01-nobody.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\IdTests.Resources\id-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\IdTests.Resources\id.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\LanguageTests.Resources\lang-missing.svg" />
