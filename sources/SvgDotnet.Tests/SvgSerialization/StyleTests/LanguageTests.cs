@@ -41,7 +41,7 @@ public class LanguageTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingLangAttributeOnSvgRoot_WhenSvgParsed_ThenSvgContainsCorrectLanguage()
+    public void HavingLangAttribute_WhenSvgParsed_ThenSvgContainsCorrectLanguage()
     {
         ParseSvgFile("style-lang.svg", svg =>
         {
@@ -52,7 +52,7 @@ public class LanguageTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingXmlLangAttributeOnSvgRoot_WhenSvgParsed_ThenSvgContainsCorrectXmlLanguage()
+    public void HavingXmlLangAttribute_WhenSvgParsed_ThenSvgContainsCorrectXmlLanguage()
     {
         ParseSvgFile("style-xmllang.svg", svg =>
         {

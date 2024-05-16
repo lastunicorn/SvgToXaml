@@ -18,4 +18,20 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgClipPath : SvgContainer
 {
+    public SvgClipPath()
+    {
+        Children.AcceptedTypes = new[] {
+            typeof(SvgCircle),
+            typeof(SvgEllipse),
+            typeof(SvgLine),
+            typeof(SvgPath),
+            typeof(SvgPolygon),
+            typeof(SvgPolyline),
+            typeof(SvgRectangle),
+
+            typeof(SvgText),
+
+            typeof(SvgUse)
+        };
+    }
 }

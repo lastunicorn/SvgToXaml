@@ -41,7 +41,7 @@ public class LanguageTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingLangAttributeOnEllipse_WhenSvgParsed_ThenEllipseContainsCorrectLanguage()
+    public void HavingLangAttribute_WhenSvgParsed_ThenEllipseContainsCorrectLanguage()
     {
         ParseSvgFile("radialgradient-lang.svg", svg =>
         {
@@ -52,7 +52,7 @@ public class LanguageTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingXmlLangAttributeOnEllipse_WhenSvgParsed_ThenEllipseContainsCorrectXmlLanguage()
+    public void HavingXmlLangAttribute_WhenSvgParsed_ThenEllipseContainsCorrectXmlLanguage()
     {
         ParseSvgFile("radialgradient-xmllang.svg", svg =>
         {

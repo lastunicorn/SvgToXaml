@@ -28,6 +28,14 @@ public class SvgUse : SvgContainer
 
     public SvgLength? Height { get; set; }
 
+    public SvgUse()
+    {
+        Children.AcceptedTypes = new[] {
+            typeof(SvgClipPath),
+            typeof(SvgStyle)
+        };
+    }
+
     public SvgElement GetReferencedElement()
     {
         Svg svg = GetParentSvg();

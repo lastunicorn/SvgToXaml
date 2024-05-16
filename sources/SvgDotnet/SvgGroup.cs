@@ -18,4 +18,29 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgGroup : SvgContainer
 {
+    public SvgGroup()
+    {
+        Children.AcceptedTypes = new[] {
+            typeof(SvgLinearGradient),
+            typeof(SvgRadialGradient),
+            
+            typeof(SvgCircle),
+            typeof(SvgEllipse),
+            typeof(SvgLine),
+            typeof(SvgPath),
+            typeof(SvgPolygon),
+            typeof(SvgPolyline),
+            typeof(SvgRectangle),
+
+            typeof(SvgDefinitions),
+            typeof(SvgGroup),
+            typeof(Svg),
+            typeof(SvgSymbol),
+            typeof(SvgUse),
+
+            typeof(SvgClipPath),
+            typeof(SvgStyle),
+            typeof(SvgText)
+        };
+    }
 }

@@ -22,6 +22,19 @@ public class SvgElementCollection<T> : Collection<T>
     where T : SvgElement
 {
     private readonly SvgContainer parent;
+    private readonly HashSet<Type> acceptedTypes = new();
+
+    public IEnumerable<Type> AcceptedTypes
+    {
+        get => acceptedTypes;
+        set
+        {
+            acceptedTypes.Clear();
+
+            foreach (Type type in value)
+                acceptedTypes.Add(type);
+        }
+    }
 
     public SvgElementCollection(SvgContainer parent)
     {
@@ -31,6 +44,9 @@ public class SvgElementCollection<T> : Collection<T>
     protected override void InsertItem(int index, T item)
     {
         if (item == null) throw new ArgumentNullException(nameof(item));
+
+        if (!acceptedTypes.Contains(item.GetType()))
+            throw new ArgumentException($"Invalid item type: '{item.GetType().FullName}'. The item cannot be added to the collection.", nameof(item));
 
         item.Parent = parent;
         base.InsertItem(index, item);
@@ -46,6 +62,9 @@ public class SvgElementCollection<T> : Collection<T>
     protected override void SetItem(int index, T item)
     {
         if (item == null) throw new ArgumentNullException(nameof(item));
+
+        if (!acceptedTypes.Contains(item.GetType()))
+            throw new ArgumentException($"Invalid type: {item.GetType().FullName}. The item cannot be added to the collection.", nameof(item));
 
         Items[index].Parent = null;
         item.Parent = parent;

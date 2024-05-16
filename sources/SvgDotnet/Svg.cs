@@ -29,4 +29,30 @@ public class Svg : SvgContainer
     public SvgLength? Height { get; set; }
 
     public SvgViewBox ViewBox { get; set; }
+
+    public Svg()
+    {
+        Children.AcceptedTypes = new[] {
+            typeof(SvgLinearGradient),
+            typeof(SvgRadialGradient),
+
+            typeof(SvgCircle),
+            typeof(SvgEllipse),
+            typeof(SvgLine),
+            typeof(SvgPath),
+            typeof(SvgPolygon),
+            typeof(SvgPolyline),
+            typeof(SvgRectangle),
+
+            typeof(SvgDefinitions),
+            typeof(SvgGroup),
+            typeof(Svg),
+            typeof(SvgSymbol),
+            typeof(SvgUse),
+
+            typeof(SvgClipPath),
+            typeof(SvgStyle),
+            typeof(SvgText)
+        };
+    }
 }

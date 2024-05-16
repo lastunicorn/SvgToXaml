@@ -14,33 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 
-public class SvgDefinitions : SvgContainer
+public class IdTests : SvgFileTestsBase
 {
-    public SvgDefinitions()
+    [Fact]
+    public void HavingUseElementWithId_WhenSvgFileIsParsed_ThenUseHasThatId()
     {
-        Children.AcceptedTypes = new[] {
-            typeof(SvgLinearGradient),
-            typeof(SvgRadialGradient),
+        ParseSvgFile("use-id.svg", svg =>
+        {
+            SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            typeof(SvgCircle),
-            typeof(SvgEllipse),
-            typeof(SvgLine),
-            typeof(SvgPath),
-            typeof(SvgPolygon),
-            typeof(SvgPolyline),
-            typeof(SvgRectangle),
+            svgUse.Id.Should().Be("use1");
+        });
+    }
 
-            typeof(SvgDefinitions),
-            typeof(SvgGroup),
-            typeof(Svg),
-            typeof(SvgSymbol),
-            typeof(SvgUse),
+    [Fact]
+    public void HavingUseElementWithNoId_WhenSvgFileIsParsed_ThenUseHasIdNull()
+    {
+        ParseSvgFile("use-id-missing.svg", svg =>
+        {
+            SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            typeof(SvgClipPath),
-            typeof(SvgStyle),
-            typeof(SvgText)
-        };
+            svgUse.Id.Should().BeNull();
+        });
     }
 }

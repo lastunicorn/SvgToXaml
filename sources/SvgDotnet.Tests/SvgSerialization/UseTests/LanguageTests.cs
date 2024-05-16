@@ -14,51 +14,51 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SymbolTests;
+namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 
 public class LanguageTests : SvgFileTestsBase
 {
     [Fact]
     public void HavingNoLangAttribute_WhenSvgParsed_ThenLanguageIsNull()
     {
-        ParseSvgFile("symbol-lang-missing.svg", svg =>
+        ParseSvgFile("use-lang-missing.svg", svg =>
         {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+            SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            svgSymbol.Language.Should().BeNull();
+            svgUse.Language.Should().BeNull();
         });
     }
 
     [Fact]
     public void HavingNoXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageIsNull()
     {
-        ParseSvgFile("symbol-xmllang-missing.svg", svg =>
+        ParseSvgFile("use-xmllang-missing.svg", svg =>
         {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+            SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            svgSymbol.Language.Should().BeNull();
+            svgUse.Language.Should().BeNull();
         });
     }
 
     [Fact]
     public void HavingLangAttribute_WhenSvgParsed_ThenSvgContainsCorrectLanguage()
     {
-        ParseSvgFile("symbol-lang.svg", svg =>
+        ParseSvgFile("use-lang.svg", svg =>
         {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+            SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            svgSymbol.Language.Should().Be("ro-RO");
+            svgUse.Language.Should().Be("ro-RO");
         });
     }
 
     [Fact]
     public void HavingXmlLangAttribute_WhenSvgParsed_ThenSvgContainsCorrectXmlLanguage()
     {
-        ParseSvgFile("symbol-xmllang.svg", svg =>
+        ParseSvgFile("use-xmllang.svg", svg =>
         {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+            SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            svgSymbol.XmlLanguage.Should().Be("ro-RO");
+            svgUse.XmlLanguage.Should().Be("ro-RO");
         });
     }
 }
