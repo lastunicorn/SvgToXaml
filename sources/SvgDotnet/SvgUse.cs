@@ -24,6 +24,10 @@ public class SvgUse : SvgContainer
 
     public double Y { get; set; }
 
+    public SvgLength? Width { get; set; }
+
+    public SvgLength? Height { get; set; }
+
     public SvgElement GetReferencedElement()
     {
         Svg svg = GetParentSvg();

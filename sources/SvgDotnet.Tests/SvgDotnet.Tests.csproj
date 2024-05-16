@@ -351,6 +351,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-zero.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-ch.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-cm.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-em.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-ex.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-in.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-missing.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-mm.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-nounit.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-pc.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-pt.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-px.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-q.svg" />
+      <None Remove="SvgSerialization\UseTests\HeightTests.Resources\height-rem.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-ch.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-cm.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-em.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-ex.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-in.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-missing.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-mm.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-nounit.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-pc.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-pt.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-px.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-q.svg" />
+      <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-rem.svg" />
     </ItemGroup>
 
     <ItemGroup>
@@ -676,6 +702,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SymbolTests\YTests.Resources\symbol-y-zero.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-ch.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-cm.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-em.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-ex.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-in.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-mm.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-nounit.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-pc.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-pt.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-px.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-q.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\HeightTests.Resources\height-rem.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-ch.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-cm.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-em.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-ex.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-in.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-mm.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-nounit.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-pc.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-pt.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-px.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-q.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-rem.svg" />
     </ItemGroup>
 
     <ItemGroup>

@@ -40,6 +40,12 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
         SvgElement.X = XmlElement.X;
         SvgElement.Y = XmlElement.Y;
 
+        if (XmlElement.Width != null)
+            SvgElement.Width = XmlElement.Width;
+
+        if (XmlElement.Height != null)
+            SvgElement.Height = XmlElement.Height;
+
         if (XmlElement.Children != null)
         {
             IEnumerable<SvgElement> elements = XmlElement.Children

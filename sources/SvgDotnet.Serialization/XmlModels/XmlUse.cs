@@ -32,6 +32,12 @@ public class XmlUse : XmlElement
     [XmlAttribute("y")]
     public double Y { get; set; }
 
+    [XmlAttribute("width")]
+    public string Width { get; set; }
+
+    [XmlAttribute("height")]
+    public string Height { get; set; }
+
     // Descriptive elements
     //[XmlElement("desc", typeof())]
     //[XmlElement("title", typeof())]
