@@ -27,10 +27,10 @@ public class XmlUse : XmlElement
     public string HrefLink { get; set; }
 
     [XmlAttribute("x")]
-    public double X { get; set; }
+    public string X { get; set; }
 
     [XmlAttribute("y")]
-    public double Y { get; set; }
+    public string Y { get; set; }
 
     [XmlAttribute("width")]
     public string Width { get; set; }

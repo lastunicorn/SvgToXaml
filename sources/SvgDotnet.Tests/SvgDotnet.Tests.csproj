@@ -377,6 +377,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-px.svg" />
       <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-q.svg" />
       <None Remove="SvgSerialization\UseTests\WidthTests.Resources\width-rem.svg" />
+      <None Remove="SvgSerialization\UseTests\XTests.Resources\x-missing.svg" />
+      <None Remove="SvgSerialization\UseTests\XTests.Resources\x-negative.svg" />
+      <None Remove="SvgSerialization\UseTests\XTests.Resources\x-percentage.svg" />
+      <None Remove="SvgSerialization\UseTests\XTests.Resources\x-positive.svg" />
+      <None Remove="SvgSerialization\UseTests\XTests.Resources\x-positivepx.svg" />
+      <None Remove="SvgSerialization\UseTests\XTests.Resources\x-zero.svg" />
+      <None Remove="SvgSerialization\UseTests\YTests.Resources\y-missing.svg" />
+      <None Remove="SvgSerialization\UseTests\YTests.Resources\y-negative.svg" />
+      <None Remove="SvgSerialization\UseTests\YTests.Resources\y-percentage.svg" />
+      <None Remove="SvgSerialization\UseTests\YTests.Resources\y-positive.svg" />
+      <None Remove="SvgSerialization\UseTests\YTests.Resources\y-positivepx.svg" />
+      <None Remove="SvgSerialization\UseTests\YTests.Resources\y-zero.svg" />
     </ItemGroup>
 
     <ItemGroup>
@@ -728,6 +740,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-px.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-q.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\WidthTests.Resources\width-rem.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\XTests.Resources\x-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\XTests.Resources\x-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\XTests.Resources\x-percentage.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\XTests.Resources\x-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\XTests.Resources\x-positivepx.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\XTests.Resources\x-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\YTests.Resources\y-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\YTests.Resources\y-negative.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\YTests.Resources\y-percentage.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\YTests.Resources\y-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\YTests.Resources\y-positivepx.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\YTests.Resources\y-zero.svg" />
     </ItemGroup>
 
     <ItemGroup>

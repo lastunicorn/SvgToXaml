@@ -37,8 +37,16 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
         base.ConvertProperties();
 
         SvgElement.Href = XmlElement.Href ?? XmlElement.HrefLink;
-        SvgElement.X = XmlElement.X;
-        SvgElement.Y = XmlElement.Y;
+
+        LengthPercentage? x = XmlElement.X;
+
+        if (x != null)
+            SvgElement.X = x;
+
+        LengthPercentage? y = XmlElement.Y;
+
+        if (y != null)
+            SvgElement.Y = y;
 
         if (XmlElement.Width != null)
             SvgElement.Width = XmlElement.Width;

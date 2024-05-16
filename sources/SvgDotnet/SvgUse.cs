@@ -20,9 +20,9 @@ public class SvgUse : SvgContainer
 {
     public HypertextReference Href { get; set; }
 
-    public double X { get; set; }
+    public LengthPercentage? X { get; set; }
 
-    public double Y { get; set; }
+    public LengthPercentage? Y { get; set; }
 
     public SvgLength? Width { get; set; }
 

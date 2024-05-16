@@ -81,8 +81,8 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
     {
         base.ConvertProperties(inheritedSvgElements);
 
-        double left = SvgElement.X;
-        double top = SvgElement.Y;
+        double left = SvgElement.X?.ComputeValue() ?? 0;
+        double top = SvgElement.Y?.ComputeValue() ?? 0;
 
         if (left != 0 || top != 0)
         {
