@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.EllipseTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgEllipse>
 {
-    [Fact]
-    public void HavingEllipseWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgContainsEllipseWithEmptyClassNames()
-    {
-        ParseSvgFile("ellipse-class-missing.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingEllipseWithEmptyClass_WhenSvgFileIsParsed_ThenSvgContainsEllipseWithEmptyClassNames()
-    {
-        ParseSvgFile("ellipse-class-empty.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingEllipseWithOneClass_WhenSvgFileIsParsed_ThenSvgContainsEllipseWithThatOneClassName()
-    {
-        ParseSvgFile("ellipse-class.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgEllipse.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingEllipseWithTwoClasses_WhenSvgFileIsParsed_ThenSvgContainsEllipseWithThoseTwoClassNames()
-    {
-        ParseSvgFile("ellipse-2class.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgEllipse.ClassNames.Should().Equal(expected);
-        });
-    }
 }

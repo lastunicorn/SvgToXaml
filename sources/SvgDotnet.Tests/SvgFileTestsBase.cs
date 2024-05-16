@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Diagnostics;
-using System.Reflection;
 using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Tests.Utils;
 
@@ -25,24 +23,16 @@ public class SvgFileTestsBase
 {
     protected void ParseSvgFile(string resourceFileName, Action<Svg> callBack = null)
     {
-        Type callerType = GetCallerType();
+        Type callerType = GetType();
         DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);
         callBack?.Invoke(deserializationResult.Svg);
     }
 
     protected void ParseSvgFile(string resourceFileName, Action<DeserializationResult> callBack = null)
     {
-        Type callerType = GetCallerType();
+        Type callerType = GetType();
         DeserializationResult deserializationResult = ParseSvgFileInternal(resourceFileName, callerType);
         callBack?.Invoke(deserializationResult);
-    }
-
-    private static Type GetCallerType()
-    {
-        StackFrame stackFrame = new(2, false);
-        MethodBase caller = stackFrame.GetMethod();
-
-        return caller.DeclaringType;
     }
 
     private static DeserializationResult ParseSvgFileInternal(string resourceFileName, Type callerType)

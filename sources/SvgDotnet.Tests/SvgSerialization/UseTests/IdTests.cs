@@ -14,29 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 
-public class IdTests : SvgFileTestsBase
+public class IdTests : IdTestsBase<SvgUse>
 {
-    [Fact]
-    public void HavingUseElementWithId_WhenSvgFileIsParsed_ThenUseHasThatId()
-    {
-        ParseSvgFile("use-id.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Id.Should().Be("use1");
-        });
-    }
-
-    [Fact]
-    public void HavingUseElementWithNoId_WhenSvgFileIsParsed_ThenUseHasIdNull()
-    {
-        ParseSvgFile("use-id-missing.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Id.Should().BeNull();
-        });
-    }
 }

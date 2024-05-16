@@ -14,51 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RadialGradientTests;
 
-public class LanguageTests : SvgFileTestsBase
+public class LanguageTests : LanguageTestsBase<SvgRadialGradient>
 {
-    [Fact]
-    public void HavingNoLangAttribute_WhenSvgParsed_ThenLanguageIsNull()
+    protected override SvgRadialGradient SelectElementToTest(Svg svg)
     {
-        ParseSvgFile("radialgradient-lang-missing.svg", svg =>
-        {
-            SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingNoXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageIsNull()
-    {
-        ParseSvgFile("radialgradient-xmllang-missing.svg", svg =>
-        {
-            SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingLangAttribute_WhenSvgParsed_ThenEllipseContainsCorrectLanguage()
-    {
-        ParseSvgFile("radialgradient-lang.svg", svg =>
-        {
-            SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.Language.Should().Be("ro-RO");
-        });
-    }
-
-    [Fact]
-    public void HavingXmlLangAttribute_WhenSvgParsed_ThenEllipseContainsCorrectXmlLanguage()
-    {
-        ParseSvgFile("radialgradient-xmllang.svg", svg =>
-        {
-            SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.XmlLanguage.Should().Be("ro-RO");
-        });
+        SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+        return svgDefinitions.Children[0] as SvgRadialGradient;
     }
 }

@@ -14,43 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgTests;
 
-public class LanguageTests : SvgFileTestsBase
+public class LanguageTests : LanguageTestsBase<Svg>
 {
-    [Fact]
-    public void HavingNoLangAttribute_WhenSvgParsed_ThenLanguageIsNull()
+    protected override Svg SelectElementToTest(Svg svg)
     {
-        ParseSvgFile("svg-lang-missing.svg", svg =>
-        {
-            svg.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingNoXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageIsNull()
-    {
-        ParseSvgFile("svg-xmllang-missing.svg", svg =>
-        {
-            svg.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingLangAttributeOnSvgRoot_WhenSvgParsed_ThenSvgContainsCorrectLanguage()
-    {
-        ParseSvgFile("svg-lang.svg", svg =>
-        {
-            svg.Language.Should().Be("ro-RO");
-        });
-    }
-
-    [Fact]
-    public void HavingXmlLangAttributeOnSvgRoot_WhenSvgParsed_ThenSvgContainsCorrectXmlLanguage()
-    {
-        ParseSvgFile("svg-xmllang.svg", svg =>
-        {
-            svg.XmlLanguage.Should().Be("ro-RO");
-        });
+        return svg;
     }
 }

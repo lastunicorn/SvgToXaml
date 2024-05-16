@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.StyleTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgStyle>
 {
-    [Fact]
-    public void HavingStyleWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgContainsStyleWithEmptyClassNames()
-    {
-        ParseSvgFile("style-class-missing.svg", svg =>
-        {
-            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
-
-            svgStyle.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingStyleWithEmptyClass_WhenSvgFileIsParsed_ThenSvgContainsStyleWithEmptyClassNames()
-    {
-        ParseSvgFile("style-class-empty.svg", svg =>
-        {
-            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
-
-            svgStyle.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingStyleWithOneClass_WhenSvgFileIsParsed_ThenSvgContainsStyleWithThatOneClassName()
-    {
-        ParseSvgFile("style-class.svg", svg =>
-        {
-            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgStyle.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingStyleWithTwoClasses_WhenSvgFileIsParsed_ThenSvgContainsStyleWithThoseTwoClassNames()
-    {
-        ParseSvgFile("style-2class.svg", svg =>
-        {
-            SvgStyle svgStyle = svg.Children[0] as SvgStyle;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgStyle.ClassNames.Should().Equal(expected);
-        });
-    }
 }

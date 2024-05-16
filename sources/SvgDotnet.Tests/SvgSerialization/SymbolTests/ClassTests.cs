@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SymbolTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgSymbol>
 {
-    [Fact]
-    public void HavingSymbolWithClassNotSpecified_WhenSvgFileIsParsed_ThenSymbolHasEmptyClassNames()
-    {
-        ParseSvgFile("symbol-class-missing.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithEmptyClass_WhenSvgFileIsParsed_ThenSymbolHasEmptyClassNames()
-    {
-        ParseSvgFile("symbol-class-empty.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithOneClass_WhenSvgFileIsParsed_ThenSymbolHasThatOneClassName()
-    {
-        ParseSvgFile("symbol-class.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgSymbol.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithTwoClasses_WhenSvgFileIsParsed_ThenSymbolHasThoseTwoClassNames()
-    {
-        ParseSvgFile("symbol-2class.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgSymbol.ClassNames.Should().Equal(expected);
-        });
-    }
 }

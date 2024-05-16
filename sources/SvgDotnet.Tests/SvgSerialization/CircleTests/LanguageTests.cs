@@ -14,51 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.CircleTests;
 
-public class LanguageTests : SvgFileTestsBase
+public class LanguageTests : LanguageTestsBase<SvgCircle>
 {
-    [Fact]
-    public void HavingNoLangAttribute_WhenSvgParsed_ThenLanguageIsNull()
-    {
-        ParseSvgFile("circle-lang-missing.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingNoXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageIsNull()
-    {
-        ParseSvgFile("circle-xmllang-missing.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingLangAttribute_WhenSvgParsed_ThenLanguageHasCorrectValue()
-    {
-        ParseSvgFile("circle-lang.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Language.Should().Be("ro-RO");
-        });
-    }
-
-    [Fact]
-    public void HavingXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageHasCorrectValue()
-    {
-        ParseSvgFile("circle-xmllang.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.XmlLanguage.Should().Be("ro-RO");
-        });
-    }
 }

@@ -14,29 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.CircleTests;
 
-public class IdTests : SvgFileTestsBase
+public class IdTests : IdTestsBase<SvgCircle>
 {
-    [Fact]
-    public void HavingCircleWithId_WhenSvgFileIsParsed_ThenSvgCircleHasThatId()
-    {
-        ParseSvgFile("circle-id.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Id.Should().Be("circle1");
-        });
-    }
-
-    [Fact]
-    public void HavingCircleWithNoId_WhenSvgFileIsParsed_ThenSvgCircleHasIdNull()
-    {
-        ParseSvgFile("circle-noid.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Id.Should().BeNull();
-        });
-    }
 }

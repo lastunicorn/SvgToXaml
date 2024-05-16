@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgUse>
 {
-    [Fact]
-    public void HavingUseElementWithClassNotSpecified_WhenSvgFileIsParsed_ThenUseHasEmptyClassNames()
-    {
-        ParseSvgFile("use-class-missing.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingUseElementWithEmptyClass_WhenSvgFileIsParsed_ThenUseHasEmptyClassNames()
-    {
-        ParseSvgFile("use-class-empty.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingUseElementWithOneClass_WhenSvgFileIsParsed_ThenUseHasThatOneClassName()
-    {
-        ParseSvgFile("use-class.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgUse.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingUseElementWithTwoClasses_WhenSvgFileIsParsed_ThenUseHasThoseTwoClassNames()
-    {
-        ParseSvgFile("use-2class.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgUse.ClassNames.Should().Equal(expected);
-        });
-    }
 }

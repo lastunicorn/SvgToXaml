@@ -14,51 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 
-public class LanguageTests : SvgFileTestsBase
+public class LanguageTests : LanguageTestsBase<SvgUse>
 {
-    [Fact]
-    public void HavingNoLangAttribute_WhenSvgParsed_ThenLanguageIsNull()
-    {
-        ParseSvgFile("use-lang-missing.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingNoXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageIsNull()
-    {
-        ParseSvgFile("use-xmllang-missing.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Language.Should().BeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingLangAttribute_WhenSvgParsed_ThenSvgContainsCorrectLanguage()
-    {
-        ParseSvgFile("use-lang.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Language.Should().Be("ro-RO");
-        });
-    }
-
-    [Fact]
-    public void HavingXmlLangAttribute_WhenSvgParsed_ThenSvgContainsCorrectXmlLanguage()
-    {
-        ParseSvgFile("use-xmllang.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.XmlLanguage.Should().Be("ro-RO");
-        });
-    }
 }

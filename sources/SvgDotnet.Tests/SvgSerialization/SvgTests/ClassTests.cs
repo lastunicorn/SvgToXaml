@@ -14,52 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<Svg>
 {
-    [Fact]
-    public void HavingSvgWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgHasEmptyClassNames()
+    protected override Svg SelectElementToTest(Svg svg)
     {
-        ParseSvgFile("svg-class-missing.svg", svg =>
-        {
-            svg.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingSvgWithEmptyClass_WhenSvgFileIsParsed_ThenSvgHasEmptyClassNames()
-    {
-        ParseSvgFile("svg-class-empty.svg", svg =>
-        {
-            svg.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingSvgWithOneClass_WhenSvgFileIsParsed_ThenSvgHasThatOneClassName()
-    {
-        ParseSvgFile("svg-class.svg", svg =>
-        {
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svg.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingSvgWithTwoClasses_WhenSvgFileIsParsed_ThenSvgHasThoseTwoClassNames()
-    {
-        ParseSvgFile("svg-2class.svg", svg =>
-        {
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svg.ClassNames.Should().Equal(expected);
-        });
+        return svg;
     }
 }

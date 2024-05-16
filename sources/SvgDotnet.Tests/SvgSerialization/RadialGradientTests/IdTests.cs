@@ -14,31 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RadialGradientTests;
 
-public class IdTests : SvgFileTestsBase
+public class IdTests : IdTestsBase<SvgRadialGradient>
 {
-    [Fact]
-    public void HavingRadialGradientWithId_WhenSvgFileIsParsed_ThenSvgRadialGradientHasThatId()
+    protected override SvgRadialGradient SelectElementToTest(Svg svg)
     {
-        ParseSvgFile("radialGradient-id.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-            SvgRadialGradient svgRadialGradient = svgDefinitions.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.Id.Should().Be("radialGradient1");
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientWithNoId_WhenSvgFileIsParsed_ThenSvgRadialGradientHasIdNull()
-    {
-        ParseSvgFile("radialGradient-noid.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-            SvgRadialGradient svgRadialGradient = svgDefinitions.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.Id.Should().BeNull();
-        });
+        SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+        return svgDefinitions.Children[0] as SvgRadialGradient;
     }
 }

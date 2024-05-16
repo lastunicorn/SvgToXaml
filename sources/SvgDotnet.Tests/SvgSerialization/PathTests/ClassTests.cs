@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.PathTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgPath>
 {
-    [Fact]
-    public void HavingPathWithClassNotSpecified_WhenSvgFileIsParsed_ThenPathHasEmptyClassNames()
-    {
-        ParseSvgFile("path-class-missing.svg", svg =>
-        {
-            SvgPath svgPath = svg.Children[0] as SvgPath;
-
-            svgPath.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingPathWithEmptyClass_WhenSvgFileIsParsed_ThenPathHasEmptyClassNames()
-    {
-        ParseSvgFile("path-class-empty.svg", svg =>
-        {
-            SvgPath svgPath = svg.Children[0] as SvgPath;
-
-            svgPath.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingPathWithOneClass_WhenSvgFileIsParsed_ThenPathHasThatOneClassName()
-    {
-        ParseSvgFile("path-class.svg", svg =>
-        {
-            SvgPath svgPath = svg.Children[0] as SvgPath;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgPath.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingPathWithTwoClasses_WhenSvgFileIsParsed_ThenPathHasThoseTwoClassNames()
-    {
-        ParseSvgFile("path-2class.svg", svg =>
-        {
-            SvgPath svgPath = svg.Children[0] as SvgPath;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgPath.ClassNames.Should().Equal(expected);
-        });
-    }
 }

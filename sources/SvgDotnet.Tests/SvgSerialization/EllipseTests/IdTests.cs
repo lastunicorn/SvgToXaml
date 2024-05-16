@@ -14,29 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.EllipseTests;
 
-public class IdTests : SvgFileTestsBase
+public class IdTests : IdTestsBase<SvgEllipse>
 {
-    [Fact]
-    public void HavingEllipseWithId_WhenSvgFileIsParsed_ThenSvgEllipseHasThatId()
-    {
-        ParseSvgFile("ellipse-id.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Id.Should().Be("ellipse1");
-        });
-    }
-
-    [Fact]
-    public void HavingEllipseWithNoId_WhenSvgFileIsParsed_ThenSvgEllipseHasIdNull()
-    {
-        ParseSvgFile("ellipse-noid.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Id.Should().BeNull();
-        });
-    }
 }

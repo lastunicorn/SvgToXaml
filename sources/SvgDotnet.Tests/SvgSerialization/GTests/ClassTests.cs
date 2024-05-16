@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.GTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgGroup>
 {
-    [Fact]
-    public void HavingGWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgContainsGroupWithEmptyClassNames()
-    {
-        ParseSvgFile("g-class-missing.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingGWithEmptyClass_WhenSvgFileIsParsed_ThenSvgContainsGroupWithEmptyClassNames()
-    {
-        ParseSvgFile("g-class-empty.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingGWithOneClass_WhenSvgFileIsParsed_ThenSvgContainsGroupWithThatOneClassName()
-    {
-        ParseSvgFile("g-class.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgGroup.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingGWithTwoClasses_WhenSvgFileIsParsed_ThenSvgContainsGroupWithThoseTwoClassNames()
-    {
-        ParseSvgFile("g-2class.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgGroup.ClassNames.Should().Equal(expected);
-        });
-    }
 }

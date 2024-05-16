@@ -14,64 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RadialGradientTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgRadialGradient>
 {
-    [Fact]
-    public void HavingRadialGradientWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgContainsRadialGradientWithEmptyClassNames()
+    protected override SvgRadialGradient SelectElementToTest(Svg svg)
     {
-        ParseSvgFile("radialgradient-class-missing.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-            SvgRadialGradient svgRadialGradient = svgDefinitions.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientWithEmptyClass_WhenSvgFileIsParsed_ThenSvgContainsRadialGradientWithEmptyClassNames()
-    {
-        ParseSvgFile("radialgradient-class-empty.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-            SvgRadialGradient svgRadialGradient = svgDefinitions.Children[0] as SvgRadialGradient;
-
-            svgRadialGradient.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientWithOneClass_WhenSvgFileIsParsed_ThenSvgContainsRadialGradientWithThatOneClassName()
-    {
-        ParseSvgFile("radialgradient-class.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-            SvgRadialGradient svgRadialGradient = svgDefinitions.Children[0] as SvgRadialGradient;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgRadialGradient.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientWithTwoClasses_WhenSvgFileIsParsed_ThenSvgContainsRadialGradientWithThoseTwoClassNames()
-    {
-        ParseSvgFile("radialgradient-2class.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-            SvgRadialGradient svgRadialGradient = svgDefinitions.Children[0] as SvgRadialGradient;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgRadialGradient.ClassNames.Should().Equal(expected);
-        });
+        SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
+        return svgDefinitions.Children[0] as SvgRadialGradient;
     }
 }

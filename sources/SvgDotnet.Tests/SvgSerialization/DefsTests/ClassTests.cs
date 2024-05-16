@@ -14,60 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.DefsTests;
 
-public class ClassTests : SvgFileTestsBase
+public class ClassTests : ClassTestsBase<SvgDefinitions>
 {
-    [Fact]
-    public void HavingDefsWithClassNotSpecified_WhenSvgFileIsParsed_ThenSvgContainsDefinitionsWithEmptyClassNames()
-    {
-        ParseSvgFile("defs-class-missing.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            svgDefinitions.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingDefsWithEmptyClass_WhenSvgFileIsParsed_ThenSvgContainsDefinitionsWithEmptyClassNames()
-    {
-        ParseSvgFile("defs-class-empty.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            svgDefinitions.ClassNames.Should().HaveCount(0);
-        });
-    }
-
-    [Fact]
-    public void HavingDefsWithOneClass_WhenSvgFileIsParsed_ThenSvgContainsDefinitionsWithThatOneClassName()
-    {
-        ParseSvgFile("defs-class.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            List<string> expected = new()
-            {
-                "class1"
-            };
-            svgDefinitions.ClassNames.Should().Equal(expected);
-        });
-    }
-
-    [Fact]
-    public void HavingDefsWithTwoClasses_WhenSvgFileIsParsed_ThenSvgContainsDefinitionsWithThoseTwoClassNames()
-    {
-        ParseSvgFile("defs-2class.svg", svg =>
-        {
-            SvgDefinitions svgDefinitions = svg.Children[0] as SvgDefinitions;
-
-            List<string> expected = new()
-            {
-                "class1",
-                "class2"
-            };
-            svgDefinitions.ClassNames.Should().Equal(expected);
-        });
-    }
 }
