@@ -61,4 +61,13 @@ public class ChildrenTests : SvgFileTestsBase
             svgUse.Children[0].Should().BeOfType<SvgStyle>();
         });
     }
+
+    [Fact]
+    public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
+    {
+        ParseSvgFile("use-invalid.svg", context =>
+        {
+            context.Warnings.Should().HaveCount(1);
+        });
+    }
 }

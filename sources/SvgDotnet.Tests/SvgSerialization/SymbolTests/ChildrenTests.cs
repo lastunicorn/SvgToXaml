@@ -226,4 +226,13 @@ public class ChildrenTests : SvgFileTestsBase
             svgSymbol.Children[0].Should().BeOfType<SvgText>();
         });
     }
+
+    [Fact]
+    public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
+    {
+        ParseSvgFile("symbol-invalid.svg", context =>
+        {
+            context.Warnings.Should().HaveCount(1);
+        });
+    }
 }

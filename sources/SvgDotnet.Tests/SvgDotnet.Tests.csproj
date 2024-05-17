@@ -74,6 +74,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-circle.svg" />
       <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-desc.svg" />
       <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-ellipse.svg" />
+      <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-invalid.svg" />
       <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-line.svg" />
       <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-path.svg" />
       <None Remove="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-polygon.svg" />
@@ -101,6 +102,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-desc.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-ellipse.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-g.svg" />
+      <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-invalid.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-line.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-lineargradient.svg" />
       <None Remove="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-path.svg" />
@@ -180,6 +182,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-desc.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-ellipse.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-g.svg" />
+      <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-invalid.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-line.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-lineargradient.svg" />
       <None Remove="SvgSerialization\GTests\ChildrenTests.Resources\g-path.svg" />
@@ -273,6 +276,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-desc.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-ellipse.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-g.svg" />
+      <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-invalid.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-line.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-lineargradient.svg" />
       <None Remove="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-path.svg" />
@@ -358,6 +362,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-desc.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-ellipse.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-g.svg" />
+      <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-invalid.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-line.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-lineargradient.svg" />
       <None Remove="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-path.svg" />
@@ -441,6 +446,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\TitleTests\ValueTests.Resources\04-value-xml.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-desc.svg" />
+      <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-invalid.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-style.svg" />
       <None Remove="SvgSerialization\UseTests\ChildrenTests.Resources\use-title.svg" />
       <None Remove="SvgSerialization\UseTests\ClassTests.Resources\01-class-missing.svg" />
@@ -549,6 +555,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-rect.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-text.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-title.svg" />
+      <EmbeddedResource Include="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-invalid.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\ChildrenTests.Resources\clippath-use.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\ClassTests.Resources\01-class-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\ClassTests.Resources\02-class-empty.svg" />
@@ -563,6 +570,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\LanguageTests.Resources\lang.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\LanguageTests.Resources\xmllang-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\ClipPathTests\LanguageTests.Resources\xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-invalid.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-circle.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-clippath.svg" />
       <EmbeddedResource Include="SvgSerialization\DefsTests\ChildrenTests.Resources\defs-defs.svg" />
@@ -642,6 +650,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-negative.svg" />
       <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-positive.svg" />
       <EmbeddedResource Include="SvgSerialization\EllipseTests\RadiusYTests.Resources\ellipse-ry-zero.svg" />
+      <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-invalid.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-circle.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-clippath.svg" />
       <EmbeddedResource Include="SvgSerialization\GTests\ChildrenTests.Resources\g-defs.svg" />
@@ -735,6 +744,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-css.svg" />
       <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-html.svg" />
       <EmbeddedResource Include="SvgSerialization\StyleTests\TypeTests.Resources\type-missing.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-invalid.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-circle.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-clippath.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\ChildrenTests.Resources\svg-defs.svg" />
@@ -820,6 +830,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SvgTests\XTests.Resources\svg-x-percentage.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\XTests.Resources\svg-x-zero.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\XTests.Resources\svg-x-positive.svg" />
+      <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-invalid.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-circle.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-clippath.svg" />
       <EmbeddedResource Include="SvgSerialization\SymbolTests\ChildrenTests.Resources\symbol-defs.svg" />
@@ -907,6 +918,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\TitleTests\LanguageTests.Resources\lang.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\LanguageTests.Resources\xmllang-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\TitleTests\LanguageTests.Resources\xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-invalid.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-clippath.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-desc.svg" />
       <EmbeddedResource Include="SvgSerialization\UseTests\ChildrenTests.Resources\use-title.svg" />

@@ -138,4 +138,13 @@ public class ChildrenTests : SvgFileTestsBase
             svgClipPath.Children[0].Should().BeOfType<SvgUse>();
         });
     }
+
+    [Fact]
+    public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
+    {
+        ParseSvgFile("clippath-invalid.svg", context =>
+        {
+            context.Warnings.Should().HaveCount(1);
+        });
+    }
 }
