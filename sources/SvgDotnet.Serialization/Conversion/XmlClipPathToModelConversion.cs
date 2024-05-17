@@ -54,6 +54,14 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
         {
             switch (serializationChild)
             {
+                case XmlDesc desc:
+                    yield return new XmlDescToModelConversion(desc, DeserializationContext);
+                    break;
+
+                case XmlTitle title:
+                    yield return new XmlTitleToModelConversion(title, DeserializationContext);
+                    break;
+
                 case XmlCircle circle:
                     yield return new XmlCircleToModelConversion(circle, DeserializationContext);
                     break;
@@ -62,16 +70,12 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
                     yield return new XmlEllipseToModelConversion(ellipse, DeserializationContext);
                     break;
 
-                case XmlPath path:
-                    yield return new XmlPathToModelConversion(path, DeserializationContext);
-                    break;
-
                 case XmlLine line:
                     yield return new XmlLineToModelConversion(line, DeserializationContext);
                     break;
 
-                case XmlRect rect:
-                    yield return new XmlRectToModelConversion(rect, DeserializationContext);
+                case XmlPath path:
+                    yield return new XmlPathToModelConversion(path, DeserializationContext);
                     break;
 
                 case XmlPolygon polygon:
@@ -82,12 +86,16 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
                     yield return new XmlPolylineToModelConversion(polyline, DeserializationContext);
                     break;
 
-                case XmlUse use:
-                    yield return new XmlUseToModelConversion(use, DeserializationContext);
+                case XmlRect rect:
+                    yield return new XmlRectToModelConversion(rect, DeserializationContext);
                     break;
 
                 case XmlText text:
                     yield return new XmlTextToModelConversion(text, DeserializationContext);
+                    break;
+
+                case XmlUse use:
+                    yield return new XmlUseToModelConversion(use, DeserializationContext);
                     break;
 
                 default:

@@ -39,7 +39,7 @@ public class XmlUse : XmlElement
     public string Height { get; set; }
 
     // Descriptive elements
-    //[XmlElement("desc", typeof())]
+    [XmlElement("desc", typeof(XmlDesc))]
     [XmlElement("title", typeof(XmlTitle))]
     //[XmlElement("metadata", typeof())]
 

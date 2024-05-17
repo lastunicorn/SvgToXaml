@@ -47,6 +47,9 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
     {
         switch (objectToConvert)
         {
+            case XmlDesc desc:
+                return new XmlDescToModelConversion(desc, DeserializationContext);
+
             case XmlTitle title:
                 return new XmlTitleToModelConversion(title, DeserializationContext);
 

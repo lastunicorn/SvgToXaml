@@ -43,11 +43,22 @@ public class ValueTests : SvgFileTestsBase
     [Fact]
     public void HavingTitleElementWithOneTextLine_WhenSvgIsParsed_ThenTitleValueIsTheExpectedOne()
     {
-        ParseSvgFile("03-value.svg", svg =>
+        ParseSvgFile("03-value-text.svg", svg =>
         {
             SvgTitle svgTitle = svg.Children[0] as SvgTitle;
 
             svgTitle.Value.Should().Be("this is a title");
         });
     }
+
+    //[Fact]
+    //public void HavingTitleElementWithTextAndXmlElements_WhenSvgIsParsed_ThenTitleValueContainsTextAndXmlElementsAsText()
+    //{
+    //    ParseSvgFile("04-value-xml.svg", svg =>
+    //    {
+    //        SvgTitle svgTitle = svg.Children[0] as SvgTitle;
+
+    //        svgTitle.Value.Should().Be("this <bold>is</bold> a title");
+    //    });
+    //}
 }

@@ -20,6 +20,12 @@ namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 public class XmlClipPath : XmlElement
 {
+    // Descriptive elements
+    [XmlElement("desc", typeof(XmlDesc))]
+    [XmlElement("title", typeof(XmlTitle))]
+    //[XmlElement("metadata", typeof())]
+
+    // Shape elements
     [XmlElement("circle", typeof(XmlCircle))]
     [XmlElement("ellipse", typeof(XmlEllipse))]
     [XmlElement("line", typeof(XmlLine))]
@@ -27,6 +33,10 @@ public class XmlClipPath : XmlElement
     [XmlElement("polygon", typeof(XmlPolygon))]
     [XmlElement("polyline", typeof(XmlPolyline))]
     [XmlElement("rect", typeof(XmlRect))]
+
+    // Other elements
+    [XmlElement("text", typeof(XmlText))]
     [XmlElement("use", typeof(XmlUse))]
+    //[XmlElement("script", typeof(XmlScript))]
     public object[] Children { get; set; }
 }

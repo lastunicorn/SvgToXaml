@@ -14,33 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
-public class SvgUse : SvgContainer
+namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.ClipPathTests;
+
+public class LanguageTests : LanguageTestsBase<SvgClipPath>
 {
-    public HypertextReference Href { get; set; }
-
-    public LengthPercentage? X { get; set; }
-
-    public LengthPercentage? Y { get; set; }
-
-    public SvgLength? Width { get; set; }
-
-    public SvgLength? Height { get; set; }
-
-    public SvgUse()
-    {
-        Children.AcceptedTypes = new[] {
-            typeof(SvgDescription),
-            typeof(SvgTitle),
-            typeof(SvgClipPath),
-            typeof(SvgStyle)
-        };
-    }
-
-    public SvgElement GetReferencedElement()
-    {
-        Svg svg = GetParentSvg();
-        return svg?.FindChild(Href.Id);
-    }
 }

@@ -21,7 +21,7 @@ namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 public class XmlContainer : XmlElement
 {
     // Descriptive elements
-    //[XmlElement("desc", typeof())]
+    [XmlElement("desc", typeof(XmlDesc))]
     [XmlElement("title", typeof(XmlTitle))]
     //[XmlElement("metadata", typeof())]
 

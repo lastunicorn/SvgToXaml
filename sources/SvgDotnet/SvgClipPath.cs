@@ -21,6 +21,9 @@ public class SvgClipPath : SvgContainer
     public SvgClipPath()
     {
         Children.AcceptedTypes = new[] {
+            typeof(SvgDescription),
+            typeof(SvgTitle),
+
             typeof(SvgCircle),
             typeof(SvgEllipse),
             typeof(SvgLine),

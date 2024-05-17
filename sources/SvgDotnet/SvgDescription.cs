@@ -16,31 +16,7 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public class SvgUse : SvgContainer
+public class SvgDescription : SvgElement
 {
-    public HypertextReference Href { get; set; }
-
-    public LengthPercentage? X { get; set; }
-
-    public LengthPercentage? Y { get; set; }
-
-    public SvgLength? Width { get; set; }
-
-    public SvgLength? Height { get; set; }
-
-    public SvgUse()
-    {
-        Children.AcceptedTypes = new[] {
-            typeof(SvgDescription),
-            typeof(SvgTitle),
-            typeof(SvgClipPath),
-            typeof(SvgStyle)
-        };
-    }
-
-    public SvgElement GetReferencedElement()
-    {
-        Svg svg = GetParentSvg();
-        return svg?.FindChild(Href.Id);
-    }
+    public string Value { get; set; }
 }

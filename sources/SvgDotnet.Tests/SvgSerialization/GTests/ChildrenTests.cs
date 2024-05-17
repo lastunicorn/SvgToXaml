@@ -19,6 +19,17 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.GTests;
 public class ChildrenTests : SvgFileTestsBase
 {
     [Fact]
+    public void HavingDescChild_WhenSvgFileIsParsed_ThenGroupContainsDescription()
+    {
+        ParseSvgFile("g-desc.svg", svg =>
+        {
+            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
+
+            svgGroup.Children[0].Should().BeOfType<SvgDescription>();
+        });
+    }
+
+    [Fact]
     public void HavingTitleChild_WhenSvgFileIsParsed_ThenGroupContainsTitle()
     {
         ParseSvgFile("g-title.svg", svg =>

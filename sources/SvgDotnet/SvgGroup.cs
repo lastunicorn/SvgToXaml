@@ -21,6 +21,7 @@ public class SvgGroup : SvgContainer
     public SvgGroup()
     {
         Children.AcceptedTypes = new[] {
+            typeof(SvgDescription),
             typeof(SvgTitle),
             
             typeof(SvgLinearGradient),

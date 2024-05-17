@@ -14,33 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-public class SvgUse : SvgContainer
+namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
+
+internal class XmlDescToModelConversion : XmlElementToModelConversion<XmlDesc, SvgDescription>
 {
-    public HypertextReference Href { get; set; }
+    protected override string ElementName => "desc";
 
-    public LengthPercentage? X { get; set; }
-
-    public LengthPercentage? Y { get; set; }
-
-    public SvgLength? Width { get; set; }
-
-    public SvgLength? Height { get; set; }
-
-    public SvgUse()
+    public XmlDescToModelConversion(XmlDesc xmlElement, DeserializationContext deserializationContext)
+        : base(xmlElement, deserializationContext)
     {
-        Children.AcceptedTypes = new[] {
-            typeof(SvgDescription),
-            typeof(SvgTitle),
-            typeof(SvgClipPath),
-            typeof(SvgStyle)
-        };
     }
 
-    public SvgElement GetReferencedElement()
+    protected override SvgDescription CreateSvgElement()
     {
-        Svg svg = GetParentSvg();
-        return svg?.FindChild(Href.Id);
+        return new SvgDescription();
+    }
+
+    protected override void ConvertProperties()
+    {
+        base.ConvertProperties();
+
+        SvgElement.Value = XmlElement.Value ?? string.Empty;
     }
 }
