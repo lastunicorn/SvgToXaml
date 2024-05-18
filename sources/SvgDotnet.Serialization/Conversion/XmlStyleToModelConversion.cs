@@ -57,7 +57,7 @@ internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle,
             .Select(x => new StyleRuleSet
             {
                 Selector = x.Groups[1].Value,
-                Declarations = x.Groups[2].Value
+                Declarations = StyleDeclarationCollection.Parse(x.Groups[2].Value)
             });
     }
 }

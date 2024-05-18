@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.SvgDotnet.Serialization.XmlModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
@@ -84,7 +85,12 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         if (XmlElement.StrokeMiterLimitSpecified)
             SvgElement.StrokeMiterLimit = XmlElement.StrokeMiterLimit;
 
-        SvgElement.Style = XmlElement.Style;
+        if (XmlElement.Style != null)
+        {
+            IEnumerable<StyleDeclaration> declarations = StyleDeclarationCollection.ParseItems(XmlElement.Style);
+
+            SvgElement.Style.AddRange(declarations);
+        }
 
         if (XmlElement.Class != null)
         {

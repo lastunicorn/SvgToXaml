@@ -22,12 +22,22 @@ public class StyleDeclarationCollection : Collection<StyleDeclaration>
 {
     public StyleDeclaration this[string name] => Items.FirstOrDefault(x => x.Name == name);
 
+    public void AddRange(IEnumerable<StyleDeclaration> declarations)
+    {
+        if (declarations == null) throw new ArgumentNullException(nameof(declarations));
+
+        IEnumerable<StyleDeclaration> declarationsNotNull = declarations.Where(x => x != null);
+
+        foreach (StyleDeclaration styleDeclaration in declarationsNotNull)
+            Items.Add(styleDeclaration);
+    }
+
     public override string ToString()
     {
         return string.Join(";", Items);
     }
 
-    public static implicit operator StyleDeclarationCollection(string text)
+    public static StyleDeclarationCollection Parse(string text)
     {
         if (text == null)
             return null;
@@ -42,7 +52,7 @@ public class StyleDeclarationCollection : Collection<StyleDeclaration>
         return styleDeclarationCollection;
     }
 
-    private static IEnumerable<StyleDeclaration> ParseItems(string text)
+    public static IEnumerable<StyleDeclaration> ParseItems(string text)
     {
         return text.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(x => (StyleDeclaration)x)

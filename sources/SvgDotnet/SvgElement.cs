@@ -34,7 +34,7 @@ public class SvgElement
 
     public ClassNameCollection ClassNames { get; } = new();
 
-    public StyleDeclarationCollection Style { get; set; }
+    public StyleDeclarationCollection Style { get; } = new();
 
     // Inherited Attributes
 

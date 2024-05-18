@@ -36,8 +36,14 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
     {
         base.ConvertProperties();
 
-        SvgElement.Href = XmlElement.Href ?? XmlElement.HrefLink;
+        ConvertPosition();
+        ConvertSize();
+        ConvertReference();
+        ConvertChildren();
+    }
 
+    private void ConvertPosition()
+    {
         LengthPercentage? x = XmlElement.X;
 
         if (x != null)
@@ -47,13 +53,24 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
 
         if (y != null)
             SvgElement.Y = y;
+    }
 
+    private void ConvertSize()
+    {
         if (XmlElement.Width != null)
             SvgElement.Width = XmlElement.Width;
 
         if (XmlElement.Height != null)
             SvgElement.Height = XmlElement.Height;
+    }
 
+    private void ConvertReference()
+    {
+        SvgElement.Href = XmlElement.Href ?? XmlElement.HrefLink;
+    }
+
+    private void ConvertChildren()
+    {
         if (XmlElement.Children != null)
         {
             IEnumerable<SvgElement> elements = XmlElement.Children

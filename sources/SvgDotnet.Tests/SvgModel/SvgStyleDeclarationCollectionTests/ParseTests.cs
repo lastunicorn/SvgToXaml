@@ -21,7 +21,7 @@ public class ParseTests
     [Fact]
     public void HavingOnePairWellFormatted_WhenParsed_ThenCollectionContainsOnePairWithCorrectValues()
     {
-        StyleDeclarationCollection styleDeclarationCollection = "name1:value1";
+        StyleDeclarationCollection styleDeclarationCollection = StyleDeclarationCollection.Parse("name1:value1");
 
         styleDeclarationCollection.Should().HaveCount(1);
 
@@ -32,7 +32,7 @@ public class ParseTests
     [Fact]
     public void HavingOnePairContainingSpaces_WhenParsed_ThenCollectionContainsOnePairWithCorrectValues()
     {
-        StyleDeclarationCollection styleDeclarationCollection = "  name1  :  value1  ";
+        StyleDeclarationCollection styleDeclarationCollection = StyleDeclarationCollection.Parse("  name1  :  value1  ");
 
         styleDeclarationCollection.Should().HaveCount(1);
 
