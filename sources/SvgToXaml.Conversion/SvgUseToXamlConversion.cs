@@ -72,8 +72,12 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
                 return new SvgUseToXamlConversion(childSvgUse, ConversionContext, SvgElement);
 
             default:
+            {
                 Type inheritedElementType = referencedSvgElement.GetType();
-                throw new UnknownElementTypeException(inheritedElementType);
+                ConversionIssue conversionIssue = new("Conversion", $"Unknown inherited element type: {inheritedElementType.FullName}");
+                ConversionContext.Errors.Add(conversionIssue);
+                return null;
+            }
         }
     }
 
