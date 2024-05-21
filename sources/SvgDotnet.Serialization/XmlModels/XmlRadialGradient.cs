@@ -40,9 +40,6 @@ public class XmlRadialGradient : XmlElement
 
     public bool GradientUnitsSpecified { get; set; }
 
-    [XmlElement("stop")]
-    public List<XmlStop> Stops { get; set; }
-
     [XmlAttribute("gradientTransform")]
     public string GradientTransform { get; set; }
 
@@ -53,4 +50,18 @@ public class XmlRadialGradient : XmlElement
     public XmlSpreadMethod SpreadMethod { get; set; }
 
     public bool SpreadMethodSpecified { get; set; }
+
+    // Descriptive elements
+    [XmlElement("desc", typeof(XmlDesc))]
+    [XmlElement("title", typeof(XmlTitle))]
+    //[XmlElement("metadata", typeof())]
+
+    // Other elements
+    //[XmlElement("animate", typeof())]
+    //[XmlElement("animateTransform", typeof())]
+    //[XmlElement("script", typeof())]
+    //[XmlElement("set", typeof())]
+    [XmlElement("stop", typeof(XmlStop))]
+    [XmlElement("style", typeof(XmlStyle))]
+    public object[] Children { get; set; }
 }

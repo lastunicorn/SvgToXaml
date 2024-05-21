@@ -23,14 +23,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgCircle" Collapsed="true">
-    <Position X="11.5" Y="3.25" Width="1.5" />
+    <Position X="9.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAIAAAACAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgCircle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgElement" Collapsed="true">
-    <Position X="18.5" Y="0.5" Width="1.5" />
+    <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACCMAIECQEgAACAAAAAQWABEggACN0AhAAAgEkBgAQ=</HashCode>
       <FileName>SvgElement.cs</FileName>
@@ -44,14 +44,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgEllipse" Collapsed="true">
-    <Position X="13.25" Y="3.25" Width="1.5" />
+    <Position X="11.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAGAAAAAAAAAAAGAAAGAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgEllipse.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgLine" Collapsed="true">
-    <Position X="16.75" Y="3.25" Width="1.5" />
+    <Position X="15" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAADAAAAAIABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgLine.cs</FileName>
@@ -73,7 +73,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgPath" Collapsed="true">
-    <Position X="15" Y="3.25" Width="1.5" />
+    <Position X="13.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgPath.cs</FileName>
@@ -87,21 +87,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgPolygon" Collapsed="true">
-    <Position X="18.5" Y="3.25" Width="1.5" />
+    <Position X="16.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgPolygon.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgPolyline" Collapsed="true">
-    <Position X="20.25" Y="3.25" Width="1.5" />
+    <Position X="18.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgPolyline.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgRectangle" Collapsed="true">
-    <Position X="22" Y="3.25" Width="1.5" />
+    <Position X="20.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABBCAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>SvgRectangle.cs</FileName>
@@ -131,7 +131,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgStyle" Collapsed="true">
-    <Position X="29" Y="1.75" Width="1.5" />
+    <Position X="13.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>SvgStyle.cs</FileName>
@@ -175,37 +175,37 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgContainer" Collapsed="true">
-    <Position X="4.75" Y="1.75" Width="1.5" />
+    <Position X="7.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAACAAAAAAAAAAEIAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
       <FileName>SvgContainer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgStop" Collapsed="true">
-    <Position X="27.25" Y="1.75" Width="1.5" />
+    <Position X="11.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAEAAAAAAAAAAAAAAAACAAAgAI=</HashCode>
       <FileName>SvgStop.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgText" Collapsed="true">
-    <Position X="25.5" Y="1.75" Width="1.5" />
+    <Position X="9.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAYAA=</HashCode>
       <FileName>SvgText.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgLinearGradient" Collapsed="true">
-    <Position X="22" Y="1.75" Width="1.5" />
+    <Position X="12.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABABAAAAAAgAAAAAAAADAAAAAIABgUBAAAAAEAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAgAAAAAAAADAAAAAIABgUBAAAAAEAAAAAA=</HashCode>
       <FileName>SvgLinearGradient.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgRadialGradient" Collapsed="true">
-    <Position X="23.75" Y="1.75" Width="1.5" />
+    <Position X="11" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAZgAAACQgAAAIAGAAAEAAAAAAAAQBBAAAAEAAAAAA=</HashCode>
+      <HashCode>ABAYgAAACQgAAAIAGAAAEAAAAAAAAQBBAAAAEAAAAAA=</HashCode>
       <FileName>SvgRadialGradient.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -231,7 +231,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DustInTheWind.SvgDotnet.SvgShape" Collapsed="true">
-    <Position X="16.75" Y="1.75" Width="1.5" />
+    <Position X="15" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SvgShape.cs</FileName>

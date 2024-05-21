@@ -16,11 +16,9 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public class SvgRadialGradient : SvgElement
+public class SvgRadialGradient : SvgContainer
 {
     private Length? radius;
-
-    public SvgGradientUnits? GradientUnits { get; set; }
 
     public Length? CenterX { get; set; }
 
@@ -45,13 +43,24 @@ public class SvgRadialGradient : SvgElement
 
     public Length? Fy { get; set; }
 
-    public List<SvgStop> Stops { get; } = new();
+    public SvgGradientUnits? GradientUnits { get; set; }
 
     public TransformCollection GradientTransforms { get; } = new();
 
+    public SvgSpreadMethod? SpreadMethod { get; set; }
+
     public HypertextReference? Href { get; set; }
 
-    public SvgSpreadMethod? SpreadMethod { get; set; }
+    public SvgRadialGradient()
+    {
+        Children.AcceptedTypes = new[] {
+            typeof(SvgDescription),
+            typeof(SvgTitle),
+
+            typeof(SvgStop),
+            typeof(SvgStyle)
+        };
+    }
 
     public Length? ComputeCenterX()
     {
@@ -116,8 +125,12 @@ public class SvgRadialGradient : SvgElement
 
     public List<SvgStop> ComputeStops()
     {
-        if (Stops.Count > 0)
-            return Stops;
+        List<SvgStop> stops = Children
+            .OfType<SvgStop>()
+            .ToList();
+
+        if (stops.Count > 0)
+            return stops;
 
         if (Href != null)
         {

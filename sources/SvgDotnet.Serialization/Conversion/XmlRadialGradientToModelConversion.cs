@@ -40,7 +40,7 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
         ConvertRadius();
         ConvertCenter();
         ConvertGradientOrigin();
-        ConvertStops();
+        ConvertChildren();
         ConvertGradientTransform();
         ConvertHref();
         ConvertSpreadMethod();
@@ -101,19 +101,40 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
             SvgElement.Fy = XmlElement.Fy;
     }
 
-    private void ConvertStops()
+    private void ConvertChildren()
     {
-        if (XmlElement.Stops != null)
+        if (XmlElement.Children != null)
         {
-            IEnumerable<SvgStop> svgStops = XmlElement.Stops
-                .Select(x =>
-                {
-                    XmlStopToModelConversion conversion = new(x, DeserializationContext);
-                    return conversion.Execute();
-                });
+            IEnumerable<SvgElement> elements = XmlElement.Children
+                .Select(CreateConversionFor)
+                .Where(x => x != null)
+                .Select(x => x.Execute());
 
-            foreach (SvgStop svgStop in svgStops)
-                SvgElement.Stops.Add(svgStop);
+            foreach (SvgElement svgElement in elements)
+                SvgElement.Children.Add(svgElement);
+        }
+    }
+
+    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
+    {
+        switch (objectToConvert)
+        {
+            case XmlDesc desc:
+                return new XmlDescToModelConversion(desc, DeserializationContext);
+
+            case XmlTitle title:
+                return new XmlTitleToModelConversion(title, DeserializationContext);
+
+            case XmlStop stop:
+                return new XmlStopToModelConversion(stop, DeserializationContext);
+
+            case XmlStyle style:
+                return new XmlStyleToModelConversion(style, DeserializationContext);
+
+            default:
+                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
+                DeserializationContext.Errors.Add(deserializationIssue);
+                return null;
         }
     }
 

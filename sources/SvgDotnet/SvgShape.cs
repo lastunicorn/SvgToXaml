@@ -19,6 +19,15 @@ namespace DustInTheWind.SvgDotnet;
 /// <summary>
 /// A graphics element that is defined by some combination of straight lines and curves.
 /// </summary>
-public class SvgShape : SvgElement
+public class SvgShape : SvgContainer
 {
+    public SvgShape()
+    {
+        Children.AcceptedTypes = new[] {
+            typeof(SvgDescription),
+            typeof(SvgTitle),
+
+            typeof(SvgStyle)
+        };
+    }
 }
