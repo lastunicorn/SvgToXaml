@@ -14,33 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+namespace DustInTheWind.SvgDotnet.Tests.SvgModel.StyleDeclarationTests;
 
-public class StyleDeclaration
+public class ToStringTests
 {
-    public string Name { get; init; }
-
-    public string Value { get; init; }
-
-    public static implicit operator StyleDeclaration(string text)
+    [Fact]
+    public void HavingInstanceWithNameAndValue_WhenCast_ThenNameAndValueSeparatedByColon()
     {
-        if (text == null)
-            return null;
-
-        int pos = text.IndexOf(':');
-
-        if (pos == -1)
-            return null;
-
-        return new StyleDeclaration
+        StyleDeclaration styleDeclaration = new()
         {
-            Name = text[..pos].Trim(),
-            Value = text[(pos + 1)..].Trim()
+            Name = "stroke",
+            Value = "blue"
         };
-    }
 
-    public override string ToString()
-    {
-        return $"{Name}:{Value}";
+        string actual = styleDeclaration.ToString();
+
+        actual.Should().Be("stroke:blue");
     }
 }
