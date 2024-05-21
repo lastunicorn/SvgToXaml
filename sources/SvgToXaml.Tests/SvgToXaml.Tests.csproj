@@ -188,6 +188,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <None Remove="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-negative-value.svg" />
         <None Remove="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-positive-value.svg" />
         <None Remove="Conversion\SvgRootTests\SvgWidthMillimetersTests.Resources\svg-width-zero.svg" />
+        <None Remove="Conversion\UseTests\LocationTests.Resources\xy-transform.svg" />
+        <None Remove="Conversion\UseTests\LocationTests.Resources\xy.svg" />
         <None Remove="empty.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group^-circle.svg" />
         <None Remove="Conversion\CircleStrokeTests\CircleInGroupTests.Resources\svgroot^-group^-circle^.svg" />
@@ -394,6 +396,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-negative-value.svg" />
         <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-positive-value.svg" />
         <EmbeddedResource Include="Conversion\SvgRootTests\SvgHeightMillimetersTests.Resources\svg-height-zero.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\LocationTests.Resources\xy-transform.svg" />
+        <EmbeddedResource Include="Conversion\UseTests\LocationTests.Resources\xy.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleTests.Resources\use-href-circle-after.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleTests.Resources\use-href-circle-before.svg" />
         <EmbeddedResource Include="Conversion\UseTests\UseHrefCircleFromDefsTests.Resources\use-href-defs-group-circle.svg" />

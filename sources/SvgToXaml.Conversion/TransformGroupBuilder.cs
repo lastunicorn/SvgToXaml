@@ -57,6 +57,13 @@ internal class TransformGroupBuilder
         AddInternal(transform);
     }
 
+    public void AddFirst(Transform transform)
+    {
+        if (transform == null) throw new ArgumentNullException(nameof(transform));
+
+        AddFirstInternal(transform);
+    }
+
     private void AddInternal(Transform transform)
     {
         if (RootTransform == null || RootTransform == Transform.Identity)
@@ -73,6 +80,27 @@ internal class TransformGroupBuilder
 
             newRootTransformGroup.Children.Add(RootTransform);
             newRootTransformGroup.Children.Add(transform);
+
+            RootTransform = newRootTransformGroup;
+        }
+    }
+
+    private void AddFirstInternal(Transform transform)
+    {
+        if (RootTransform == null || RootTransform == Transform.Identity)
+        {
+            RootTransform = transform;
+        }
+        else if (RootTransform is TransformGroup rootTransformGroup)
+        {
+            rootTransformGroup.Children.Insert(0, transform);
+        }
+        else
+        {
+            TransformGroup newRootTransformGroup = new();
+
+            newRootTransformGroup.Children.Add(transform);
+            newRootTransformGroup.Children.Add(RootTransform);
 
             RootTransform = newRootTransformGroup;
         }

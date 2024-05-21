@@ -89,7 +89,7 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
             TransformGroupBuilder transformGroupBuilder = new(XamlElement.RenderTransform);
 
             TranslateTransform translateTransform = new(left, top);
-            transformGroupBuilder.Add(translateTransform);
+            transformGroupBuilder.AddFirst(translateTransform);
             XamlElement.RenderTransform = transformGroupBuilder.RootTransform;
         }
     }
