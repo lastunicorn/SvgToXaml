@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections;
+using System.IO;
+using System.Windows;
+using System.Windows.Markup;
 using System.Windows.Threading;
 using DustInTheWind.SvgToXaml.Application.OpenFile;
 using DustInTheWind.SvgToXaml.Application.Transform;
@@ -26,6 +30,7 @@ public class MainViewModel : ViewModelBase
     private readonly IRequestBus requestBus;
     private string svgText;
     private string xamlText;
+    private UIElement xamlObject;
     private string svgFilePath;
     private readonly Dispatcher dispatcher;
     private string errors;
@@ -58,10 +63,21 @@ public class MainViewModel : ViewModelBase
     public string XamlText
     {
         get => xamlText;
-        set
+        private set
         {
             if (value == xamlText) return;
             xamlText = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public UIElement XamlObject
+    {
+        get => xamlObject;
+        set
+        {
+            if (Equals(value, xamlObject)) return;
+            xamlObject = value;
             OnPropertyChanged();
         }
     }
@@ -136,6 +152,10 @@ public class MainViewModel : ViewModelBase
     {
         XamlText = ev.XamlText;
 
+        XamlObject = ev.XamlText == null
+            ? null
+            : ExtractUiElement(ev.XamlText);
+
         IEnumerable<ErrorInfo> logItems = ev.Errors
             .Concat(ev.Warning)
             .Concat(ev.Info);
@@ -147,6 +167,25 @@ public class MainViewModel : ViewModelBase
         return Task.CompletedTask;
     }
 
+    private UIElement ExtractUiElement(string xamlText)
+    {
+        using Stream stream = ToStream(xamlText);
+        object loadedObject = XamlReader.Load(stream);
+
+        if (loadedObject is ResourceDictionary { Count: > 0 } resourceDictionary)
+        {
+            IDictionaryEnumerator enumerator = resourceDictionary.GetEnumerator();
+
+            if (enumerator.MoveNext())
+            {
+                DictionaryEntry entry = (DictionaryEntry)enumerator.Current;
+                return entry.Value as UIElement;
+            }
+        }
+
+        return null;
+    }
+
     private async Task TransformSvgToXaml()
     {
         TransformRequest request = new()
@@ -156,5 +195,15 @@ public class MainViewModel : ViewModelBase
         };
 
         await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);
+    }
+
+    public static Stream ToStream(string s)
+    {
+        MemoryStream stream = new();
+        StreamWriter writer = new(stream);
+        writer.Write(s);
+        writer.Flush();
+        stream.Position = 0;
+        return stream;
     }
 }
