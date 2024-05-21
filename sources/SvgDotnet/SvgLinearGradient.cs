@@ -18,13 +18,13 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgLinearGradient : SvgContainer
 {
-    public SvgLength? X1 { get; set; }
+    public Length? X1 { get; set; }
 
-    public SvgLength? Y1 { get; set; }
+    public Length? Y1 { get; set; }
 
-    public SvgLength? X2 { get; set; }
+    public Length? X2 { get; set; }
 
-    public SvgLength? Y2 { get; set; }
+    public Length? Y2 { get; set; }
 
     public SvgGradientUnits? GradientUnits { get; set; }
 
@@ -45,7 +45,7 @@ public class SvgLinearGradient : SvgContainer
         };
     }
 
-    public SvgLength? ComputeX1()
+    public Length? ComputeX1()
     {
         if (X1 != null)
             return X1;
@@ -62,7 +62,7 @@ public class SvgLinearGradient : SvgContainer
         return null;
     }
 
-    public SvgLength? ComputeX2()
+    public Length? ComputeX2()
     {
         if (X2 != null)
             return X2;
@@ -79,7 +79,7 @@ public class SvgLinearGradient : SvgContainer
         return null;
     }
 
-    public SvgLength? ComputeY1()
+    public Length? ComputeY1()
     {
         if (Y1 != null)
             return Y1;
@@ -96,7 +96,7 @@ public class SvgLinearGradient : SvgContainer
         return null;
     }
 
-    public SvgLength? ComputeY2()
+    public Length? ComputeY2()
     {
         if (Y2 != null)
             return Y2;

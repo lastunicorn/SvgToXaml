@@ -25,7 +25,7 @@ public class XTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            LengthPercentage expected = new SvgLength(10);
+            LengthPercentage expected = new Length(10);
             svgUse.X.Should().Be(expected);
         });
     }
@@ -37,7 +37,7 @@ public class XTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            LengthPercentage expected = new SvgLength(-10);
+            LengthPercentage expected = new Length(-10);
             svgUse.X.Should().Be(expected);
         });
     }
@@ -49,7 +49,7 @@ public class XTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            LengthPercentage expected = new SvgLength(0);
+            LengthPercentage expected = new Length(0);
             svgUse.X.Should().Be(expected);
         });
     }
@@ -84,7 +84,7 @@ public class XTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            LengthPercentage expected = new SvgLength(42, SvgLengthUnit.Pixels);
+            LengthPercentage expected = new Length(42, SvgLengthUnit.Pixels);
             svgUse.X.Should().Be(expected);
         });
     }

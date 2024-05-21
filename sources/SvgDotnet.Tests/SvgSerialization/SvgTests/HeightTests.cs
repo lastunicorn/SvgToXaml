@@ -32,7 +32,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-nounit.svg", svg =>
         {
-            SvgLength expected = new(123);
+            Length expected = new(123);
             svg.Height.Should().Be(expected);
         });
     }
@@ -42,7 +42,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-cm.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Centimeters);
+            Length expected = new(123, SvgLengthUnit.Centimeters);
             svg.Height.Should().Be(expected);
         });
     }
@@ -52,7 +52,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-mm.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Millimeters);
+            Length expected = new(123, SvgLengthUnit.Millimeters);
             svg.Height.Should().Be(expected);
         });
     }
@@ -62,7 +62,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-q.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.QuarterMillimeters);
+            Length expected = new(123, SvgLengthUnit.QuarterMillimeters);
             svg.Height.Should().Be(expected);
         });
     }
@@ -72,7 +72,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-in.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Inches);
+            Length expected = new(123, SvgLengthUnit.Inches);
             svg.Height.Should().Be(expected);
         });
     }
@@ -82,7 +82,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-pc.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Picas);
+            Length expected = new(123, SvgLengthUnit.Picas);
             svg.Height.Should().Be(expected);
         });
     }
@@ -92,7 +92,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-pt.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Points);
+            Length expected = new(123, SvgLengthUnit.Points);
             svg.Height.Should().Be(expected);
         });
     }
@@ -102,7 +102,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-px.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.Pixels);
+            Length expected = new(123, SvgLengthUnit.Pixels);
             svg.Height.Should().Be(expected);
         });
     }
@@ -112,7 +112,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-em.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.ElementFontSize);
+            Length expected = new(123, SvgLengthUnit.ElementFontSize);
             svg.Height.Should().Be(expected);
         });
     }
@@ -122,7 +122,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-ex.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.ElementFontHeight);
+            Length expected = new(123, SvgLengthUnit.ElementFontHeight);
             svg.Height.Should().Be(expected);
         });
     }
@@ -132,7 +132,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-ch.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
+            Length expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
             svg.Height.Should().Be(expected);
         });
     }
@@ -142,7 +142,7 @@ public class HeightTests : SvgFileTestsBase
     {
         ParseSvgFile("height-rem.svg", svg =>
         {
-            SvgLength expected = new(123, SvgLengthUnit.RootElementFontSize);
+            Length expected = new(123, SvgLengthUnit.RootElementFontSize);
             svg.Height.Should().Be(expected);
         });
     }

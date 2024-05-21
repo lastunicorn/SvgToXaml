@@ -36,7 +36,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123);
+            Length expected = new(123);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -48,7 +48,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.Centimeters);
+            Length expected = new(123, SvgLengthUnit.Centimeters);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -60,7 +60,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.Millimeters);
+            Length expected = new(123, SvgLengthUnit.Millimeters);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -72,7 +72,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.QuarterMillimeters);
+            Length expected = new(123, SvgLengthUnit.QuarterMillimeters);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -84,7 +84,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.Inches);
+            Length expected = new(123, SvgLengthUnit.Inches);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -96,7 +96,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.Picas);
+            Length expected = new(123, SvgLengthUnit.Picas);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -108,7 +108,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.Points);
+            Length expected = new(123, SvgLengthUnit.Points);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -120,7 +120,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.Pixels);
+            Length expected = new(123, SvgLengthUnit.Pixels);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -132,7 +132,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.ElementFontSize);
+            Length expected = new(123, SvgLengthUnit.ElementFontSize);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -144,7 +144,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.ElementFontHeight);
+            Length expected = new(123, SvgLengthUnit.ElementFontHeight);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -156,7 +156,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
+            Length expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
             svgSymbol.Width.Should().Be(expected);
         });
     }
@@ -168,7 +168,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
-            SvgLength expected = new(123, SvgLengthUnit.RootElementFontSize);
+            Length expected = new(123, SvgLengthUnit.RootElementFontSize);
             svgSymbol.Width.Should().Be(expected);
         });
     }

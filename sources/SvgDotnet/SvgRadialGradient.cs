@@ -18,15 +18,15 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgRadialGradient : SvgElement
 {
-    private SvgLength? radius;
+    private Length? radius;
 
     public SvgGradientUnits? GradientUnits { get; set; }
 
-    public SvgLength? CenterX { get; set; }
+    public Length? CenterX { get; set; }
 
-    public SvgLength? CenterY { get; set; }
+    public Length? CenterY { get; set; }
 
-    public SvgLength? Radius
+    public Length? Radius
     {
         get => radius;
         set
@@ -41,9 +41,9 @@ public class SvgRadialGradient : SvgElement
         }
     }
 
-    public SvgLength? Fx { get; set; }
+    public Length? Fx { get; set; }
 
-    public SvgLength? Fy { get; set; }
+    public Length? Fy { get; set; }
 
     public List<SvgStop> Stops { get; } = new();
 
@@ -53,7 +53,7 @@ public class SvgRadialGradient : SvgElement
 
     public SvgSpreadMethod? SpreadMethod { get; set; }
 
-    public SvgLength? ComputeCenterX()
+    public Length? ComputeCenterX()
     {
         if (CenterX != null)
             return CenterX;
@@ -70,7 +70,7 @@ public class SvgRadialGradient : SvgElement
         return null;
     }
 
-    public SvgLength? ComputeCenterY()
+    public Length? ComputeCenterY()
     {
         if (CenterY != null)
             return CenterY;
@@ -87,7 +87,7 @@ public class SvgRadialGradient : SvgElement
         return null;
     }
 
-    public SvgLength? ComputeRadius()
+    public Length? ComputeRadius()
     {
         if (Radius != null)
             return Radius;
@@ -104,12 +104,12 @@ public class SvgRadialGradient : SvgElement
         return null;
     }
 
-    public SvgLength? ComputeFx()
+    public Length? ComputeFx()
     {
         return Fx;
     }
 
-    public SvgLength? ComputeFy()
+    public Length? ComputeFy()
     {
         return Fy;
     }

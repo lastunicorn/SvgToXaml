@@ -25,7 +25,7 @@ public class StrokeDashOffsetTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(10);
+            LengthPercentage expected = new Length(10);
             svgCircle.StrokeDashOffset.Should().Be(expected);
         });
     }
@@ -37,7 +37,7 @@ public class StrokeDashOffsetTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(-10);
+            LengthPercentage expected = new Length(-10);
             svgCircle.StrokeDashOffset.Should().Be(expected);
         });
     }
@@ -49,7 +49,7 @@ public class StrokeDashOffsetTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(0);
+            LengthPercentage expected = new Length(0);
             svgCircle.StrokeDashOffset.Should().Be(expected);
         });
     }
@@ -84,7 +84,7 @@ public class StrokeDashOffsetTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(14, SvgLengthUnit.Pixels);
+            LengthPercentage expected = new Length(14, SvgLengthUnit.Pixels);
             svgCircle.StrokeDashOffset.Should().Be(expected);
         });
     }

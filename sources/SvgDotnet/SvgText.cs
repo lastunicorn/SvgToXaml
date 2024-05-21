@@ -20,7 +20,7 @@ public class SvgText : SvgElement
 {
     public string Text { get; set; }
 
-    public SvgLength? X { get; set; }
+    public Length? X { get; set; }
 
-    public SvgLength? Y { get; set; }
+    public Length? Y { get; set; }
 }

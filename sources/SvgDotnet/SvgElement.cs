@@ -198,7 +198,7 @@ public class SvgElement
 
         if (styleDeclaration != null)
         {
-            SvgLength length = styleDeclaration.Value.Trim();
+            Length length = styleDeclaration.Value.Trim();
             return length.Value;
         }
 

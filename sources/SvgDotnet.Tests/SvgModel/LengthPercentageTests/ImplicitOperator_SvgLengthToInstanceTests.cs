@@ -21,11 +21,11 @@ public class ImplicitOperator_SvgLengthToInstanceTests
     [Fact]
     public void HavingPositiveLengthInCentimeters_WhenCastToInstance_ThenReturnsLengthInstance()
     {
-        SvgLength svgLength = new(23.6, SvgLengthUnit.Centimeters);
+        Length length = new(23.6, SvgLengthUnit.Centimeters);
 
-        LengthPercentage lengthPercentage = svgLength;
+        LengthPercentage lengthPercentage = length;
 
-        SvgLength expected = new(23.6, SvgLengthUnit.Centimeters);
+        Length expected = new(23.6, SvgLengthUnit.Centimeters);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -33,11 +33,11 @@ public class ImplicitOperator_SvgLengthToInstanceTests
     [Fact]
     public void HavingNegativeLengthInCentimeters_WhenCastToInstance_ThenReturnsLengthInstance()
     {
-        SvgLength svgLength = new(-23.6, SvgLengthUnit.Centimeters);
+        Length length = new(-23.6, SvgLengthUnit.Centimeters);
 
-        LengthPercentage lengthPercentage = svgLength;
+        LengthPercentage lengthPercentage = length;
 
-        SvgLength expected = new(-23.6, SvgLengthUnit.Centimeters);
+        Length expected = new(-23.6, SvgLengthUnit.Centimeters);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -45,11 +45,11 @@ public class ImplicitOperator_SvgLengthToInstanceTests
     [Fact]
     public void HavingZeroLengthInCentimeters_WhenCastToInstance_ThenReturnsLengthInstance()
     {
-        SvgLength svgLength = new(0, SvgLengthUnit.Centimeters);
+        Length length = new(0, SvgLengthUnit.Centimeters);
 
-        LengthPercentage lengthPercentage = svgLength;
+        LengthPercentage lengthPercentage = length;
 
-        SvgLength expected = new(0, SvgLengthUnit.Centimeters);
+        Length expected = new(0, SvgLengthUnit.Centimeters);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }

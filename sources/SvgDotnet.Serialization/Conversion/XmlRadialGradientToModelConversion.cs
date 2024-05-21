@@ -61,7 +61,7 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
 
     private void ConvertRadius()
     {
-        SvgLength? radius = XmlElement.R;
+        Length? radius = XmlElement.R;
 
         if (radius != null)
         {

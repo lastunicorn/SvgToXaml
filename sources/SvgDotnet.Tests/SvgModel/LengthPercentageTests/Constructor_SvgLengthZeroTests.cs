@@ -22,8 +22,8 @@ public class Constructor_SvgLengthZeroTests
 
     public Constructor_SvgLengthZeroTests()
     {
-        SvgLength svgLength = SvgLength.Zero;
-        lengthPercentage = new LengthPercentage(svgLength);
+        Length length = Length.Zero;
+        lengthPercentage = new LengthPercentage(length);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class Constructor_SvgLengthZeroTests
     [Fact]
     public void HavingZeroLength_WhenCreatingInstanceFromIt_ThenLengthIsTheZeroValue()
     {
-        lengthPercentage.Length.Should().Be(SvgLength.Zero);
+        lengthPercentage.Length.Should().Be(Length.Zero);
     }
 
     [Fact]

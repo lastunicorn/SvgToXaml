@@ -1061,7 +1061,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="SvgModel\SvgLengthTests\" />
+      <Folder Include="SvgModel\LengthTests\" />
     </ItemGroup>
 
 </Project>

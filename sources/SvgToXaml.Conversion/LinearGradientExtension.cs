@@ -31,10 +31,10 @@ internal static class LinearGradientExtension
         GradientStopCollection gradientStopCollection = new(gradientStops);
         LinearGradientBrush linearGradientBrush = new(gradientStopCollection);
 
-        double x1 = svgLinearGradient.ComputeX1() ?? SvgLength.Zero;
-        double x2 = svgLinearGradient.ComputeX2() ?? SvgLength.Zero;
-        double y1 = svgLinearGradient.ComputeY1() ?? new SvgLength(1);
-        double y2 = svgLinearGradient.ComputeY2() ?? new SvgLength(1);
+        double x1 = svgLinearGradient.ComputeX1() ?? Length.Zero;
+        double x2 = svgLinearGradient.ComputeX2() ?? Length.Zero;
+        double y1 = svgLinearGradient.ComputeY1() ?? new Length(1);
+        double y2 = svgLinearGradient.ComputeY2() ?? new Length(1);
 
         linearGradientBrush.StartPoint = new Point(x1, y1);
         linearGradientBrush.EndPoint = new Point(x2, y2);

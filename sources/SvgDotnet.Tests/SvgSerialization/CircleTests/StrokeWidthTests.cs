@@ -25,7 +25,7 @@ public class StrokeWidthTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(10);
+            LengthPercentage expected = new Length(10);
             svgCircle.StrokeWidth.Should().Be(expected);
         });
     }
@@ -37,7 +37,7 @@ public class StrokeWidthTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = result.Svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(0);
+            LengthPercentage expected = new Length(0);
             svgCircle.StrokeWidth.Should().Be(expected);
 
             result.Errors.Count.Should().Be(1);
@@ -52,7 +52,7 @@ public class StrokeWidthTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(0);
+            LengthPercentage expected = new Length(0);
             svgCircle.StrokeWidth.Should().Be(expected);
         });
     }
@@ -87,7 +87,7 @@ public class StrokeWidthTests : SvgFileTestsBase
         {
             SvgCircle svgCircle = svg.Children[0] as SvgCircle;
 
-            LengthPercentage expected = new SvgLength(14, SvgLengthUnit.Pixels);
+            LengthPercentage expected = new Length(14, SvgLengthUnit.Pixels);
             svgCircle.StrokeWidth.Should().Be(expected);
         });
     }

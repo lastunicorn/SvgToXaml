@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public readonly record struct LengthPercentage
 {
-    public SvgLength? Length { get; }
+    public Length? Length { get; }
 
     public SvgPercentage? Percentage { get; }
 
@@ -28,7 +28,7 @@ public readonly record struct LengthPercentage
 
     public static LengthPercentage Empty { get; } = new();
 
-    public static LengthPercentage Zero { get; } = new(SvgLength.Zero);
+    public static LengthPercentage Zero { get; } = new(SvgDotnet.Length.Zero);
 
     public LengthPercentage()
     {
@@ -37,9 +37,9 @@ public readonly record struct LengthPercentage
         IsEmpty = true;
     }
 
-    public LengthPercentage(SvgLength svgLength)
+    public LengthPercentage(Length length)
     {
-        Length = svgLength;
+        Length = length;
         Percentage = null;
         IsEmpty = false;
     }
@@ -70,7 +70,7 @@ public readonly record struct LengthPercentage
         if (string.IsNullOrEmpty(text))
             return Empty;
 
-        bool isLength = SvgLength.TryParse(text, out SvgLength svgLength);
+        bool isLength = SvgDotnet.Length.TryParse(text, out Length svgLength);
 
         if (isLength)
             return new LengthPercentage(svgLength);
@@ -83,9 +83,9 @@ public readonly record struct LengthPercentage
         return Empty;
     }
 
-    public static implicit operator LengthPercentage(SvgLength svgLength)
+    public static implicit operator LengthPercentage(Length length)
     {
-        return new LengthPercentage(svgLength);
+        return new LengthPercentage(length);
     }
 
     public static implicit operator LengthPercentage(SvgPercentage svgPercentage)
@@ -95,8 +95,8 @@ public readonly record struct LengthPercentage
 
     public static implicit operator LengthPercentage(double value)
     {
-        SvgLength svgLength = new(value);
-        return new LengthPercentage(svgLength);
+        Length length = new(value);
+        return new LengthPercentage(length);
     }
 
     public static implicit operator LengthPercentage(string text)

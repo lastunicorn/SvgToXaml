@@ -18,9 +18,9 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgRectangle : SvgShape
 {
-    public SvgLength? Width { get; set; }
+    public Length? Width { get; set; }
 
-    public SvgLength? Height { get; set; }
+    public Length? Height { get; set; }
 
     public double X { get; set; }
 

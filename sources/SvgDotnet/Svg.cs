@@ -24,9 +24,9 @@ public class Svg : SvgContainer
 
     public string Version { get; set; }
 
-    public SvgLength? Width { get; set; }
+    public Length? Width { get; set; }
 
-    public SvgLength? Height { get; set; }
+    public Length? Height { get; set; }
 
     public SvgViewBox ViewBox { get; set; }
 

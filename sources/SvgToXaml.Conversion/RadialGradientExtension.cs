@@ -30,9 +30,9 @@ internal static class RadialGradientExtension
         GradientStopCollection gradientStopCollection = new(gradientStops);
         RadialGradientBrush radialGradientBrush = new(gradientStopCollection);
 
-        double cx = svgRadialGradient.ComputeCenterX() ?? SvgLength.Zero;
-        double cy = svgRadialGradient.ComputeCenterY() ?? SvgLength.Zero;
-        double r = svgRadialGradient.ComputeRadius() ?? SvgLength.Zero;
+        double cx = svgRadialGradient.ComputeCenterX() ?? Length.Zero;
+        double cy = svgRadialGradient.ComputeCenterY() ?? Length.Zero;
+        double r = svgRadialGradient.ComputeRadius() ?? Length.Zero;
         double fx = svgRadialGradient.ComputeFx() ?? cx;
         double fy = svgRadialGradient.ComputeFy() ?? cy;
 

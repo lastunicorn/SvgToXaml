@@ -19,23 +19,23 @@ using System.Text.RegularExpressions;
 
 namespace DustInTheWind.SvgDotnet;
 
-public readonly struct SvgLength
+public readonly struct Length
 {
     private static readonly Regex Regex = new(@"^\s*([+-]?[0-9]*[.]?[0-9]+(?:e[+-]?[0-9]+)?)(em|ex|ch|rem|vw|vh|vmin|vmax|cm|mm|Q|in|pc|pt|px)?\s*$", RegexOptions.Singleline);
 
-    public static SvgLength Zero { get; } = new(0);
+    public static Length Zero { get; } = new(0);
 
     public double Value { get; }
 
     public SvgLengthUnit Unit { get; }
 
-    public SvgLength(double value, SvgLengthUnit unit = SvgLengthUnit.Unspecified)
+    public Length(double value, SvgLengthUnit unit = SvgLengthUnit.Unspecified)
     {
         Value = value;
         Unit = unit;
     }
 
-    public static SvgLength Parse(string text)
+    public static Length Parse(string text)
     {
         if (text == null)
             return Zero;
@@ -48,23 +48,23 @@ public readonly struct SvgLength
         double value = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
         SvgLengthUnit unit = match.Groups[2].Value.StringToUnit();
 
-        return new SvgLength(value, unit);
+        return new Length(value, unit);
     }
 
-    public static bool TryParse(string text, out SvgLength svgLength)
+    public static bool TryParse(string text, out Length length)
     {
         Match match = Regex.Match(text);
 
         if (!match.Success)
         {
-            svgLength = null;
+            length = null;
             return false;
         }
 
         double value = double.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
         SvgLengthUnit unit = match.Groups[2].Value.StringToUnit();
 
-        svgLength = new SvgLength(value, unit);
+        length = new Length(value, unit);
         return true;
     }
 
@@ -75,37 +75,37 @@ public readonly struct SvgLength
             : Value.ToString(CultureInfo.InvariantCulture) + Unit.UnitToString();
     }
 
-    public static implicit operator SvgLength(double value)
+    public static implicit operator Length(double value)
     {
-        return new SvgLength(value);
+        return new Length(value);
     }
 
-    public static implicit operator SvgLength(float value)
+    public static implicit operator Length(float value)
     {
-        return new SvgLength(value);
+        return new Length(value);
     }
 
-    public static implicit operator double(SvgLength length)
+    public static implicit operator double(Length length)
     {
         return length.ToUserUnits().Value;
     }
 
-    public static implicit operator double(SvgLength? length)
+    public static implicit operator double(Length? length)
     {
         return length?.ToUserUnits().Value ?? 0;
     }
 
-    public static implicit operator SvgLength(string text)
+    public static implicit operator Length(string text)
     {
         return text == null
             ? Zero
             : Parse(text);
     }
 
-    public static implicit operator SvgLength?(string text)
+    public static implicit operator Length?(string text)
     {
         return text == null
-            ? (SvgLength?)null
+            ? (Length?)null
             : Parse(text);
     }
 
@@ -114,7 +114,7 @@ public readonly struct SvgLength
     /// 1 in = 2.54 cm
     /// 1 in = 96 px
     /// </remarks>
-    public SvgLength ToUserUnits()
+    public Length ToUserUnits()
     {
         switch (Unit)
         {

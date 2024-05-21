@@ -23,7 +23,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-nounit.svg", svg =>
         {
-            SvgLength expected = new(1000);
+            Length expected = new(1000);
             svg.Height.Should().Be(expected);
         });
     }
@@ -33,7 +33,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-cm.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Centimeters);
+            Length expected = new(1000, SvgLengthUnit.Centimeters);
             svg.Height.Should().Be(expected);
         });
     }
@@ -43,7 +43,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-mm.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Millimeters);
+            Length expected = new(1000, SvgLengthUnit.Millimeters);
             svg.Height.Should().Be(expected);
         });
     }
@@ -53,7 +53,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-q.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.QuarterMillimeters);
+            Length expected = new(1000, SvgLengthUnit.QuarterMillimeters);
             svg.Height.Should().Be(expected);
         });
     }
@@ -63,7 +63,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-in.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Inches);
+            Length expected = new(1000, SvgLengthUnit.Inches);
             svg.Height.Should().Be(expected);
         });
     }
@@ -73,7 +73,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-pc.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Picas);
+            Length expected = new(1000, SvgLengthUnit.Picas);
             svg.Height.Should().Be(expected);
         });
     }
@@ -83,7 +83,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-pt.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Points);
+            Length expected = new(1000, SvgLengthUnit.Points);
             svg.Height.Should().Be(expected);
         });
     }
@@ -93,7 +93,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-px.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.Pixels);
+            Length expected = new(1000, SvgLengthUnit.Pixels);
             svg.Height.Should().Be(expected);
         });
     }
@@ -103,7 +103,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-em.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.ElementFontSize);
+            Length expected = new(1000, SvgLengthUnit.ElementFontSize);
             svg.Height.Should().Be(expected);
         });
     }
@@ -113,7 +113,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-ex.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.ElementFontHeight);
+            Length expected = new(1000, SvgLengthUnit.ElementFontHeight);
             svg.Height.Should().Be(expected);
         });
     }
@@ -123,7 +123,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-ch.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.CharacterAdvanceOfZero);
+            Length expected = new(1000, SvgLengthUnit.CharacterAdvanceOfZero);
             svg.Height.Should().Be(expected);
         });
     }
@@ -133,7 +133,7 @@ public class HeightExponentialTests : SvgFileTestsBase
     {
         ParseSvgFile("height-rem.svg", svg =>
         {
-            SvgLength expected = new(1000, SvgLengthUnit.RootElementFontSize);
+            Length expected = new(1000, SvgLengthUnit.RootElementFontSize);
             svg.Height.Should().Be(expected);
         });
     }

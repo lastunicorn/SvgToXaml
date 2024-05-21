@@ -25,7 +25,7 @@ public class ImplicitOperator_DoubleToInstanceTests
 
         LengthPercentage lengthPercentage = number;
 
-        SvgLength expected = new(24.5);
+        Length expected = new(24.5);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -37,7 +37,7 @@ public class ImplicitOperator_DoubleToInstanceTests
 
         LengthPercentage lengthPercentage = number;
 
-        SvgLength expected = new(-24.5);
+        Length expected = new(-24.5);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -49,7 +49,7 @@ public class ImplicitOperator_DoubleToInstanceTests
 
         LengthPercentage lengthPercentage = number;
 
-        SvgLength expected = SvgLength.Zero;
+        Length expected = Length.Zero;
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }

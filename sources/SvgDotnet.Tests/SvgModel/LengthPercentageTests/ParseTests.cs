@@ -45,7 +45,7 @@ public class ParseTests
 
         LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
 
-        SvgLength expected = new(24);
+        Length expected = new(24);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -57,7 +57,7 @@ public class ParseTests
 
         LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
 
-        SvgLength expected = new(-24);
+        Length expected = new(-24);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -69,7 +69,7 @@ public class ParseTests
 
         LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
 
-        SvgLength expected = SvgLength.Zero;
+        Length expected = Length.Zero;
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -81,7 +81,7 @@ public class ParseTests
 
         LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
 
-        SvgLength expected = new(24, SvgLengthUnit.Pixels);
+        Length expected = new(24, SvgLengthUnit.Pixels);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -93,7 +93,7 @@ public class ParseTests
 
         LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
 
-        SvgLength expected = new(-24, SvgLengthUnit.Pixels);
+        Length expected = new(-24, SvgLengthUnit.Pixels);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }
@@ -105,7 +105,7 @@ public class ParseTests
 
         LengthPercentage lengthPercentage = LengthPercentage.Parse(text);
 
-        SvgLength expected = new(0, SvgLengthUnit.Pixels);
+        Length expected = new(0, SvgLengthUnit.Pixels);
         lengthPercentage.Length.Should().Be(expected);
         lengthPercentage.Percentage.Should().BeNull();
     }

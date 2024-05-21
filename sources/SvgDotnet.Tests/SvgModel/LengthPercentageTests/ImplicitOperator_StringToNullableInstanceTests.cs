@@ -45,7 +45,7 @@ public class ImplicitOperator_StringToNullableInstanceTests
 
         LengthPercentage? lengthPercentage = text;
 
-        SvgLength expected = new(24);
+        Length expected = new(24);
         lengthPercentage.Value.Length.Should().Be(expected);
         lengthPercentage.Value.Percentage.Should().BeNull();
     }
@@ -57,7 +57,7 @@ public class ImplicitOperator_StringToNullableInstanceTests
 
         LengthPercentage? lengthPercentage = text;
 
-        SvgLength expected = new(-24);
+        Length expected = new(-24);
         lengthPercentage.Value.Length.Should().Be(expected);
         lengthPercentage.Value.Percentage.Should().BeNull();
     }
@@ -69,7 +69,7 @@ public class ImplicitOperator_StringToNullableInstanceTests
 
         LengthPercentage? lengthPercentage = text;
 
-        SvgLength expected = SvgLength.Zero;
+        Length expected = Length.Zero;
         lengthPercentage.Value.Length.Should().Be(expected);
         lengthPercentage.Value.Percentage.Should().BeNull();
     }
@@ -81,7 +81,7 @@ public class ImplicitOperator_StringToNullableInstanceTests
 
         LengthPercentage? lengthPercentage = text;
 
-        SvgLength expected = new(24, SvgLengthUnit.Pixels);
+        Length expected = new(24, SvgLengthUnit.Pixels);
         lengthPercentage.Value.Length.Should().Be(expected);
         lengthPercentage.Value.Percentage.Should().BeNull();
     }
@@ -93,7 +93,7 @@ public class ImplicitOperator_StringToNullableInstanceTests
 
         LengthPercentage? lengthPercentage = text;
 
-        SvgLength expected = new(-24, SvgLengthUnit.Pixels);
+        Length expected = new(-24, SvgLengthUnit.Pixels);
         lengthPercentage.Value.Length.Should().Be(expected);
         lengthPercentage.Value.Percentage.Should().BeNull();
     }
@@ -105,7 +105,7 @@ public class ImplicitOperator_StringToNullableInstanceTests
 
         LengthPercentage? lengthPercentage = text;
 
-        SvgLength expected = new(0, SvgLengthUnit.Pixels);
+        Length expected = new(0, SvgLengthUnit.Pixels);
         lengthPercentage.Value.Length.Should().Be(expected);
         lengthPercentage.Value.Percentage.Should().BeNull();
     }

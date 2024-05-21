@@ -23,7 +23,7 @@ public class YTests : SvgFileTestsBase
     {
         ParseSvgFile("symbol-y-positive.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(10);
+            LengthPercentage expected = new Length(10);
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
             svgSymbol.Y.Should().Be(expected);
@@ -35,7 +35,7 @@ public class YTests : SvgFileTestsBase
     {
         ParseSvgFile("symbol-y-negative.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(-10);
+            LengthPercentage expected = new Length(-10);
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
             svgSymbol.Y.Should().Be(expected);
@@ -47,7 +47,7 @@ public class YTests : SvgFileTestsBase
     {
         ParseSvgFile("symbol-y-zero.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(0);
+            LengthPercentage expected = new Length(0);
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
             svgSymbol.Y.Should().Be(expected);
@@ -82,7 +82,7 @@ public class YTests : SvgFileTestsBase
     {
         ParseSvgFile("symbol-y-positivepx.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(42, SvgLengthUnit.Pixels);
+            LengthPercentage expected = new Length(42, SvgLengthUnit.Pixels);
             SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
 
             svgSymbol.Y.Should().Be(expected);

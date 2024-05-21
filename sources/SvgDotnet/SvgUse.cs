@@ -24,9 +24,9 @@ public class SvgUse : SvgContainer
 
     public LengthPercentage? Y { get; set; }
 
-    public SvgLength? Width { get; set; }
+    public Length? Width { get; set; }
 
-    public SvgLength? Height { get; set; }
+    public Length? Height { get; set; }
 
     public SvgUse()
     {

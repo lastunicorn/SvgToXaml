@@ -36,7 +36,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123);
+            Length expected = new(123);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -48,7 +48,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.Centimeters);
+            Length expected = new(123, SvgLengthUnit.Centimeters);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -60,7 +60,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.Millimeters);
+            Length expected = new(123, SvgLengthUnit.Millimeters);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -72,7 +72,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.QuarterMillimeters);
+            Length expected = new(123, SvgLengthUnit.QuarterMillimeters);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -84,7 +84,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.Inches);
+            Length expected = new(123, SvgLengthUnit.Inches);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -96,7 +96,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.Picas);
+            Length expected = new(123, SvgLengthUnit.Picas);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -108,7 +108,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.Points);
+            Length expected = new(123, SvgLengthUnit.Points);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -120,7 +120,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.Pixels);
+            Length expected = new(123, SvgLengthUnit.Pixels);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -132,7 +132,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.ElementFontSize);
+            Length expected = new(123, SvgLengthUnit.ElementFontSize);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -144,7 +144,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.ElementFontHeight);
+            Length expected = new(123, SvgLengthUnit.ElementFontHeight);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -156,7 +156,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
+            Length expected = new(123, SvgLengthUnit.CharacterAdvanceOfZero);
             svgUse.Width.Should().Be(expected);
         });
     }
@@ -168,7 +168,7 @@ public class WidthTests : SvgFileTestsBase
         {
             SvgUse svgUse = svg.Children[0] as SvgUse;
 
-            SvgLength expected = new(123, SvgLengthUnit.RootElementFontSize);
+            Length expected = new(123, SvgLengthUnit.RootElementFontSize);
             svgUse.Width.Should().Be(expected);
         });
     }

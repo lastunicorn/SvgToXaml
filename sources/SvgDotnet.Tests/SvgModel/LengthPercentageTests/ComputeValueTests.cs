@@ -31,8 +31,8 @@ public class ComputeValueTests
     [Fact]
     public void HavingInstanceContainingPositiveMillimetersLength_WhenComputingTheValue_ThenReturnsTheLengthValue()
     {
-        SvgLength svgLength = new(63.4, SvgLengthUnit.Millimeters);
-        LengthPercentage lengthPercentage = new(svgLength);
+        Length length = new(63.4, SvgLengthUnit.Millimeters);
+        LengthPercentage lengthPercentage = new(length);
 
         double computedValue = lengthPercentage.ComputeValue();
 
@@ -42,8 +42,8 @@ public class ComputeValueTests
     [Fact]
     public void HavingInstanceContainingNegativeMillimetersLength_WhenComputingTheValue_ThenReturnsTheLengthValue()
     {
-        SvgLength svgLength = new(-63.4, SvgLengthUnit.Millimeters);
-        LengthPercentage lengthPercentage = new(svgLength);
+        Length length = new(-63.4, SvgLengthUnit.Millimeters);
+        LengthPercentage lengthPercentage = new(length);
 
         double computedValue = lengthPercentage.ComputeValue();
 

@@ -25,7 +25,7 @@ public class CenterXTests : SvgFileTestsBase
         {
             SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
 
-            SvgLength expected = 300;
+            Length expected = 300;
             svgRadialGradient.CenterX.Should().Be(expected);
         });
     }
@@ -37,7 +37,7 @@ public class CenterXTests : SvgFileTestsBase
         {
             SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
 
-            SvgLength expected = -300;
+            Length expected = -300;
             svgRadialGradient.CenterX.Should().Be(expected);
         });
     }
@@ -49,7 +49,7 @@ public class CenterXTests : SvgFileTestsBase
         {
             SvgRadialGradient svgRadialGradient = svg.Children[0] as SvgRadialGradient;
 
-            svgRadialGradient.CenterX.Should().Be(SvgLength.Zero);
+            svgRadialGradient.CenterX.Should().Be(Length.Zero);
         });
     }
 

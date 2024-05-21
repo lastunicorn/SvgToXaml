@@ -23,7 +23,7 @@ public class XTests : SvgFileTestsBase
     {
         ParseSvgFile("svg-x-positive.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(10);
+            LengthPercentage expected = new Length(10);
             svg.X.Should().Be(expected);
         });
     }
@@ -33,7 +33,7 @@ public class XTests : SvgFileTestsBase
     {
         ParseSvgFile("svg-x-negative.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(-10);
+            LengthPercentage expected = new Length(-10);
             svg.X.Should().Be(expected);
         });
     }
@@ -43,7 +43,7 @@ public class XTests : SvgFileTestsBase
     {
         ParseSvgFile("svg-x-zero.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(0);
+            LengthPercentage expected = new Length(0);
             svg.X.Should().Be(expected);
         });
     }
@@ -72,7 +72,7 @@ public class XTests : SvgFileTestsBase
     {
         ParseSvgFile("svg-x-positivepx.svg", svg =>
         {
-            LengthPercentage expected = new SvgLength(42, SvgLengthUnit.Pixels);
+            LengthPercentage expected = new Length(42, SvgLengthUnit.Pixels);
             svg.X.Should().Be(expected);
         });
     }

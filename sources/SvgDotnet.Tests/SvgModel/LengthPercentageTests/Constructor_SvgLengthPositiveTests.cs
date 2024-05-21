@@ -22,8 +22,8 @@ public class Constructor_SvgLengthPositiveTests
 
     public Constructor_SvgLengthPositiveTests()
     {
-        SvgLength svgLength = new(63.4, SvgLengthUnit.Millimeters);
-        lengthPercentage = new LengthPercentage(svgLength);
+        Length length = new(63.4, SvgLengthUnit.Millimeters);
+        lengthPercentage = new LengthPercentage(length);
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class Constructor_SvgLengthPositiveTests
     [Fact]
     public void HavingPositiveMillimetersLength_WhenCreatingInstanceFromIt_ThenLengthIsTheProvidedValue()
     {
-        SvgLength expected = new(63.4, SvgLengthUnit.Millimeters);
+        Length expected = new(63.4, SvgLengthUnit.Millimeters);
         lengthPercentage.Length.Should().Be(expected);
     }
 
