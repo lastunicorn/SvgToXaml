@@ -188,28 +188,55 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     Height="8"
                     Background="Transparent"
                     HorizontalAlignment="Stretch"
-                    Visibility="{Binding Errors, Converter={StaticResource NullToVisibilityConverter}}" />
+                    Visibility="{Binding ErrorItems, Converter={StaticResource NullToVisibilityConverter}}" />
 
                 <Border
                     Grid.Row="2"
+                    Background="LightYellow"
                     BorderBrush="#eee"
                     BorderThickness="2"
                     CornerRadius="2">
 
-                    <TextBox
-                        x:Name="TextBoxErrors"
-                        Background="LightYellow"
+                    <ListView
+                        ItemsSource="{Binding ErrorItems}"
+                        Background="Transparent"
                         BorderThickness="0"
-                        Padding="8"
-                        VerticalAlignment="Stretch"
-                        HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto"
-                        AcceptsReturn="True"
-                        AcceptsTab="True"
-                        Text="{Binding Errors}"
-                        FontFamily="Consolas"
-                        FontSize="12"
-                        IsReadOnly="True" />
+                        Padding="0 10"
+                        VerticalAlignment="Stretch">
+
+                        <ItemsControl.Template>
+                            <ControlTemplate>
+                                <ScrollViewer
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}">
+
+                                    <ItemsPresenter />
+
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel
+                                    Margin="5 2 0 2">
+                                    
+                                    <TextBlock
+                                        DockPanel.Dock="Left"
+                                        Text="{Binding InfoItemType, StringFormat={}[{0}]}"
+                                        Margin="0 0 10 0"/>
+
+                                    <TextBlock
+                                        Text="{Binding Message}"
+                                        FontFamily="Consolas"
+                                        FontSize="12" />
+
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ListView>
+
                 </Border>
             </Grid>
         </Grid>

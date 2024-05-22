@@ -33,7 +33,7 @@ public class MainViewModel : ViewModelBase
     private UIElement xamlObject;
     private string svgFilePath;
     private readonly Dispatcher dispatcher;
-    private string errors;
+    private List<ConversionInfoItem> errorItems;
     private bool shouldOptimize;
 
     public string SvgFilePath
@@ -82,13 +82,13 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public string Errors
+    public List<ConversionInfoItem> ErrorItems
     {
-        get => errors;
-        set
+        get => errorItems;
+        private set
         {
-            if (value == errors) return;
-            errors = value;
+            if (Equals(value, errorItems)) return;
+            errorItems = value;
             OnPropertyChanged();
         }
     }
@@ -156,13 +156,19 @@ public class MainViewModel : ViewModelBase
             ? null
             : ExtractUiElement(ev.XamlText);
 
-        IEnumerable<ErrorInfo> logItems = ev.Errors
-            .Concat(ev.Warning)
-            .Concat(ev.Info);
+        IEnumerable<ConversionInfoItem> errorInfoItems = ev.Errors
+            .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Error));
 
-        Errors = logItems.Any()
-            ? string.Join(Environment.NewLine, logItems.Select(x => x.Message))
-            : null;
+        IEnumerable<ConversionInfoItem> warningInfoItems = ev.Warning
+            .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Waring));
+
+        IEnumerable<ConversionInfoItem> infoInfoItems = ev.Info
+            .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Info));
+
+        ErrorItems = errorInfoItems
+            .Concat(warningInfoItems)
+            .Concat(infoInfoItems)
+            .ToList();
 
         return Task.CompletedTask;
     }
