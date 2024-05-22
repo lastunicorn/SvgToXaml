@@ -54,12 +54,18 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
                 DeserializationResult deserializationResult = Parse(svgText);
 
                 IEnumerable<ErrorInfo> errorInfos = deserializationResult.Errors
-                    .Concat(deserializationResult.Warnings)
                     .Select(x => new ErrorInfo
                     {
                         Message = $"{x.Path} : {x.Message}"
                     });
                 xamlTextChangedEvent.Errors.AddRange(errorInfos);
+
+                IEnumerable<ErrorInfo> warningsInfos = deserializationResult.Warnings
+                    .Select(x => new ErrorInfo
+                    {
+                        Message = $"{x.Path} : {x.Message}"
+                    });
+                xamlTextChangedEvent.Warning.AddRange(warningsInfos);
 
                 if (deserializationResult.Svg == null)
                     return;

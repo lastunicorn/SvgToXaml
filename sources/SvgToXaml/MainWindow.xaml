@@ -34,6 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     <Window.Resources>
         <svgToXaml:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <svgToXaml:InfoItemTypeToColorConverter x:Key="InfoItemTypeToColorConverter" />
     </Window.Resources>
 
     <Border
@@ -219,12 +220,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel
-                                    Margin="5 2 0 2">
-                                    
-                                    <TextBlock
+                                    Margin="5 2">
+
+                                    <Ellipse
                                         DockPanel.Dock="Left"
-                                        Text="{Binding InfoItemType, StringFormat={}[{0}]}"
-                                        Margin="0 0 10 0"/>
+                                        Width="16"
+                                        Height="16"
+                                        Margin="0 0 10 0"
+                                        VerticalAlignment="Center"
+                                        Fill="{Binding InfoItemType, Converter={StaticResource InfoItemTypeToColorConverter}}" />
 
                                     <TextBlock
                                         Text="{Binding Message}"

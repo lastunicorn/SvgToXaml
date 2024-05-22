@@ -165,10 +165,14 @@ public class MainViewModel : ViewModelBase
         IEnumerable<ConversionInfoItem> infoInfoItems = ev.Info
             .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Info));
 
-        ErrorItems = errorInfoItems
+        List<ConversionInfoItem> items = errorInfoItems
             .Concat(warningInfoItems)
             .Concat(infoInfoItems)
             .ToList();
+
+        ErrorItems = items.Count == 0
+            ? null
+            : items;
 
         return Task.CompletedTask;
     }
