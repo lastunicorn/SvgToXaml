@@ -51,35 +51,12 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         {
             if (!string.IsNullOrEmpty(svgText))
             {
-                DeserializationResult deserializationResult = Parse(svgText);
+                Svg svg = Deserialize(svgText);
 
-                IEnumerable<ErrorInfo> errorInfos = deserializationResult.Errors
-                    .Select(x => new ErrorInfo
-                    {
-                        Message = $"{x.Path} : {x.Message}"
-                    });
-                xamlTextChangedEvent.Errors.AddRange(errorInfos);
-
-                IEnumerable<ErrorInfo> warningsInfos = deserializationResult.Warnings
-                    .Select(x => new ErrorInfo
-                    {
-                        Message = $"{x.Path} : {x.Message}"
-                    });
-                xamlTextChangedEvent.Warning.AddRange(warningsInfos);
-
-                if (deserializationResult.Svg == null)
+                if (svg == null)
                     return;
 
-                ConversionContext conversionContext = ConvertToXaml(deserializationResult.Svg);
-                Canvas canvas = conversionContext.Canvas;
-
-                IEnumerable<ErrorInfo> conversionErrorInfos = conversionContext.Errors
-                    .Concat(conversionContext.Warnings)
-                    .Select(x => new ErrorInfo
-                    {
-                        Message = $"{x.Path} : {x.Message}"
-                    });
-                xamlTextChangedEvent.Errors.AddRange(conversionErrorInfos);
+                Canvas canvas = Convert(svg);
 
                 if (canvas == null)
                     return;
@@ -107,10 +84,47 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         }
     }
 
-    public static DeserializationResult Parse(string svg)
+    private Svg Deserialize(string svgText)
     {
         SvgSerializer serializer = new();
-        return serializer.Deserialize(svg);
+        DeserializationResult deserializationResult = serializer.Deserialize(svgText);
+
+        IEnumerable<ErrorInfo> errorInfos = deserializationResult.Errors
+            .Select(x => new ErrorInfo
+            {
+                Message = $"{x.Path} : {x.Message}"
+            });
+        xamlTextChangedEvent.Errors.AddRange(errorInfos);
+
+        IEnumerable<ErrorInfo> warningsInfos = deserializationResult.Warnings
+            .Select(x => new ErrorInfo
+            {
+                Message = $"{x.Path} : {x.Message}"
+            });
+        xamlTextChangedEvent.Warning.AddRange(warningsInfos);
+
+        return deserializationResult.Svg;
+    }
+
+    private Canvas Convert(Svg svg)
+    {
+        ConversionContext conversionContext = ConvertToXaml(svg);
+
+        IEnumerable<ErrorInfo> errorInfos = conversionContext.Errors
+            .Select(x => new ErrorInfo
+            {
+                Message = $"{x.Path} : {x.Message}"
+            });
+        xamlTextChangedEvent.Errors.AddRange(errorInfos);
+
+        IEnumerable<ErrorInfo> warningInfos = conversionContext.Warnings
+            .Select(x => new ErrorInfo
+            {
+                Message = $"{x.Path} : {x.Message}"
+            });
+        xamlTextChangedEvent.Warning.AddRange(warningInfos);
+
+        return conversionContext.Canvas;
     }
 
     private static ConversionContext ConvertToXaml(Svg svg)

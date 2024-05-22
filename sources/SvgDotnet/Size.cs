@@ -30,6 +30,11 @@ public class Size
         UnitOfMeasurement = UnitOfMeasurement.None
     };
 
+    public override string ToString()
+    {
+        return $"{Value} {UnitOfMeasurement}";
+    }
+
     public static implicit operator Size(double value)
     {
         return new Size

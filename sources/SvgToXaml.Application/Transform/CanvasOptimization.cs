@@ -193,6 +193,10 @@ internal class CanvasOptimization
         bool containsClip = canvas.Clip != null;
         if (containsClip)
             return true;
+        
+        bool isTransparent = Math.Abs(canvas.Opacity - 1) > double.Epsilon;
+        if (isTransparent)
+            return true;
 
         return false;
     }

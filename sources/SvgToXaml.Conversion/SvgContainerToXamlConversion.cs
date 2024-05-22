@@ -77,6 +77,9 @@ public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversi
             case SvgGroup svgGChild:
                 return new SvgGroupToXamlConversion(svgGChild, ConversionContext, Referrer);
 
+            case Svg childSvg:
+                return new SvgToXamlConversion(childSvg, ConversionContext, Referrer);
+
             case SvgUse svgUse:
                 return new SvgUseToXamlConversion(svgUse, ConversionContext);
 

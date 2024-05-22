@@ -83,6 +83,17 @@ public readonly record struct LengthPercentage
         return Empty;
     }
 
+    public override string ToString()
+    {
+        if (Length != null)
+            return Length.ToString();
+
+        if (Percentage != null)
+            return Percentage.ToString();
+
+        return string.Empty;
+    }
+
     public static implicit operator LengthPercentage(Length length)
     {
         return new LengthPercentage(length);
@@ -109,7 +120,7 @@ public readonly record struct LengthPercentage
     public static implicit operator LengthPercentage?(string text)
     {
         if (text == null)
-            return (LengthPercentage?)null;
+            return null;
 
         return Parse(text);
     }

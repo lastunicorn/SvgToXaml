@@ -65,6 +65,20 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
 
         base.ConvertProperties();
 
+        ConvertVersion();
+        ConvertPosition();
+        ConvertSize();
+        ConvertViewBox();
+    }
+
+    private void ConvertVersion()
+    {
+        if (XmlElement.Version != null)
+            SvgElement.Version = XmlElement.Version;
+    }
+
+    private void ConvertPosition()
+    {
         LengthPercentage? x = XmlElement.X;
 
         if (x != null)
@@ -74,16 +88,19 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
 
         if (y != null)
             SvgElement.Y = y;
+    }
 
-        if (XmlElement.Version != null)
-            SvgElement.Version = XmlElement.Version;
-
+    private void ConvertSize()
+    {
         if (XmlElement.Width != null)
             SvgElement.Width = XmlElement.Width;
 
         if (XmlElement.Height != null)
             SvgElement.Height = XmlElement.Height;
+    }
 
+    private void ConvertViewBox()
+    {
         if (XmlElement.ViewBox != null)
             SvgElement.ViewBox = XmlElement.ViewBox;
     }

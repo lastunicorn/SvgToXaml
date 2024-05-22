@@ -104,7 +104,7 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         foreach (StyleDeclaration svgStyleDeclaration in unknownStyleDeclarations)
         {
             ConversionIssue conversionIssue = new("Conversion", $"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
-            ConversionContext.Errors.Add(conversionIssue);
+            ConversionContext.Warnings.Add(conversionIssue);
         }
     }
 
