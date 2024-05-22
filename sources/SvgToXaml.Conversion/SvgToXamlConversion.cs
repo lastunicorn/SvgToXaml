@@ -52,6 +52,8 @@ public class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
             XamlElement.Width = svg.ViewBox.Width.Value;
             XamlElement.Height = svg.ViewBox.Height.Value;
 
+            //XamlElement.ClipToBounds = true;
+
             bool viewBoxIsTranslated = svg.ViewBox.OriginX is { Value: not 0 } ||
                                        svg.ViewBox.OriginY is { Value: not 0 };
 

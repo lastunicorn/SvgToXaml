@@ -38,6 +38,22 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
 
         XamlElement.Text = SvgElement.Text;
 
+        ConvertFontSize(inheritedSvgElements);
+        ConvertPosition();
+    }
+
+    private void ConvertFontSize(IEnumerable<SvgElement> svgElements)
+    {
+        double? fontSize = svgElements
+            .Select(x => x.ComputeFontSize())
+            .FirstOrDefault(x => x != null);
+
+        if (fontSize != null)
+            XamlElement.FontSize = fontSize.Value;
+    }
+
+    private void ConvertPosition()
+    {
         double left = SvgElement.X;
         double top = SvgElement.Y;
 

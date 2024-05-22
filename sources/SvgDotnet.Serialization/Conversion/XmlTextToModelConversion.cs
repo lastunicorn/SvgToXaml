@@ -36,8 +36,17 @@ internal class XmlTextToModelConversion : XmlElementToModelConversion<XmlText, S
     {
         base.ConvertProperties();
 
-        SvgElement.Text = XmlElement.Text;
+        ConvertText();
+        ConvertLocation();
+    }
 
+    private void ConvertText()
+    {
+        SvgElement.Text = XmlElement.Text;
+    }
+
+    private void ConvertLocation()
+    {
         if (XmlElement.XSpecified)
             SvgElement.X = XmlElement.X;
 

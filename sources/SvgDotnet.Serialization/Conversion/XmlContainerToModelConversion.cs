@@ -55,7 +55,7 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             else
             {
                 DeserializationIssue deserializationIssue = new("Xml deserialization", $"Child type '{elementType.Name}' is not allowed in '{ElementName}'. Child is ignored.");
-                DeserializationContext.Errors.Add(deserializationIssue);
+                DeserializationContext.Warnings.Add(deserializationIssue);
             }
         }
     }

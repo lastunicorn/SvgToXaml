@@ -92,7 +92,9 @@ public class SvgElement
 
     public LengthPercentage? StrokeDashOffset { get; set; }
 
-    //
+    public double? FontSize { get; set; }
+
+    // Other Attributes
 
     public TransformCollection Transforms { get; } = new();
 
@@ -256,6 +258,16 @@ public class SvgElement
             return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
 
         return Opacity;
+    }
+
+    public double? ComputeFontSize()
+    {
+        StyleDeclaration styleDeclaration = Style?["font-size"] ?? GetStyleValueFromClasses("font-size");
+
+        if (styleDeclaration != null)
+            return double.Parse(styleDeclaration.Value, CultureInfo.InvariantCulture);
+
+        return FontSize;
     }
 
     protected StyleDeclaration GetStyleValueFromClasses(string name)
