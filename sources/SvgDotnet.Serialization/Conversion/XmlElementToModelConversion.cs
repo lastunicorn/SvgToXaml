@@ -36,8 +36,9 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         if (XmlElement.TabIndexSpecified)
             SvgElement.TabIndex = XmlElement.TabIndex;
 
-        SvgElement.Language = XmlElement.Lang;
-        SvgElement.XmlLanguage = XmlElement.XmlLang;
+        string language = XmlElement.XmlLang ?? XmlElement.Lang;
+        if (language != null)
+            SvgElement.Language = language;
 
         if (XmlElement.DisplaySpecified)
             SvgElement.Display = Convert(XmlElement.Display);

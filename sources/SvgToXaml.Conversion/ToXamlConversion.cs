@@ -152,7 +152,7 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
     private void SetLanguage(FrameworkElement frameworkElement)
     {
-        string languageId = SvgElement.Language ?? SvgElement.XmlLanguage;
+        string languageId = SvgElement.Language;
 
         if (languageId != null)
             frameworkElement.Language = XmlLanguage.GetLanguage(languageId);

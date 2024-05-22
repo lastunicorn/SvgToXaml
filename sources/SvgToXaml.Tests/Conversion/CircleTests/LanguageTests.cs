@@ -59,13 +59,13 @@ public class LanguageTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingBothLangAndXmlLangAttributes_WhenSvgIsConverted_ThenLanguageHasLangValue()
+    public void HavingBothLangAndXmlLangAttributes_WhenSvgIsConverted_ThenLanguageHasXmlLangValue()
     {
         ConvertSvgFile("circle-lang-xmllang.svg", canvas =>
         {
             Ellipse ellipse = canvas.GetElementByIndex<Ellipse>(0);
 
-            XmlLanguage expected = XmlLanguage.GetLanguage("de-DE");
+            XmlLanguage expected = XmlLanguage.GetLanguage("fr-FR");
             ellipse.Language.Should().Be(expected);
         });
     }

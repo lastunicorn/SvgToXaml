@@ -51,11 +51,11 @@ public class LanguageTests : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingBothLangAndXmlLangAttributes_WhenSvgIsConverted_ThenLanguageHasLangValue()
+    public void HavingBothLangAndXmlLangAttributes_WhenSvgIsConverted_ThenLanguageHasXmlLangValue()
     {
         ConvertSvgFile("svg-lang-xmllang.svg", canvas =>
         {
-            XmlLanguage expected = XmlLanguage.GetLanguage("de-DE");
+            XmlLanguage expected = XmlLanguage.GetLanguage("fr-FR");
             canvas.Language.Should().Be(expected);
         });
     }

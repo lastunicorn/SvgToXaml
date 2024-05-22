@@ -30,8 +30,6 @@ public class SvgElement
 
     public string Language { get; set; }
 
-    public string XmlLanguage { get; set; }
-
     public Display? Display { get; set; }
 
     public ClassNameCollection ClassNames { get; } = new();

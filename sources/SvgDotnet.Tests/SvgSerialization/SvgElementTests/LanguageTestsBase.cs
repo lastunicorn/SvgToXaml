@@ -53,13 +53,23 @@ public abstract class LanguageTestsBase<T> : SvgFileTestsBase
     }
 
     [Fact]
-    public void HavingXmlLangAttribute_WhenSvgParsed_ThenElementContainsCorrectXmlLanguage()
+    public void HavingXmlLangAttribute_WhenSvgParsed_ThenElementContainsCorrectLanguage()
     {
         ParseSvgFile("xmllang.svg", result =>
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            svgElement.XmlLanguage.Should().Be("ro-RO");
+            svgElement.Language.Should().Be("de-DE");
+        });
+    }
+    [Fact]
+    public void HavingBothLangAndXmlLangAttributes_WhenSvgParsed_ThenElementContainsLanguageValueFromXmlLang()
+    {
+        ParseSvgFile("lang-and-xmllang.svg", result =>
+        {
+            T svgElement = SelectElementToTest(result.Svg);
+
+            svgElement.Language.Should().Be("de-DE");
         });
     }
 
