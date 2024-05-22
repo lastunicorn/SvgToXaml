@@ -18,7 +18,7 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-internal class XmlPolylineToModelConversion : XmlElementToModelConversion<XmlPolyline, SvgPolyline>
+internal class XmlPolylineToModelConversion : XmlShapeToModelConversion<XmlPolyline, SvgPolyline>
 {
     protected override string ElementName => "polyline";
 
@@ -37,7 +37,6 @@ internal class XmlPolylineToModelConversion : XmlElementToModelConversion<XmlPol
         base.ConvertProperties();
 
         ConvertPoints();
-        ConvertChildren();
     }
 
     private void ConvertPoints()
@@ -48,40 +47,6 @@ internal class XmlPolylineToModelConversion : XmlElementToModelConversion<XmlPol
 
             foreach (SvgPoint point in points)
                 SvgElement.Points.Add(point);
-        }
-    }
-
-    private void ConvertChildren()
-    {
-        if (XmlElement.Children != null)
-        {
-            IEnumerable<SvgElement> elements = XmlElement.Children
-                .Select(CreateConversionFor)
-                .Where(x => x != null)
-                .Select(x => x.Execute());
-
-            foreach (SvgElement svgElement in elements)
-                SvgElement.Children.Add(svgElement);
-        }
-    }
-
-    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
-    {
-        switch (objectToConvert)
-        {
-            case XmlDesc desc:
-                return new XmlDescToModelConversion(desc, DeserializationContext);
-
-            case XmlTitle title:
-                return new XmlTitleToModelConversion(title, DeserializationContext);
-
-            case XmlStyle style:
-                return new XmlStyleToModelConversion(style, DeserializationContext);
-
-            default:
-                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
-                DeserializationContext.Errors.Add(deserializationIssue);
-                return null;
         }
     }
 }

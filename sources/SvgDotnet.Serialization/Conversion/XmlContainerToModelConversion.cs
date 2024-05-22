@@ -19,9 +19,11 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementToModelConversion<TXml, TSvg>
-    where TXml : XmlContainer
+    where TXml : XmlElement, IXmlContainer
     where TSvg : SvgContainer
 {
+    protected List<Type> AllowedChildTypes { get; } = new();
+
     protected XmlContainerToModelConversion(TXml xmlContainer, DeserializationContext deserializationContext)
         : base(xmlContainer, deserializationContext)
     {
@@ -31,15 +33,30 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
     {
         base.ConvertProperties();
 
-        if (XmlElement.Children != null)
-        {
-            IEnumerable<SvgElement> elements = XmlElement.Children
-                .Select(CreateConversionFor)
-                .Where(x => x != null)
-                .Select(x => x.Execute());
+        ConvertChildren();
+    }
 
-            foreach (SvgElement svgElement in elements)
+    private void ConvertChildren()
+    {
+        if (XmlElement.Children == null)
+            return;
+
+        foreach (XmlElement xmlElement in XmlElement.Children)
+        {
+            Type elementType = xmlElement.GetType();
+            bool isAllowed = AllowedChildTypes.Contains(elementType);
+
+            if (isAllowed)
+            {
+                IToModelConversion<SvgElement> conversion = CreateConversionFor(xmlElement);
+                SvgElement svgElement = conversion.Execute();
                 SvgElement.Children.Add(svgElement);
+            }
+            else
+            {
+                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {elementType.Name} in {ElementName}.");
+                DeserializationContext.Errors.Add(deserializationIssue);
+            }
         }
     }
 
@@ -47,53 +64,53 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
     {
         switch (objectToConvert)
         {
-            case XmlDesc desc:
-                return new XmlDescToModelConversion(desc, DeserializationContext);
+            case XmlDesc xmlDesc:
+                return new XmlDescToModelConversion(xmlDesc, DeserializationContext);
 
-            case XmlTitle title:
-                return new XmlTitleToModelConversion(title, DeserializationContext);
+            case XmlTitle xmlTitle:
+                return new XmlTitleToModelConversion(xmlTitle, DeserializationContext);
 
-            case XmlLinearGradient linearGradient:
-                return new XmlLinearGradientToModelConversion(linearGradient, DeserializationContext);
+            case XmlLinearGradient xmlLinearGradient:
+                return new XmlLinearGradientToModelConversion(xmlLinearGradient, DeserializationContext);
 
-            case XmlRadialGradient radialGradient:
-                return new XmlRadialGradientToModelConversion(radialGradient, DeserializationContext);
+            case XmlRadialGradient xmlRadialGradient:
+                return new XmlRadialGradientToModelConversion(xmlRadialGradient, DeserializationContext);
 
-            case XmlCircle circle:
-                return new XmlCircleToModelConversion(circle, DeserializationContext);
+            case XmlCircle xmlCircle:
+                return new XmlCircleToModelConversion(xmlCircle, DeserializationContext);
 
-            case XmlEllipse ellipse:
-                return new XmlEllipseToModelConversion(ellipse, DeserializationContext);
+            case XmlEllipse xmlEllipse:
+                return new XmlEllipseToModelConversion(xmlEllipse, DeserializationContext);
 
-            case XmlLine line:
-                return new XmlLineToModelConversion(line, DeserializationContext);
+            case XmlLine xmlLine:
+                return new XmlLineToModelConversion(xmlLine, DeserializationContext);
 
-            case XmlPath path:
-                return new XmlPathToModelConversion(path, DeserializationContext);
+            case XmlPath xmlPath:
+                return new XmlPathToModelConversion(xmlPath, DeserializationContext);
 
-            case XmlPolygon polygon:
-                return new XmlPolygonToModelConversion(polygon, DeserializationContext);
+            case XmlPolygon xmlPolygon:
+                return new XmlPolygonToModelConversion(xmlPolygon, DeserializationContext);
 
-            case XmlPolyline polyline:
-                return new XmlPolylineToModelConversion(polyline, DeserializationContext);
+            case XmlPolyline xmlPolyline:
+                return new XmlPolylineToModelConversion(xmlPolyline, DeserializationContext);
 
-            case XmlRect rect:
-                return new XmlRectToModelConversion(rect, DeserializationContext);
+            case XmlRect xmlRect:
+                return new XmlRectToModelConversion(xmlRect, DeserializationContext);
 
-            case XmlDefs defs:
-                return new XmlDefsToModelConversion(defs, DeserializationContext);
+            case XmlDefs xmlDefs:
+                return new XmlDefsToModelConversion(xmlDefs, DeserializationContext);
 
-            case XmlG childG:
-                return new XmlGroupToModelConversion(childG, DeserializationContext);
+            case XmlG childXmlG:
+                return new XmlGroupToModelConversion(childXmlG, DeserializationContext);
 
-            case XmlSvg childSvg:
-                return new XmlSvgToModelConversion(childSvg, DeserializationContext);
+            case XmlSvg childXmlSvg:
+                return new XmlSvgToModelConversion(childXmlSvg, DeserializationContext);
 
-            case XmlSymbol symbol:
-                return new XmlSymbolToModelConversion(symbol, DeserializationContext);
+            case XmlSymbol xmlSymbol:
+                return new XmlSymbolToModelConversion(xmlSymbol, DeserializationContext);
 
-            case XmlUse use:
-                return new XmlUseToModelConversion(use, DeserializationContext);
+            case XmlUse xmlUse:
+                return new XmlUseToModelConversion(xmlUse, DeserializationContext);
 
             case XmlClipPath clipPath:
                 return new XmlClipPathToModelConversion(clipPath, DeserializationContext);

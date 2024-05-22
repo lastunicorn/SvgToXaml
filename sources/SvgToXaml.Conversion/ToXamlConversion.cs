@@ -61,10 +61,14 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         try
         {
             Display? display = SvgElement.CalculateDisplay();
+            
             if (display == Display.None)
                 return null;
 
             XamlElement = CreateXamlElement();
+
+            if (XamlElement == null)
+                return null;
 
             CheckStyleDeclarations();
 

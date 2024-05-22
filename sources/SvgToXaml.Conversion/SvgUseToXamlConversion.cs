@@ -32,7 +32,12 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
         SvgElement referencedElement = SvgElement.GetReferencedElement();
 
         if (referencedElement == null)
+        {
+            ConversionIssue conversionIssue = new("Conversion", $"The 'use' element could not find referenced element: '{SvgElement.Href.Id}'.");
+            ConversionContext.Warnings.Add(conversionIssue);
+
             return null;
+        }
 
         IConversion<UIElement> conversion = ConvertReferencedElement(referencedElement);
         UIElement uiElement = conversion.Execute();

@@ -40,6 +40,9 @@ public class SvgUse : SvgContainer
 
     public SvgElement GetReferencedElement()
     {
+        if (string.IsNullOrEmpty(Href.Id))
+            return null;
+
         Svg svg = GetParentSvg();
         return svg?.FindChild(Href.Id);
     }

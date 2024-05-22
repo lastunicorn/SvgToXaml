@@ -18,7 +18,7 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-internal class XmlCircleToModelConversion : XmlElementToModelConversion<XmlCircle, SvgCircle>
+internal class XmlCircleToModelConversion : XmlShapeToModelConversion<XmlCircle, SvgCircle>
 {
     protected override string ElementName => "circle";
 
@@ -38,7 +38,6 @@ internal class XmlCircleToModelConversion : XmlElementToModelConversion<XmlCircl
 
         ConvertRadius();
         ConvertPosition();
-        ConvertChildren();
     }
 
     private void ConvertRadius()
@@ -64,39 +63,5 @@ internal class XmlCircleToModelConversion : XmlElementToModelConversion<XmlCircl
     {
         SvgElement.CenterX = XmlElement.Cx;
         SvgElement.CenterY = XmlElement.Cy;
-    }
-
-    private void ConvertChildren()
-    {
-        if (XmlElement.Children != null)
-        {
-            IEnumerable<SvgElement> elements = XmlElement.Children
-                .Select(CreateConversionFor)
-                .Where(x => x != null)
-                .Select(x => x.Execute());
-
-            foreach (SvgElement svgElement in elements)
-                SvgElement.Children.Add(svgElement);
-        }
-    }
-
-    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
-    {
-        switch (objectToConvert)
-        {
-            case XmlDesc desc:
-                return new XmlDescToModelConversion(desc, DeserializationContext);
-
-            case XmlTitle title:
-                return new XmlTitleToModelConversion(title, DeserializationContext);
-
-            case XmlStyle style:
-                return new XmlStyleToModelConversion(style, DeserializationContext);
-
-            default:
-                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
-                DeserializationContext.Errors.Add(deserializationIssue);
-                return null;
-        }
     }
 }

@@ -41,6 +41,39 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
+    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenEllipseContainsLinearGradient()
+    {
+        ParseSvgFile("ellipse-lineargradient.svg", svg =>
+        {
+            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
+
+            svgEllipse.Children[0].Should().BeOfType<SvgLinearGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenEllipseContainsRadialGradient()
+    {
+        ParseSvgFile("ellipse-radialgradient.svg", svg =>
+        {
+            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
+
+            svgEllipse.Children[0].Should().BeOfType<SvgRadialGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenEllipseContainsClipPath()
+    {
+        ParseSvgFile("ellipse-clippath.svg", svg =>
+        {
+            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
+
+            svgEllipse.Children[0].Should().BeOfType<SvgClipPath>();
+        });
+    }
+
+    [Fact]
     public void HavingStyleChild_WhenSvgFileIsParsed_ThenEllipseContainsStyle()
     {
         ParseSvgFile("ellipse-style.svg", svg =>

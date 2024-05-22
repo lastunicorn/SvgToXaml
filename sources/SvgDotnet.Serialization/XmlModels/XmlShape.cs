@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-public class XmlShape : XmlElement
+public class XmlShape : XmlElement, IXmlContainer
 {
     // Animation elements
     //[XmlElement("animate", typeof())]
@@ -34,11 +34,11 @@ public class XmlShape : XmlElement
     //[XmlElement("metadata", typeof())]
 
     // Paint server elements
-    //[XmlElement("linearGradient", typeof(XmlLinearGradient))]
-    //[XmlElement("radialGradient", typeof(XmlRadialGradient))]
+    [XmlElement("linearGradient", typeof(XmlLinearGradient))]
+    [XmlElement("radialGradient", typeof(XmlRadialGradient))]
     //[XmlElement("pattern", typeof())]
 
-    //[XmlElement("clipPath", typeof(XmlClipPath))]
+    [XmlElement("clipPath", typeof(XmlClipPath))]
     //[XmlElement("marker", typeof())]
     //[XmlElement("mask", typeof())]
     //[XmlElement("script", typeof())]

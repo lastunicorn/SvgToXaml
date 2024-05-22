@@ -18,35 +18,24 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-internal class XmlPolygonToModelConversion : XmlShapeToModelConversion<XmlPolygon, SvgPolygon>
+internal abstract class XmlShapeToModelConversion<TXml, TSvg> : XmlContainerToModelConversion<TXml, TSvg>
+    where TXml : XmlShape, IXmlContainer
+    where TSvg : SvgContainer
 {
-    protected override string ElementName => "polygon";
-
-    public XmlPolygonToModelConversion(XmlPolygon xmlElement, DeserializationContext deserializationContext)
-        : base(xmlElement, deserializationContext)
+    protected XmlShapeToModelConversion(TXml xmlShape, DeserializationContext deserializationContext)
+        : base(xmlShape, deserializationContext)
     {
-    }
-
-    protected override SvgPolygon CreateSvgElement()
-    {
-        return new SvgPolygon();
-    }
-
-    protected override void ConvertProperties()
-    {
-        base.ConvertProperties();
-
-        ConvertPoints();
-    }
-
-    private void ConvertPoints()
-    {
-        if (XmlElement.Points != null)
+        AllowedChildTypes.AddRange(new[]
         {
-            IEnumerable<SvgPoint> points = SvgPoint.ParseMany(XmlElement.Points);
+            typeof(XmlDesc),
+            typeof(XmlTitle),
 
-            foreach (SvgPoint point in points)
-                SvgElement.Points.Add(point);
-        }
+            typeof(XmlLinearGradient),
+            typeof(XmlRadialGradient),
+
+            typeof(XmlClipPath),
+            typeof(XmlStyle)
+        });
     }
+
 }

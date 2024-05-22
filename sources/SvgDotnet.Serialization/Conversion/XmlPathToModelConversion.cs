@@ -18,7 +18,7 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-internal class XmlPathToModelConversion : XmlElementToModelConversion<XmlPath, SvgPath>
+internal class XmlPathToModelConversion : XmlShapeToModelConversion<XmlPath, SvgPath>
 {
     protected override string ElementName => "path";
 
@@ -37,45 +37,10 @@ internal class XmlPathToModelConversion : XmlElementToModelConversion<XmlPath, S
         base.ConvertProperties();
 
         ConvertData();
-        ConvertChildren();
     }
 
     private void ConvertData()
     {
         SvgElement.Data = XmlElement.D;
-    }
-
-    private void ConvertChildren()
-    {
-        if (XmlElement.Children != null)
-        {
-            IEnumerable<SvgElement> elements = XmlElement.Children
-                .Select(CreateConversionFor)
-                .Where(x => x != null)
-                .Select(x => x.Execute());
-
-            foreach (SvgElement svgElement in elements)
-                SvgElement.Children.Add(svgElement);
-        }
-    }
-
-    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
-    {
-        switch (objectToConvert)
-        {
-            case XmlDesc desc:
-                return new XmlDescToModelConversion(desc, DeserializationContext);
-
-            case XmlTitle title:
-                return new XmlTitleToModelConversion(title, DeserializationContext);
-
-            case XmlStyle style:
-                return new XmlStyleToModelConversion(style, DeserializationContext);
-
-            default:
-                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
-                DeserializationContext.Errors.Add(deserializationIssue);
-                return null;
-        }
     }
 }

@@ -41,6 +41,39 @@ public class ChildrenTests : SvgFileTestsBase
     }
 
     [Fact]
+    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenLineContainsLinearGradient()
+    {
+        ParseSvgFile("line-lineargradient.svg", svg =>
+        {
+            SvgLine svgLine = svg.Children[0] as SvgLine;
+
+            svgLine.Children[0].Should().BeOfType<SvgLinearGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenLineContainsRadialGradient()
+    {
+        ParseSvgFile("line-radialgradient.svg", svg =>
+        {
+            SvgLine svgLine = svg.Children[0] as SvgLine;
+
+            svgLine.Children[0].Should().BeOfType<SvgRadialGradient>();
+        });
+    }
+
+    [Fact]
+    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenLineContainsClipPath()
+    {
+        ParseSvgFile("line-clippath.svg", svg =>
+        {
+            SvgLine svgLine = svg.Children[0] as SvgLine;
+
+            svgLine.Children[0].Should().BeOfType<SvgClipPath>();
+        });
+    }
+
+    [Fact]
     public void HavingStyleChild_WhenSvgFileIsParsed_ThenRectangleContainsStyle()
     {
         ParseSvgFile("line-style.svg", svg =>

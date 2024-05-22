@@ -25,6 +25,32 @@ internal class XmlDefsToModelConversion : XmlContainerToModelConversion<XmlDefs,
     public XmlDefsToModelConversion(XmlDefs xmlContainer, DeserializationContext deserializationContext)
         : base(xmlContainer, deserializationContext)
     {
+        AllowedChildTypes.AddRange(new[]
+        {
+            typeof(XmlDesc),
+            typeof(XmlTitle),
+
+            typeof(XmlLinearGradient),
+            typeof(XmlRadialGradient),
+
+            typeof(XmlCircle),
+            typeof(XmlEllipse),
+            typeof(XmlLine),
+            typeof(XmlPath),
+            typeof(XmlPolygon),
+            typeof(XmlPolyline),
+            typeof(XmlRect),
+
+            typeof(XmlDefs),
+            typeof(XmlG),
+            typeof(XmlSvg),
+            typeof(XmlSymbol),
+            typeof(XmlUse),
+
+            typeof(XmlClipPath),
+            typeof(XmlStyle),
+            typeof(XmlText)
+        });
     }
 
     protected override SvgDefinitions CreateSvgElement()

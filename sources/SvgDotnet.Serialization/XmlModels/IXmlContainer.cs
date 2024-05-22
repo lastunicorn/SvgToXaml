@@ -14,24 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-/// <summary>
-/// A graphics element that is defined by some combination of straight lines and curves.
-/// </summary>
-public class SvgShape : SvgContainer
+public interface IXmlContainer
 {
-    public SvgShape()
-    {
-        Children.AcceptedTypes = new[] {
-            typeof(SvgDescription),
-            typeof(SvgTitle),
-
-            typeof(SvgLinearGradient),
-            typeof(SvgRadialGradient),
-
-            typeof(SvgClipPath),
-            typeof(SvgStyle)
-        };
-    }
+    object[] Children { get; set; }
 }

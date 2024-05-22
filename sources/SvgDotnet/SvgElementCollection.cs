@@ -82,6 +82,9 @@ public class SvgElementCollection<T> : Collection<T>
 
     public SvgElement FindChild(string id)
     {
+        if (id == null)
+            return null;
+
         foreach (T svgElement in Items)
         {
             if (svgElement.Id == id)
