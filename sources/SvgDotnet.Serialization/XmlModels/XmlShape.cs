@@ -14,34 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
-
 namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-public class XmlShape : XmlElement, IXmlContainer
+public class XmlShape : XmlContainer
 {
-    // Animation elements
-    //[XmlElement("animate", typeof())]
-    //[XmlElement("animate", typeof())]
-    //[XmlElement("animateMotion", typeof())]
-    //[XmlElement("animateTransform", typeof())]
-    //[XmlElement("discard", typeof())]
-    //[XmlElement("set", typeof())]
-
-    // Descriptive elements
-    [XmlElement("desc", typeof(XmlDesc))]
-    [XmlElement("title", typeof(XmlTitle))]
-    //[XmlElement("metadata", typeof())]
-
-    // Paint server elements
-    [XmlElement("linearGradient", typeof(XmlLinearGradient))]
-    [XmlElement("radialGradient", typeof(XmlRadialGradient))]
-    //[XmlElement("pattern", typeof())]
-
-    [XmlElement("clipPath", typeof(XmlClipPath))]
-    //[XmlElement("marker", typeof())]
-    //[XmlElement("mask", typeof())]
-    //[XmlElement("script", typeof())]
-    [XmlElement("style", typeof(XmlStyle))]
-    public object[] Children { get; set; }
 }

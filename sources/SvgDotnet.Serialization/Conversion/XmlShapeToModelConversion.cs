@@ -19,7 +19,7 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal abstract class XmlShapeToModelConversion<TXml, TSvg> : XmlContainerToModelConversion<TXml, TSvg>
-    where TXml : XmlShape, IXmlContainer
+    where TXml : XmlShape
     where TSvg : SvgContainer
 {
     protected XmlShapeToModelConversion(TXml xmlShape, DeserializationContext deserializationContext)

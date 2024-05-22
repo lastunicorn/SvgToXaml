@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-public class XmlContainer : XmlElement, IXmlContainer
+public class XmlContainer : XmlElement
 {
     // Descriptive elements
     [XmlElement("desc", typeof(XmlDesc))]

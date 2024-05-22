@@ -19,7 +19,7 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementToModelConversion<TXml, TSvg>
-    where TXml : XmlElement, IXmlContainer
+    where TXml : XmlContainer
     where TSvg : SvgContainer
 {
     protected List<Type> AllowedChildTypes { get; } = new();
@@ -54,7 +54,7 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             }
             else
             {
-                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {elementType.Name} in {ElementName}.");
+                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Child type '{elementType.Name}' is not allowed in '{ElementName}'. Child is ignored.");
                 DeserializationContext.Errors.Add(deserializationIssue);
             }
         }
@@ -112,14 +112,14 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             case XmlUse xmlUse:
                 return new XmlUseToModelConversion(xmlUse, DeserializationContext);
 
-            case XmlClipPath clipPath:
-                return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
+            case XmlClipPath xmlClipPath:
+                return new XmlClipPathToModelConversion(xmlClipPath, DeserializationContext);
 
-            case XmlStyle style:
-                return new XmlStyleToModelConversion(style, DeserializationContext);
+            case XmlStyle xmlStyle:
+                return new XmlStyleToModelConversion(xmlStyle, DeserializationContext);
 
-            case XmlText text:
-                return new XmlTextToModelConversion(text, DeserializationContext);
+            case XmlText xmlText:
+                return new XmlTextToModelConversion(xmlText, DeserializationContext);
 
             default:
                 DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
