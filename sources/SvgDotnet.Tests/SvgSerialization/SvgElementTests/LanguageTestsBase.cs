@@ -22,9 +22,9 @@ public abstract class LanguageTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingNoLangAttribute_WhenSvgParsed_ThenLanguageIsNull()
     {
-        ParseSvgFile("lang-missing.svg", svg =>
+        ParseSvgFile("lang-missing.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.Language.Should().BeNull();
         });
@@ -33,9 +33,9 @@ public abstract class LanguageTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingNoXmlLangAttribute_WhenSvgParsed_ThenXmlLanguageIsNull()
     {
-        ParseSvgFile("xmllang-missing.svg", svg =>
+        ParseSvgFile("xmllang-missing.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.Language.Should().BeNull();
         });
@@ -44,9 +44,9 @@ public abstract class LanguageTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingLangAttribute_WhenSvgParsed_ThenElementContainsCorrectLanguage()
     {
-        ParseSvgFile("lang.svg", svg =>
+        ParseSvgFile("lang.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.Language.Should().Be("ro-RO");
         });
@@ -55,9 +55,9 @@ public abstract class LanguageTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingXmlLangAttribute_WhenSvgParsed_ThenElementContainsCorrectXmlLanguage()
     {
-        ParseSvgFile("xmllang.svg", svg =>
+        ParseSvgFile("xmllang.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.XmlLanguage.Should().Be("ro-RO");
         });

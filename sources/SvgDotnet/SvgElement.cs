@@ -26,6 +26,8 @@ public class SvgElement
 
     public string Id { get; set; }
 
+    public int? TabIndex { get; set; }
+
     public string Language { get; set; }
 
     public string XmlLanguage { get; set; }

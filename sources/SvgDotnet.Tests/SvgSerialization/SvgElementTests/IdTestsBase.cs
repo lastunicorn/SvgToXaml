@@ -22,9 +22,9 @@ public abstract class IdTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithId_WhenSvgFileIsParsed_ThenElementHasThatId()
     {
-        ParseSvgFile("id.svg", svg =>
+        ParseSvgFile("id.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.Id.Should().Be("elementId1");
         });
@@ -33,9 +33,9 @@ public abstract class IdTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithNoId_WhenSvgFileIsParsed_ThenElementHasIdNull()
     {
-        ParseSvgFile("id-missing.svg", svg =>
+        ParseSvgFile("id-missing.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.Id.Should().BeNull();
         });

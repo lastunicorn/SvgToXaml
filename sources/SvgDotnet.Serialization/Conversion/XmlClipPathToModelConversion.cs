@@ -20,7 +20,7 @@ namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlClipPath, SvgClipPath>
 {
-    protected override string ElementName => "clip-path";
+    protected override string ElementName => "clipPath";
 
     public XmlClipPathToModelConversion(XmlClipPath xmlElement, DeserializationContext deserializationContext)
         : base(xmlElement, deserializationContext)
@@ -36,6 +36,19 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
     {
         base.ConvertProperties();
 
+        if (SvgElement.TabIndex != null)
+        {
+            SvgElement.TabIndex = null;
+
+            DeserializationIssue deserializationIssue = new("Xml deserialization", "'tabIndex' attribute is not allowed on 'clipPath' element.");
+            DeserializationContext.Warnings.Add(deserializationIssue);
+        }
+
+        ConvertChildren();
+    }
+
+    private void ConvertChildren()
+    {
         if (XmlElement.Children != null)
         {
             IEnumerable<IToModelConversion<SvgElement>> conversions = CreateConversionsForAllChildren();

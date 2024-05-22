@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.SvgDotnet.Serialization.XmlModels;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
@@ -33,6 +32,9 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         base.ConvertProperties();
 
         SvgElement.Id = XmlElement.Id;
+
+        if (XmlElement.TabIndexSpecified)
+            SvgElement.TabIndex = XmlElement.TabIndex;
 
         SvgElement.Language = XmlElement.Lang;
         SvgElement.XmlLanguage = XmlElement.XmlLang;

@@ -25,6 +25,11 @@ public class XmlElement
     [XmlAttribute("id")]
     public string Id { get; set; }
 
+    [XmlAttribute("tabIndex")]
+    public int TabIndex { get; set; }
+    
+    public bool TabIndexSpecified { get; set; }
+
     [XmlAttribute("lang")]
     public string Lang { get; set; }
 

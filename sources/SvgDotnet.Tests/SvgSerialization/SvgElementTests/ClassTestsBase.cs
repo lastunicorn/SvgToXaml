@@ -22,9 +22,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithClassNotSpecified_WhenSvgFileIsParsed_ThenElementHasEmptyClassNames()
     {
-        ParseSvgFile("01-class-missing.svg", svg =>
+        ParseSvgFile("01-class-missing.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.ClassNames.Should().HaveCount(0);
         });
@@ -33,9 +33,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithEmptyClass_WhenSvgFileIsParsed_ThenElementHasEmptyClassNames()
     {
-        ParseSvgFile("02-class-empty.svg", svg =>
+        ParseSvgFile("02-class-empty.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             svgElement.ClassNames.Should().HaveCount(0);
         });
@@ -44,9 +44,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithOneClass_WhenSvgFileIsParsed_ThenElementHasThatOneClassName()
     {
-        ParseSvgFile("03-class-1.svg", svg =>
+        ParseSvgFile("03-class-1.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             List<string> expected = new()
             {
@@ -59,9 +59,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithTwoClasses_WhenSvgFileIsParsed_ThenElementHasThoseTwoClassNames()
     {
-        ParseSvgFile("04-class-2-space-1.svg", svg =>
+        ParseSvgFile("04-class-2-space-1.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             List<string> expected = new()
             {
@@ -75,9 +75,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithTwoClassesSeparatedByTwoSpaces_WhenSvgFileIsParsed_ThenSvgContainsElementWithThoseTwoClassNames()
     {
-        ParseSvgFile("05-class-2-space-2.svg", svg =>
+        ParseSvgFile("05-class-2-space-2.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             List<string> expected = new()
             {
@@ -91,9 +91,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithTwoClassesSeparatedByOneTab_WhenSvgFileIsParsed_ThenSvgContainsElementWithThoseTwoClassNames()
     {
-        ParseSvgFile("06-class-2-tab-1.svg", svg =>
+        ParseSvgFile("06-class-2-tab-1.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             List<string> expected = new()
             {
@@ -107,9 +107,9 @@ public abstract class ClassTestsBase<T> : SvgFileTestsBase
     [Fact]
     public void HavingElementWithTwoClassesSeparatedByTwoTabs_WhenSvgFileIsParsed_ThenSvgContainsElementWithThoseTwoClassNames()
     {
-        ParseSvgFile("07-class-2-tab-2.svg", svg =>
+        ParseSvgFile("07-class-2-tab-2.svg", result =>
         {
-            T svgElement = SelectElementToTest(svg);
+            T svgElement = SelectElementToTest(result.Svg);
 
             List<string> expected = new()
             {
