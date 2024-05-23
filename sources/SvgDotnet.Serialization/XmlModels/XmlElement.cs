@@ -85,8 +85,8 @@ public class XmlElement
 
     public bool StrokeMiterLimitSpecified { get; set; }
 
-    //[XmlAttribute("stroke-dasharray")]
-    //public double StrokeDashArray { get; set; }
+    [XmlAttribute("stroke-dasharray")]
+    public string StrokeDashArray { get; set; }
 
     [XmlAttribute("stroke-dashoffset")]
     public string StrokeDashOffset { get; set; }

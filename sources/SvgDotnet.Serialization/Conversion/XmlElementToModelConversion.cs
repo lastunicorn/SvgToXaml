@@ -83,7 +83,11 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         if (XmlElement.StrokeLineCapSpecified)
             SvgElement.StrokeLineCap = Convert(XmlElement.StrokeLineCap);
 
-        SvgElement.StrokeDashOffset = XmlElement.StrokeDashOffset;
+        if (XmlElement.StrokeDashArray != null)
+            SvgElement.StrokeDashArray = DashArray.Parse(XmlElement.StrokeDashArray);
+
+        if (XmlElement.StrokeDashOffset != null)
+            SvgElement.StrokeDashOffset = XmlElement.StrokeDashOffset;
 
         if (XmlElement.StrokeMiterLimitSpecified)
             SvgElement.StrokeMiterLimit = XmlElement.StrokeMiterLimit;

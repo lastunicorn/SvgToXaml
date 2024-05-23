@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Globalization;
+using System.Windows.Markup;
 
 namespace DustInTheWind.SvgDotnet;
 
@@ -89,6 +90,8 @@ public class SvgElement
     public StrokeLineJoin? StrokeLineJoin { get; set; }
 
     public double? StrokeMiterLimit { get; set; }
+
+    public DashArray StrokeDashArray { get; set; }
 
     public LengthPercentage? StrokeDashOffset { get; set; }
 
@@ -225,6 +228,19 @@ public class SvgElement
             return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), styleDeclaration.Value, true);
 
         return StrokeLineJoin;
+    }
+
+    public DashArray ComputeStrokeDashArray()
+    {
+        StyleDeclaration styleDeclaration = Style?["stroke-dasharray"] ?? GetStyleValueFromClasses("stroke-dasharray");
+
+        if (styleDeclaration != null)
+        {
+            DashArray dashArray = DashArray.Parse(styleDeclaration.Value.Trim());
+            return dashArray;
+        }
+
+        return StrokeDashArray;
     }
 
     public LengthPercentage? ComputeStrokeDashOffset()

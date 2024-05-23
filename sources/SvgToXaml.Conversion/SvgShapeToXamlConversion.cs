@@ -38,6 +38,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         SetStrokeThickness(inheritedSvgElements);
         SetStrokeLineCap(inheritedSvgElements);
         SetStrokeLineJoin(inheritedSvgElements);
+        SetStrokeDashArray(inheritedSvgElements);
         SetStrokeDashOffset(inheritedSvgElements);
         SetStrokeMiterLimit(inheritedSvgElements);
     }
@@ -170,6 +171,19 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
                 StrokeLineJoin.Arcs => PenLineJoin.Miter,
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+    }
+
+    private void SetStrokeDashArray(IEnumerable<SvgElement> svgElements)
+    {
+        DashArray strokeDashArray = svgElements
+            .Select(x => x.ComputeStrokeDashArray())
+            .FirstOrDefault(x => x != null);
+
+        if (strokeDashArray != null)
+        {
+            IEnumerable<double> values = strokeDashArray.Select(x => x.ComputeValue());
+            XamlElement.StrokeDashArray = new DoubleCollection(values);
         }
     }
 
