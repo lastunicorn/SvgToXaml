@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Serialization;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.CircleTests;
 
 public class StrokeWidthTests : SvgFileTestsBase
@@ -40,8 +42,10 @@ public class StrokeWidthTests : SvgFileTestsBase
             LengthPercentage expected = new Length(0);
             svgCircle.StrokeWidth.Should().Be(expected);
 
-            result.Errors.Count.Should().Be(1);
-            result.Errors[0].Path.Should().Be("svg.(1)circle.@stroke-width");
+            result.Issues.Count.Should().Be(1);
+
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Error);
+            result.Issues[0].Path.Should().Be("svg.(1)circle.@stroke-width");
         });
     }
 

@@ -18,13 +18,13 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 public class ConversionIssue
 {
-    public string Path { get; }
+    public ConversionIssueLevel Level { get; }
 
     public string Message { get; }
 
-    public ConversionIssue(string path, string message)
+    public ConversionIssue(ConversionIssueLevel level, string message)
     {
-        Path = path;
+        Level = level;
         Message = message;
     }
 }

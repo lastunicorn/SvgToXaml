@@ -22,7 +22,5 @@ public class ConversionContext
 {
     public Canvas Canvas { get; set; }
 
-    public List<ConversionIssue> Warnings { get; init; } = new();
-
-    public List<ConversionIssue> Errors { get; init; } = new();
+    public ConversionIssueCollection Issues { get; init; } = new();
 }

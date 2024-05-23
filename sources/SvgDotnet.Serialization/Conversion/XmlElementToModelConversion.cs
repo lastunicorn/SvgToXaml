@@ -66,8 +66,8 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
                 string path = DeserializationContext.Path.ToString();
                 DeserializationContext.Path.RemoveLast();
 
-                NegativeValueIssue negativeValueIssue = new(path);
-                DeserializationContext.Errors.Add(negativeValueIssue);
+                NegativeValueIssue negativeValueIssue = new(DeserializationIssueLevel.Error, path);
+                DeserializationContext.Issues.Add(negativeValueIssue);
 
                 SvgElement.StrokeWidth = LengthPercentage.Zero;
             }

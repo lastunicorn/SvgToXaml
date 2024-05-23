@@ -95,16 +95,14 @@ public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversi
             case SvgStyle:
             {
                 Type inheritedElementType = svgElement.GetType();
-                ConversionIssue conversionIssue = new("Conversion", $"Element ignored. Type: {inheritedElementType.FullName}");
-                ConversionContext.Warnings.Add(conversionIssue);
+                ConversionContext.Issues.AddWarning($"Element ignored. Type: {inheritedElementType.FullName}");
                 return null;
             }
 
             default:
             {
                 Type inheritedElementType = svgElement.GetType();
-                ConversionIssue conversionIssue = new("Conversion", $"Unknown element type: {inheritedElementType.FullName}");
-                ConversionContext.Errors.Add(conversionIssue);
+                ConversionContext.Issues.AddError($"Unknown element type: {inheritedElementType.FullName}");
                 return null;
             }
         }

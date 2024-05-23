@@ -24,13 +24,13 @@ public class InfoItemTypeToColorConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is ConversionInfoItemType conversionInfoItemType)
+        if (value is IssueType conversionInfoItemType)
         {
             return conversionInfoItemType switch
             {
-                ConversionInfoItemType.Error => Brushes.OrangeRed,
-                ConversionInfoItemType.Waring => new SolidColorBrush(Color.FromRgb(0xfc, 0xdd, 0x5f)),
-                ConversionInfoItemType.Info => Brushes.LightSkyBlue,
+                IssueType.Error => Brushes.OrangeRed,
+                IssueType.Waring => new SolidColorBrush(Color.FromRgb(0xfc, 0xdd, 0x5f)),
+                IssueType.Info => Brushes.LightSkyBlue,
             };
         }
         

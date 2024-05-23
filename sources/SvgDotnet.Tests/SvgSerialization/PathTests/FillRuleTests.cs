@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Serialization;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.PathTests;
 
 public class FillRuleTests : SvgFileTestsBase
@@ -57,7 +59,8 @@ public class FillRuleTests : SvgFileTestsBase
         ParseSvgFile("path-fillrule-invalid.svg", context =>
         {
             context.Svg.Should().BeNull();
-            context.Errors.Count.Should().Be(1);
+            context.Issues.Count.Should().Be(1);
+            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Error);
         });
     }
 }

@@ -73,8 +73,8 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
                 string path = DeserializationContext.Path.ToString();
                 DeserializationContext.Path.RemoveLast();
 
-                NegativeValueIssue issue = new(path);
-                DeserializationContext.Warnings.Add(issue);
+                NegativeValueIssue issue = new(DeserializationIssueLevel.Warning, path);
+                DeserializationContext.Issues.Add(issue);
             }
             else
             {
@@ -132,8 +132,8 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
                 return new XmlStyleToModelConversion(style, DeserializationContext);
 
             default:
-                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
-                DeserializationContext.Errors.Add(deserializationIssue);
+                string path = DeserializationContext.Path.ToString();
+                DeserializationContext.Issues.AddError(path, $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
                 return null;
         }
     }

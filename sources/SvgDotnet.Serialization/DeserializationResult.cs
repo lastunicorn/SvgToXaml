@@ -20,7 +20,5 @@ public class DeserializationResult
 {
     public Svg Svg { get; init; }
 
-    public List<DeserializationIssue> Warnings { get; init; } = new();
-
-    public List<DeserializationIssue> Errors { get; init; } = new();
+    public List<DeserializationIssue> Issues { get; init; } = new();
 }

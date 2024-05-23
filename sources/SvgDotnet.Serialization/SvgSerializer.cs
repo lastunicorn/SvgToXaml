@@ -35,8 +35,8 @@ public class SvgSerializer
 
     private void HandleUnknownNode(object sender, XmlNodeEventArgs e)
     {
-        DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
-        deserializationContext.Warnings.Add(deserializationIssue);
+        string path = deserializationContext.Path.ToString();
+        deserializationContext.Issues.AddWarning(path, $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
     }
 
     public DeserializationResult Deserialize(string svg)
@@ -77,16 +77,16 @@ public class SvgSerializer
 
             if (xmlSvg == null)
             {
-                DeserializationIssue deserializationIssue = new("Xml deserialization", "The text is not a valid svg.");
-                deserializationContext.Errors.Add(deserializationIssue);
+                string path = deserializationContext.Path.ToString();
+                deserializationContext.Issues.AddError(path, "The text is not a valid svg.");
             }
 
             return xmlSvg;
         }
         catch (Exception ex)
         {
-            DeserializationIssue deserializationIssue = new("Xml deserialization", ex.ToString());
-            deserializationContext.Errors.Add(deserializationIssue);
+            string path = deserializationContext.Path.ToString();
+            deserializationContext.Issues.AddError(path, ex.ToString());
 
             return null;
         }
@@ -103,8 +103,7 @@ public class SvgSerializer
         return new DeserializationResult
         {
             Svg = svg,
-            Errors = deserializationContext.Errors,
-            Warnings = deserializationContext.Warnings
+            Issues = deserializationContext.Issues.ToList()
         };
     }
 }

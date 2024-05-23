@@ -14,19 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml.Conversion;
 
-namespace DustInTheWind.SvgToXaml;
-
-public class ConversionInfoItem
+public enum ConversionIssueLevel
 {
-    public ConversionInfoItemType InfoItemType { get; }
-
-    public string Message { get; }
-
-    public ConversionInfoItem(ErrorInfo errorInfo, ConversionInfoItemType infoItemType)
-    {
-        Message = errorInfo.Message;
-        InfoItemType = infoItemType;
-    }
+    Info,
+    Warning,
+    Error
 }

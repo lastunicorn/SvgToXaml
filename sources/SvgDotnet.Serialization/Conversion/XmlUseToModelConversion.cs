@@ -100,8 +100,8 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
                 return new XmlStyleToModelConversion(style, DeserializationContext);
 
             default:
-                DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
-                DeserializationContext.Errors.Add(deserializationIssue);
+                string path = DeserializationContext.Path.ToString();
+                DeserializationContext.Issues.AddError(path, $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
                 return null;
         }
     }

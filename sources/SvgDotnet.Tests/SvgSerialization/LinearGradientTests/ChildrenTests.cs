@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Serialization;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.LinearGradientTests;
 
 public class ChildrenTests : SvgFileTestsBase
@@ -67,7 +69,8 @@ public class ChildrenTests : SvgFileTestsBase
     {
         ParseSvgFile("lineargradient-invalid.svg", context =>
         {
-            context.Warnings.Should().HaveCount(1);
+            context.Issues.Should().HaveCount(1);
+            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

@@ -18,13 +18,9 @@ namespace DustInTheWind.SvgDotnet.Serialization;
 
 public class DeserializationIssue
 {
-    public string Path { get; }
+    public DeserializationIssueLevel Level { get; init; }
 
-    public string Message { get; }
+    public string Path { get; init; }
 
-    public DeserializationIssue(string path, string message)
-    {
-        Path = path;
-        Message = message;
-    }
+    public string Message { get; init; }
 }

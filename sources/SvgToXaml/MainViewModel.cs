@@ -33,7 +33,7 @@ public class MainViewModel : ViewModelBase
     private UIElement xamlObject;
     private string svgFilePath;
     private readonly Dispatcher dispatcher;
-    private List<ConversionInfoItem> errorItems;
+    private List<ProcessingIssueViewModel> errorItems;
     private bool shouldOptimize;
 
     public string SvgFilePath
@@ -82,7 +82,7 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public List<ConversionInfoItem> ErrorItems
+    public List<ProcessingIssueViewModel> ErrorItems
     {
         get => errorItems;
         private set
@@ -156,18 +156,8 @@ public class MainViewModel : ViewModelBase
             ? null
             : ExtractUiElement(ev.XamlText);
 
-        IEnumerable<ConversionInfoItem> errorInfoItems = ev.Errors
-            .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Error));
-
-        IEnumerable<ConversionInfoItem> warningInfoItems = ev.Warning
-            .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Waring));
-
-        IEnumerable<ConversionInfoItem> infoInfoItems = ev.Info
-            .Select(x => new ConversionInfoItem(x, ConversionInfoItemType.Info));
-
-        List<ConversionInfoItem> items = errorInfoItems
-            .Concat(warningInfoItems)
-            .Concat(infoInfoItems)
+        List<ProcessingIssueViewModel> items = ev.Issues
+            .Select(x => new ProcessingIssueViewModel(x))
             .ToList();
 
         ErrorItems = items.Count == 0

@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Serialization;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.EllipseTests;
 
 public class RadiusXTests : SvgFileTestsBase
@@ -38,8 +40,10 @@ public class RadiusXTests : SvgFileTestsBase
 
             svgEllipse.RadiusX.Should().Be(0);
 
-            result.Warnings.Should().HaveCount(1);
-            result.Warnings[0].Path.Should().Be("svg.(1)ellipse.@rx");
+            result.Issues.Should().HaveCount(1);
+
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues[0].Path.Should().Be("svg.(1)ellipse.@rx");
         });
     }
 

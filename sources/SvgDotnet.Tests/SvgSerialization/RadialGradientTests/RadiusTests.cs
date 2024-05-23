@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Serialization;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RadialGradientTests;
 
 public class RadiusTests : SvgFileTestsBase
@@ -39,8 +41,10 @@ public class RadiusTests : SvgFileTestsBase
 
             svgRadialGradient.Radius.Should().Be(Length.Zero);
 
-            result.Warnings.Should().HaveCount(1);
-            result.Warnings[0].Path.Should().Be("svg.(1)radialGradient.@r");
+            result.Issues.Should().HaveCount(1);
+
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues[0].Path.Should().Be("svg.(1)radialGradient.@r");
         });
     }
 

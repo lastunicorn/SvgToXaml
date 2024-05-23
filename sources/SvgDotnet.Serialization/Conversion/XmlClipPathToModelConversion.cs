@@ -40,8 +40,8 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
         {
             SvgElement.TabIndex = null;
 
-            DeserializationIssue deserializationIssue = new("Xml deserialization", "'tabIndex' attribute is not allowed on 'clipPath' element.");
-            DeserializationContext.Warnings.Add(deserializationIssue);
+            string path = DeserializationContext.Path.ToString();
+            DeserializationContext.Issues.AddWarning(path, "'tabIndex' attribute is not allowed on 'clipPath' element.");
         }
 
         ConvertChildren();
@@ -87,8 +87,8 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
                     yield return new XmlLineToModelConversion(line, DeserializationContext);
                     break;
 
-                case XmlPath path:
-                    yield return new XmlPathToModelConversion(path, DeserializationContext);
+                case XmlPath xmlPath:
+                    yield return new XmlPathToModelConversion(xmlPath, DeserializationContext);
                     break;
 
                 case XmlPolygon polygon:
@@ -112,8 +112,8 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
                     break;
 
                 default:
-                    DeserializationIssue deserializationIssue = new("Xml deserialization", $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
-                    DeserializationContext.Errors.Add(deserializationIssue);
+                    string path = DeserializationContext.Path.ToString();
+                    DeserializationContext.Issues.AddError(path,  $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
                     break;
             }
         }

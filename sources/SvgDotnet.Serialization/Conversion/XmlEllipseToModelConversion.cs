@@ -51,8 +51,8 @@ internal class XmlEllipseToModelConversion : XmlShapeToModelConversion<XmlEllips
             string path = DeserializationContext.Path.ToString();
             DeserializationContext.Path.RemoveLast();
 
-            NegativeValueIssue issue = new(path);
-            DeserializationContext.Warnings.Add(issue);
+            NegativeValueIssue issue = new(DeserializationIssueLevel.Warning, path);
+            DeserializationContext.Issues.Add(issue);
         }
         else
         {
@@ -70,8 +70,8 @@ internal class XmlEllipseToModelConversion : XmlShapeToModelConversion<XmlEllips
             string path = DeserializationContext.Path.ToString();
             DeserializationContext.Path.RemoveLast();
 
-            NegativeValueIssue issue = new(path);
-            DeserializationContext.Warnings.Add(issue);
+            NegativeValueIssue issue = new(DeserializationIssueLevel.Warning, path);
+            DeserializationContext.Issues.Add(issue);
         }
         else
         {

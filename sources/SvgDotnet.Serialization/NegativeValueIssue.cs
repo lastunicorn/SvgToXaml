@@ -20,8 +20,10 @@ public class NegativeValueIssue : DeserializationIssue
 {
     private const string DefaultMessage = "Negative values are not accepted.";
 
-    public NegativeValueIssue(string path)
-        : base(path, DefaultMessage)
+    public NegativeValueIssue(DeserializationIssueLevel level, string path)
     {
+        Level = level;
+        Path = path;
+        Message = DefaultMessage;
     }
 }

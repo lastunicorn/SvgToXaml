@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml;
 
-public class XamlTextChangedEvent
+public enum IssueType
 {
-    public string XamlText { get; set; }
-
-    public List<ProcessingIssue> Issues { get; } = new();
+    Error,
+    Waring,
+    Info
 }

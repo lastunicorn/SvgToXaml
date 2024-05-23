@@ -76,11 +76,13 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         }
         catch (Exception ex)
         {
-            ErrorInfo errorInfo = new()
+            ProcessingIssue processingIssue = new()
             {
+                Category = "General",
+                Level = ProcessingIssueLevel.Error,
                 Message = ex.ToString()
             };
-            xamlTextChangedEvent.Errors.Add(errorInfo);
+            xamlTextChangedEvent.Issues.Add(processingIssue);
         }
     }
 
@@ -89,19 +91,10 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         SvgSerializer serializer = new();
         DeserializationResult deserializationResult = serializer.Deserialize(svgText);
 
-        IEnumerable<ErrorInfo> errorInfos = deserializationResult.Errors
-            .Select(x => new ErrorInfo
-            {
-                Message = $"{x.Path} : {x.Message}"
-            });
-        xamlTextChangedEvent.Errors.AddRange(errorInfos);
+        IEnumerable<ProcessingIssue> issues = deserializationResult.Issues
+            .Select(x => new ProcessingIssue(x));
 
-        IEnumerable<ErrorInfo> warningsInfos = deserializationResult.Warnings
-            .Select(x => new ErrorInfo
-            {
-                Message = $"{x.Path} : {x.Message}"
-            });
-        xamlTextChangedEvent.Warning.AddRange(warningsInfos);
+        xamlTextChangedEvent.Issues.AddRange(issues);
 
         return deserializationResult.Svg;
     }
@@ -110,19 +103,10 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
     {
         ConversionContext conversionContext = ConvertToXaml(svg);
 
-        IEnumerable<ErrorInfo> errorInfos = conversionContext.Errors
-            .Select(x => new ErrorInfo
-            {
-                Message = $"{x.Path} : {x.Message}"
-            });
-        xamlTextChangedEvent.Errors.AddRange(errorInfos);
+        IEnumerable<ProcessingIssue> issues = conversionContext.Issues
+            .Select(x => new ProcessingIssue(x));
 
-        IEnumerable<ErrorInfo> warningInfos = conversionContext.Warnings
-            .Select(x => new ErrorInfo
-            {
-                Message = $"{x.Path} : {x.Message}"
-            });
-        xamlTextChangedEvent.Warning.AddRange(warningInfos);
+        xamlTextChangedEvent.Issues.AddRange(issues);
 
         return conversionContext.Canvas;
     }
@@ -142,11 +126,8 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         CanvasOptimization canvasOptimization = new(canvas);
         canvasOptimization.Execute();
 
-        if (canvasOptimization.Errors.Count > 0)
-            xamlTextChangedEvent.Errors.AddRange(canvasOptimization.Errors);
-
-        if (canvasOptimization.Infos.Count > 0)
-            xamlTextChangedEvent.Info.AddRange(canvasOptimization.Infos);
+        if (canvasOptimization.Issues.Count > 0)
+            xamlTextChangedEvent.Issues.AddRange(canvasOptimization.Issues);
 
         return canvasOptimization.Canvas;
     }

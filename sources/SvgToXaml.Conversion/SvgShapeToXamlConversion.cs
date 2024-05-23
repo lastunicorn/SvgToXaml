@@ -174,6 +174,10 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
     }
 
+    /// <summary>
+    /// This method needs the stroke thickness to be already calculated.
+    /// Call it only after the stroke thickness was calculated.
+    /// </summary>
     private void SetStrokeDashArray(IEnumerable<SvgElement> svgElements)
     {
         DashArray strokeDashArray = svgElements
@@ -182,11 +186,32 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
 
         if (strokeDashArray != null)
         {
-            IEnumerable<double> values = strokeDashArray.Select(x => x.ComputeValue());
+            double strokeThickness = XamlElement.StrokeThickness;
+
+            IEnumerable<double> values = strokeDashArray.Select(x =>
+            {
+                double computedValue = x.ComputeValue();
+
+                if (x.Length != null)
+                    return computedValue / strokeThickness;
+
+                if (x.Percentage != null)
+                {
+                    // This value is wrong. It should be calculated as percentage from the root Canvas.
+                    return computedValue / strokeThickness;
+                }
+
+                return computedValue;
+            });
+
             XamlElement.StrokeDashArray = new DoubleCollection(values);
         }
     }
 
+    /// <summary>
+    /// This method needs the stroke thickness to be already calculated.
+    /// Call it only after the stroke thickness was calculated.
+    /// </summary>
     private void SetStrokeDashOffset(IEnumerable<SvgElement> svgElements)
     {
         LengthPercentage? strokeDashOffset = svgElements
@@ -194,7 +219,24 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
             .FirstOrDefault(x => x != null);
 
         if (strokeDashOffset != null)
-            XamlElement.StrokeDashOffset = strokeDashOffset.Value.ComputeValue();
+        {
+            double strokeThickness = XamlElement.StrokeThickness;
+            double computedValue = strokeDashOffset.Value.ComputeValue();
+
+            if (strokeDashOffset.Value.Length != null)
+            {
+                XamlElement.StrokeDashOffset = computedValue / strokeThickness;
+            }
+            else if (strokeDashOffset.Value.Percentage != null)
+            {
+                // This value is wrong. It should be calculated as percentage from the root Canvas.
+                XamlElement.StrokeDashOffset = computedValue / strokeThickness;
+            }
+            else
+            {
+                XamlElement.StrokeDashOffset = strokeDashOffset.Value.ComputeValue();
+            }
+        }
     }
 
     private void SetStrokeMiterLimit(IEnumerable<SvgElement> svgElements)

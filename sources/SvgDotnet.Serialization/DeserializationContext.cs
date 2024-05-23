@@ -18,9 +18,7 @@ namespace DustInTheWind.SvgDotnet.Serialization;
 
 internal class DeserializationContext
 {
-    public List<DeserializationIssue> Warnings { get; } = new();
-
-    public List<DeserializationIssue> Errors { get; } = new();
+    public DeserializationIssueCollection Issues { get; } = new();
 
     public TreePath Path { get; } = new();
 }

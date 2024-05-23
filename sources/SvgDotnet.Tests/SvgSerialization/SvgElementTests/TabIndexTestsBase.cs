@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgDotnet.Serialization;
+
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 public abstract class TabIndexTestsBase<T> : SvgFileTestsBase
@@ -68,7 +70,8 @@ public abstract class TabIndexTestsBase<T> : SvgFileTestsBase
     {
         ParseSvgFile("tabindex-nan.svg", result =>
         {
-            result.Errors.Count.Should().Be(1);
+            result.Issues.Count.Should().Be(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Error);
         });
     }
 
@@ -77,7 +80,8 @@ public abstract class TabIndexTestsBase<T> : SvgFileTestsBase
     {
         ParseSvgFile("tabindex-float.svg", result =>
         {
-            result.Errors.Count.Should().Be(1);
+            result.Issues.Count.Should().Be(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Error);
         });
     }
 

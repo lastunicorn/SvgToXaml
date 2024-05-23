@@ -50,8 +50,8 @@ internal class XmlCircleToModelConversion : XmlShapeToModelConversion<XmlCircle,
             string path = DeserializationContext.Path.ToString();
             DeserializationContext.Path.RemoveLast();
 
-            NegativeValueIssue issue = new(path);
-            DeserializationContext.Warnings.Add(issue);
+            NegativeValueIssue issue = new(DeserializationIssueLevel.Warning, path);
+            DeserializationContext.Issues.Add(issue);
         }
         else
         {

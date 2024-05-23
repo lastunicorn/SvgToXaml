@@ -14,11 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+using DustInTheWind.SvgToXaml.Application.Transform;
 
-public class XamlTextChangedEvent
+namespace DustInTheWind.SvgToXaml;
+
+public class ProcessingIssueViewModel
 {
-    public string XamlText { get; set; }
+    public IssueType IssueType { get; }
 
-    public List<ProcessingIssue> Issues { get; } = new();
+    public string Message { get; }
+
+    public ProcessingIssueViewModel(ProcessingIssue processingIssue)
+    {
+        IssueType = processingIssue.Level switch
+        {
+            ProcessingIssueLevel.Info => IssueType.Info,
+            ProcessingIssueLevel.Warning => IssueType.Waring,
+            ProcessingIssueLevel.Error => IssueType.Error,
+            _ => IssueType.Info
+        };
+
+        Message = $"{processingIssue.Category}: {processingIssue.Message}";
+    }
 }

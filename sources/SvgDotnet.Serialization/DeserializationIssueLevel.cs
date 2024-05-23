@@ -14,9 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgDotnet.Serialization;
 
-public class ErrorInfo
+public enum DeserializationIssueLevel
 {
-    public string Message { get; set; }
+    Info,
+    Warning,
+    Error,
 }

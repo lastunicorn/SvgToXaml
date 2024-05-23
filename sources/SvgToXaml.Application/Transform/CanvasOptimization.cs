@@ -25,9 +25,7 @@ internal class CanvasOptimization
 {
     public Canvas Canvas { get; }
 
-    public List<ErrorInfo> Errors { get; } = new();
-
-    public List<ErrorInfo> Infos { get; } = new();
+    public List<ProcessingIssue> Issues { get; } = new();
 
     public CanvasOptimization(Canvas canvas)
     {
@@ -128,11 +126,13 @@ internal class CanvasOptimization
         {
             childCount = 0;
 
-            ErrorInfo errorInfo = new()
+            ProcessingIssue processingIssue = new()
             {
-                Message = $"Optimization: Failed moving {grandChildren.Count} children outside of container. Container could not be removed - {childCanvas.GetType().Name}."
+                Category = "Optimization",
+                Level = ProcessingIssueLevel.Error,
+                Message = $"Failed moving {grandChildren.Count} children outside of container. Container could not be removed - {childCanvas.GetType().Name}."
             };
-            Errors.Add(errorInfo);
+            Issues.Add(processingIssue);
 
             return false;
         }
@@ -142,11 +142,13 @@ internal class CanvasOptimization
 
             childCount = grandChildren.Count;
 
-            ErrorInfo errorInfo = new()
+            ProcessingIssue processingIssue = new()
             {
-                Message = $"Optimization: {grandChildren.Count} children moved outside of container. Container removed - {childCanvas.GetType().Name}."
+                Category = "Optimization",
+                Level = ProcessingIssueLevel.Info,
+                Message = $"{grandChildren.Count} children moved outside of container. Container removed - {childCanvas.GetType().Name}."
             };
-            Infos.Add(errorInfo);
+            Issues.Add(processingIssue);
 
             return true;
         }
@@ -171,11 +173,13 @@ internal class CanvasOptimization
     {
         bool success = element.RemoveFromParent(out DependencyObject _, out int? _);
 
-        ErrorInfo errorInfo = new()
+        ProcessingIssue processingIssue = new()
         {
-            Message = $"Optimization: UIElement removed - {element.GetType().Name}. Reason: {reason}"
+            Category = "Optimization",
+            Level = ProcessingIssueLevel.Info,
+            Message = $"UIElement removed - {element.GetType().Name}. Reason: {reason}"
         };
-        Infos.Add(errorInfo);
+        Issues.Add(processingIssue);
 
         return success;
     }
