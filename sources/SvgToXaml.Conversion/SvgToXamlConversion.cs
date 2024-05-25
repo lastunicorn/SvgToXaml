@@ -16,11 +16,12 @@
 
 using System.Windows.Controls;
 using DustInTheWind.SvgDotnet;
+using ScaleTransform = System.Windows.Media.ScaleTransform;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
+internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
 {
     private readonly Svg svg;
 
@@ -38,27 +39,40 @@ public class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
     protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
         base.ConvertProperties(inheritedSvgElements);
+        
+        if (svg.Width != null)
+            XamlElement.Width = svg.Width.Value.ToUserUnits();
 
-        if (svg.ViewBox == null)
-        {
-            if (svg.Width != null)
-                XamlElement.Width = svg.Width.Value.ToUserUnits();
+        if (svg.Height != null)
+            XamlElement.Height = svg.Height.Value.ToUserUnits();
 
-            if (svg.Height != null)
-                XamlElement.Height = svg.Height.Value.ToUserUnits();
-        }
-        else
+        if (svg.ViewBox != null)
         {
             XamlElement.Width = svg.ViewBox.Width.Value;
             XamlElement.Height = svg.ViewBox.Height.Value;
 
             //XamlElement.ClipToBounds = true;
 
-            bool viewBoxIsTranslated = svg.ViewBox.OriginX is { Value: not 0 } ||
-                                       svg.ViewBox.OriginY is { Value: not 0 };
+            bool viewBoxIsTranslated = svg.ViewBox.MinX is { Value: not 0 } ||
+                                       svg.ViewBox.MinY is { Value: not 0 };
+
+            TransformGroupBuilder transformGroupBuilder = new(XamlElement.RenderTransform);
 
             if (viewBoxIsTranslated)
-                XamlElement.RenderTransform = CreateRenderTransform(svg.ViewBox);
+            {
+                TranslateTransform translateTransform = CreateRenderTransform(svg.ViewBox);
+                transformGroupBuilder.Add(translateTransform);
+            }
+
+            bool svgHasSizeDefined = svg.Width != null || svg.Height != null;
+
+            if (svgHasSizeDefined)
+            {
+                ScaleTransform scaleTransform = CreateTransformForSvgSize();
+                transformGroupBuilder.Add(scaleTransform);
+            }
+
+            XamlElement.RenderTransform = transformGroupBuilder.RootTransform;
         }
     }
 
@@ -66,12 +80,35 @@ public class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
     {
         TranslateTransform translateTransform = new();
 
-        if (svgViewBox.OriginX.Value != 0)
-            translateTransform.X = -svgViewBox.OriginX.Value;
+        if (svgViewBox.MinX.Value != 0)
+            translateTransform.X = -svgViewBox.MinX.Value;
 
-        if (svgViewBox.OriginY.Value != 0)
-            translateTransform.Y = -svgViewBox.OriginY.Value;
+        if (svgViewBox.MinY.Value != 0)
+            translateTransform.Y = -svgViewBox.MinY.Value;
 
         return translateTransform;
+    }
+
+    private ScaleTransform CreateTransformForSvgSize()
+    {
+        ScaleTransform scaleTransform = new();
+
+        if (svg.Width != null)
+        {
+            Length svgWidth = svg.Width.Value.ToUserUnits();
+
+            if (svgWidth.Value != 0)
+                scaleTransform.ScaleX = svgWidth.Value / svg.ViewBox.Width.Value;
+        }
+
+        if (svg.Height != null)
+        {
+            Length svgHeight = svg.Height.Value.ToUserUnits();
+
+            if (svgHeight.Value != 0)
+                scaleTransform.ScaleY = svgHeight.Value / svg.ViewBox.Height.Value;
+        }
+
+        return scaleTransform;
     }
 }

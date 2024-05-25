@@ -101,24 +101,21 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
     private Canvas Convert(Svg svg)
     {
-        ConversionContext conversionContext = ConvertToXaml(svg);
+        ConversionResult conversionResult = ConvertToXaml(svg);
 
-        IEnumerable<ProcessingIssue> issues = conversionContext.Issues
+        IEnumerable<ProcessingIssue> issues = conversionResult.Issues
             .Select(x => new ProcessingIssue(x));
 
         xamlTextChangedEvent.Issues.AddRange(issues);
 
-        return conversionContext.Canvas;
+        return conversionResult.Canvas;
     }
 
-    private static ConversionContext ConvertToXaml(Svg svg)
+    private static Conversion.ConversionResult ConvertToXaml(Svg svg)
     {
-        ConversionContext conversionContext = new();
+        SvgToXamlConvertor svgToXamlConvertor = new();
 
-        SvgToXamlConversion svgToXamlConversion = new(svg, conversionContext);
-        conversionContext.Canvas = svgToXamlConversion.Execute();
-
-        return conversionContext;
+        return svgToXamlConvertor.ConvertToXaml(svg);
     }
 
     private Canvas Optimize(Canvas canvas)

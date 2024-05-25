@@ -20,7 +20,7 @@ using DustInTheWind.SvgDotnet;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversion<TSvg, TXaml>
+internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversion<TSvg, TXaml>
     where TSvg : SvgContainer
     where TXaml : Panel
 {

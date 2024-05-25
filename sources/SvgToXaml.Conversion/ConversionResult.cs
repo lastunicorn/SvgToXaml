@@ -18,11 +18,9 @@ using System.Windows.Controls;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-internal class ConversionContext
+public class ConversionResult
 {
     public Canvas Canvas { get; set; }
 
     public ConversionIssueCollection Issues { get; init; } = new();
-
-    public Viewport Viewport { get; set; }
 }

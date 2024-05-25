@@ -19,7 +19,7 @@ using DustInTheWind.SvgDotnet;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup, Canvas>
+internal class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup, Canvas>
 {
     public SvgGroupToXamlConversion(SvgGroup svgGroup, ConversionContext conversionContext, SvgElement referrer = null)
         : base(svgGroup, conversionContext, referrer)

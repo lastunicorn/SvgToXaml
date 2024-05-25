@@ -21,7 +21,7 @@ using DustInTheWind.SvgDotnet;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 
-public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
+internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     where TSvg : SvgElement
     where TXaml : UIElement
 {
@@ -43,6 +43,7 @@ public abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         "stroke-width",
         "stroke-linecap",
         "stroke-linejoin",
+        "stroke-dasharray",
         "stroke-dashoffset",
         "stroke-miterlimit",
         "opacity",

@@ -20,9 +20,9 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgViewBox
 {
-    public Size OriginX { get; set; }
+    public Size MinX { get; set; }
 
-    public Size OriginY { get; set; }
+    public Size MinY { get; set; }
 
     public Size Width { get; set; }
 
@@ -40,8 +40,8 @@ public class SvgViewBox
 
         return new SvgViewBox
         {
-            OriginX = double.Parse(parts[0], CultureInfo.InvariantCulture),
-            OriginY = double.Parse(parts[1], CultureInfo.InvariantCulture),
+            MinX = double.Parse(parts[0], CultureInfo.InvariantCulture),
+            MinY = double.Parse(parts[1], CultureInfo.InvariantCulture),
             Width = double.Parse(parts[2], CultureInfo.InvariantCulture),
             Height = double.Parse(parts[3], CultureInfo.InvariantCulture)
         };

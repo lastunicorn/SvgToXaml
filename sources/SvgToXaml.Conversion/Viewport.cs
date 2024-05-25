@@ -14,15 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
+namespace DustInTheWind.SvgToXaml.Conversion;
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
-
-internal class ConversionResult
+public class Viewport
 {
-    public Canvas Canvas { get; init; }
-
-    public List<ConversionIssue> Warnings { get; init; } = new();
-
-    public List<ConversionIssue> Errors { get; init; } = new();
+    public double Width { get; set; }
+    
+    public double Height { get; set; }
 }
