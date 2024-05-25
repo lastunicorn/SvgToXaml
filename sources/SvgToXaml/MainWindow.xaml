@@ -227,7 +227,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                         Width="16"
                                         Height="16"
                                         Margin="0 0 10 0"
-                                        VerticalAlignment="Center"
+                                        VerticalAlignment="Top"
                                         Fill="{Binding IssueType, Converter={StaticResource InfoItemTypeToColorConverter}}" />
 
                                     <TextBlock

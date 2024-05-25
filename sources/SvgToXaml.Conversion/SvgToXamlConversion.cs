@@ -23,12 +23,9 @@ namespace DustInTheWind.SvgToXaml.Conversion;
 
 internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
 {
-    private readonly Svg svg;
-
     public SvgToXamlConversion(Svg svg, ConversionContext conversionContext, SvgElement referrer = null)
         : base(svg, conversionContext, referrer)
     {
-        this.svg = svg ?? throw new ArgumentNullException(nameof(svg));
     }
 
     protected override Canvas CreateXamlElement()
@@ -39,76 +36,110 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
     protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
     {
         base.ConvertProperties(inheritedSvgElements);
-        
-        if (svg.Width != null)
-            XamlElement.Width = svg.Width.Value.ToUserUnits();
 
-        if (svg.Height != null)
-            XamlElement.Height = svg.Height.Value.ToUserUnits();
+        SetSize();
+        SetTransformation();
+    }
 
-        if (svg.ViewBox != null)
+    private void SetSize()
+    {
+        if (SvgElement.Width != null)
+            XamlElement.Width = SvgElement.Width.Value.ToUserUnits();
+        else if (SvgElement.ViewBox != null)
+            XamlElement.Width = SvgElement.ViewBox.Width.Value;
+
+        if (SvgElement.Height != null)
+            XamlElement.Height = SvgElement.Height.Value.ToUserUnits();
+        else if (SvgElement.ViewBox != null)
+            XamlElement.Height = SvgElement.ViewBox.Height.Value;
+    }
+
+    private void SetTransformation()
+    {
+        if (SvgElement.ViewBox != null)
         {
-            XamlElement.Width = svg.ViewBox.Width.Value;
-            XamlElement.Height = svg.ViewBox.Height.Value;
-
-            //XamlElement.ClipToBounds = true;
-
-            bool viewBoxIsTranslated = svg.ViewBox.MinX is { Value: not 0 } ||
-                                       svg.ViewBox.MinY is { Value: not 0 };
-
             TransformGroupBuilder transformGroupBuilder = new(XamlElement.RenderTransform);
 
-            if (viewBoxIsTranslated)
-            {
-                TranslateTransform translateTransform = CreateRenderTransform(svg.ViewBox);
+            TranslateTransform translateTransform = CreateRenderTransform();
+            if (translateTransform != null)
                 transformGroupBuilder.Add(translateTransform);
-            }
 
-            bool svgHasSizeDefined = svg.Width != null || svg.Height != null;
-
-            if (svgHasSizeDefined)
-            {
-                ScaleTransform scaleTransform = CreateTransformForSvgSize();
+            ScaleTransform scaleTransform = CreateTransformForSvgSize();
+            if (scaleTransform != null)
                 transformGroupBuilder.Add(scaleTransform);
-            }
 
             XamlElement.RenderTransform = transformGroupBuilder.RootTransform;
         }
     }
 
-    private static TranslateTransform CreateRenderTransform(SvgViewBox svgViewBox)
+    private TranslateTransform CreateRenderTransform()
     {
-        TranslateTransform translateTransform = new();
+        double x = 0;
 
-        if (svgViewBox.MinX.Value != 0)
-            translateTransform.X = -svgViewBox.MinX.Value;
+        if (SvgElement.X != null)
+        {
+            // This translation is wrong. It should be calculated in the coordinate system of the
+            // parent of the svg element.
+            x += SvgElement.X.Value.ComputeValue();
+        }
 
-        if (svgViewBox.MinY.Value != 0)
-            translateTransform.Y = -svgViewBox.MinY.Value;
+        if (SvgElement.ViewBox != null && SvgElement.ViewBox.MinX.Value != 0)
+            x -= SvgElement.ViewBox.MinX.Value;
 
-        return translateTransform;
+        double y = 0;
+
+        if (SvgElement.Y != null)
+        {
+            // This translation is wrong. It should be calculated in the coordinate system of the
+            // parent of the svg element.
+            y += SvgElement.Y.Value.ComputeValue();
+        }
+
+        if (SvgElement.ViewBox != null && SvgElement.ViewBox.MinY.Value != 0)
+            y -= SvgElement.ViewBox.MinY.Value;
+
+        if (x != 0 || y != 0)
+        {
+            return new TranslateTransform
+            {
+                X = x,
+                Y = y
+            };
+        }
+
+        return null;
     }
 
     private ScaleTransform CreateTransformForSvgSize()
     {
-        ScaleTransform scaleTransform = new();
+        double scaleX = 1;
+        double scaleY = 1;
 
-        if (svg.Width != null)
+        if (SvgElement.Width != null)
         {
-            Length svgWidth = svg.Width.Value.ToUserUnits();
+            Length svgWidth = SvgElement.Width.Value.ToUserUnits();
 
             if (svgWidth.Value != 0)
-                scaleTransform.ScaleX = svgWidth.Value / svg.ViewBox.Width.Value;
+                scaleX = svgWidth.Value / SvgElement.ViewBox.Width.Value;
         }
 
-        if (svg.Height != null)
+        if (SvgElement.Height != null)
         {
-            Length svgHeight = svg.Height.Value.ToUserUnits();
+            Length svgHeight = SvgElement.Height.Value.ToUserUnits();
 
             if (svgHeight.Value != 0)
-                scaleTransform.ScaleY = svgHeight.Value / svg.ViewBox.Height.Value;
+                scaleY = svgHeight.Value / SvgElement.ViewBox.Height.Value;
         }
 
-        return scaleTransform;
+        if (Math.Abs(scaleX - 1) > double.Epsilon || Math.Abs(scaleY - 1) > double.Epsilon)
+        {
+            return new ScaleTransform
+            {
+                ScaleX = scaleX,
+                ScaleY = scaleY
+            };
+        }
+
+        return null;
     }
 }
