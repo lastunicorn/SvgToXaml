@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using DustInTheWind.SvgDotnet;
@@ -29,9 +30,13 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
     protected TSvg SvgElement { get; }
 
+    protected List<SvgElement> ShadowTree { get; private set; }
+
     protected ConversionContext ConversionContext { get; }
 
     protected TXaml XamlElement { get; private set; }
+    
+    protected TXaml WrapperXamlElement { get; private set; }
 
     protected List<string> KnownStyleSelectors { get; } = new()
     {
@@ -66,6 +71,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
             if (display == Display.None)
                 return null;
 
+            ShadowTree = EnumerateInheritedElements().ToList();
             XamlElement = CreateXamlElement();
 
             if (XamlElement == null)
@@ -73,10 +79,9 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
             CheckStyleDeclarations();
 
-            List<SvgElement> inheritedSvgElements = EnumerateInheritedElements().ToList();
-            ConvertProperties(inheritedSvgElements);
+            ConvertProperties();
 
-            return XamlElement;
+            return WrapperXamlElement ?? XamlElement;
         }
         catch (SvgConversionException)
         {
@@ -134,7 +139,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         }
     }
 
-    protected virtual void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected virtual void ConvertProperties()
     {
         if (XamlElement is FrameworkElement frameworkElement)
             SetLanguage(frameworkElement);
@@ -257,5 +262,13 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
         if (isFullTransparent) 
             ConversionContext.Issues.AddWarning($"Completely transparent element ({XamlElement.GetType().Name}) present.");
+    }
+
+    protected void SetWrapperXamlElement(TXaml wrapperElement)
+    {
+        if (wrapperElement is Panel panel)
+            panel.Children.Add(XamlElement);
+
+        WrapperXamlElement = wrapperElement;
     }
 }

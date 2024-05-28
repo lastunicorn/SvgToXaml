@@ -33,12 +33,12 @@ internal class SvgPolygonToXamlConversion : SvgShapeToXamlConversion<SvgPolygon,
         return new Polygon();
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
         SetPoints();
-        SetFillRule(inheritedSvgElements);
+        SetFillRule();
     }
 
     private void SetPoints()
@@ -46,9 +46,9 @@ internal class SvgPolygonToXamlConversion : SvgShapeToXamlConversion<SvgPolygon,
         XamlElement.Points = SvgElement.Points.ToXaml();
     }
 
-    private void SetFillRule(IEnumerable<SvgElement> svgElements)
+    private void SetFillRule()
     {
-        SvgFillRule? svgFillRule = svgElements
+        SvgFillRule? svgFillRule = ShadowTree
             .Select(x => x.ComputeFillRule())
             .FirstOrDefault(x => x != null);
 

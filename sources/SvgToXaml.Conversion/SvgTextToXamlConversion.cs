@@ -32,19 +32,19 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
         return new TextBlock();
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
         XamlElement.Text = SvgElement.Text;
 
-        ConvertFontSize(inheritedSvgElements);
+        ConvertFontSize();
         ConvertPosition();
     }
 
-    private void ConvertFontSize(IEnumerable<SvgElement> svgElements)
+    private void ConvertFontSize()
     {
-        double? fontSize = svgElements
+        double? fontSize = ShadowTree
             .Select(x => x.ComputeFontSize())
             .FirstOrDefault(x => x != null);
 

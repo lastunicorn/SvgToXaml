@@ -34,12 +34,12 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
         return new Path();
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
         SetData();
-        SetFillRule(inheritedSvgElements);
+        SetFillRule();
     }
 
     private void SetData()
@@ -49,12 +49,12 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
             : Geometry.Parse(SvgElement.Data);
     }
 
-    private void SetFillRule(IEnumerable<SvgElement> svgElements)
+    private void SetFillRule()
     {
         if (XamlElement.Data.IsEmpty())
             return;
 
-        SvgFillRule? svgFillRule = svgElements
+        SvgFillRule? svgFillRule = ShadowTree
             .Select(x => x.ComputeFillRule())
             .FirstOrDefault(x => x != null);
 

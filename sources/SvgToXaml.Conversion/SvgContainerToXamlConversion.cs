@@ -29,9 +29,9 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
     {
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
         ConvertChildren();
     }

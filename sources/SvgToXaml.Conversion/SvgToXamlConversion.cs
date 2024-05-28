@@ -33,10 +33,11 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
         return new Canvas();
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
+        SetLocation();
         SetSize();
         SetTransformation();
     }
@@ -52,6 +53,32 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
             XamlElement.Height = SvgElement.Height.Value.ToUserUnits();
         else if (SvgElement.ViewBox != null)
             XamlElement.Height = SvgElement.ViewBox.Height.Value;
+    }
+
+    private void SetLocation()
+    {
+        double x = 0;
+        double y = 0;
+
+        if (SvgElement.X != null) 
+            x = SvgElement.X.Value.ComputeValue();
+
+        if (SvgElement.Y != null) 
+            y = SvgElement.Y.Value.ComputeValue();
+
+        if (x != 0 || y != 0)
+        {
+            Canvas wrapperCanvas = new()
+            {
+                RenderTransform = new TranslateTransform
+                {
+                    X = x,
+                    Y = y
+                }
+            };
+
+            SetWrapperXamlElement(wrapperCanvas);
+        }
     }
 
     private void SetTransformation()
@@ -76,24 +103,10 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
     {
         double x = 0;
 
-        if (SvgElement.X != null)
-        {
-            // This translation is wrong. It should be calculated in the coordinate system of the
-            // parent of the svg element.
-            x += SvgElement.X.Value.ComputeValue();
-        }
-
         if (SvgElement.ViewBox != null && SvgElement.ViewBox.MinX.Value != 0)
             x -= SvgElement.ViewBox.MinX.Value;
 
         double y = 0;
-
-        if (SvgElement.Y != null)
-        {
-            // This translation is wrong. It should be calculated in the coordinate system of the
-            // parent of the svg element.
-            y += SvgElement.Y.Value.ComputeValue();
-        }
 
         if (SvgElement.ViewBox != null && SvgElement.ViewBox.MinY.Value != 0)
             y -= SvgElement.ViewBox.MinY.Value;

@@ -29,23 +29,23 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
     {
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
-        SetFill(inheritedSvgElements);
-        SetStroke(inheritedSvgElements);
-        SetStrokeThickness(inheritedSvgElements);
-        SetStrokeLineCap(inheritedSvgElements);
-        SetStrokeLineJoin(inheritedSvgElements);
-        SetStrokeDashArray(inheritedSvgElements);
-        SetStrokeDashOffset(inheritedSvgElements);
-        SetStrokeMiterLimit(inheritedSvgElements);
+        SetFill();
+        SetStroke();
+        SetStrokeThickness();
+        SetStrokeLineCap();
+        SetStrokeLineJoin();
+        SetStrokeDashArray();
+        SetStrokeDashOffset();
+        SetStrokeMiterLimit();
     }
 
-    private void SetFill(IEnumerable<SvgElement> svgElements)
+    private void SetFill()
     {
-        Paint fill = svgElements
+        Paint fill = ShadowTree
             .Select(x => x.ComputeFill())
             .FirstOrDefault(x => x != null);
 
@@ -85,9 +85,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
     }
 
-    private void SetStroke(IEnumerable<SvgElement> svgElements)
+    private void SetStroke()
     {
-        Paint stroke = svgElements
+        Paint stroke = ShadowTree
             .Select(x => x.ComputeStroke())
             .FirstOrDefault(x => x != null);
 
@@ -123,9 +123,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
     }
 
-    private void SetStrokeThickness(IEnumerable<SvgElement> svgElements)
+    private void SetStrokeThickness()
     {
-        LengthPercentage? strokeWidth = svgElements
+        LengthPercentage? strokeWidth = ShadowTree
             .Select(x => x.ComputeStrokeWidth())
             .FirstOrDefault(x => x != null);
 
@@ -133,9 +133,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
             XamlElement.StrokeThickness = strokeWidth.Value.Length?.Value ?? 0;
     }
 
-    private void SetStrokeLineCap(IEnumerable<SvgElement> svgElements)
+    private void SetStrokeLineCap()
     {
-        StrokeLineCap? strokeLineCap = svgElements
+        StrokeLineCap? strokeLineCap = ShadowTree
             .Select(x => x.ComputeStrokeLineCap())
             .FirstOrDefault(x => x != null);
 
@@ -154,9 +154,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
     }
 
-    private void SetStrokeLineJoin(IEnumerable<SvgElement> svgElements)
+    private void SetStrokeLineJoin()
     {
-        StrokeLineJoin? strokeLineJoin = svgElements
+        StrokeLineJoin? strokeLineJoin = ShadowTree
             .Select(x => x.ComputeStrokeLineJoin())
             .FirstOrDefault(x => x != null);
 
@@ -178,9 +178,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
     /// This method needs the stroke thickness to be already calculated.
     /// Call it only after the stroke thickness was calculated.
     /// </summary>
-    private void SetStrokeDashArray(IEnumerable<SvgElement> svgElements)
+    private void SetStrokeDashArray()
     {
-        DashArray strokeDashArray = svgElements
+        DashArray strokeDashArray = ShadowTree
             .Select(x => x.ComputeStrokeDashArray())
             .FirstOrDefault(x => x != null);
 
@@ -212,9 +212,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
     /// This method needs the stroke thickness to be already calculated.
     /// Call it only after the stroke thickness was calculated.
     /// </summary>
-    private void SetStrokeDashOffset(IEnumerable<SvgElement> svgElements)
+    private void SetStrokeDashOffset()
     {
-        LengthPercentage? strokeDashOffset = svgElements
+        LengthPercentage? strokeDashOffset = ShadowTree
             .Select(x => x.ComputeStrokeDashOffset())
             .FirstOrDefault(x => x != null);
 
@@ -239,9 +239,9 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
         }
     }
 
-    private void SetStrokeMiterLimit(IEnumerable<SvgElement> svgElements)
+    private void SetStrokeMiterLimit()
     {
-        double? strokeMiterLimit = svgElements
+        double? strokeMiterLimit = ShadowTree
             .Select(x => x.ComputeStrokeMiterLimit())
             .FirstOrDefault(x => x != null);
 

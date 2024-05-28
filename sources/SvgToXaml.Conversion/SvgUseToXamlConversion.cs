@@ -83,7 +83,7 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
         }
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
         double left = SvgElement.X?.ComputeValue() ?? 0;
         double top = SvgElement.Y?.ComputeValue() ?? 0;
@@ -97,6 +97,6 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
             XamlElement.RenderTransform = transformGroupBuilder.RootTransform;
         }
 
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
     }
 }

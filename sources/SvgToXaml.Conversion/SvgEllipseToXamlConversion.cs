@@ -32,11 +32,11 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
         return new Ellipse();
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
         SetPosition();
 
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
         SetSize();
     }

@@ -32,11 +32,11 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
         return new Rectangle();
     }
 
-    protected override void ConvertProperties(List<SvgElement> inheritedSvgElements)
+    protected override void ConvertProperties()
     {
         SetPosition();
 
-        base.ConvertProperties(inheritedSvgElements);
+        base.ConvertProperties();
 
         SetSize();
         SetCornetRadius();
