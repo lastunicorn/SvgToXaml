@@ -22,36 +22,28 @@ using System.Xml;
 using DustInTheWind.SvgDotnet;
 using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
-using DustInTheWind.SvgToXaml.Infrastructure;
-using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
-internal class TransformUseCase : IRequestHandler<TransformRequest>
+internal class SvgToXamlTransformation
 {
-    private readonly EventBus eventBus;
-    private XamlTextChangedEvent xamlTextChangedEvent;
+    public string Svg { get; set; }
 
-    public TransformUseCase(EventBus eventBus)
-    {
-        this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
-    }
+    public bool PerformOptimizations { get; set; }
 
-    public async Task Handle(TransformRequest request, CancellationToken cancellationToken)
-    {
-        xamlTextChangedEvent = new XamlTextChangedEvent();
+    public List<string> IgnoredNamespaces { get; set; }
 
-        Transform(request.SvgText, request.ShouldOptimize);
-        await eventBus.Publish(xamlTextChangedEvent, cancellationToken);
-    }
+    public string Xaml { get; private set; }
 
-    private void Transform(string svgText, bool shouldOptimize)
+    public List<ProcessingIssue> Issues { get; } = new();
+
+    public void Execute()
     {
         try
         {
-            if (!string.IsNullOrEmpty(svgText))
+            if (!string.IsNullOrEmpty(Svg))
             {
-                Svg svg = Deserialize(svgText);
+                Svg svg = Deserialize(Svg);
 
                 if (svg == null)
                     return;
@@ -61,7 +53,7 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
                 if (canvas == null)
                     return;
 
-                if (shouldOptimize)
+                if (PerformOptimizations)
                     canvas = Optimize(canvas);
 
                 string xaml = Serialize(canvas);
@@ -71,7 +63,7 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
 
                 xaml = XmlAlter(xaml);
 
-                xamlTextChangedEvent.XamlText = xaml;
+                Xaml = xaml;
             }
         }
         catch (Exception ex)
@@ -82,42 +74,38 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
                 Level = ProcessingIssueLevel.Error,
                 Message = ex.ToString()
             };
-            xamlTextChangedEvent.Issues.Add(processingIssue);
+            Issues.Add(processingIssue);
         }
     }
 
     private Svg Deserialize(string svgText)
     {
         SvgSerializer serializer = new();
-        serializer.Options.IgnoredNamespaces.AddRange(ConversionOptions.IgnoredNamespaces);
+
+        if (IgnoredNamespaces is { Count: > 0 })
+            serializer.Options.IgnoredNamespaces.AddRange(IgnoredNamespaces);
 
         DeserializationResult deserializationResult = serializer.Deserialize(svgText);
 
         IEnumerable<ProcessingIssue> issues = deserializationResult.Issues
             .Select(x => new ProcessingIssue(x));
 
-        xamlTextChangedEvent.Issues.AddRange(issues);
+        Issues.AddRange(issues);
 
         return deserializationResult.Svg;
     }
 
     private Canvas Convert(Svg svg)
     {
-        ConversionResult conversionResult = ConvertToXaml(svg);
+        SvgToXamlConvertor svgToXamlConvertor = new();
+        ConversionResult conversionResult = svgToXamlConvertor.ConvertToXaml(svg);
 
         IEnumerable<ProcessingIssue> issues = conversionResult.Issues
             .Select(x => new ProcessingIssue(x));
 
-        xamlTextChangedEvent.Issues.AddRange(issues);
+        Issues.AddRange(issues);
 
         return conversionResult.Canvas;
-    }
-
-    private static Conversion.ConversionResult ConvertToXaml(Svg svg)
-    {
-        SvgToXamlConvertor svgToXamlConvertor = new();
-
-        return svgToXamlConvertor.ConvertToXaml(svg);
     }
 
     private Canvas Optimize(Canvas canvas)
@@ -126,7 +114,7 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
         canvasOptimization.Execute();
 
         if (canvasOptimization.Issues.Count > 0)
-            xamlTextChangedEvent.Issues.AddRange(canvasOptimization.Issues);
+            Issues.AddRange(canvasOptimization.Issues);
 
         return canvasOptimization.Canvas;
     }

@@ -16,11 +16,9 @@
 
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
 
-public class TransformRequest : IRequest
+public class SetOptimizeFlagRequest : IRequest
 {
-    public string SvgText { get; set; }
-
-    public bool ShouldOptimize { get; set; }
+    public bool OptimizeOutputXaml { get; set; }
 }

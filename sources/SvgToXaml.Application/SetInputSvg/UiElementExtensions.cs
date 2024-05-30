@@ -19,7 +19,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
 internal static class UiElementExtensions
 {

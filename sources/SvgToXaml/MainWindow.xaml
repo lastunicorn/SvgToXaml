@@ -49,47 +49,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <DockPanel
-                Grid.Column="0">
-
-                <StackPanel
-                    DockPanel.Dock="Top"
-                    Orientation="Horizontal"
-                    Margin="0 0 0 8">
-
-                    <Button
-                        Padding="12 4"
-                        Content="Open File..."
-                        Command="{Binding OpenFileCommand}" />
-
-                    <TextBlock
-                        Text="{Binding SvgFilePath}"
-                        VerticalAlignment="Center"
-                        Margin="10 0 0 0"
-                        TextTrimming="CharacterEllipsis" />
-
-                </StackPanel>
-
-                <Border
-                    BorderBrush="#eee"
-                    BorderThickness="2"
-                    CornerRadius="2">
-
-                    <TextBox
-                        Background="#eee"
-                        BorderThickness="0"
-                        Padding="8"
-                        VerticalAlignment="Stretch"
-                        HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto"
-                        AcceptsReturn="True"
-                        AcceptsTab="True"
-                        Text="{Binding SvgText}"
-                        FontFamily="Consolas"
-                        FontSize="12" />
-                </Border>
-
-            </DockPanel>
+            <svgToXaml:InputPanel
+                Grid.Column="0"
+                DataContext="{Binding InputPanelViewModel}" />
 
             <GridSplitter
                 Grid.Column="1"

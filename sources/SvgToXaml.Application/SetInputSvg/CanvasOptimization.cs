@@ -19,7 +19,7 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Shapes;
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
 internal class CanvasOptimization
 {

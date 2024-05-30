@@ -14,11 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
-public class XamlTextChangedEvent
+internal interface IXmlAlterationStep
 {
-    public string XamlText { get; set; }
-
-    public List<ProcessingIssue> Issues { get; } = new();
+    void Execute();
 }

@@ -19,8 +19,8 @@ using System.IO;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
-using DustInTheWind.SvgToXaml.Application.OpenFile;
-using DustInTheWind.SvgToXaml.Application.Transform;
+using DustInTheWind.SvgToXaml.Application.SetInputSvg;
+using DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
 using DustInTheWind.SvgToXaml.Infrastructure;
 
 namespace DustInTheWind.SvgToXaml;
@@ -28,37 +28,10 @@ namespace DustInTheWind.SvgToXaml;
 public class MainViewModel : ViewModelBase
 {
     private readonly IRequestBus requestBus;
-    private string svgText;
     private string xamlText;
     private UIElement xamlObject;
-    private string svgFilePath;
-    private readonly Dispatcher dispatcher;
     private List<ProcessingIssueViewModel> errorItems;
     private bool shouldOptimize;
-
-    public string SvgFilePath
-    {
-        get => svgFilePath;
-        private set
-        {
-            if (value == svgFilePath) return;
-            svgFilePath = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public string SvgText
-    {
-        get => svgText;
-        set
-        {
-            if (value == svgText) return;
-            svgText = value;
-            OnPropertyChanged();
-
-            _ = TransformSvgToXaml();
-        }
-    }
 
     public string XamlText
     {
@@ -102,50 +75,26 @@ public class MainViewModel : ViewModelBase
             shouldOptimize = value;
             OnPropertyChanged();
 
-            _ = TransformSvgToXaml();
+            _ = SetShouldOptimizeFlag();
         }
     }
 
-    public OpenFileCommand OpenFileCommand { get; }
-
     public CopyToClipboardCommand CopyToClipboardCommand { get; }
 
-    public MainViewModel(IRequestBus requestBus, EventBus eventBus, OpenFileCommand openFileCommand, CopyToClipboardCommand copyToClipboardCommand)
+    public InputPanelViewModel InputPanelViewModel { get; }
+
+    public MainViewModel(IRequestBus requestBus, EventBus eventBus, CopyToClipboardCommand copyToClipboardCommand,
+        InputPanelViewModel inputPanelViewModel)
     {
         if (eventBus == null) throw new ArgumentNullException(nameof(eventBus));
         this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
 
-        OpenFileCommand = openFileCommand;
         CopyToClipboardCommand = copyToClipboardCommand;
         shouldOptimize = true;
 
-        eventBus.Subscribe<SvgTextChangingEvent>(SvgTextChangingEventHandler);
-        eventBus.Subscribe<SvgTextChangedEvent>(SvgTextChangedEventHandler);
         eventBus.Subscribe<XamlTextChangedEvent>(XamlTextChangedEventHandler);
 
-        dispatcher = Dispatcher.CurrentDispatcher;
-    }
-
-    private Task SvgTextChangingEventHandler(SvgTextChangingEvent ev, CancellationToken cancellationToken)
-    {
-        dispatcher.Invoke(() =>
-        {
-            SvgFilePath = ev.FilePath;
-            SvgText = string.Empty;
-        });
-
-        return Task.CompletedTask;
-    }
-
-    private Task SvgTextChangedEventHandler(SvgTextChangedEvent ev, CancellationToken cancellationToken)
-    {
-        dispatcher.Invoke(() =>
-        {
-            SvgFilePath = ev.FilePath;
-            SvgText = ev.SvgText;
-        });
-
-        return Task.CompletedTask;
+        InputPanelViewModel = inputPanelViewModel;
     }
 
     private Task XamlTextChangedEventHandler(XamlTextChangedEvent ev, CancellationToken cancellationToken)
@@ -186,12 +135,11 @@ public class MainViewModel : ViewModelBase
         return null;
     }
 
-    private async Task TransformSvgToXaml()
+    private async Task SetShouldOptimizeFlag()
     {
-        TransformRequest request = new()
+        SetOptimizeFlagRequest request = new()
         {
-            SvgText = svgText,
-            ShouldOptimize = ShouldOptimize
+            OptimizeOutputXaml = ShouldOptimize
         };
 
         await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);

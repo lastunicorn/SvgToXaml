@@ -17,7 +17,8 @@
 using System.Reflection;
 using System.Windows;
 using Autofac;
-using DustInTheWind.SvgToXaml.Application.Transform;
+using DustInTheWind.SvgToXaml.Application;
+using DustInTheWind.SvgToXaml.Application.SetInputSvg;
 using DustInTheWind.SvgToXaml.FileAccess;
 using DustInTheWind.SvgToXaml.Infrastructure;
 using DustInTheWind.SvgToXaml.Ports.FileAccess;
@@ -47,7 +48,7 @@ public partial class App : System.Windows.Application
 
     private static void ConfigureServices(ContainerBuilder containerBuilder)
     {
-        Assembly useCasesAssembly = typeof(TransformRequest).Assembly;
+        Assembly useCasesAssembly = typeof(SetInputSvgRequest).Assembly;
         MediatRConfiguration mediatRConfiguration = MediatRConfigurationBuilder.Create(useCasesAssembly)
             .WithAllOpenGenericHandlerTypesRegistered()
             .Build();
@@ -56,6 +57,7 @@ public partial class App : System.Windows.Application
 
         containerBuilder.RegisterType<EventBus>().SingleInstance();
         containerBuilder.RegisterType<RequestBus>().As<IRequestBus>().SingleInstance();
+        containerBuilder.RegisterType<ApplicationState>().AsSelf().SingleInstance();
 
         containerBuilder.RegisterType<UserInteractions>().As<IUserInteractions>();
         containerBuilder.RegisterType<FileSystem>().As<IFileSystem>();
@@ -63,7 +65,9 @@ public partial class App : System.Windows.Application
         containerBuilder.RegisterType<OpenFileCommand>();
         containerBuilder.RegisterType<CopyToClipboardCommand>();
 
-        containerBuilder.RegisterType<MainViewModel>();
         containerBuilder.RegisterType<MainWindow>();
+
+        containerBuilder.RegisterType<MainViewModel>();
+        containerBuilder.RegisterType<InputPanelViewModel>();
     }
 }

@@ -14,9 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+using DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
-internal interface IXmlAlterationStep
+namespace DustInTheWind.SvgToXaml.Application;
+
+public class ApplicationState
 {
-    void Execute();
+    public List<string> IgnoredNamespaces { get; } = new()
+    {
+        "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
+        "http://www.inkscape.org/namespaces/inkscape"
+    };
+
+    public string InputSvg { get; set; }
+    
+    public string OutputXaml { get; set; }
+
+    public bool OptimizeOutputXaml { get; set; }
+    
+    public List<ProcessingIssue> LastConversionIssues { get; set; }
 }

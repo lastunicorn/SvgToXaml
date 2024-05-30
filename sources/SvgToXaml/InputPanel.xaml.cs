@@ -14,17 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+using System.Windows.Controls;
 
-internal class ConversionIssue
+namespace DustInTheWind.SvgToXaml;
+
+/// <summary>
+/// Interaction logic for InputPanel.xaml
+/// </summary>
+public partial class InputPanel : UserControl
 {
-    public string Path { get; }
-
-    public string Message { get; }
-
-    public ConversionIssue(string path, string message)
+    public InputPanel()
     {
-        Path = path;
-        Message = message;
+        InitializeComponent();
     }
 }

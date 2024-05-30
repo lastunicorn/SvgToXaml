@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.Transform;
+using MediatR;
 
-public enum ProcessingIssueLevel
+namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
+
+public class SetInputSvgRequest : IRequest
 {
-    Info,
-    Warning,
-    Error
+    public string SvgText { get; set; }
 }
