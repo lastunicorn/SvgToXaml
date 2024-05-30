@@ -32,11 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     ResizeMode="CanResizeWithGrip"
     d:DataContext="{d:DesignInstance svgToXaml:MainViewModel}">
 
-    <Window.Resources>
-        <svgToXaml:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-        <svgToXaml:InfoItemTypeToColorConverter x:Key="InfoItemTypeToColorConverter" />
-    </Window.Resources>
-
     <Border
         Padding="8"
         Background="#bbb">
@@ -59,152 +54,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 Background="Transparent"
                 HorizontalAlignment="Stretch" />
 
-            <Grid
+            <svgToXaml:OutputPanel
                 Grid.Column="2"
-                svgToXaml:CollapsableBehaviour.Enable="{Binding ElementName=GS_DetailsView}">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="2*" />
-                </Grid.RowDefinitions>
-
-                <DockPanel>
-
-                    <StackPanel
-                        DockPanel.Dock="Top"
-                        Orientation="Horizontal"
-                        FlowDirection="RightToLeft"
-                        Margin="0 0 0 8">
-
-                        <Button
-                            Padding="12 4"
-                            Content="Copy"
-                            Command="{Binding CopyToClipboardCommand}"
-                            CommandParameter="{Binding Path=Text, ElementName=TextBoxResult, Mode=OneWay}" />
-
-                        <CheckBox
-                            VerticalAlignment="Center"
-                            Content="Optimize"
-                            FlowDirection="LeftToRight"
-                            Margin="10 0 0 0"
-                            IsChecked="{Binding ShouldOptimize}" />
-
-                    </StackPanel>
-
-                    <TabControl>
-
-                        <TabItem>
-
-                            <TabItem.Header>
-                                <TextBlock Text="XAML" Margin="10 5" />
-                            </TabItem.Header>
-
-                            <TextBox
-                                x:Name="TextBoxResult"
-                                Background="#eee"
-                                BorderThickness="0"
-                                Padding="8"
-                                VerticalAlignment="Stretch"
-                                HorizontalScrollBarVisibility="Auto"
-                                VerticalScrollBarVisibility="Auto"
-                                AcceptsReturn="True"
-                                AcceptsTab="True"
-                                Text="{Binding XamlText, Mode=OneWay}"
-                                FontFamily="Consolas"
-                                FontSize="12"
-                                IsReadOnly="True" />
-
-                        </TabItem>
-
-                        <TabItem>
-
-                            <TabItem.Header>
-                                <TextBlock Text="Image" Margin="10 5" />
-                            </TabItem.Header>
-
-                            <Viewbox
-                                Margin="10">
-
-                                <ContentControl
-                                    Content="{Binding XamlObject}">
-
-                                    <ContentControl.Effect>
-                                        <DropShadowEffect
-                                            Color="Black"
-                                            Direction="0"
-                                            ShadowDepth="0"
-                                            BlurRadius="10" />
-                                    </ContentControl.Effect>
-
-                                </ContentControl>
-                            </Viewbox>
-                        </TabItem>
-
-                    </TabControl>
-
-                </DockPanel>
-
-                <GridSplitter
-                    x:Name="GS_DetailsView"
-                    Grid.Row="1"
-                    Height="8"
-                    Background="Transparent"
-                    HorizontalAlignment="Stretch"
-                    Visibility="{Binding ErrorItems, Converter={StaticResource NullToVisibilityConverter}}" />
-
-                <Border
-                    Grid.Row="2"
-                    Background="LightYellow"
-                    BorderBrush="#eee"
-                    BorderThickness="2"
-                    CornerRadius="2">
-
-                    <ListView
-                        ItemsSource="{Binding ErrorItems}"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Padding="0 10"
-                        VerticalAlignment="Stretch">
-
-                        <ItemsControl.Template>
-                            <ControlTemplate>
-                                <ScrollViewer
-                                    Padding="{TemplateBinding Padding}"
-                                    Background="{TemplateBinding Background}">
-
-                                    <ItemsPresenter />
-
-                                </ScrollViewer>
-                            </ControlTemplate>
-                        </ItemsControl.Template>
-
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <DockPanel
-                                    Margin="5 2">
-
-                                    <Ellipse
-                                        DockPanel.Dock="Left"
-                                        Width="16"
-                                        Height="16"
-                                        Margin="0 0 10 0"
-                                        VerticalAlignment="Top"
-                                        Fill="{Binding IssueType, Converter={StaticResource InfoItemTypeToColorConverter}}" />
-
-                                    <TextBlock
-                                        Text="{Binding Message}"
-                                        FontFamily="Consolas"
-                                        FontSize="12" />
-
-                                </DockPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-
-                    </ListView>
-
-                </Border>
-            </Grid>
+                DataContext="{Binding OutputPanelViewModel}" />
         </Grid>
 
     </Border>

@@ -17,7 +17,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Utils;
 
 public static class CollapsableBehaviour
 {

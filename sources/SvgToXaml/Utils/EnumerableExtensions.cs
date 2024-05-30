@@ -14,17 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Utils;
 
-public class MainViewModel : ViewModelBase
+internal static class EnumerableExtensions
 {
-    public InputPanelViewModel InputPanelViewModel { get; }
-
-    public OutputPanelViewModel OutputPanelViewModel { get; }
-
-    public MainViewModel(InputPanelViewModel inputPanelViewModel, OutputPanelViewModel outputPanelViewModel)
+    public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> svgElements, T svgElement)
     {
-        InputPanelViewModel = inputPanelViewModel ?? throw new ArgumentNullException(nameof(inputPanelViewModel));
-        OutputPanelViewModel = outputPanelViewModel ?? throw new ArgumentNullException(nameof(outputPanelViewModel));
+        if (svgElements == null)
+            return new[] { svgElement };
+
+        return svgElements
+            .Concat(new[] { svgElement });
     }
 }

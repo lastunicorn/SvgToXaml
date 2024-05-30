@@ -69,5 +69,6 @@ public partial class App : System.Windows.Application
 
         containerBuilder.RegisterType<MainViewModel>();
         containerBuilder.RegisterType<InputPanelViewModel>();
+        containerBuilder.RegisterType<OutputPanelViewModel>();
     }
 }

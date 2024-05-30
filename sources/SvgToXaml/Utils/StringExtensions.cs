@@ -14,16 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml;
+using System.IO;
 
-internal static class EnumerableExtensions
+namespace DustInTheWind.SvgToXaml.Utils;
+
+internal static class StringExtensions
 {
-    public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> svgElements, T svgElement)
+    public static Stream ToStream(this string s)
     {
-        if (svgElements == null)
-            return new[] { svgElement };
-
-        return svgElements
-            .Concat(new[] { svgElement });
+        MemoryStream stream = new();
+        StreamWriter writer = new(stream);
+        writer.Write(s);
+        writer.Flush();
+        stream.Position = 0;
+        return stream;
     }
 }
