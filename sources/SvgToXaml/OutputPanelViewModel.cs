@@ -17,7 +17,9 @@
 using System.Collections;
 using System.IO;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Markup;
+using DustInTheWind.SvgToXaml.Application.GetOutputInitialization;
 using DustInTheWind.SvgToXaml.Application.SetInputSvg;
 using DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
 using DustInTheWind.SvgToXaml.Infrastructure;
@@ -30,8 +32,26 @@ public class OutputPanelViewModel : ViewModelBase
     private readonly IRequestBus requestBus;
     private string xamlText;
     private UIElement xamlObject;
-    private List<ProcessingIssueViewModel> errorItems;
+    private ListCollectionView errorItems;
     private bool shouldOptimize;
+    private bool displayErrors = true;
+    private bool displayWarnings = true;
+    private bool displayInfos;
+    private int errorCount;
+    private int warningCount;
+    private int infoCount;
+    private bool isInitialized;
+
+    public bool IsInitialized
+    {
+        get => isInitialized;
+        private set
+        {
+            if (value == isInitialized) return;
+            isInitialized = value;
+            OnPropertyChanged();
+        }
+    }
 
     public string XamlText
     {
@@ -55,7 +75,7 @@ public class OutputPanelViewModel : ViewModelBase
         }
     }
 
-    public List<ProcessingIssueViewModel> ErrorItems
+    public ListCollectionView ErrorItems
     {
         get => errorItems;
         private set
@@ -75,11 +95,83 @@ public class OutputPanelViewModel : ViewModelBase
             shouldOptimize = value;
             OnPropertyChanged();
 
-            _ = SetShouldOptimizeFlag();
+            _ = SetOptimizeFlag();
         }
     }
 
     public CopyToClipboardCommand CopyToClipboardCommand { get; }
+
+    public bool DisplayErrors
+    {
+        get => displayErrors;
+        set
+        {
+            if (value == displayErrors) return;
+            displayErrors = value;
+            OnPropertyChanged();
+
+            ErrorItems?.Refresh();
+        }
+    }
+
+    public bool DisplayWarnings
+    {
+        get => displayWarnings;
+        set
+        {
+            if (value == displayWarnings) return;
+            displayWarnings = value;
+            OnPropertyChanged();
+
+            ErrorItems?.Refresh();
+        }
+    }
+
+    public bool DisplayInfos
+    {
+        get => displayInfos;
+        set
+        {
+            if (value == displayInfos) return;
+            displayInfos = value;
+            OnPropertyChanged();
+
+            ErrorItems?.Refresh();
+        }
+    }
+
+    public int ErrorCount
+    {
+        get => errorCount;
+        set
+        {
+            if (value == errorCount) return;
+            errorCount = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int WarningCount
+    {
+        get => warningCount;
+        set
+        {
+            if (value == warningCount) return;
+            warningCount = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int InfoCount
+    {
+        get => infoCount;
+        set
+        {
+            if (value == infoCount) return;
+            infoCount = value;
+            OnPropertyChanged();
+        }
+    }
 
     public OutputPanelViewModel(IRequestBus requestBus, EventBus eventBus, CopyToClipboardCommand copyToClipboardCommand)
     {
@@ -90,6 +182,8 @@ public class OutputPanelViewModel : ViewModelBase
         shouldOptimize = true;
 
         eventBus.Subscribe<XamlTextChangedEvent>(XamlTextChangedEventHandler);
+
+        _ = Initialize();
     }
 
     private Task XamlTextChangedEventHandler(XamlTextChangedEvent ev, CancellationToken cancellationToken)
@@ -106,9 +200,32 @@ public class OutputPanelViewModel : ViewModelBase
 
         ErrorItems = items.Count == 0
             ? null
-            : items;
+            : new ListCollectionView(items)
+            {
+                Filter = ErrorItemsFilter
+            };
+
+        InfoCount = ev.InfoCount;
+        WarningCount = ev.WarningCount;
+        ErrorCount = ev.ErrorCount;
 
         return Task.CompletedTask;
+    }
+
+    private bool ErrorItemsFilter(object item)
+    {
+        if (item is ProcessingIssueViewModel processingIssueViewModel)
+        {
+            return processingIssueViewModel.IssueType switch
+            {
+                IssueType.Error => DisplayErrors,
+                IssueType.Waring => DisplayWarnings,
+                IssueType.Info => DisplayInfos,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        return false;
     }
 
     private UIElement ExtractUiElement(string xamlText)
@@ -130,7 +247,7 @@ public class OutputPanelViewModel : ViewModelBase
         return null;
     }
 
-    private async Task SetShouldOptimizeFlag()
+    private async Task SetOptimizeFlag()
     {
         SetOptimizeFlagRequest request = new()
         {
@@ -138,5 +255,17 @@ public class OutputPanelViewModel : ViewModelBase
         };
 
         await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);
+    }
+
+    private async Task Initialize()
+    {
+        GetOutputInitializationRequest request = new();
+
+        GetOutputInitializationResponse response = await requestBus.Send<GetOutputInitializationRequest, GetOutputInitializationResponse>(request, CancellationToken.None)
+            .ConfigureAwait(false);
+
+        ShouldOptimize = response.ShouldOptimizeXaml;
+
+        IsInitialized = true;
     }
 }

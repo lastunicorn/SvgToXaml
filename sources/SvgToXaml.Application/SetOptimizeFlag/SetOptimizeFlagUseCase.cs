@@ -33,7 +33,7 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
 
     public async Task Handle(SetOptimizeFlagRequest request, CancellationToken cancellationToken)
     {
-        applicationState.OptimizeOutputXaml = request.OptimizeOutputXaml;
+        applicationState.OptimizeOutput = request.OptimizeOutputXaml;
 
         PerformTransformation();
         await RaiseXamlEvent(cancellationToken);
@@ -44,7 +44,7 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
         SvgToXamlTransformation svgToXamlTransformation = new()
         {
             Svg = applicationState.InputSvg,
-            PerformOptimizations = applicationState.OptimizeOutputXaml,
+            PerformOptimizations = applicationState.OptimizeOutput,
             IgnoredNamespaces = applicationState.IgnoredNamespaces.ToList()
         };
 
@@ -59,7 +59,10 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
         XamlTextChangedEvent xamlTextChangedEvent = new()
         {
             XamlText = applicationState.OutputXaml,
-            Issues = applicationState.LastConversionIssues
+            Issues = applicationState.LastConversionIssues.ToList(),
+            InfoCount = applicationState.LastConversionIssues.InfoCount,
+            WarningCount = applicationState.LastConversionIssues.WarningCount,
+            ErrorCount = applicationState.LastConversionIssues.ErrorCount
         };
 
         await eventBus.Publish(xamlTextChangedEvent, cancellationToken);

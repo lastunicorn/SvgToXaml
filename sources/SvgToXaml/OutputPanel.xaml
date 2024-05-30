@@ -19,7 +19,8 @@
     </UserControl.Resources>
 
     <Grid
-        utils:CollapsableBehaviour.Enable="{Binding ElementName=GS_DetailsView}">
+        utils:CollapsableBehaviour.Enable="{Binding ElementName=GS_DetailsView}"
+        IsEnabled="{Binding IsInitialized}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
@@ -118,48 +119,91 @@
             BorderThickness="2"
             CornerRadius="2">
 
-            <ListView
-                ItemsSource="{Binding ErrorItems}"
-                Background="Transparent"
-                BorderThickness="0"
-                Padding="0 10"
-                VerticalAlignment="Stretch">
+            <DockPanel>
 
-                <ItemsControl.Template>
-                    <ControlTemplate>
-                        <ScrollViewer
-                            Padding="{TemplateBinding Padding}"
-                            Background="{TemplateBinding Background}">
+                <StackPanel
+                    DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    Margin="10 10 10 10">
 
-                            <ItemsPresenter />
+                    <CheckBox
+                        IsChecked="{Binding DisplayErrors}">
 
-                        </ScrollViewer>
-                    </ControlTemplate>
-                </ItemsControl.Template>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Errors (" />
+                            <TextBlock Text="{Binding ErrorCount}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </CheckBox>
 
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <DockPanel
-                            Margin="5 2">
+                    <CheckBox
+                        IsChecked="{Binding DisplayWarnings}"
+                        Margin="10 0 0 0">
 
-                            <Ellipse
-                                DockPanel.Dock="Left"
-                                Width="16"
-                                Height="16"
-                                Margin="0 0 10 0"
-                                VerticalAlignment="Top"
-                                Fill="{Binding IssueType, Converter={StaticResource InfoItemTypeToColorConverter}}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Warning (" />
+                            <TextBlock Text="{Binding WarningCount}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </CheckBox>
 
-                            <TextBlock
-                                Text="{Binding Message}"
-                                FontFamily="Consolas"
-                                FontSize="12" />
+                    <CheckBox
+                        IsChecked="{Binding DisplayInfos}"
+                        Margin="10 0 0 0">
 
-                        </DockPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Infos (" />
+                            <TextBlock Text="{Binding InfoCount}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </CheckBox>
 
-            </ListView>
+                </StackPanel>
+
+                <ListView
+                    ItemsSource="{Binding ErrorItems}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Padding="0 10"
+                    VerticalAlignment="Stretch">
+
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <ScrollViewer
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}">
+
+                                <ItemsPresenter />
+
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type svgToXaml:ProcessingIssueViewModel}">
+                            <DockPanel
+                                Margin="5 2">
+
+                                <Ellipse
+                                    DockPanel.Dock="Left"
+                                    Width="16"
+                                    Height="16"
+                                    Margin="0 0 10 0"
+                                    VerticalAlignment="Top"
+                                    Fill="{Binding IssueType, Converter={StaticResource InfoItemTypeToColorConverter}}" />
+
+                                <TextBlock
+                                    Text="{Binding Message}"
+                                    FontFamily="Consolas"
+                                    FontSize="12" />
+
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ListView>
+
+            </DockPanel>
 
         </Border>
     </Grid>

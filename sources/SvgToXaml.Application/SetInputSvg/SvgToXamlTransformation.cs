@@ -35,7 +35,7 @@ internal class SvgToXamlTransformation
 
     public string Xaml { get; private set; }
 
-    public List<ProcessingIssue> Issues { get; } = new();
+    public ProcessingIssueCollection Issues { get; } = new();
 
     public void Execute()
     {

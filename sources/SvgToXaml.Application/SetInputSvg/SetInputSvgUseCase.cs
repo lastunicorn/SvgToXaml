@@ -43,7 +43,7 @@ internal class SetInputSvgUseCase : IRequestHandler<SetInputSvgRequest>
         SvgToXamlTransformation svgToXamlTransformation = new()
         {
             Svg = applicationState.InputSvg,
-            PerformOptimizations = applicationState.OptimizeOutputXaml,
+            PerformOptimizations = applicationState.OptimizeOutput,
             IgnoredNamespaces = applicationState.IgnoredNamespaces.ToList()
         };
 
@@ -58,7 +58,10 @@ internal class SetInputSvgUseCase : IRequestHandler<SetInputSvgRequest>
         XamlTextChangedEvent xamlTextChangedEvent = new()
         {
             XamlText = applicationState.OutputXaml,
-            Issues = applicationState.LastConversionIssues
+            Issues = applicationState.LastConversionIssues.ToList(),
+            InfoCount = applicationState.LastConversionIssues.InfoCount,
+            WarningCount = applicationState.LastConversionIssues.WarningCount,
+            ErrorCount = applicationState.LastConversionIssues.ErrorCount
         };
 
         await eventBus.Publish(xamlTextChangedEvent, cancellationToken);

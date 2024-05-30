@@ -30,7 +30,7 @@ public class ApplicationState
     
     public string OutputXaml { get; set; }
 
-    public bool OptimizeOutputXaml { get; set; }
+    public bool OptimizeOutput { get; set; } = true;
     
-    public List<ProcessingIssue> LastConversionIssues { get; set; }
+    public ProcessingIssueCollection LastConversionIssues { get; set; }
 }
