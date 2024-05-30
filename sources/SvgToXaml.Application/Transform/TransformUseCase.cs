@@ -89,6 +89,8 @@ internal class TransformUseCase : IRequestHandler<TransformRequest>
     private Svg Deserialize(string svgText)
     {
         SvgSerializer serializer = new();
+        serializer.Options.IgnoredNamespaces.AddRange(ConversionOptions.IgnoredNamespaces);
+
         DeserializationResult deserializationResult = serializer.Deserialize(svgText);
 
         IEnumerable<ProcessingIssue> issues = deserializationResult.Issues

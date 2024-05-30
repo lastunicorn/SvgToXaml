@@ -26,6 +26,8 @@ public class SvgSerializer
 
     private DeserializationContext deserializationContext;
 
+    public SvgDeserializationOptions Options { get; } = new();
+
     public SvgSerializer()
     {
         xmlSerializer = new XmlSerializer(typeof(XmlSvg));
@@ -35,8 +37,17 @@ public class SvgSerializer
 
     private void HandleUnknownNode(object sender, XmlNodeEventArgs e)
     {
-        string path = deserializationContext.Path.ToString();
-        deserializationContext.Issues.AddWarning(path, $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
+        bool isNamespaceIgnored = Options.IgnoredNamespaces.Contains(e.NamespaceURI);
+        if (isNamespaceIgnored)
+        {
+            string path = deserializationContext.Path.ToString();
+            deserializationContext.Issues.AddInfo(path, $"Ignoring XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
+        }
+        else
+        {
+            string path = deserializationContext.Path.ToString();
+            deserializationContext.Issues.AddWarning(path, $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
+        }
     }
 
     public DeserializationResult Deserialize(string svg)
