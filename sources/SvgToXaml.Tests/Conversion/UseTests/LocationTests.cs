@@ -20,7 +20,7 @@ using DustInTheWind.SvgToXaml.Tests.Utils;
 
 namespace DustInTheWind.SvgToXaml.Tests.Conversion.UseTests;
 
-public class LocationTests :SvgFileTestsBase
+public class LocationTests : SvgFileTestsBase
 {
     [Fact]
     public void HavingXYSpecifiedForUseElement_WhenSvgIsParsed_ThenTranslateTransformIsCreated()

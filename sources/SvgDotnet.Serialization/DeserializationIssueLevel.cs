@@ -20,5 +20,5 @@ public enum DeserializationIssueLevel
 {
     Info,
     Warning,
-    Error,
+    Error
 }

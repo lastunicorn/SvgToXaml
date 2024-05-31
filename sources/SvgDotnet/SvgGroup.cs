@@ -20,13 +20,14 @@ public class SvgGroup : SvgContainer
 {
     public SvgGroup()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
-            
+
             typeof(SvgLinearGradient),
             typeof(SvgRadialGradient),
-            
+
             typeof(SvgCircle),
             typeof(SvgEllipse),
             typeof(SvgLine),

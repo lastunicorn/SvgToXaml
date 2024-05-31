@@ -20,7 +20,6 @@ namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
 public class ProcessingIssueCollection : Collection<ProcessingIssue>
 {
-
     public int InfoCount { get; private set; }
 
     public int WarningCount { get; private set; }
@@ -101,7 +100,7 @@ public class ProcessingIssueCollection : Collection<ProcessingIssue>
     {
         IEnumerable<ProcessingIssue> notNullItems = issues.Where(x => x != null);
 
-        foreach (ProcessingIssue processingIssue in notNullItems) 
+        foreach (ProcessingIssue processingIssue in notNullItems)
             Add(processingIssue);
     }
 }

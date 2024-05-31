@@ -78,7 +78,7 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
 
-        if (isZeroSize) 
+        if (isZeroSize)
             ConversionContext.Issues.AddWarning("Zero-size rectangle present.");
     }
 }

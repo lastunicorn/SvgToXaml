@@ -27,7 +27,7 @@ public class XmlElement
 
     [XmlAttribute("tabIndex")]
     public int TabIndex { get; set; }
-    
+
     public bool TabIndexSpecified { get; set; }
 
     [XmlAttribute("lang")]

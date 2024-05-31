@@ -47,9 +47,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Autofac" Version="8.0.0" />
-      <PackageReference Include="MediatR" Version="12.2.0" />
-      <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.0.0" />
+        <PackageReference Include="Autofac" Version="8.0.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="12.0.0" />
     </ItemGroup>
 
 </Project>

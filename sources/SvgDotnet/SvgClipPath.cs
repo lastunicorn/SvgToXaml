@@ -20,7 +20,8 @@ public class SvgClipPath : SvgContainer
 {
     public SvgClipPath()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
 

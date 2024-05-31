@@ -20,10 +20,11 @@ public class SvgDefinitions : SvgContainer
 {
     public SvgDefinitions()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
-            
+
             typeof(SvgLinearGradient),
             typeof(SvgRadialGradient),
 

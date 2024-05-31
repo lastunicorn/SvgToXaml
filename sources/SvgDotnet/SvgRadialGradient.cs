@@ -53,7 +53,8 @@ public class SvgRadialGradient : SvgContainer
 
     public SvgRadialGradient()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
 

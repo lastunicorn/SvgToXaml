@@ -37,7 +37,7 @@ public class DashArray : IEnumerable<LengthPercentage>
     {
         if (text == null) throw new ArgumentNullException(nameof(text));
 
-        IEnumerable<LengthPercentage> values = text.Split(new []{ ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+        IEnumerable<LengthPercentage> values = text.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(x => (LengthPercentage)x);
 
         return new DashArray(values);

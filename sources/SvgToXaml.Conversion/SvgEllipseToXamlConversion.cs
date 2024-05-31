@@ -65,7 +65,7 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
 
-        if (isZeroSize) 
+        if (isZeroSize)
             ConversionContext.Issues.AddWarning("Zero-size ellipse present.");
     }
 }

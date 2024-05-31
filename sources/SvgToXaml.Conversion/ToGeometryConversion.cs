@@ -27,7 +27,7 @@ internal class ToGeometryConversion
 
     public ToGeometryConversion(SvgElement svgElement, ConversionContext conversionContext)
     {
-        this.rootSvgElement = svgElement ?? throw new ArgumentNullException(nameof(svgElement));
+        rootSvgElement = svgElement ?? throw new ArgumentNullException(nameof(svgElement));
         this.conversionContext = conversionContext ?? throw new ArgumentNullException(nameof(conversionContext));
     }
 

@@ -27,10 +27,10 @@ public class ApplicationState
     };
 
     public string InputSvg { get; set; }
-    
+
     public string OutputXaml { get; set; }
 
     public bool OptimizeOutput { get; set; } = true;
-    
+
     public ProcessingIssueCollection LastConversionIssues { get; set; }
 }

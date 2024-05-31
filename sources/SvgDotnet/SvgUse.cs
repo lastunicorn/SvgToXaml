@@ -30,7 +30,8 @@ public class SvgUse : SvgContainer
 
     public SvgUse()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
             typeof(SvgClipPath),

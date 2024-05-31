@@ -46,6 +46,7 @@ public class StyleRuleSetCollection : Collection<StyleRuleSet>
         foreach (StyleRuleSet styleRuleSet in styleRuleSetsNotNull)
             Items.Add(styleRuleSet);
     }
+
     public StyleRuleSet GetRuleSet(string selector)
     {
         if (selector == null)

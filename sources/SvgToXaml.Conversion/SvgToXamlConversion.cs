@@ -60,10 +60,10 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
         double x = 0;
         double y = 0;
 
-        if (SvgElement.X != null) 
+        if (SvgElement.X != null)
             x = SvgElement.X.Value.ComputeValue();
 
-        if (SvgElement.Y != null) 
+        if (SvgElement.Y != null)
             y = SvgElement.Y.Value.ComputeValue();
 
         if (x != 0 || y != 0)

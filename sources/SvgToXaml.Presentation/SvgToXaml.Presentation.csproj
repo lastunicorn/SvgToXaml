@@ -27,8 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SvgToXaml.Application\SvgToXaml.Application.csproj" PrivateAssets="All" />
-      <ProjectReference Include="..\SvgToXaml.Infrastructure\SvgToXaml.Infrastructure.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.Application\SvgToXaml.Application.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.Infrastructure\SvgToXaml.Infrastructure.csproj" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>

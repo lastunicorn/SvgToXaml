@@ -113,7 +113,7 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
 
                 default:
                     string path = DeserializationContext.Path.ToString();
-                    DeserializationContext.Issues.AddError(path,  $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
+                    DeserializationContext.Issues.AddError(path, $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
                     break;
             }
         }

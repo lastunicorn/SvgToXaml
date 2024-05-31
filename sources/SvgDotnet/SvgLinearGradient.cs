@@ -36,7 +36,8 @@ public class SvgLinearGradient : SvgContainer
 
     public SvgLinearGradient()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
 
@@ -115,7 +116,7 @@ public class SvgLinearGradient : SvgContainer
 
     public List<SvgStop> ComputeStops()
     {
-        List<SvgStop> stops  = Children
+        List<SvgStop> stops = Children
             .OfType<SvgStop>()
             .ToList();
 

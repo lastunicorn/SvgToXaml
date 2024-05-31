@@ -35,7 +35,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     protected ConversionContext ConversionContext { get; }
 
     protected TXaml XamlElement { get; private set; }
-    
+
     protected TXaml WrapperXamlElement { get; private set; }
 
     protected List<string> KnownStyleSelectors { get; } = new()
@@ -67,7 +67,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         try
         {
             Display? display = SvgElement.CalculateDisplay();
-            
+
             if (display == Display.None)
                 return null;
 
@@ -107,7 +107,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         IEnumerable<StyleDeclaration> unknownStyleDeclarations = SvgElement.Style
             .Where(x => !KnownStyleSelectors.Contains(x.Name));
 
-        foreach (StyleDeclaration svgStyleDeclaration in unknownStyleDeclarations) 
+        foreach (StyleDeclaration svgStyleDeclaration in unknownStyleDeclarations)
             ConversionContext.Issues.AddWarning($"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
     }
 
@@ -204,7 +204,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
         bool isFullTransparent = XamlElement.Opacity == 0;
 
-        if (isFullTransparent) 
+        if (isFullTransparent)
             ConversionContext.Issues.AddWarning($"Completely transparent element ({XamlElement.GetType().Name}) present.");
     }
 

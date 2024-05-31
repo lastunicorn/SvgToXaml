@@ -37,5 +37,4 @@ internal abstract class XmlShapeToModelConversion<TXml, TSvg> : XmlContainerToMo
             typeof(XmlStyle)
         });
     }
-
 }

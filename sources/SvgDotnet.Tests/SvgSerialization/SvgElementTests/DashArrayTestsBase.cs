@@ -37,7 +37,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new Length(14))
             };
@@ -52,7 +52,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new Length(14)),
                 new LengthPercentage(new Length(3))
@@ -68,7 +68,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new Length(14, SvgLengthUnit.Pixels))
             };
@@ -83,7 +83,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new Length(14, SvgLengthUnit.Pixels)),
                 new LengthPercentage(new Length(3, SvgLengthUnit.Pixels))
@@ -99,7 +99,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new SvgPercentage(14))
             };
@@ -114,7 +114,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new SvgPercentage(14)),
                 new LengthPercentage(new SvgPercentage(3))
@@ -130,7 +130,7 @@ public abstract class DashArrayTestsBase<T> : SvgFileTestsBase
         {
             T svgElement = SelectElementToTest(result.Svg);
 
-            LengthPercentage[] expected = new[]
+            LengthPercentage[] expected =
             {
                 new LengthPercentage(new Length(14)),
                 new LengthPercentage(new Length(3))

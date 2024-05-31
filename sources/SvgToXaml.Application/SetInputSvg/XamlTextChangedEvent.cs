@@ -23,8 +23,8 @@ public class XamlTextChangedEvent
     public List<ProcessingIssue> Issues { get; init; }
 
     public int InfoCount { get; init; }
-    
+
     public int WarningCount { get; init; }
-    
+
     public int ErrorCount { get; init; }
 }

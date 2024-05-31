@@ -62,6 +62,7 @@ public abstract class LanguageTestsBase<T> : SvgFileTestsBase
             svgElement.Language.Should().Be("de-DE");
         });
     }
+
     [Fact]
     public void HavingBothLangAndXmlLangAttributes_WhenSvgParsed_ThenElementContainsLanguageValueFromXmlLang()
     {

@@ -30,7 +30,7 @@ public class InfoItemTypeToColorConverter : IValueConverter
             {
                 IssueType.Error => Brushes.OrangeRed,
                 IssueType.Waring => new SolidColorBrush(Color.FromRgb(0xfc, 0xdd, 0x5f)),
-                IssueType.Info => Brushes.LightSkyBlue,
+                IssueType.Info => Brushes.LightSkyBlue
             };
         }
 

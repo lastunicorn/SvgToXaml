@@ -23,7 +23,8 @@ public class SvgShape : SvgContainer
 {
     public SvgShape()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
 

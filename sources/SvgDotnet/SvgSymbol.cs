@@ -30,7 +30,8 @@ public class SvgSymbol : SvgContainer
 
     public SvgSymbol()
     {
-        Children.AcceptedTypes = new[] {
+        Children.AcceptedTypes = new[]
+        {
             typeof(SvgDescription),
             typeof(SvgTitle),
 

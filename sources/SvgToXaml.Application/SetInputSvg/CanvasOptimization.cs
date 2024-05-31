@@ -17,6 +17,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
@@ -186,7 +187,7 @@ internal class CanvasOptimization
 
     private static bool IsCanvasUseful(Canvas canvas)
     {
-        bool containsTransformations = canvas.RenderTransform != null && canvas.RenderTransform != System.Windows.Media.Transform.Identity;
+        bool containsTransformations = canvas.RenderTransform != null && canvas.RenderTransform != Transform.Identity;
         if (containsTransformations)
             return true;
 
@@ -197,7 +198,7 @@ internal class CanvasOptimization
         bool containsClip = canvas.Clip != null;
         if (containsClip)
             return true;
-        
+
         bool isTransparent = Math.Abs(canvas.Opacity - 1) > double.Epsilon;
         if (isTransparent)
             return true;
