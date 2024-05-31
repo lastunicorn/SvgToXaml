@@ -19,7 +19,7 @@ using DustInTheWind.SvgDotnet;
 using ScaleTransform = System.Windows.Media.ScaleTransform;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
 {
@@ -40,19 +40,6 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
         SetLocation();
         SetSize();
         SetTransformation();
-    }
-
-    private void SetSize()
-    {
-        if (SvgElement.Width != null)
-            XamlElement.Width = SvgElement.Width.Value.ToUserUnits();
-        else if (SvgElement.ViewBox != null)
-            XamlElement.Width = SvgElement.ViewBox.Width.Value;
-
-        if (SvgElement.Height != null)
-            XamlElement.Height = SvgElement.Height.Value.ToUserUnits();
-        else if (SvgElement.ViewBox != null)
-            XamlElement.Height = SvgElement.ViewBox.Height.Value;
     }
 
     private void SetLocation()
@@ -79,6 +66,19 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
 
             SetWrapperXamlElement(wrapperCanvas);
         }
+    }
+
+    private void SetSize()
+    {
+        if (SvgElement.Width != null)
+            XamlElement.Width = SvgElement.Width.Value.ToUserUnits();
+        else if (SvgElement.ViewBox != null)
+            XamlElement.Width = SvgElement.ViewBox.Width.Value;
+
+        if (SvgElement.Height != null)
+            XamlElement.Height = SvgElement.Height.Value.ToUserUnits();
+        else if (SvgElement.ViewBox != null)
+            XamlElement.Height = SvgElement.ViewBox.Height.Value;
     }
 
     private void SetTransformation()

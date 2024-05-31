@@ -18,7 +18,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgDotnet;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion<TSvg, TXaml>
     where TSvg : SvgShape

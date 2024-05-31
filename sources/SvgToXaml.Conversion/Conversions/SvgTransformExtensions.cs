@@ -21,7 +21,7 @@ using RotateTransform = DustInTheWind.SvgDotnet.RotateTransform;
 using ScaleTransform = DustInTheWind.SvgDotnet.ScaleTransform;
 using TranslateTransform = DustInTheWind.SvgDotnet.TranslateTransform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal static class SvgTransformExtensions
 {
@@ -124,7 +124,7 @@ internal static class SvgTransformExtensions
         else if (transform is TransformGroup transformGroup)
         {
             foreach (Transform childTransforms in transformGroup.Children)
-                TranslateOriginRecursively(childTransforms, x, y);
+                childTransforms.TranslateOriginRecursively(x, y);
         }
     }
 

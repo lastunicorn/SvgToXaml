@@ -17,7 +17,7 @@
 using System.Windows.Shapes;
 using DustInTheWind.SvgDotnet;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal class SvgLineToXamlConversion : SvgShapeToXamlConversion<SvgLine, Line>
 {

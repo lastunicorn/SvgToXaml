@@ -18,7 +18,7 @@ using System.Windows;
 using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
 {
@@ -75,11 +75,11 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
                 return new SvgUseToXamlConversion(childSvgUse, ConversionContext, SvgElement);
 
             default:
-            {
-                Type inheritedElementType = referencedSvgElement.GetType();
-                ConversionContext.Issues.AddError($"Unknown inherited element type: {inheritedElementType.FullName}");
-                return null;
-            }
+                {
+                    Type inheritedElementType = referencedSvgElement.GetType();
+                    ConversionContext.Issues.AddError($"Unknown inherited element type: {inheritedElementType.FullName}");
+                    return null;
+                }
         }
     }
 

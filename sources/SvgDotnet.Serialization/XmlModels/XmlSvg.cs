@@ -38,4 +38,7 @@ public class XmlSvg : XmlContainer
 
     [XmlAttribute("viewBox")]
     public string ViewBox { get; set; }
+
+    [XmlAttribute("preserveAspectRatio")]
+    public string PreserveAspectRatio { get; set; }
 }

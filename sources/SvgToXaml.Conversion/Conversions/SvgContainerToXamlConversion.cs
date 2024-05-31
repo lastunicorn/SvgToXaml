@@ -18,7 +18,7 @@ using System.Windows;
 using System.Windows.Controls;
 using DustInTheWind.SvgDotnet;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConversion<TSvg, TXaml>
     where TSvg : SvgContainer
@@ -93,18 +93,18 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
             case SvgRadialGradient:
             case SvgClipPath:
             case SvgStyle:
-            {
-                Type inheritedElementType = svgElement.GetType();
-                ConversionContext.Issues.AddWarning($"Element ignored. Type: {inheritedElementType.FullName}");
-                return null;
-            }
+                {
+                    Type inheritedElementType = svgElement.GetType();
+                    ConversionContext.Issues.AddWarning($"Element ignored. Type: {inheritedElementType.FullName}");
+                    return null;
+                }
 
             default:
-            {
-                Type inheritedElementType = svgElement.GetType();
-                ConversionContext.Issues.AddError($"Unknown element type: {inheritedElementType.FullName}");
-                return null;
-            }
+                {
+                    Type inheritedElementType = svgElement.GetType();
+                    ConversionContext.Issues.AddError($"Unknown element type: {inheritedElementType.FullName}");
+                    return null;
+                }
         }
     }
 }

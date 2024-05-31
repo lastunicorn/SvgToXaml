@@ -18,7 +18,7 @@ using System.Windows.Controls;
 using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
 {

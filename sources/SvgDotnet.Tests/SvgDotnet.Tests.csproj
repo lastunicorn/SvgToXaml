@@ -608,6 +608,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\lang.svg" />
       <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\xmllang-missing.svg" />
       <None Remove="SvgSerialization\SvgTests\LanguageTests.Resources\xmllang.svg" />
+      <None Remove="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-align-meet.svg" />
+      <None Remove="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-align-slice.svg" />
+      <None Remove="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-align.svg" />
+      <None Remove="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-invalid.svg" />
+      <None Remove="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-missing.svg" />
       <None Remove="SvgSerialization\SvgTests\TabIndexTests.Resources\tabindex-float.svg" />
       <None Remove="SvgSerialization\SvgTests\TabIndexTests.Resources\tabindex-missing.svg" />
       <None Remove="SvgSerialization\SvgTests\TabIndexTests.Resources\tabindex-nan.svg" />
@@ -1389,6 +1394,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\lang.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\xmllang-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\LanguageTests.Resources\xmllang.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-invalid.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-align-slice.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-align-meet.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-align.svg" />
+      <EmbeddedResource Include="SvgSerialization\SvgTests\PreserveAspectRatioTests.Resources\preserveaspectratio-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\TabIndexTests.Resources\tabindex-float.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\TabIndexTests.Resources\tabindex-missing.svg" />
       <EmbeddedResource Include="SvgSerialization\SvgTests\TabIndexTests.Resources\tabindex-nan.svg" />

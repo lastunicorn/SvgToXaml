@@ -18,7 +18,7 @@ using System.Windows;
 using System.Windows.Media;
 using DustInTheWind.SvgDotnet;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal class ToGeometryConversion
 {
@@ -41,34 +41,34 @@ internal class ToGeometryConversion
         switch (svgElement)
         {
             case SvgCircle svgCircle:
-            {
-                Point centerPoint = new(svgCircle.CenterX, svgCircle.CenterY);
-                return new EllipseGeometry(centerPoint, svgCircle.Radius, svgCircle.Radius);
-            }
+                {
+                    Point centerPoint = new(svgCircle.CenterX, svgCircle.CenterY);
+                    return new EllipseGeometry(centerPoint, svgCircle.Radius, svgCircle.Radius);
+                }
 
             case SvgEllipse svgEllipse:
-            {
-                Point centerPoint = new(svgEllipse.CenterX, svgEllipse.CenterY);
-                return new EllipseGeometry(centerPoint, svgEllipse.RadiusX, svgEllipse.RadiusY);
-            }
+                {
+                    Point centerPoint = new(svgEllipse.CenterX, svgEllipse.CenterY);
+                    return new EllipseGeometry(centerPoint, svgEllipse.RadiusX, svgEllipse.RadiusY);
+                }
 
             case SvgPath svgPath:
-            {
-                return Geometry.Parse(svgPath.Data);
-            }
+                {
+                    return Geometry.Parse(svgPath.Data);
+                }
 
             case SvgLine svgLine:
-            {
-                Point startPoint = new(svgLine.X1, svgLine.Y1);
-                Point endPoint = new(svgLine.X2, svgLine.Y2);
-                return new LineGeometry(startPoint, endPoint);
-            }
+                {
+                    Point startPoint = new(svgLine.X1, svgLine.Y1);
+                    Point endPoint = new(svgLine.X2, svgLine.Y2);
+                    return new LineGeometry(startPoint, endPoint);
+                }
 
             case SvgRectangle svgRectangle:
-            {
-                Rect rect = new(svgRectangle.X, svgRectangle.Y, svgRectangle.Width, svgRectangle.Height);
-                return new RectangleGeometry(rect);
-            }
+                {
+                    Rect rect = new(svgRectangle.X, svgRectangle.Y, svgRectangle.Width, svgRectangle.Height);
+                    return new RectangleGeometry(rect);
+                }
 
             case SvgPolygon svgPolygon:
                 conversionContext.Issues.AddError("Failing to transform SvgPolygon into a Geometry. Reason: not implemented.");
@@ -79,19 +79,19 @@ internal class ToGeometryConversion
                 return null;
 
             case SvgUse svgUse:
-            {
-                string referencedId = svgUse.Href.Id;
+                {
+                    string referencedId = svgUse.Href.Id;
 
-                if (referencedId == null)
-                    return Geometry.Empty;
+                    if (referencedId == null)
+                        return Geometry.Empty;
 
-                SvgElement referencedElement = svgElement.GetParentSvg().FindChild(referencedId);
+                    SvgElement referencedElement = svgElement.GetParentSvg().FindChild(referencedId);
 
-                if (referencedElement == null)
-                    return null;
+                    if (referencedElement == null)
+                        return null;
 
-                return ConvertToGeometry(referencedElement);
-            }
+                    return ConvertToGeometry(referencedElement);
+                }
 
             default:
                 conversionContext.Issues.AddError($"Failed to transform '{svgElement?.GetType()}' into a Geometry. Reason: unknown type.");

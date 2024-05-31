@@ -17,7 +17,7 @@
 using System.Windows.Controls;
 using DustInTheWind.SvgDotnet;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup, Canvas>
 {

@@ -19,18 +19,18 @@ using DustInTheWind.SvgDotnet;
 using FillRule = System.Windows.Media.FillRule;
 using SvgFillRule = DustInTheWind.SvgDotnet.FillRule;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
-internal class SvgPolylineToXamlConversion : SvgShapeToXamlConversion<SvgPolyline, Polyline>
+internal class SvgPolygonToXamlConversion : SvgShapeToXamlConversion<SvgPolygon, Polygon>
 {
-    public SvgPolylineToXamlConversion(SvgPolyline svgPolyline, ConversionContext conversionContext, SvgElement referrer = null)
-        : base(svgPolyline, conversionContext, referrer)
+    public SvgPolygonToXamlConversion(SvgPolygon svgPolygon, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgPolygon, conversionContext, referrer)
     {
     }
 
-    protected override Polyline CreateXamlElement()
+    protected override Polygon CreateXamlElement()
     {
-        return new Polyline();
+        return new Polygon();
     }
 
     protected override void ConvertProperties()

@@ -18,18 +18,18 @@ using System.Windows.Shapes;
 using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
-internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectangle, Rectangle>
+internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse, Ellipse>
 {
-    public SvgRectangleToXamlConversion(SvgRectangle svgRectangle, ConversionContext conversionContext, SvgElement referrer = null)
-        : base(svgRectangle, conversionContext, referrer)
+    public SvgEllipseToXamlConversion(SvgEllipse svgEllipse, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgEllipse, conversionContext, referrer)
     {
     }
 
-    protected override Rectangle CreateXamlElement()
+    protected override Ellipse CreateXamlElement()
     {
-        return new Rectangle();
+        return new Ellipse();
     }
 
     protected override void ConvertProperties()
@@ -39,13 +39,12 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
         base.ConvertProperties();
 
         SetSize();
-        SetCornetRadius();
     }
 
     private void SetPosition()
     {
-        double left = SvgElement.X;
-        double top = SvgElement.Y;
+        double left = SvgElement.CenterX - SvgElement.RadiusX;
+        double top = SvgElement.CenterY - SvgElement.RadiusY;
 
         if (left != 0 || top != 0)
             XamlElement.RenderTransform = new TranslateTransform(left, top);
@@ -53,20 +52,8 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
     private void SetSize()
     {
-        XamlElement.Width = SvgElement.Width;
-        XamlElement.Height = SvgElement.Height;
-    }
-
-    private void SetCornetRadius()
-    {
-        double? radiusX = SvgElement.Rx ?? SvgElement.Ry;
-        double? radiusY = SvgElement.Ry ?? SvgElement.Rx;
-
-        if (radiusX != null)
-            XamlElement.RadiusX = radiusX.Value;
-
-        if (radiusY != null)
-            XamlElement.RadiusY = radiusY.Value;
+        XamlElement.Width = SvgElement.RadiusX * 2;
+        XamlElement.Height = SvgElement.RadiusY * 2;
     }
 
     protected override void OnExecuted()
@@ -79,6 +66,6 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
 
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning("Zero-size rectangle present.");
+            ConversionContext.Issues.AddWarning("Zero-size ellipse present.");
     }
 }

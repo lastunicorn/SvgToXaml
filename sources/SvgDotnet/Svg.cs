@@ -30,6 +30,8 @@ public class Svg : SvgContainer
 
     public SvgViewBox ViewBox { get; set; }
 
+    public PreserveAspectRatio PreserveAspectRatio { get; set; } = new();
+
     public Svg()
     {
         Children.AcceptedTypes = new[]

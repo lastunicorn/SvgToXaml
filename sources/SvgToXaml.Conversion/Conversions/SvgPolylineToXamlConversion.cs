@@ -14,46 +14,40 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Media;
 using System.Windows.Shapes;
 using DustInTheWind.SvgDotnet;
 using FillRule = System.Windows.Media.FillRule;
 using SvgFillRule = DustInTheWind.SvgDotnet.FillRule;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
-internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
+internal class SvgPolylineToXamlConversion : SvgShapeToXamlConversion<SvgPolyline, Polyline>
 {
-    public SvgPathToXamlConversion(SvgPath svgPath, ConversionContext conversionContext, SvgElement referrer = null)
-        : base(svgPath, conversionContext, referrer)
+    public SvgPolylineToXamlConversion(SvgPolyline svgPolyline, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgPolyline, conversionContext, referrer)
     {
     }
 
-    protected override Path CreateXamlElement()
+    protected override Polyline CreateXamlElement()
     {
-        return new Path();
+        return new Polyline();
     }
 
     protected override void ConvertProperties()
     {
         base.ConvertProperties();
 
-        SetData();
+        SetPoints();
         SetFillRule();
     }
 
-    private void SetData()
+    private void SetPoints()
     {
-        XamlElement.Data = SvgElement.Data is null or "none"
-            ? Geometry.Empty
-            : Geometry.Parse(SvgElement.Data);
+        XamlElement.Points = SvgElement.Points.ToXaml();
     }
 
     private void SetFillRule()
     {
-        if (XamlElement.Data.IsEmpty())
-            return;
-
         SvgFillRule? svgFillRule = ShadowTree
             .Select(x => x.ComputeFillRule())
             .FirstOrDefault(x => x != null);
@@ -63,36 +57,7 @@ internal class SvgPathToXamlConversion : SvgShapeToXamlConversion<SvgPath, Path>
         if (fillRule == null)
             return;
 
-        switch (XamlElement.Data)
-        {
-            case GeometryGroup geometryGroup:
-            {
-                geometryGroup = geometryGroup.Clone();
-                geometryGroup.FillRule = fillRule.Value;
-                geometryGroup.Freeze();
-
-                XamlElement.Data = geometryGroup;
-                break;
-            }
-
-            case PathGeometry pathGeometry:
-            {
-                pathGeometry = pathGeometry.Clone();
-                pathGeometry.FillRule = fillRule.Value;
-                pathGeometry.Freeze();
-                XamlElement.Data = pathGeometry;
-                break;
-            }
-
-            case StreamGeometry streamGeometry:
-            {
-                streamGeometry = streamGeometry.Clone();
-                streamGeometry.FillRule = fillRule.Value;
-                streamGeometry.Freeze();
-                XamlElement.Data = streamGeometry;
-                break;
-            }
-        }
+        XamlElement.FillRule = fillRule.Value;
     }
 
     private static FillRule? ComputeFillRule(SvgFillRule? fillRule)

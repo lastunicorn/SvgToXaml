@@ -14,24 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgDotnet;
-using DustInTheWind.SvgToXaml.Conversion.Conversions;
+namespace DustInTheWind.SvgDotnet;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
-
-public class SvgToXamlConvertor
+/// <summary>
+/// This enum is part of the <see cref="PreserveAspectRatio"/> structure.
+/// </summary>
+public enum MeetOrSlice
 {
-    public ConversionResult ConvertToXaml(Svg svg)
-    {
-        ConversionContext conversionContext = new();
-
-        SvgToXamlConversion svgToXamlConversion = new(svg, conversionContext);
-        conversionContext.Canvas = svgToXamlConversion.Execute();
-
-        return new ConversionResult
-        {
-            Canvas = conversionContext.Canvas,
-            Issues = conversionContext.Issues
-        };
-    }
+    Meet,
+    Slice
 }

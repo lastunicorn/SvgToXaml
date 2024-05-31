@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Text.RegularExpressions;
 using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
@@ -69,6 +70,42 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
         ConvertPosition();
         ConvertSize();
         ConvertViewBox();
+        ConvertPreserveAspectRation();
+    }
+
+    private void ConvertPreserveAspectRation()
+    {
+        if (XmlElement.PreserveAspectRatio == null)
+            return;
+
+        PreserveAspectRatio? preserveAspectRatio = Parse(XmlElement.PreserveAspectRatio);
+
+        if (preserveAspectRatio == null)
+        {
+            string path = DeserializationContext.Path.ToString();
+            DeserializationContext.Issues.AddError(path, "Invalid value for 'preserveAspectRatio'.");
+        }
+        else
+        {
+            SvgElement.PreserveAspectRatio = preserveAspectRatio.Value;
+        }
+    }
+
+    private static PreserveAspectRatio? Parse(string text)
+    {
+        Regex regex = new(@"^\s*(none|xMinYMin|xMidYMin|xMaxYMin|xMinYMid|xMidYMid|xMaxYMid|xMinYMax|xMidYMax|xMaxYMax)(?:\s+(meet|slice))?\s*$", RegexOptions.Singleline);
+
+        Match match = regex.Match(text);
+
+        if (!match.Success)
+            return null;
+
+        Align align = Enum.Parse<Align>(match.Groups[1].Value, true);
+        MeetOrSlice meetOrSlice = match.Groups.Count > 1 && !string.IsNullOrEmpty(match.Groups[2].Value)
+            ? Enum.Parse<MeetOrSlice>(match.Groups[2].Value, true)
+            : MeetOrSlice.Meet;
+
+        return new PreserveAspectRatio(align, meetOrSlice);
     }
 
     private void ConvertVersion()

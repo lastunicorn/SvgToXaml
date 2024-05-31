@@ -19,6 +19,7 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using DustInTheWind.SvgDotnet;
+using DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 namespace DustInTheWind.SvgToXaml.Conversion;
 

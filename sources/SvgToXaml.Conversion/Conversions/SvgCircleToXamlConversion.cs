@@ -18,12 +18,12 @@ using System.Windows.Shapes;
 using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
-internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse, Ellipse>
+internal class SvgCircleToXamlConversion : SvgShapeToXamlConversion<SvgCircle, Ellipse>
 {
-    public SvgEllipseToXamlConversion(SvgEllipse svgEllipse, ConversionContext conversionContext, SvgElement referrer = null)
-        : base(svgEllipse, conversionContext, referrer)
+    public SvgCircleToXamlConversion(SvgCircle svgCircle, ConversionContext conversionContext, SvgElement referrer = null)
+        : base(svgCircle, conversionContext, referrer)
     {
     }
 
@@ -43,8 +43,8 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
 
     private void SetPosition()
     {
-        double left = SvgElement.CenterX - SvgElement.RadiusX;
-        double top = SvgElement.CenterY - SvgElement.RadiusY;
+        double left = SvgElement.CenterX - SvgElement.Radius;
+        double top = SvgElement.CenterY - SvgElement.Radius;
 
         if (left != 0 || top != 0)
             XamlElement.RenderTransform = new TranslateTransform(left, top);
@@ -52,8 +52,8 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
 
     private void SetSize()
     {
-        XamlElement.Width = SvgElement.RadiusX * 2;
-        XamlElement.Height = SvgElement.RadiusY * 2;
+        XamlElement.Width = SvgElement.Radius * 2;
+        XamlElement.Height = SvgElement.Radius * 2;
     }
 
     protected override void OnExecuted()
@@ -66,6 +66,6 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
 
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning("Zero-size ellipse present.");
+            ConversionContext.Issues.AddWarning("Zero-size ellipse (circle) present.");
     }
 }
