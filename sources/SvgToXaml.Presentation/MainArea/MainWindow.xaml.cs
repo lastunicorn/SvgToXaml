@@ -14,32 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Input;
-using DustInTheWind.SvgToXaml.Application.OpenFile;
-using DustInTheWind.SvgToXaml.Infrastructure;
+using System.Windows;
+using DustInTheWind.SvgToXaml.Presentation.Main;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation;
 
-public class OpenFileCommand : ICommand
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    private readonly IRequestBus requestBus;
-
-    public event EventHandler CanExecuteChanged;
-
-    public OpenFileCommand(IRequestBus requestBus)
+    public MainWindow(MainViewModel mainViewModel)
     {
-        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
-    }
+        InitializeComponent();
 
-    public bool CanExecute(object parameter)
-    {
-        return true;
-    }
-
-    public void Execute(object parameter)
-    {
-        OpenFileRequest request = new();
-
-        requestBus.Send(request);
+        DataContext = mainViewModel;
     }
 }

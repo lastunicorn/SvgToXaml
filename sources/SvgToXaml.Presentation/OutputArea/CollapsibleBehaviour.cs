@@ -17,16 +17,16 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DustInTheWind.SvgToXaml.Utils;
+namespace DustInTheWind.SvgToXaml.Presentation.Utils;
 
-public static class CollapsableBehaviour
+public static class CollapsibleBehaviour
 {
     private static readonly Dictionary<DependencyObject, GridLength> OldValues = new();
 
     public static readonly DependencyProperty EnableProperty = DependencyProperty.RegisterAttached(
         "Enable",
         typeof(GridSplitter),
-        typeof(CollapsableBehaviour),
+        typeof(CollapsibleBehaviour),
         new UIPropertyMetadata(null, OnEnableChanged));
 
     public static GridSplitter GetEnable(DependencyObject obj)

@@ -14,16 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Utils;
+using DustInTheWind.SvgToXaml.Application.SetInputSvg;
 
-internal static class EnumerableExtensions
+namespace DustInTheWind.SvgToXaml.Presentation;
+
+public class ProcessingIssueViewModel
 {
-    public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> svgElements, T svgElement)
-    {
-        if (svgElements == null)
-            return new[] { svgElement };
+    public IssueType IssueType { get; }
 
-        return svgElements
-            .Concat(new[] { svgElement });
+    public string Message { get; }
+
+    public ProcessingIssueViewModel(ProcessingIssue processingIssue)
+    {
+        IssueType = processingIssue.Level switch
+        {
+            ProcessingIssueLevel.Info => IssueType.Info,
+            ProcessingIssueLevel.Warning => IssueType.Waring,
+            ProcessingIssueLevel.Error => IssueType.Error,
+            _ => IssueType.Info
+        };
+
+        Message = $"{processingIssue.Category}: {processingIssue.Message}";
     }
 }

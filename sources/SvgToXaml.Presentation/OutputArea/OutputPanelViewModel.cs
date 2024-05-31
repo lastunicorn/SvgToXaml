@@ -23,9 +23,8 @@ using DustInTheWind.SvgToXaml.Application.GetOutputInitialization;
 using DustInTheWind.SvgToXaml.Application.SetInputSvg;
 using DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
 using DustInTheWind.SvgToXaml.Infrastructure;
-using DustInTheWind.SvgToXaml.Utils;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
 public class OutputPanelViewModel : ViewModelBase
 {

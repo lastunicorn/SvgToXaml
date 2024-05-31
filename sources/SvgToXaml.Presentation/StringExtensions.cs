@@ -1,4 +1,4 @@
-// SvgToXaml
+﻿// SvgToXaml
 // Copyright (C) 2022-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,23 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+using System.IO;
 
-namespace DustInTheWind.SvgToXaml.Utils;
+namespace DustInTheWind.SvgToXaml.Presentation;
 
-public class NullToVisibilityConverter : IValueConverter
+internal static class StringExtensions
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public static Stream ToStream(this string s)
     {
-        return value == null
-            ? Visibility.Collapsed
-            : Visibility.Visible;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
+        MemoryStream stream = new();
+        StreamWriter writer = new(stream);
+        writer.Write(s);
+        writer.Flush();
+        stream.Position = 0;
+        return stream;
     }
 }

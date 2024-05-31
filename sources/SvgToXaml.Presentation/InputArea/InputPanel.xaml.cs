@@ -14,23 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
-using System.Windows.Input;
+using System.Windows.Controls;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation;
 
-public class CopyToClipboardCommand : ICommand
+/// <summary>
+/// Interaction logic for InputPanel.xaml
+/// </summary>
+public partial class InputPanel : UserControl
 {
-    public event EventHandler CanExecuteChanged;
-
-    public bool CanExecute(object parameter)
+    public InputPanel()
     {
-        return true;
-    }
-
-    public void Execute(object parameter)
-    {
-        string text = parameter as string;
-        Clipboard.SetText(text);
+        InitializeComponent();
     }
 }

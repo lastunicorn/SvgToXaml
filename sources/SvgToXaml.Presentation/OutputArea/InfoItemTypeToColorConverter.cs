@@ -18,7 +18,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation.Converters;
 
 public class InfoItemTypeToColorConverter : IValueConverter
 {
@@ -33,7 +33,7 @@ public class InfoItemTypeToColorConverter : IValueConverter
                 IssueType.Info => Brushes.LightSkyBlue,
             };
         }
-        
+
         return Brushes.Transparent;
     }
 

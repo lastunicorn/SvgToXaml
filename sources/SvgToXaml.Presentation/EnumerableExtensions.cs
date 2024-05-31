@@ -14,11 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation;
 
-public enum IssueType
+internal static class EnumerableExtensions
 {
-    Error,
-    Waring,
-    Info
+    public static IEnumerable<T> SafeConcat<T>(this IEnumerable<T> svgElements, T svgElement)
+    {
+        if (svgElements == null)
+            return new[] { svgElement };
+
+        return svgElements
+            .Concat(new[] { svgElement });
+    }
 }

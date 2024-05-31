@@ -14,26 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.SetInputSvg;
+using System.Windows.Input;
+using DustInTheWind.SvgToXaml.Application.OpenFile;
+using DustInTheWind.SvgToXaml.Infrastructure;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation.Main;
 
-public class ProcessingIssueViewModel
+public class OpenFileCommand : ICommand
 {
-    public IssueType IssueType { get; }
+    private readonly IRequestBus requestBus;
 
-    public string Message { get; }
+    public event EventHandler CanExecuteChanged;
 
-    public ProcessingIssueViewModel(ProcessingIssue processingIssue)
+    public OpenFileCommand(IRequestBus requestBus)
     {
-        IssueType = processingIssue.Level switch
-        {
-            ProcessingIssueLevel.Info => IssueType.Info,
-            ProcessingIssueLevel.Warning => IssueType.Waring,
-            ProcessingIssueLevel.Error => IssueType.Error,
-            _ => IssueType.Info
-        };
+        this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
+    }
 
-        Message = $"{processingIssue.Category}: {processingIssue.Message}";
+    public bool CanExecute(object parameter)
+    {
+        return true;
+    }
+
+    public void Execute(object parameter)
+    {
+        OpenFileRequest request = new();
+
+        requestBus.Send(request);
     }
 }

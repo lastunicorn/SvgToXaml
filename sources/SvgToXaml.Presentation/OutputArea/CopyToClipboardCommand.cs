@@ -14,19 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.IO;
+using System.Windows;
+using System.Windows.Input;
 
-namespace DustInTheWind.SvgToXaml.Utils;
+namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
-internal static class StringExtensions
+public class CopyToClipboardCommand : ICommand
 {
-    public static Stream ToStream(this string s)
+    public event EventHandler CanExecuteChanged;
+
+    public bool CanExecute(object parameter)
     {
-        MemoryStream stream = new();
-        StreamWriter writer = new(stream);
-        writer.Write(s);
-        writer.Flush();
-        stream.Position = 0;
-        return stream;
+        return true;
+    }
+
+    public void Execute(object parameter)
+    {
+        string text = parameter as string;
+        Clipboard.SetText(text);
     }
 }

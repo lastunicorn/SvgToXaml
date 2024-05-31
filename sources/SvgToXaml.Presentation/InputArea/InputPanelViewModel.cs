@@ -18,8 +18,9 @@ using System.Windows.Threading;
 using DustInTheWind.SvgToXaml.Application.OpenFile;
 using DustInTheWind.SvgToXaml.Application.SetInputSvg;
 using DustInTheWind.SvgToXaml.Infrastructure;
+using DustInTheWind.SvgToXaml.Presentation.Main;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation.InputArea;
 
 public class InputPanelViewModel : ViewModelBase
 {

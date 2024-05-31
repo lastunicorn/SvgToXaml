@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <ProjectReference Include="..\SvgToXaml.Infrastructure\SvgToXaml.Infrastructure.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.Ports.FileAccess\SvgToXaml.Ports.FileAccess.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.Ports.UserAccess\SvgToXaml.Ports.UserAccess.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\SvgToXaml.Presentation\SvgToXaml.Presentation.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.UserAccess\SvgToXaml.UserAccess.csproj" PrivateAssets="All" />
     </ItemGroup>
 

@@ -14,19 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
+namespace DustInTheWind.SvgToXaml.Presentation;
 
-namespace DustInTheWind.SvgToXaml;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+public enum IssueType
 {
-    public MainWindow(MainViewModel mainViewModel)
-    {
-        InitializeComponent();
-
-        DataContext = mainViewModel;
-    }
+    Error,
+    Waring,
+    Info
 }

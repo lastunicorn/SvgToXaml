@@ -1,4 +1,4 @@
-﻿// SvgToXaml
+// SvgToXaml
 // Copyright (C) 2022-2024 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,17 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
+using System.Globalization;
+using System.Windows;
+using System.Windows.Data;
 
-namespace DustInTheWind.SvgToXaml;
+namespace DustInTheWind.SvgToXaml.Presentation;
 
-/// <summary>
-/// Interaction logic for InputPanel.xaml
-/// </summary>
-public partial class InputPanel : UserControl
+public class NullToVisibilityConverter : IValueConverter
 {
-    public InputPanel()
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        InitializeComponent();
+        return value == null
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

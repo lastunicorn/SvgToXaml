@@ -14,7 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml;
+using DustInTheWind.SvgToXaml.Presentation.InputArea;
+using DustInTheWind.SvgToXaml.Presentation.OutputArea;
+
+namespace DustInTheWind.SvgToXaml.Presentation.Main;
 
 public class MainViewModel : ViewModelBase
 {
