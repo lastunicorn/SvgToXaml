@@ -105,7 +105,7 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
             SvgElement.ClassNames.AddRange(collection);
         }
 
-        if (XmlElement.FontSizeSpecified)
+        if (XmlElement.FontSize != null)
             SvgElement.FontSize = XmlElement.FontSize;
 
         if (XmlElement.Transform != null)

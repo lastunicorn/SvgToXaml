@@ -92,9 +92,7 @@ public class XmlElement
     public string StrokeDashOffset { get; set; }
 
     [XmlAttribute("font-size")]
-    public double FontSize { get; set; }
-
-    public bool FontSizeSpecified { get; set; }
+    public string FontSize { get; set; }
 
     //
 

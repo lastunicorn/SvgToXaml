@@ -28,8 +28,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\SvgDotnet\SvgDotNet.csproj" PrivateAssets="All" />
-        <ProjectReference Include="..\SvgDotnet.Serialization\SvgDotnet.Serialization.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.Application\SvgToXaml.Application.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\SvgToXaml.FileAccess\SvgToXaml.FileAccess.csproj" PrivateAssets="All" />

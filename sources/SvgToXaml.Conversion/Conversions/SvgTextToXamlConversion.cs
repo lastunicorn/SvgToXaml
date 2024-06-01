@@ -44,12 +44,12 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
 
     private void ConvertFontSize()
     {
-        double? fontSize = ShadowTree
+        LengthPercentage? fontSize = ShadowTree
             .Select(x => x.ComputeFontSize())
             .FirstOrDefault(x => x != null);
 
         if (fontSize != null)
-            XamlElement.FontSize = fontSize.Value;
+            XamlElement.FontSize = fontSize.Value.ComputeValue();
     }
 
     private void ConvertPosition()
