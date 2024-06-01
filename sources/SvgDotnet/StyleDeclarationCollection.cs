@@ -22,6 +22,26 @@ public class StyleDeclarationCollection : Collection<StyleDeclaration>
 {
     public StyleDeclaration this[string name] => Items.FirstOrDefault(x => x.Name == name);
 
+    public StyleDeclarationCollection()
+    {
+    }
+
+    public StyleDeclarationCollection(IEnumerable<StyleDeclaration> declarations)
+        : base(declarations.ToList())
+    {
+    }
+
+    public StyleDeclaration Add(string name, string value)
+    {
+        if (name == null) throw new ArgumentNullException(nameof(name));
+        if (value == null) throw new ArgumentNullException(nameof(value));
+
+        StyleDeclaration styleDeclaration = new(name, value);
+        Items.Add(styleDeclaration);
+
+        return styleDeclaration;
+    }
+
     public void AddRange(IEnumerable<StyleDeclaration> declarations)
     {
         if (declarations == null) throw new ArgumentNullException(nameof(declarations));

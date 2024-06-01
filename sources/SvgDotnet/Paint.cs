@@ -19,13 +19,27 @@ namespace DustInTheWind.SvgDotnet;
 /// <remarks>
 /// Possible Values = none | {color} | {url} [none | {color}]? | context-fill | context-stroke 
 /// </remarks>
-public class Paint
+public class Paint : IEquatable<Paint>
 {
     public SvgColor Color { get; private init; }
 
     public SvgUrl Url { get; private init; }
 
     public bool IsNone { get; private init; }
+
+    private Paint()
+    {
+    }
+
+    public Paint(SvgColor svgColor)
+    {
+        Color = svgColor ?? throw new ArgumentNullException(nameof(svgColor));
+    }
+
+    public Paint(SvgUrl svgUrl)
+    {
+        Url = svgUrl ?? throw new ArgumentNullException(nameof(svgUrl));
+    }
 
     public static Paint Parse(string text)
     {
@@ -77,5 +91,35 @@ public class Paint
         return text == null
             ? null
             : Parse(text);
+    }
+
+    public bool Equals(Paint other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Equals(Color, other.Color) && Equals(Url, other.Url) && IsNone == other.IsNone;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        return Equals((Paint)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Color, Url, IsNone);
+    }
+
+    public static bool operator ==(Paint left, Paint right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Paint left, Paint right)
+    {
+        return !Equals(left, right);
     }
 }

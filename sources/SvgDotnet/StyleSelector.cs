@@ -15,11 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace DustInTheWind.SvgDotnet;
 
 public class StyleSelector : IEquatable<StyleSelector>
 {
+    private static readonly Regex Regex = new(@"^\s*(\.|#)?(\w+)\s*", RegexOptions.Multiline);
+
     public StyleSelectorType Type { get; }
 
     public string Name { get; }
@@ -30,6 +33,28 @@ public class StyleSelector : IEquatable<StyleSelector>
 
         Type = type;
         Name = name ?? throw new ArgumentNullException(nameof(name));
+    }
+
+    public static StyleSelector Parse(string text)
+    {
+        if (text == null)
+            return null;
+
+        Match match = Regex.Match(text);
+
+        if (!match.Success)
+            return null;
+
+        StyleSelectorType styleSelectorType = match.Groups[1].Value switch
+        {
+            "" => StyleSelectorType.Element,
+            "." => StyleSelectorType.Class,
+            "#" => StyleSelectorType.Id,
+            _ => StyleSelectorType.None
+        };
+        string selectorName = match.Groups[2].Value;
+
+        return new StyleSelector(styleSelectorType, selectorName);
     }
 
     public override string ToString()

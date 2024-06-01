@@ -156,7 +156,7 @@ public abstract class SvgElement
         }
     }
 
-    public Display? CalculateDisplay()
+    public Display? ComputeDisplay()
     {
         StyleDeclaration styleDeclaration = Style?["display"] ?? GetStyleValueFromClasses("display");
 

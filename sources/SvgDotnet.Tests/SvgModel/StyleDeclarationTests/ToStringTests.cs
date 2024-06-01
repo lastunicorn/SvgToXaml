@@ -21,11 +21,7 @@ public class ToStringTests
     [Fact]
     public void HavingInstanceWithNameAndValue_WhenCast_ThenNameAndValueSeparatedByColon()
     {
-        StyleDeclaration styleDeclaration = new()
-        {
-            Name = "stroke",
-            Value = "blue"
-        };
+        StyleDeclaration styleDeclaration = new("stroke", "blue");
 
         string actual = styleDeclaration.ToString();
 

@@ -36,6 +36,19 @@ public class StyleRuleSetCollection : Collection<StyleRuleSet>
         base.SetItem(index, item);
     }
 
+    public void Add(string styleSelector, IEnumerable<StyleDeclaration> declarations)
+    {
+        StyleSelector styleSelectorObject = StyleSelector.Parse(styleSelector);
+
+        StyleRuleSet styleRuleSet = new()
+        {
+            Selector = styleSelectorObject,
+            Declarations = new StyleDeclarationCollection(declarations)
+        };
+
+        Add(styleRuleSet);
+    }
+
     public void AddRange(IEnumerable<StyleRuleSet> styleRuleSets)
     {
         if (styleRuleSets == null)

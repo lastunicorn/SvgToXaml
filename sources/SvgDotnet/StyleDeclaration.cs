@@ -18,9 +18,15 @@ namespace DustInTheWind.SvgDotnet;
 
 public class StyleDeclaration
 {
-    public string Name { get; init; }
+    public string Name { get; }
 
-    public string Value { get; init; }
+    public string Value { get; }
+
+    public StyleDeclaration(string name, string value)
+    {
+        Name = name ?? throw new ArgumentNullException(nameof(name));
+        Value = value ?? throw new ArgumentNullException(nameof(value));
+    }
 
     public static implicit operator StyleDeclaration(string text)
     {
@@ -32,11 +38,10 @@ public class StyleDeclaration
         if (pos == -1)
             return null;
 
-        return new StyleDeclaration
-        {
-            Name = text[..pos].Trim(),
-            Value = text[(pos + 1)..].Trim()
-        };
+        string name = text[..pos].Trim();
+        string value = text[(pos + 1)..].Trim();
+
+        return new StyleDeclaration(name, value);
     }
 
     public override string ToString()

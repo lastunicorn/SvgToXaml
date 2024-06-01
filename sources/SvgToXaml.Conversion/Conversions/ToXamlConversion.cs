@@ -68,7 +68,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
         try
         {
-            Display? display = SvgElement.CalculateDisplay();
+            Display? display = SvgElement.ComputeDisplay();
 
             if (display == Display.None)
                 return null;
