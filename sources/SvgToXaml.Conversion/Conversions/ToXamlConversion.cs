@@ -19,9 +19,8 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using DustInTheWind.SvgDotnet;
-using DustInTheWind.SvgToXaml.Conversion.Conversions;
 
-namespace DustInTheWind.SvgToXaml.Conversion;
+namespace DustInTheWind.SvgToXaml.Conversion.Conversions;
 
 internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
     where TSvg : SvgElement

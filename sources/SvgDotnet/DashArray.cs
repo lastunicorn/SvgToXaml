@@ -22,6 +22,10 @@ public class DashArray : IEnumerable<LengthPercentage>
 {
     private readonly List<LengthPercentage> values = new();
 
+    public bool IsEmpty => values.Count == 0;
+
+    public static DashArray Empty { get; } = new();
+
     public DashArray()
     {
     }
@@ -35,12 +39,18 @@ public class DashArray : IEnumerable<LengthPercentage>
 
     public static DashArray Parse(string text)
     {
-        if (text == null) throw new ArgumentNullException(nameof(text));
+        if (text == null || text.Trim() == "none")
+            return Empty;
 
         IEnumerable<LengthPercentage> values = text.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
             .Select(x => (LengthPercentage)x);
 
         return new DashArray(values);
+    }
+
+    public override string ToString()
+    {
+        return string.Join(" ", values);
     }
 
     public IEnumerator<LengthPercentage> GetEnumerator()

@@ -37,6 +37,29 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
     {
         base.ConvertProperties();
 
+        // PreserveAspectRatio
+        //      => ViewBox.Stretch
+        //      => ViewBox.HorizontalAlignment
+        //      => ViewBox.VerticalAlignment
+
+        // none + <any>
+        //      ViewBox.Stretch = "Fill"
+        //      ViewBox.HorizontalAlignment - ignored
+        //      ViewBox.VerticalAlignment - ignored
+
+        // meet
+        //      ViewBox.Stretch = "Uniform"
+        //
+        // slice
+        //      ViewBox.Stretch = "UniformToFill"
+        //
+        // XMin, XMid, XMax
+        //      ViewBox.HorizontalAlignment = Left, Center, Right
+        //
+        // YMin, YMid, YMax
+        //      ViewBox.VerticalAlignment = Top, Center, Bottom
+        //
+
         SetLocation();
         SetSize();
         SetTransformation();

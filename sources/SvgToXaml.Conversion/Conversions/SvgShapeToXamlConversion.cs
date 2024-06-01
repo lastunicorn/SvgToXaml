@@ -184,7 +184,7 @@ internal abstract class SvgShapeToXamlConversion<TSvg, TXaml> : ToXamlConversion
             .Select(x => x.ComputeStrokeDashArray())
             .FirstOrDefault(x => x != null);
 
-        if (strokeDashArray != null)
+        if (strokeDashArray is { IsEmpty: false })
         {
             double strokeThickness = XamlElement.StrokeThickness;
 
