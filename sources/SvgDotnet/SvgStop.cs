@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgStop : SvgElement
 {
+    protected override string ElementName => "stop";
+
     public double Offset { get; set; }
 
     public SvgColor StopColor { get; set; }

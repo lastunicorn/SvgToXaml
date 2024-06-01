@@ -39,12 +39,10 @@ internal class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup,
             return;
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
-
         if (isZeroSize)
             ConversionContext.Issues.AddWarning("Zero-size canvas detected.");
 
         bool isEmpty = XamlElement.Children.Count == 0;
-
         if (isEmpty)
             ConversionContext.Issues.AddWarning("Empty canvas detected.");
     }

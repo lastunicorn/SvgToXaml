@@ -18,5 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgPolyline : SvgShape
 {
+    protected override string ElementName => "polyline";
+
     public SvgPointCollection Points { get; } = new();
 }

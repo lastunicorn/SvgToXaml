@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgText : SvgElement
 {
+    protected override string ElementName => "text";
+
     public string Text { get; set; }
 
     public Length? X { get; set; }

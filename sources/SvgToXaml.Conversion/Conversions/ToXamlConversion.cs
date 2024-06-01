@@ -64,6 +64,8 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
     public TXaml Execute()
     {
+        OnExecuting();
+
         try
         {
             Display? display = SvgElement.CalculateDisplay();
@@ -95,6 +97,10 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
         {
             OnExecuted();
         }
+    }
+
+    protected virtual void OnExecuting()
+    {
     }
 
     protected abstract TXaml CreateXamlElement();
@@ -203,9 +209,8 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
             return;
 
         bool isFullTransparent = XamlElement.Opacity == 0;
-
         if (isFullTransparent)
-            ConversionContext.Issues.AddWarning($"Completely transparent element ({XamlElement.GetType().Name}) present.");
+            ConversionContext.Issues.AddWarning($"Completely transparent element ({XamlElement.GetType().Name}) is present.");
     }
 
     protected void SetWrapperXamlElement(TXaml wrapperElement)

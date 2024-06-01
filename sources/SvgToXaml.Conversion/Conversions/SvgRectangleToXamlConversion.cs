@@ -69,6 +69,15 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
             XamlElement.RadiusY = radiusY.Value;
     }
 
+    protected override void OnExecuting()
+    {
+        base.OnExecuting();
+
+        bool hasBorder = SvgElement.StrokeWidth != null && SvgElement.StrokeWidth.Value.ComputeValue() != 0;
+        if (hasBorder)
+            ConversionContext.Issues.AddWarning("Rectangle with border was detected.");
+    }
+
     protected override void OnExecuted()
     {
         base.OnExecuted();
@@ -77,7 +86,6 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
             return;
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
-
         if (isZeroSize)
             ConversionContext.Issues.AddWarning("Zero-size rectangle present.");
     }

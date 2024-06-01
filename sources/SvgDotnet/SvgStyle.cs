@@ -22,6 +22,8 @@ namespace DustInTheWind.SvgDotnet;
 /// </summary>
 public class SvgStyle : SvgElement
 {
+    protected override string ElementName => "style";
+
     public string Title { get; set; }
 
     public string Type { get; set; }

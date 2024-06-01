@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgRectangle : SvgShape
 {
+    protected override string ElementName => "rect";
+
     public Length? Width { get; set; }
 
     public Length? Height { get; set; }

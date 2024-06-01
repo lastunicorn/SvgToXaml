@@ -21,7 +21,7 @@ namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
 internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle, SvgStyle>
 {
-    private static readonly Regex Regex = new(@"\.(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
+    private static readonly Regex Regex = new(@"(\.|#)?(\w+)\s*{\s*(.*?)\s*}", RegexOptions.Multiline);
 
     protected override string ElementName => "style";
 
@@ -54,10 +54,23 @@ internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle,
         MatchCollection matches = Regex.Matches(text);
 
         return matches
-            .Select(x => new StyleRuleSet
+            .Select(x =>
             {
-                Selector = x.Groups[1].Value,
-                Declarations = StyleDeclarationCollection.Parse(x.Groups[2].Value)
+                StyleSelectorType styleSelectorType = x.Groups[1].Value switch
+                {
+                    "" => StyleSelectorType.Element,
+                    "." => StyleSelectorType.Class,
+                    "#" => StyleSelectorType.Id,
+                    _ => StyleSelectorType.None
+                };
+                string selectorName = x.Groups[2].Value;
+                string declarationsAsString = x.Groups[3].Value;
+
+                return new StyleRuleSet
+                {
+                    Selector = new StyleSelector(styleSelectorType, selectorName),
+                    Declarations = StyleDeclarationCollection.Parse(declarationsAsString)
+                };
             });
     }
 }

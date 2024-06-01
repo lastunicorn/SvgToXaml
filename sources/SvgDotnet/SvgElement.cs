@@ -18,9 +18,19 @@ using System.Globalization;
 
 namespace DustInTheWind.SvgDotnet;
 
-public class SvgElement
+public abstract class SvgElement
 {
+    private static readonly StyleSelectorType[] StyleSelectorImportance =
+    {
+        StyleSelectorType.None,
+        StyleSelectorType.Element,
+        StyleSelectorType.Class,
+        StyleSelectorType.Id
+    };
+
     public SvgContainer Parent { get; set; }
+
+    protected abstract string ElementName { get; }
 
     // Core Attributes
 
@@ -303,7 +313,7 @@ public class SvgElement
 
     protected StyleDeclaration GetStyleValueFromClasses(string name)
     {
-        IEnumerable<StyleRuleSet> applicableStyleRuleSets = GetApplicableStyleRuleSets();
+        IEnumerable<StyleRuleSet> applicableStyleRuleSets = GetApplicableStyleRuleSets()?.ToList();
 
         return applicableStyleRuleSets?
             .Select(x => x.Declarations?[name])
@@ -312,15 +322,41 @@ public class SvgElement
 
     private IEnumerable<StyleRuleSet> GetApplicableStyleRuleSets()
     {
-        if (ClassNames == null)
-            return null;
+        List<StyleSelector> possibleSelectors = ComputePossibleStyleRuleSetSelectors();
 
         Svg parentSvg = GetParentSvg();
         IEnumerable<StyleRuleSet> styleRuleSets = parentSvg?.GetAllStyleRuleSets(MimeTypes.TextCss);
 
         return styleRuleSets?
-            .Where(x => ClassNames.Contains(x.Selector))
+            .Where(x => possibleSelectors.Contains(x.Selector))
             .Where(x => x.Declarations != null)
-            .Reverse();
+            .OrderBy(x => Array.IndexOf(StyleSelectorImportance, x.Selector.Type))
+            .Reverse()
+            .ToList();
+    }
+
+    private List<StyleSelector> ComputePossibleStyleRuleSetSelectors()
+    {
+        List<StyleSelector> possibleSelectors = new()
+        {
+            new StyleSelector(StyleSelectorType.Element, ElementName)
+        };
+
+        if (ClassNames is { Count: > 0 })
+        {
+            IEnumerable<StyleSelector> styleRuleSetSelectors = ClassNames
+                .Select(x => new StyleSelector(StyleSelectorType.Class, x));
+
+            possibleSelectors.AddRange(styleRuleSetSelectors);
+        }
+
+        bool hasId = !string.IsNullOrWhiteSpace(Id);
+        if (hasId)
+        {
+            StyleSelector styleSelector = new(StyleSelectorType.Id, Id);
+            possibleSelectors.Add(styleSelector);
+        }
+
+        return possibleSelectors;
     }
 }

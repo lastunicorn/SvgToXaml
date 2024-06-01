@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgSymbol : SvgContainer
 {
+    protected override string ElementName => "symbol";
+
     public LengthPercentage? X { get; set; }
 
     public LengthPercentage? Y { get; set; }

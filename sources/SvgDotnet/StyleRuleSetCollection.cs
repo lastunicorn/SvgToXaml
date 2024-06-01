@@ -47,7 +47,7 @@ public class StyleRuleSetCollection : Collection<StyleRuleSet>
             Items.Add(styleRuleSet);
     }
 
-    public StyleRuleSet GetRuleSet(string selector)
+    public StyleRuleSet GetRuleSet(StyleSelector selector)
     {
         if (selector == null)
             throw new ArgumentNullException(nameof(selector));

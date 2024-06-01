@@ -16,11 +16,11 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public class SvgContainer : SvgElement
+public abstract class SvgContainer : SvgElement
 {
     public SvgElementCollection<SvgElement> Children { get; }
 
-    public SvgContainer()
+    protected SvgContainer()
     {
         Children = new SvgElementCollection<SvgElement>(this);
     }

@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgLine : SvgShape
 {
+    protected override string ElementName => "line";
+
     public double X1 { get; set; }
 
     public double Y1 { get; set; }

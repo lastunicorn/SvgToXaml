@@ -18,6 +18,8 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgRadialGradient : SvgContainer
 {
+    protected override string ElementName => "radialGradient";
+
     private Length? radius;
 
     public Length? CenterX { get; set; }

@@ -16,14 +16,10 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public class StyleRuleSet
+public enum StyleSelectorType
 {
-    public StyleSelector Selector { get; init; }
-
-    public StyleDeclarationCollection Declarations { get; init; }
-
-    public override string ToString()
-    {
-        return $"{Selector}{{{Declarations}}}";
-    }
+    None,
+    Element,
+    Id,
+    Class
 }
