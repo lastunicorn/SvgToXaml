@@ -119,6 +119,22 @@ public class SvgElement
         return null;
     }
 
+    public Svg GetRootSvg()
+    {
+        Svg rootSvg = null;
+        SvgContainer parent = Parent;
+
+        while (parent != null)
+        {
+            if (parent is Svg svg)
+                rootSvg = svg;
+
+            parent = parent.Parent;
+        }
+
+        return rootSvg;
+    }
+
     public IEnumerable<SvgElement> EnumerateAncestors()
     {
         SvgElement ancestor = Parent;

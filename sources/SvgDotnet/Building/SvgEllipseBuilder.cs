@@ -14,37 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+namespace DustInTheWind.SvgDotnet.Building;
 
-public class SvgUse : SvgContainer
+internal class SvgEllipseBuilder
 {
-    public HypertextReference Href { get; set; }
+    private readonly SvgEllipse svgEllipse;
 
-    public LengthPercentage? X { get; set; }
-
-    public LengthPercentage? Y { get; set; }
-
-    public Length? Width { get; set; }
-
-    public Length? Height { get; set; }
-
-    public SvgUse()
+    public SvgEllipseBuilder()
     {
-        Children.AcceptedTypes = new[]
-        {
-            typeof(SvgDescription),
-            typeof(SvgTitle),
-            typeof(SvgClipPath),
-            typeof(SvgStyle)
-        };
+        svgEllipse = new SvgEllipse();
     }
 
-    public SvgElement GetReferencedElement()
+    public SvgEllipseBuilder(SvgEllipse svgEllipse)
     {
-        if (string.IsNullOrEmpty(Href.Id))
-            return null;
+        this.svgEllipse = svgEllipse ?? throw new ArgumentNullException(nameof(svgEllipse));
+    }
 
-        Svg svg = GetRootSvg();
-        return svg?.FindChild(Href.Id);
+    public SvgEllipse Build()
+    {
+        return svgEllipse;
     }
 }

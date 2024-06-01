@@ -14,37 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+namespace DustInTheWind.SvgDotnet.Building;
 
-public class SvgUse : SvgContainer
+internal static class SvgBuildersExtensions
 {
-    public HypertextReference Href { get; set; }
-
-    public LengthPercentage? X { get; set; }
-
-    public LengthPercentage? Y { get; set; }
-
-    public Length? Width { get; set; }
-
-    public Length? Height { get; set; }
-
-    public SvgUse()
+    public static SvgBuilder CreateBuilder(this Svg svg)
     {
-        Children.AcceptedTypes = new[]
-        {
-            typeof(SvgDescription),
-            typeof(SvgTitle),
-            typeof(SvgClipPath),
-            typeof(SvgStyle)
-        };
+        return new SvgBuilder(svg);
     }
 
-    public SvgElement GetReferencedElement()
+    public static SvgCircleBuilder CreateBuilder(this SvgCircle circle)
     {
-        if (string.IsNullOrEmpty(Href.Id))
-            return null;
-
-        Svg svg = GetRootSvg();
-        return svg?.FindChild(Href.Id);
+        return new SvgCircleBuilder(circle);
     }
 }

@@ -25,6 +25,48 @@ public class SvgContainer : SvgElement
         Children = new SvgElementCollection<SvgElement>(this);
     }
 
+    public T AddChild<T>()
+        where T : SvgElement, new()
+    {
+        T svgElement = new();
+        Children.Add(svgElement);
+
+        return svgElement;
+    }
+
+    internal T AddChild<T>(Action<T> action)
+        where T : SvgElement, new()
+    {
+        if (action == null) throw new ArgumentNullException(nameof(action));
+
+        T svgElement = new();
+        action(svgElement);
+
+        Children.Add(svgElement);
+
+        return svgElement;
+    }
+
+    public T AddChild<T>(T svgElement)
+        where T : SvgElement
+    {
+        if (svgElement == null) throw new ArgumentNullException(nameof(svgElement));
+
+        Children.Add(svgElement);
+        return svgElement;
+    }
+
+    public T AddChild<T>(Func<T> func)
+        where T : SvgElement
+    {
+        if (func == null) throw new ArgumentNullException(nameof(func));
+
+        T svgElement = func();
+        Children.Add(svgElement);
+
+        return svgElement;
+    }
+
     public virtual SvgElement FindChild(string id)
     {
         return Children.FindChild(id);

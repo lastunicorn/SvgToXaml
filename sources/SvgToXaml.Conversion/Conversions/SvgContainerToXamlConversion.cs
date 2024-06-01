@@ -88,23 +88,29 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
 
             case SvgTitle:
             case SvgDescription:
+            {
+                Type inheritedElementType = svgElement.GetType();
+                ConversionContext.Issues.AddWarning($"Element ignored. Type: {inheritedElementType.FullName}");
+                return null;
+            }
+
             case SvgDefinitions:
             case SvgLinearGradient:
             case SvgRadialGradient:
             case SvgClipPath:
             case SvgStyle:
-                {
-                    Type inheritedElementType = svgElement.GetType();
-                    ConversionContext.Issues.AddWarning($"Element ignored. Type: {inheritedElementType.FullName}");
-                    return null;
-                }
+            {
+                Type inheritedElementType = svgElement.GetType();
+                ConversionContext.Issues.AddInfo($"Non-renderable element ignored. Type: {inheritedElementType.FullName}");
+                return null;
+            }
 
             default:
-                {
-                    Type inheritedElementType = svgElement.GetType();
-                    ConversionContext.Issues.AddError($"Unknown element type: {inheritedElementType.FullName}");
-                    return null;
-                }
+            {
+                Type inheritedElementType = svgElement.GetType();
+                ConversionContext.Issues.AddError($"Unknown element type: {inheritedElementType.FullName}");
+                return null;
+            }
         }
     }
 }
