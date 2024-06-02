@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,6 +37,16 @@ internal class SvgToXamlTransformation
     public string Xaml { get; private set; }
 
     public ProcessingIssueCollection Issues { get; } = new();
+
+    public TimeSpan DeserializationTime { get; set; }
+
+    public TimeSpan ConversionTime { get; set; }
+
+    public TimeSpan OptimizationTime { get; set; }
+
+    public TimeSpan SerializationTime { get; set; }
+
+    public TimeSpan AlterationTime { get; set; }
 
     public void Execute()
     {
@@ -80,74 +91,119 @@ internal class SvgToXamlTransformation
 
     private Svg Deserialize(string svgText)
     {
-        SvgSerializer serializer = new();
+        Stopwatch stopwatch = Stopwatch.StartNew();
 
-        if (IgnoredNamespaces is { Count: > 0 })
-            serializer.Options.IgnoredNamespaces.AddRange(IgnoredNamespaces);
+        try
+        {
+            SvgSerializer serializer = new();
 
-        DeserializationResult deserializationResult = serializer.Deserialize(svgText);
+            if (IgnoredNamespaces is { Count: > 0 })
+                serializer.Options.IgnoredNamespaces.AddRange(IgnoredNamespaces);
 
-        IEnumerable<ProcessingIssue> issues = deserializationResult.Issues
-            .Select(x => new ProcessingIssue(x));
+            DeserializationResult deserializationResult = serializer.Deserialize(svgText);
 
-        Issues.AddRange(issues);
+            IEnumerable<ProcessingIssue> issues = deserializationResult.Issues
+                .Select(x => new ProcessingIssue(x));
 
-        return deserializationResult.Svg;
+            Issues.AddRange(issues);
+
+            return deserializationResult.Svg;
+        }
+        finally
+        {
+            DeserializationTime = stopwatch.Elapsed;
+        }
     }
 
     private Canvas Convert(Svg svg)
     {
-        SvgToXamlConvertor svgToXamlConvertor = new();
-        ConversionResult conversionResult = svgToXamlConvertor.ConvertToXaml(svg);
+        Stopwatch stopwatch = Stopwatch.StartNew();
 
-        IEnumerable<ProcessingIssue> issues = conversionResult.Issues
-            .Select(x => new ProcessingIssue(x));
+        try
+        {
+            SvgToXamlConvertor svgToXamlConvertor = new();
+            ConversionResult conversionResult = svgToXamlConvertor.ConvertToXaml(svg);
 
-        Issues.AddRange(issues);
+            IEnumerable<ProcessingIssue> issues = conversionResult.Issues
+                .Select(x => new ProcessingIssue(x));
 
-        return conversionResult.Canvas;
+            Issues.AddRange(issues);
+
+            return conversionResult.Canvas;
+        }
+        finally
+        {
+            ConversionTime = stopwatch.Elapsed;
+        }
     }
 
     private Canvas Optimize(Canvas canvas)
     {
-        CanvasOptimization canvasOptimization = new(canvas);
-        canvasOptimization.Execute();
+        Stopwatch stopwatch = Stopwatch.StartNew();
 
-        if (canvasOptimization.Issues.Count > 0)
-            Issues.AddRange(canvasOptimization.Issues);
+        try
+        {
+            CanvasOptimization canvasOptimization = new(canvas);
+            canvasOptimization.Execute();
 
-        return canvasOptimization.Canvas;
+            if (canvasOptimization.Issues.Count > 0)
+                Issues.AddRange(canvasOptimization.Issues);
+
+            return canvasOptimization.Canvas;
+        }
+        finally
+        {
+            OptimizationTime = stopwatch.Elapsed;
+        }
     }
 
-    private static string Serialize(Canvas canvas)
+    private string Serialize(Canvas canvas)
     {
-        using MemoryStream ms = new();
-        XmlWriterSettings xmlWriterSettings = new()
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
+        try
         {
-            Indent = true,
-            NewLineOnAttributes = true,
-            OmitXmlDeclaration = true
-        };
-        using XmlWriter xmlWriter = XmlWriter.Create(ms, xmlWriterSettings);
+            using MemoryStream ms = new();
+            XmlWriterSettings xmlWriterSettings = new()
+            {
+                Indent = true,
+                NewLineOnAttributes = true,
+                OmitXmlDeclaration = true
+            };
+            using XmlWriter xmlWriter = XmlWriter.Create(ms, xmlWriterSettings);
 
-        ResourceDictionary resourceDictionary = new()
+            ResourceDictionary resourceDictionary = new()
+            {
+                { "SvgTransform", canvas }
+            };
+
+            XamlWriter.Save(resourceDictionary, xmlWriter);
+
+            ms.Position = 0;
+            using StreamReader sr = new(ms);
+
+            return sr.ReadToEnd();
+        }
+        finally
         {
-            { "SvgTransform", canvas }
-        };
-
-        XamlWriter.Save(resourceDictionary, xmlWriter);
-
-        ms.Position = 0;
-        using StreamReader sr = new(ms);
-
-        return sr.ReadToEnd();
+            SerializationTime = stopwatch.Elapsed;
+        }
     }
 
-    private static string XmlAlter(string xml)
+    private string XmlAlter(string xml)
     {
-        XmlAlteration xmlAlteration = new(xml);
-        xmlAlteration.AddStep(typeof(MatrixTransformXmlAlterationStep));
-        xmlAlteration.Execute();
-        return xmlAlteration.SerializeResult();
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
+        try
+        {
+            XmlAlteration xmlAlteration = new(xml);
+            xmlAlteration.AddStep(typeof(MatrixTransformXmlAlterationStep));
+            xmlAlteration.Execute();
+            return xmlAlteration.SerializeResult();
+        }
+        finally
+        {
+            AlterationTime = stopwatch.Elapsed;
+        }
     }
 }
