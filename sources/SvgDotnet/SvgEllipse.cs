@@ -21,7 +21,7 @@ public class SvgEllipse : SvgShape
     private double radiusX;
     private double radiusY;
 
-    protected override string ElementName => "ellipse";
+    public override string ElementName => "ellipse";
 
     public double RadiusX
     {

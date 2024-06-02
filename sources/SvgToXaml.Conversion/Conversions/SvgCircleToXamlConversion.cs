@@ -62,7 +62,7 @@ internal class SvgCircleToXamlConversion : SvgShapeToXamlConversion<SvgCircle, E
 
         bool hasBorder = SvgElement.StrokeWidth != null && SvgElement.StrokeWidth.Value.ComputeValue() != 0;
         if (hasBorder)
-            ConversionContext.Issues.AddWarning("Circle with border was detected.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Border is present. It will not be correctly translated.");
     }
 
     protected override void OnExecuted()
@@ -74,6 +74,6 @@ internal class SvgCircleToXamlConversion : SvgShapeToXamlConversion<SvgCircle, E
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning("Zero-size Circle detected.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Zero-size circle present.");
     }
 }

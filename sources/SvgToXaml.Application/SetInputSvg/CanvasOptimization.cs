@@ -118,10 +118,10 @@ internal class CanvasOptimization
         }
     }
 
-    private bool ExtractChildrenFrom(Panel childCanvas, out int childCount)
+    private bool ExtractChildrenFrom(Panel panel, out int childCount)
     {
-        List<UIElement> grandChildren = RemoveAllChildren(childCanvas);
-        bool success = childCanvas.RemoveFromParent(out DependencyObject parent, out int? index);
+        List<UIElement> children = RemoveAllChildren(panel);
+        bool success = panel.RemoveFromParent(out DependencyObject parent, out int? index);
 
         if (!success)
         {
@@ -131,7 +131,7 @@ internal class CanvasOptimization
             {
                 Category = "Optimization",
                 Level = ProcessingIssueLevel.Error,
-                Message = $"Failed moving {grandChildren.Count} children outside of container. Container could not be removed - {childCanvas.GetType().Name}."
+                Message = $"[{panel.GetType().Name}] Failed moving {children.Count} children outside of container. Container could not be removed."
             };
             Issues.Add(processingIssue);
 
@@ -139,15 +139,15 @@ internal class CanvasOptimization
         }
         else
         {
-            grandChildren.AddToParent(parent, index);
+            children.AddToParent(parent, index);
 
-            childCount = grandChildren.Count;
+            childCount = children.Count;
 
             ProcessingIssue processingIssue = new()
             {
                 Category = "Optimization",
                 Level = ProcessingIssueLevel.Info,
-                Message = $"{grandChildren.Count} children moved outside of container. Container removed - {childCanvas.GetType().Name}."
+                Message = $"[{panel.GetType().Name}] {children.Count} children moved outside of container. Container removed."
             };
             Issues.Add(processingIssue);
 
@@ -178,7 +178,7 @@ internal class CanvasOptimization
         {
             Category = "Optimization",
             Level = ProcessingIssueLevel.Info,
-            Message = $"UIElement removed - {element.GetType().Name}. Reason: {reason}"
+            Message = $"[{element.GetType().Name}] UIElement removed. Reason: {reason}"
         };
         Issues.Add(processingIssue);
 

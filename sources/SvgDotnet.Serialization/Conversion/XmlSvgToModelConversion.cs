@@ -83,7 +83,7 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
         if (preserveAspectRatio == null)
         {
             string path = DeserializationContext.Path.ToString();
-            DeserializationContext.Issues.AddError(path, "Invalid value for 'preserveAspectRatio'.");
+            DeserializationContext.Issues.AddError(path, $"[{ElementName}] Invalid value for 'preserveAspectRatio'.");
         }
         else
         {

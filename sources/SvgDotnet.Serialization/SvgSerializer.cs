@@ -41,12 +41,12 @@ public class SvgSerializer
         if (isNamespaceIgnored)
         {
             string path = deserializationContext.Path.ToString();
-            deserializationContext.Issues.AddInfo(path, $"Ignoring XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
+            deserializationContext.Issues.AddInfo(path, $"[{e.Name}] Ignoring XML {e.NodeType}. Line: {e.LineNumber}:{e.LinePosition}");
         }
         else
         {
             string path = deserializationContext.Path.ToString();
-            deserializationContext.Issues.AddWarning(path, $"Unknown XML {e.NodeType} ({e.Name}). Line: {e.LineNumber}:{e.LinePosition}");
+            deserializationContext.Issues.AddWarning(path, $"[{e.Name}] Unknown XML {e.NodeType}. Line: {e.LineNumber}:{e.LinePosition}");
         }
     }
 
@@ -89,7 +89,7 @@ public class SvgSerializer
             if (xmlSvg == null)
             {
                 string path = deserializationContext.Path.ToString();
-                deserializationContext.Issues.AddError(path, "The text is not a valid svg.");
+                deserializationContext.Issues.AddError(path, "The text is not a valid svg document.");
             }
 
             return xmlSvg;

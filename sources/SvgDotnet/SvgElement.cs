@@ -30,7 +30,7 @@ public abstract class SvgElement
 
     public SvgContainer Parent { get; set; }
 
-    protected abstract string ElementName { get; }
+    public abstract string ElementName { get; }
 
     // Core Attributes
 

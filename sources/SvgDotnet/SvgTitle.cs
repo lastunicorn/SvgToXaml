@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgTitle : SvgElement
 {
-    protected override string ElementName => "title";
+    public override string ElementName => "title";
 
     public string Value { get; set; }
 }

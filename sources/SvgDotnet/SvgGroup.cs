@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgGroup : SvgContainer
 {
-    protected override string ElementName => "g";
+    public override string ElementName => "g";
 
     public SvgGroup()
     {

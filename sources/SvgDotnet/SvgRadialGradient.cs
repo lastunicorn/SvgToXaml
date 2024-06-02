@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgRadialGradient : SvgContainer
 {
-    protected override string ElementName => "radialGradient";
+    public override string ElementName => "radialGradient";
 
     private Length? radius;
 

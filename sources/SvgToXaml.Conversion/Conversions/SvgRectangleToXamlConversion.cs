@@ -75,7 +75,7 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
         bool hasBorder = SvgElement.StrokeWidth != null && SvgElement.StrokeWidth.Value.ComputeValue() != 0;
         if (hasBorder)
-            ConversionContext.Issues.AddWarning("Rectangle with border was detected.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Border is present. It will not be correctly translated.");
     }
 
     protected override void OnExecuted()
@@ -87,6 +87,6 @@ internal class SvgRectangleToXamlConversion : SvgShapeToXamlConversion<SvgRectan
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning("Zero-size rectangle present.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Zero-size rectangle present.");
     }
 }

@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public struct HypertextReference
+public readonly struct HypertextReference
 {
     private readonly string rawValue;
 
@@ -29,6 +29,11 @@ public struct HypertextReference
         Id = value != null && value.StartsWith("#")
             ? value[1..]
             : null;
+    }
+
+    public override string ToString()
+    {
+        return rawValue;
     }
 
     public static implicit operator HypertextReference(string value)

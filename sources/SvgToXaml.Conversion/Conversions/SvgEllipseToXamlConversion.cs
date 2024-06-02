@@ -56,6 +56,15 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
         XamlElement.Height = SvgElement.RadiusY * 2;
     }
 
+    protected override void OnExecuting()
+    {
+        base.OnExecuting();
+
+        bool hasBorder = SvgElement.StrokeWidth != null && SvgElement.StrokeWidth.Value.ComputeValue() != 0;
+        if (hasBorder)
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Border is present. It will not be correctly translated.");
+    }
+
     protected override void OnExecuted()
     {
         base.OnExecuted();
@@ -64,8 +73,7 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
             return;
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
-
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning("Zero-size ellipse present.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Zero-size ellipse present.");
     }
 }

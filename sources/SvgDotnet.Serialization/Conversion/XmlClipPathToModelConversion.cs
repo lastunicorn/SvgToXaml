@@ -41,7 +41,7 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
             SvgElement.TabIndex = null;
 
             string path = DeserializationContext.Path.ToString();
-            DeserializationContext.Issues.AddWarning(path, "'tabIndex' attribute is not allowed on 'clipPath' element.");
+            DeserializationContext.Issues.AddWarning(path, $"[{ElementName}] 'tabIndex' attribute is not allowed.");
         }
 
         ConvertChildren();
@@ -113,7 +113,7 @@ internal class XmlClipPathToModelConversion : XmlElementToModelConversion<XmlCli
 
                 default:
                     string path = DeserializationContext.Path.ToString();
-                    DeserializationContext.Issues.AddError(path, $"Unknown element type {serializationChild.GetType().Name} in {ElementName}.");
+                    DeserializationContext.Issues.AddError(path, $"[{ElementName}] Unknown element type {serializationChild.GetType().Name}.");
                     break;
             }
         }

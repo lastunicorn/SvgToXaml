@@ -33,7 +33,7 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
 
         if (referencedElement == null)
         {
-            ConversionContext.Issues.AddWarning($"The 'use' element could not find referenced element: '{SvgElement.Href.Id}'.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Referenced element could not be found: '{SvgElement.Href}'. Use element not converted.");
             return null;
         }
 
@@ -75,11 +75,10 @@ internal class SvgUseToXamlConversion : ToXamlConversion<SvgUse, UIElement>
                 return new SvgUseToXamlConversion(childSvgUse, ConversionContext, SvgElement);
 
             default:
-                {
-                    Type inheritedElementType = referencedSvgElement.GetType();
-                    ConversionContext.Issues.AddError($"Unknown inherited element type: {inheritedElementType.FullName}");
-                    return null;
-                }
+            {
+                ConversionContext.Issues.AddError($"[{SvgElement.ElementName}] Unknown referenced element: {referencedSvgElement.ElementName}");
+                return null;
+            }
         }
     }
 

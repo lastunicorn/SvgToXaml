@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgLinearGradient : SvgContainer
 {
-    protected override string ElementName => "linearGradient";
+    public override string ElementName => "linearGradient";
 
     public Length? X1 { get; set; }
 

@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgPath : SvgShape
 {
-    protected override string ElementName => "path";
+    public override string ElementName => "path";
 
     /// <remarks>
     /// Possible values: none | &lt;string&gt;

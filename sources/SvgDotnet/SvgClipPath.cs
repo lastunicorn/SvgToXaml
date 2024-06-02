@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgClipPath : SvgContainer
 {
-    protected override string ElementName => "clipPath";
+    public override string ElementName => "clipPath";
 
     public SvgClipPath()
     {

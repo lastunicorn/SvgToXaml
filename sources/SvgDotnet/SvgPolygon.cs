@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgPolygon : SvgShape
 {
-    protected override string ElementName => "polygon";
+    public override string ElementName => "polygon";
 
     public SvgPointCollection Points { get; } = new();
 }

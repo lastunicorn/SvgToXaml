@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgCircle : SvgShape
 {
-    protected override string ElementName => "circle";
+    public override string ElementName => "circle";
 
     private double radius;
 

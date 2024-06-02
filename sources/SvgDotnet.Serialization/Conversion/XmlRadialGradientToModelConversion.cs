@@ -133,7 +133,7 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
 
             default:
                 string path = DeserializationContext.Path.ToString();
-                DeserializationContext.Issues.AddError(path, $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
+                DeserializationContext.Issues.AddError(path, $"[{ElementName}] Unknown element type {objectToConvert.GetType().Name}.");
                 return null;
         }
     }

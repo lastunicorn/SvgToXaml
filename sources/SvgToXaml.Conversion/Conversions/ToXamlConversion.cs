@@ -114,7 +114,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
             .Where(x => !KnownStyleSelectors.Contains(x.Name));
 
         foreach (StyleDeclaration svgStyleDeclaration in unknownStyleDeclarations)
-            ConversionContext.Issues.AddWarning($"Unknown style declaration in {SvgElement.GetType().Name}: {svgStyleDeclaration.Name}");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Unknown style declaration: {svgStyleDeclaration.Name}");
     }
 
     protected virtual IEnumerable<SvgElement> EnumerateInheritedElements()
@@ -210,7 +210,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
         bool isFullTransparent = XamlElement.Opacity == 0;
         if (isFullTransparent)
-            ConversionContext.Issues.AddWarning($"Completely transparent element ({XamlElement.GetType().Name}) is present.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Completely transparent element.");
     }
 
     protected void SetWrapperXamlElement(TXaml wrapperElement)

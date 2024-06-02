@@ -18,7 +18,7 @@ namespace DustInTheWind.SvgDotnet;
 
 public class SvgUse : SvgContainer
 {
-    protected override string ElementName => "use";
+    public override string ElementName => "use";
 
     public HypertextReference Href { get; set; }
 

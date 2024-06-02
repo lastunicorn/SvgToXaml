@@ -55,7 +55,7 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             else
             {
                 string path = DeserializationContext.Path.ToString();
-                DeserializationContext.Issues.AddWarning(path, $"Child type '{elementType.Name}' is not allowed in '{ElementName}'. Child is ignored.");
+                DeserializationContext.Issues.AddWarning(path, $"[{ElementName}] Child type '{elementType.Name}' is not allowed. Child is ignored.");
             }
         }
     }
@@ -123,7 +123,7 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
 
             default:
                 string path = DeserializationContext.Path.ToString();
-                DeserializationContext.Issues.AddError(path, $"Unknown element type {objectToConvert.GetType().Name} in {ElementName}.");
+                DeserializationContext.Issues.AddError(path, $"[{ElementName}] Unknown element type {objectToConvert.GetType().Name}.");
                 return null;
         }
     }

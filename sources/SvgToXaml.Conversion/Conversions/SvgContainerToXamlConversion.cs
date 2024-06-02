@@ -39,7 +39,6 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
     private void ConvertChildren()
     {
         IEnumerable<UIElement> xamlElements = SvgElement.Children
-            .Where(x => x is not SvgDefinitions)
             .Select(CreateConversionFor)
             .Where(x => x != null)
             .Select(x => x.Execute())
@@ -89,8 +88,7 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
             case SvgTitle:
             case SvgDescription:
             {
-                Type inheritedElementType = svgElement.GetType();
-                ConversionContext.Issues.AddWarning($"Element ignored. Type: {inheritedElementType.FullName}");
+                ConversionContext.Issues.AddWarning($"[{svgElement.ElementName}] Element ignored.");
                 return null;
             }
 
@@ -100,15 +98,13 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
             case SvgClipPath:
             case SvgStyle:
             {
-                Type inheritedElementType = svgElement.GetType();
-                ConversionContext.Issues.AddInfo($"Non-renderable element ignored. Type: {inheritedElementType.FullName}");
+                ConversionContext.Issues.AddInfo($"[{svgElement.ElementName}] Non-renderable element. It will be ignored.");
                 return null;
             }
 
             default:
             {
-                Type inheritedElementType = svgElement.GetType();
-                ConversionContext.Issues.AddError($"Unknown element type: {inheritedElementType.FullName}");
+                ConversionContext.Issues.AddError($"[{svgElement.ElementName}] Unknown element.");
                 return null;
             }
         }
