@@ -17,7 +17,7 @@
 using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
 
-namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
 public class ProcessingIssue
 {

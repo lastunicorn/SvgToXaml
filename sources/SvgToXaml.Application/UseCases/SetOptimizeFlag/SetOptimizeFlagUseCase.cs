@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.SetInputSvg;
+using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 using DustInTheWind.SvgToXaml.Infrastructure;
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetOptimizeFlag;
 
 internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
 {

@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using MediatR;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
-namespace DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
-
-public class SetOptimizeFlagRequest : IRequest
+public enum ProcessingIssueLevel
 {
-    public bool OptimizeOutputXaml { get; set; }
+    Info,
+    Warning,
+    Error
 }

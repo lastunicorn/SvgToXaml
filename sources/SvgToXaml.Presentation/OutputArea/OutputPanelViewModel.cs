@@ -19,9 +19,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Markup;
-using DustInTheWind.SvgToXaml.Application.GetOutputInitialization;
-using DustInTheWind.SvgToXaml.Application.SetInputSvg;
-using DustInTheWind.SvgToXaml.Application.SetOptimizeFlag;
+using DustInTheWind.SvgToXaml.Application.UseCases.GetOutputInitialization;
+using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+using DustInTheWind.SvgToXaml.Application.UseCases.SetOptimizeFlag;
 using DustInTheWind.SvgToXaml.Infrastructure;
 
 namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;

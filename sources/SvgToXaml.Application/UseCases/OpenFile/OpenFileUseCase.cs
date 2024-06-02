@@ -19,7 +19,7 @@ using DustInTheWind.SvgToXaml.Ports.FileAccess;
 using DustInTheWind.SvgToXaml.Ports.UserAccess;
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.OpenFile;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.OpenFile;
 
 internal class OpenFileUseCase : IRequestHandler<OpenFileRequest>
 {

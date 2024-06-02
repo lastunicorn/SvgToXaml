@@ -14,9 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.OpenFile;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
-public class SvgTextChangingEvent
+internal class ConversionIssue
 {
-    public string FilePath { get; set; }
+    public string Path { get; }
+
+    public string Message { get; }
+
+    public ConversionIssue(string path, string message)
+    {
+        Path = path;
+        Message = message;
+    }
 }

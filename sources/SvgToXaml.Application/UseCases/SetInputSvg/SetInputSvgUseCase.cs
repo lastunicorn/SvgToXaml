@@ -17,7 +17,7 @@
 using DustInTheWind.SvgToXaml.Infrastructure;
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
 internal class SetInputSvgUseCase : IRequestHandler<SetInputSvgRequest>
 {

@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Input;
-using DustInTheWind.SvgToXaml.Application.OpenFile;
+using DustInTheWind.SvgToXaml.Application.UseCases.OpenFile;
 using DustInTheWind.SvgToXaml.Infrastructure;
 
 namespace DustInTheWind.SvgToXaml.Presentation.Main;

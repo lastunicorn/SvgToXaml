@@ -16,7 +16,7 @@
 
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.GetOutputInitialization;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.GetOutputInitialization;
 
 internal class GetOutputInitializationUseCase : IRequestHandler<GetOutputInitializationRequest, GetOutputInitializationResponse>
 {

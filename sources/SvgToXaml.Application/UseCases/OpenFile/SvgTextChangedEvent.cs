@@ -14,17 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.OpenFile;
 
-public class XamlTextChangedEvent
+public class SvgTextChangedEvent
 {
-    public string XamlText { get; init; }
+    public string FilePath { get; set; }
 
-    public List<ProcessingIssue> Issues { get; init; }
-
-    public int InfoCount { get; init; }
-
-    public int WarningCount { get; init; }
-
-    public int ErrorCount { get; init; }
+    public string SvgText { get; set; }
 }

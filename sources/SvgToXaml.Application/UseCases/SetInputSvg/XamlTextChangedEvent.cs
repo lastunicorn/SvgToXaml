@@ -14,9 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.GetOutputInitialization;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
-public class GetOutputInitializationResponse
+public class XamlTextChangedEvent
 {
-    public bool ShouldOptimizeXaml { get; init; }
+    public string XamlText { get; init; }
+
+    public List<ProcessingIssue> Issues { get; init; }
+
+    public int InfoCount { get; init; }
+
+    public int WarningCount { get; init; }
+
+    public int ErrorCount { get; init; }
 }

@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Windows;
 using Autofac;
 using DustInTheWind.SvgToXaml.Application;
-using DustInTheWind.SvgToXaml.Application.SetInputSvg;
+using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 using DustInTheWind.SvgToXaml.FileAccess;
 using DustInTheWind.SvgToXaml.Infrastructure;
 using DustInTheWind.SvgToXaml.Ports.FileAccess;

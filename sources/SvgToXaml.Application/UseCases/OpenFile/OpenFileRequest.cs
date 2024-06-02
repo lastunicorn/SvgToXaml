@@ -16,9 +16,8 @@
 
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.OpenFile;
 
-public class SetInputSvgRequest : IRequest
+public class OpenFileRequest : IRequest
 {
-    public string SvgText { get; set; }
 }

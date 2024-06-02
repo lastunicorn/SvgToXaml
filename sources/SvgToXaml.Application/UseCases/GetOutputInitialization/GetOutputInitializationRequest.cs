@@ -14,17 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.SetInputSvg;
+using MediatR;
 
-internal class ConversionIssue
+namespace DustInTheWind.SvgToXaml.Application.UseCases.GetOutputInitialization;
+
+public class GetOutputInitializationRequest : IRequest<GetOutputInitializationResponse>
 {
-    public string Path { get; }
-
-    public string Message { get; }
-
-    public ConversionIssue(string path, string message)
-    {
-        Path = path;
-        Message = message;
-    }
 }
