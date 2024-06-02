@@ -24,9 +24,9 @@ using DustInTheWind.SvgDotnet;
 using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
 
-namespace DustInTheWind.SvgToXaml.Application.Processing;
+namespace DustInTheWind.SvgToXaml.Domain;
 
-internal class SvgToXamlTransformation
+public class SvgToXamlTransformation
 {
     public string Svg { get; set; }
 

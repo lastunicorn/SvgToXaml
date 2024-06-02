@@ -35,9 +35,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <ProjectReference Include="..\SvgDotNet\SvgDotnet.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\SvgDotnet.Serialization\SvgDotnet.Serialization.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\SvgToXaml.Conversion\SvgToXaml.Conversion.csproj" PrivateAssets="All" />
+      <ProjectReference Include="..\SvgToXaml.Domain\SvgToXaml.Domain.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\SvgToXaml.Infrastructure\SvgToXaml.Infrastructure.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\SvgToXaml.Ports.FileAccess\SvgToXaml.Ports.FileAccess.csproj" PrivateAssets="All" />
       <ProjectReference Include="..\SvgToXaml.Ports.UserAccess\SvgToXaml.Ports.UserAccess.csproj" PrivateAssets="All" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Processing\" />
     </ItemGroup>
 
 </Project>

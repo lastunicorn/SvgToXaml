@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.Processing;
 using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+using DustInTheWind.SvgToXaml.Domain;
 using DustInTheWind.SvgToXaml.Infrastructure;
 using MediatR;
 
@@ -61,7 +61,9 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
         {
             XamlText = applicationState.OutputXaml,
 
-            Issues = applicationState.ProcessingResults.LastProcessingIssues.ToList(),
+            Issues = applicationState.ProcessingResults.LastProcessingIssues
+                .Select(x => new Issue(x))
+                .ToList(),
             InfoCount = applicationState.ProcessingResults.LastProcessingIssues.InfoCount,
             WarningCount = applicationState.ProcessingResults.LastProcessingIssues.WarningCount,
             ErrorCount = applicationState.ProcessingResults.LastProcessingIssues.ErrorCount,

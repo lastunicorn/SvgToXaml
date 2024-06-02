@@ -74,6 +74,6 @@ internal class SvgCircleToXamlConversion : SvgShapeToXamlConversion<SvgCircle, E
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Zero-size circle present.");
+            ConversionContext.Issues.AddWarning($"[{XamlElement.GetType().Name}] Zero-size circle created.");
     }
 }

@@ -14,26 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
-namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
-
-public class ProcessingIssueViewModel
+public enum IssueLevel
 {
-    public IssueType IssueType { get; }
-
-    public string Message { get; }
-
-    public ProcessingIssueViewModel(Issue processingIssue)
-    {
-        IssueType = processingIssue.Level switch
-        {
-            IssueLevel.Info => IssueType.Info,
-            IssueLevel.Warning => IssueType.Waring,
-            IssueLevel.Error => IssueType.Error,
-            _ => IssueType.Info
-        };
-
-        Message = $"{processingIssue.Category}: {processingIssue.Message}";
-    }
+    Info,
+    Warning,
+    Error
 }

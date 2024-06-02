@@ -17,7 +17,7 @@
 using System.Xml;
 using System.Xml.XPath;
 
-namespace DustInTheWind.SvgToXaml.Application.Processing;
+namespace DustInTheWind.SvgToXaml.Domain;
 
 internal class MatrixTransformXmlAlterationStep : IXmlAlterationStep
 {

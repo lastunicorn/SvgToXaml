@@ -16,7 +16,7 @@
 
 using System.Collections.ObjectModel;
 
-namespace DustInTheWind.SvgToXaml.Application.Processing;
+namespace DustInTheWind.SvgToXaml.Domain;
 
 public class ProcessingIssueCollection : Collection<ProcessingIssue>
 {

@@ -17,7 +17,7 @@
 using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
 
-namespace DustInTheWind.SvgToXaml.Application.Processing;
+namespace DustInTheWind.SvgToXaml.Domain;
 
 public class ProcessingIssue
 {
@@ -27,11 +27,11 @@ public class ProcessingIssue
 
     public string Message { get; init; }
 
-    internal ProcessingIssue()
+    public ProcessingIssue()
     {
     }
 
-    internal ProcessingIssue(ConversionIssue conversionIssue)
+    public ProcessingIssue(ConversionIssue conversionIssue)
     {
         Category = "Conversion";
 
@@ -46,7 +46,7 @@ public class ProcessingIssue
         Message = conversionIssue.Message;
     }
 
-    internal ProcessingIssue(DeserializationIssue deserializationIssue)
+    public ProcessingIssue(DeserializationIssue deserializationIssue)
     {
         Category = "SVG Deserialization";
 

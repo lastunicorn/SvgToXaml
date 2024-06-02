@@ -20,7 +20,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace DustInTheWind.SvgToXaml.Application.Processing;
+namespace DustInTheWind.SvgToXaml.Domain;
 
 internal class CanvasOptimization
 {

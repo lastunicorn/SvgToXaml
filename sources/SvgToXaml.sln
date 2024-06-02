@@ -48,7 +48,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SvgToXaml", "SvgToXaml", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgDotnet.Tests", "SvgDotnet.Tests\SvgDotnet.Tests.csproj", "{43C9D84B-CEFD-4313-8447-C9B46369B981}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgToXaml.Presentation", "SvgToXaml.Presentation\SvgToXaml.Presentation.csproj", "{FF5218D0-CD67-4EC9-A823-149334FA4B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvgToXaml.Presentation", "SvgToXaml.Presentation\SvgToXaml.Presentation.csproj", "{FF5218D0-CD67-4EC9-A823-149334FA4B86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvgToXaml.Domain", "SvgToXaml.Domain\SvgToXaml.Domain.csproj", "{3BB29F3E-5E8B-4FB7-B307-5E2F4E8863BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,6 +118,10 @@ Global
 		{FF5218D0-CD67-4EC9-A823-149334FA4B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF5218D0-CD67-4EC9-A823-149334FA4B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF5218D0-CD67-4EC9-A823-149334FA4B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB29F3E-5E8B-4FB7-B307-5E2F4E8863BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB29F3E-5E8B-4FB7-B307-5E2F4E8863BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB29F3E-5E8B-4FB7-B307-5E2F4E8863BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB29F3E-5E8B-4FB7-B307-5E2F4E8863BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -138,6 +144,7 @@ Global
 		{811623A5-4A28-4723-8FEB-F33B10BB9AE0} = {3B2ED03C-C43B-44DD-A7D1-1A12DAF7CACE}
 		{43C9D84B-CEFD-4313-8447-C9B46369B981} = {AA8D9BAA-4A90-48BB-84D5-31DC53D0DA6C}
 		{FF5218D0-CD67-4EC9-A823-149334FA4B86} = {6CB88766-C63B-41B0-8FC1-C14D83E70159}
+		{3BB29F3E-5E8B-4FB7-B307-5E2F4E8863BD} = {6CB88766-C63B-41B0-8FC1-C14D83E70159}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5252BD5F-48C8-432B-BC88-B093B544447D}
