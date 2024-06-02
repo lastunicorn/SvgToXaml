@@ -14,9 +14,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+using DustInTheWind.SvgToXaml.Application.Processing;
 
-internal interface IXmlAlterationStep
+namespace DustInTheWind.SvgToXaml.Application;
+
+public class ProcessingResults
 {
-    void Execute();
+    public ProcessingIssueCollection LastProcessingIssues { get; set; }
+
+    public TimeSpan DeserializationTime { get; set; }
+
+    public TimeSpan ConversionTime { get; set; }
+
+    public TimeSpan OptimizationTime { get; set; }
+
+    public TimeSpan SerializationTime { get; set; }
+
+    public TimeSpan AlterationTime { get; set; }
 }

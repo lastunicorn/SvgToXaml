@@ -18,7 +18,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace DustInTheWind.SvgToXaml.Presentation.Converters;
+namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
 public class InfoItemTypeToColorConverter : IValueConverter
 {

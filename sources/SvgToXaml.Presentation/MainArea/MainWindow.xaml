@@ -17,14 +17,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <Window
-    x:Class="DustInTheWind.SvgToXaml.Presentation.MainWindow"
+    x:Class="DustInTheWind.SvgToXaml.Presentation.MainArea.MainWindow"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:presentation="clr-namespace:DustInTheWind.SvgToXaml.Presentation"
-    xmlns:main="clr-namespace:DustInTheWind.SvgToXaml.Presentation.Main"
+    xmlns:inputArea="clr-namespace:DustInTheWind.SvgToXaml.Presentation.InputArea"
+    xmlns:outputArea="clr-namespace:DustInTheWind.SvgToXaml.Presentation.OutputArea"
 
     mc:Ignorable="d"
     Title="SVG to XAML"
@@ -45,7 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <presentation:InputPanel
+            <inputArea:InputPanel
                 Grid.Column="0"
                 DataContext="{Binding InputPanelViewModel}" />
 
@@ -55,7 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 Background="Transparent"
                 HorizontalAlignment="Stretch" />
 
-            <presentation:OutputPanel
+            <outputArea:OutputPanel
                 Grid.Column="2"
                 DataContext="{Binding OutputPanelViewModel}" />
         </Grid>

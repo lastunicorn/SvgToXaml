@@ -17,7 +17,7 @@
 using DustInTheWind.SvgDotnet.Serialization;
 using DustInTheWind.SvgToXaml.Conversion;
 
-namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.Processing;
 
 public class ProcessingIssue
 {
@@ -31,7 +31,7 @@ public class ProcessingIssue
     {
     }
 
-    internal ProcessingIssue(Conversion.ConversionIssue conversionIssue)
+    internal ProcessingIssue(ConversionIssue conversionIssue)
     {
         Category = "Conversion";
 

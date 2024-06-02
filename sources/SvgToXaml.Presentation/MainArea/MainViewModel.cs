@@ -17,7 +17,7 @@
 using DustInTheWind.SvgToXaml.Presentation.InputArea;
 using DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
-namespace DustInTheWind.SvgToXaml.Presentation.Main;
+namespace DustInTheWind.SvgToXaml.Presentation.MainArea;
 
 public class MainViewModel : ViewModelBase
 {

@@ -31,7 +31,7 @@ internal class GetOutputInitializationUseCase : IRequestHandler<GetOutputInitial
     {
         GetOutputInitializationResponse response = new()
         {
-            ShouldOptimizeXaml = applicationState.OptimizeOutput
+            ShouldOptimizeXaml = applicationState.ProcessingOptions.OptimizeOutput
         };
 
         return Task.FromResult(response);

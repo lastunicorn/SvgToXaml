@@ -14,23 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
-
 namespace DustInTheWind.SvgToXaml.Application;
 
 public class ApplicationState
 {
-    public List<string> IgnoredNamespaces { get; } = new()
-    {
-        "http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd",
-        "http://www.inkscape.org/namespaces/inkscape"
-    };
+    public ProcessingOptions ProcessingOptions { get; } = new();
 
     public string InputSvg { get; set; }
 
     public string OutputXaml { get; set; }
 
-    public bool OptimizeOutput { get; set; } = true;
-
-    public ProcessingIssueCollection LastConversionIssues { get; set; }
+    public ProcessingResults ProcessingResults { get; } = new();
 }

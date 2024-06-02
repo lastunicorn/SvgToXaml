@@ -18,7 +18,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 
-namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+namespace DustInTheWind.SvgToXaml.Application.Processing;
 
 internal class XmlAlteration
 {

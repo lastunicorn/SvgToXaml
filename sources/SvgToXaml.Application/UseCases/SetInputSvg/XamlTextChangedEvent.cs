@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgToXaml.Application.Processing;
+
 namespace DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 
 public class XamlTextChangedEvent
@@ -27,4 +29,14 @@ public class XamlTextChangedEvent
     public int WarningCount { get; init; }
 
     public int ErrorCount { get; init; }
+
+    public TimeSpan DeserializationTime { get; init; }
+
+    public TimeSpan ConversionTime { get; init; }
+
+    public TimeSpan OptimizationTime { get; init; }
+
+    public TimeSpan SerializationTime { get; init; }
+
+    public TimeSpan AlterationTime { get; init; }
 }

@@ -17,7 +17,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DustInTheWind.SvgToXaml.Presentation.Utils;
+namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
 public static class CollapsibleBehaviour
 {

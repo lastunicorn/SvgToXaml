@@ -14,17 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Controls;
+namespace DustInTheWind.SvgToXaml.Application.Processing;
 
-namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
-
-/// <summary>
-/// Interaction logic for OutputPanel.xaml
-/// </summary>
-public partial class OutputPanel : UserControl
+internal interface IXmlAlterationStep
 {
-    public OutputPanel()
-    {
-        InitializeComponent();
-    }
+    void Execute();
 }

@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
-using DustInTheWind.SvgToXaml.Presentation.Main;
 
-namespace DustInTheWind.SvgToXaml.Presentation;
+namespace DustInTheWind.SvgToXaml.Presentation.MainArea;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

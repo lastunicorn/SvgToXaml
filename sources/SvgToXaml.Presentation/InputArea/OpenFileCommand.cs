@@ -18,7 +18,7 @@ using System.Windows.Input;
 using DustInTheWind.SvgToXaml.Application.UseCases.OpenFile;
 using DustInTheWind.SvgToXaml.Infrastructure;
 
-namespace DustInTheWind.SvgToXaml.Presentation.Main;
+namespace DustInTheWind.SvgToXaml.Presentation.InputArea;
 
 public class OpenFileCommand : ICommand
 {

@@ -18,7 +18,6 @@ using System.Windows.Threading;
 using DustInTheWind.SvgToXaml.Application.UseCases.OpenFile;
 using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 using DustInTheWind.SvgToXaml.Infrastructure;
-using DustInTheWind.SvgToXaml.Presentation.Main;
 
 namespace DustInTheWind.SvgToXaml.Presentation.InputArea;
 

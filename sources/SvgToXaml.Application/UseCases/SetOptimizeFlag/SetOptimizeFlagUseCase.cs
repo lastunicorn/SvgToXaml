@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.SvgToXaml.Application.Processing;
 using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
 using DustInTheWind.SvgToXaml.Infrastructure;
 using MediatR;
@@ -33,7 +34,7 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
 
     public async Task Handle(SetOptimizeFlagRequest request, CancellationToken cancellationToken)
     {
-        applicationState.OptimizeOutput = request.OptimizeOutputXaml;
+        applicationState.ProcessingOptions.OptimizeOutput = request.OptimizeOutputXaml;
 
         PerformTransformation();
         await RaiseXamlEvent(cancellationToken);
@@ -44,14 +45,14 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
         SvgToXamlTransformation svgToXamlTransformation = new()
         {
             Svg = applicationState.InputSvg,
-            PerformOptimizations = applicationState.OptimizeOutput,
-            IgnoredNamespaces = applicationState.IgnoredNamespaces.ToList()
+            PerformOptimizations = applicationState.ProcessingOptions.OptimizeOutput,
+            IgnoredNamespaces = applicationState.ProcessingOptions.IgnoredNamespaces.ToList()
         };
 
         svgToXamlTransformation.Execute();
 
         applicationState.OutputXaml = svgToXamlTransformation.Xaml;
-        applicationState.LastConversionIssues = svgToXamlTransformation.Issues;
+        applicationState.ProcessingResults.LastProcessingIssues = svgToXamlTransformation.Issues;
     }
 
     private async Task RaiseXamlEvent(CancellationToken cancellationToken)
@@ -59,10 +60,17 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
         XamlTextChangedEvent xamlTextChangedEvent = new()
         {
             XamlText = applicationState.OutputXaml,
-            Issues = applicationState.LastConversionIssues.ToList(),
-            InfoCount = applicationState.LastConversionIssues.InfoCount,
-            WarningCount = applicationState.LastConversionIssues.WarningCount,
-            ErrorCount = applicationState.LastConversionIssues.ErrorCount
+
+            Issues = applicationState.ProcessingResults.LastProcessingIssues.ToList(),
+            InfoCount = applicationState.ProcessingResults.LastProcessingIssues.InfoCount,
+            WarningCount = applicationState.ProcessingResults.LastProcessingIssues.WarningCount,
+            ErrorCount = applicationState.ProcessingResults.LastProcessingIssues.ErrorCount,
+
+            DeserializationTime = applicationState.ProcessingResults.DeserializationTime,
+            ConversionTime = applicationState.ProcessingResults.ConversionTime,
+            OptimizationTime = applicationState.ProcessingResults.OptimizationTime,
+            SerializationTime = applicationState.ProcessingResults.SerializationTime,
+            AlterationTime = applicationState.ProcessingResults.AlterationTime
         };
 
         await eventBus.Publish(xamlTextChangedEvent, cancellationToken);

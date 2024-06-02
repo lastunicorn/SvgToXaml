@@ -16,7 +16,7 @@
 
 using System.Windows.Controls;
 
-namespace DustInTheWind.SvgToXaml.Presentation;
+namespace DustInTheWind.SvgToXaml.Presentation.InputArea;
 
 /// <summary>
 /// Interaction logic for InputPanel.xaml

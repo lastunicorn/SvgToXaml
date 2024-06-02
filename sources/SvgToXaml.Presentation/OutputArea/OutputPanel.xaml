@@ -1,14 +1,12 @@
 ﻿<UserControl
-    x:Class="DustInTheWind.SvgToXaml.Presentation.OutputPanel"
+    x:Class="DustInTheWind.SvgToXaml.Presentation.OutputArea.OutputPanel"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:utils="clr-namespace:DustInTheWind.SvgToXaml.Presentation.Utils"
     xmlns:presentation="clr-namespace:DustInTheWind.SvgToXaml.Presentation"
     xmlns:outputArea="clr-namespace:DustInTheWind.SvgToXaml.Presentation.OutputArea"
-    xmlns:converters="clr-namespace:DustInTheWind.SvgToXaml.Presentation.Converters"
 
     mc:Ignorable="d"
     d:DesignHeight="450"
@@ -17,11 +15,11 @@
 
     <UserControl.Resources>
         <presentation:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-        <converters:InfoItemTypeToColorConverter x:Key="InfoItemTypeToColorConverter" />
+        <outputArea:InfoItemTypeToColorConverter x:Key="InfoItemTypeToColorConverter" />
     </UserControl.Resources>
 
     <Grid
-        utils:CollapsibleBehaviour.Enable="{Binding ElementName=GS_DetailsView}"
+        outputArea:CollapsibleBehaviour.Enable="{Binding ElementName=GS_DetailsView}"
         IsEnabled="{Binding IsInitialized}">
 
         <Grid.RowDefinitions>
@@ -182,7 +180,7 @@
                     </ItemsControl.Template>
 
                     <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="{x:Type presentation:ProcessingIssueViewModel}">
+                        <DataTemplate DataType="{x:Type outputArea:ProcessingIssueViewModel}">
                             <DockPanel
                                 Margin="5 2">
 
