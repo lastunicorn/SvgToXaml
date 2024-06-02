@@ -58,41 +58,36 @@ internal class TextWhiteSpaceProcessing
             WhiteSpacePreservation.Normal or
             WhiteSpacePreservation.NoWrap;
 
-        if (collapseNewLines)
-            Text = Regex.Replace(Text, @"[\r\n|\r|\n|]", " ");
-
         bool collapseSpacesAndTabs = whiteSpacePreservation is
             WhiteSpacePreservation.Normal or
             WhiteSpacePreservation.NoWrap or
             WhiteSpacePreservation.PreLine;
 
-        if (collapseSpacesAndTabs)
-        {
-            Text = Text.Replace("\t", " ");
-            Text = Regex.Replace(Text, @"\s+", " ");
-        }
-        
-        bool wrapText = whiteSpacePreservation is
+        if (collapseNewLines && collapseSpacesAndTabs)
+            Text = Regex.Replace(Text, @"[\r\n|\r|\n| |\t]+", " ");
+        else if (collapseNewLines)
+            Text = Regex.Replace(Text, @"[\r\n|\r|\n]+", " ");
+        else if (collapseSpacesAndTabs) 
+            Text = Regex.Replace(Text, @"[ |\t]+", " ");
+
+        bool trimSpaces = whiteSpacePreservation is
             WhiteSpacePreservation.Normal or
-            WhiteSpacePreservation.PreWrap or
-            WhiteSpacePreservation.BreakSpaces or
+            WhiteSpacePreservation.NoWrap or
             WhiteSpacePreservation.PreLine;
 
-        if (wrapText)
+        if (trimSpaces)
         {
-            // todo: implement text wrapping.
+            Regex regexTrim = new(@"^[^\S\r\n]*(.+?)[^\S\r\n]*$", RegexOptions.Multiline);
+            Text = regexTrim.Replace(Text, "$1");
         }
-        
-       // todo: process spaces at the end of the line.
     }
 
     private void Process(SpacePreservation spacePreservation)
     {
         if (spacePreservation == SpacePreservation.Default)
         {
-            Text = Regex.Replace(Text, @"[\r\n|\r|\n|\t]", " ");
-            Text = Text.Trim();
             Text = Regex.Replace(Text, @"\s+", " ");
+            Text = Text.Trim();
         }
     }
 }
