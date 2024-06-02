@@ -210,7 +210,7 @@ internal abstract class ToXamlConversion<TSvg, TXaml> : IConversion<TXaml>
 
         bool isFullTransparent = XamlElement.Opacity == 0;
         if (isFullTransparent)
-            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Completely transparent element.");
+            ConversionContext.Issues.AddWarning($"[{XamlElement.GetType().Name}] Completely transparent element created.");
     }
 
     protected void SetWrapperXamlElement(TXaml wrapperElement)

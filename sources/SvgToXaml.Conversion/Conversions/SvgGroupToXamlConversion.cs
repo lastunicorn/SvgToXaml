@@ -40,10 +40,10 @@ internal class SvgGroupToXamlConversion : SvgContainerToXamlConversion<SvgGroup,
 
         bool isZeroSize = XamlElement.Width == 0 || XamlElement.Height == 0;
         if (isZeroSize)
-            ConversionContext.Issues.AddWarning($"[{XamlElement.GetType().Name}] Zero-size canvas detected.");
+            ConversionContext.Issues.AddWarning($"[{XamlElement.GetType().Name}] Zero-size canvas created.");
 
         bool isEmpty = XamlElement.Children.Count == 0;
         if (isEmpty)
-            ConversionContext.Issues.AddWarning($"[{XamlElement.GetType().Name}] Empty canvas detected.");
+            ConversionContext.Issues.AddWarning($"[{XamlElement.GetType().Name}] Empty canvas created.");
     }
 }

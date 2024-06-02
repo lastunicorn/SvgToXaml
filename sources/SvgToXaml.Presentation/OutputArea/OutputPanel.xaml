@@ -44,23 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
 
-        <DockPanel>
-
-            <StackPanel
-                DockPanel.Dock="Top"
-                Orientation="Horizontal"
-                FlowDirection="RightToLeft"
-                Margin="0 0 0 8">
-
-
-                <CheckBox
-                    VerticalAlignment="Center"
-                    Content="Optimize"
-                    FlowDirection="LeftToRight"
-                    Margin="10 0 0 0"
-                    IsChecked="{Binding ApplyOptimizations}" />
-
-            </StackPanel>
+        <Grid>
 
             <TabControl>
 
@@ -99,7 +83,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             </TabControl>
 
-        </DockPanel>
+            <StackPanel
+                DockPanel.Dock="Top"
+                Orientation="Horizontal"
+                FlowDirection="RightToLeft"
+                Margin="0 0 0 8"
+                VerticalAlignment="Top"
+                Height="28">
+
+                <CheckBox
+                    VerticalAlignment="Center"
+                    Content="Optimize"
+                    FlowDirection="LeftToRight"
+                    Margin="10 0 0 0"
+                    IsChecked="{Binding ApplyOptimizations}" />
+
+            </StackPanel>
+
+        </Grid>
 
         <GridSplitter
             x:Name="GS_DetailsView"
@@ -120,6 +121,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 DataContext="{Binding OutputIssuesPanelViewModel}" />
 
         </Border>
+
     </Grid>
 
 </UserControl>
