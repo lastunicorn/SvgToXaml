@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-public enum XmlSpacePreservation
+public enum XmlSpace
 {
     [XmlEnum(Name = "default")]
     Default,

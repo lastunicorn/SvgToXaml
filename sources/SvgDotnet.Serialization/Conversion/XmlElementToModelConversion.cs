@@ -120,19 +120,6 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
         ConvertPreserveSpace();
     }
 
-    private void ConvertPreserveSpace()
-    {
-        if (XmlElement.XmlSpaceSpecified)
-        {
-            SvgElement.WhiteSpace = XmlElement.XmlSpace switch
-            {
-                XmlSpacePreservation.Default => WhiteSpacePreservation.Default,
-                XmlSpacePreservation.Preserve => WhiteSpacePreservation.Preserve,
-                _ => throw new ArgumentOutOfRangeException("Invalid value for the Space property.", nameof(XmlElement.XmlSpace))
-            };
-        }
-    }
-
     private static FillRule Convert(XmlFillRule value)
     {
         return value switch
@@ -175,5 +162,35 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
             XmlDisplay.None => Display.None,
             _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
         };
+    }
+
+    private void ConvertPreserveSpace()
+    {
+        if (XmlElement.XmlSpaceSpecified)
+        {
+            SvgElement.Space = XmlElement.XmlSpace switch
+            {
+                XmlSpace.Default => SpacePreservation.Default,
+                XmlSpace.Preserve => SpacePreservation.Preserve,
+                _ => throw new ArgumentOutOfRangeException("Invalid value for the Space property.", nameof(XmlElement.XmlSpace))
+            };
+
+            string path = DeserializationContext.Path.ToString();
+            DeserializationContext.Issues.AddWarning(path, $"[{SvgElement.ElementName}] Deprecated attribute: xml:space");
+        }
+
+        if (XmlElement.WhiteSpaceSpecified)
+        {
+            SvgElement.WhiteSpace = XmlElement.WhiteSpace switch
+            {
+                XmlWhiteSpace.Normal => WhiteSpacePreservation.Normal,
+                XmlWhiteSpace.Pre => WhiteSpacePreservation.Pre,
+                XmlWhiteSpace.NoWrap => WhiteSpacePreservation.NoWrap,
+                XmlWhiteSpace.PreWrap => WhiteSpacePreservation.PreWrap,
+                XmlWhiteSpace.BreakSpaces => WhiteSpacePreservation.BreakSpaces,
+                XmlWhiteSpace.PreLine => WhiteSpacePreservation.PreLine,
+                _ => throw new ArgumentOutOfRangeException("Invalid value for the WhiteSpace property.", nameof(XmlElement.WhiteSpace))
+            };
+        }
     }
 }

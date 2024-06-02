@@ -14,14 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.SvgDotnet;
+using System.Xml.Serialization;
 
-public enum WhiteSpacePreservation
+namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
+
+public enum XmlWhiteSpace
 {
+    [XmlEnum(Name = "normal")]
     Normal,
+
+    [XmlEnum(Name = "pre")]
     Pre,
+
+    [XmlEnum(Name = "nowrap")]
     NoWrap,
+
+    [XmlEnum(Name = "pre-wrap")]
     PreWrap,
+
+    [XmlEnum(Name = "break-spaces")]
     BreakSpaces,
+
+    [XmlEnum(Name = "pre-line")]
     PreLine
 }

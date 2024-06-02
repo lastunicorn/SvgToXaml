@@ -111,6 +111,8 @@ public abstract class SvgElement
     /// New content should use the white-space property instead.
     /// </summary>
     [Obsolete("Use the white-space property instead.")]
+    public SpacePreservation? Space { get; set; }
+
     public WhiteSpacePreservation? WhiteSpace { get; set; }
 
     // Other Attributes
@@ -168,7 +170,7 @@ public abstract class SvgElement
         StyleDeclaration styleDeclaration = Style?["display"] ?? GetStyleValueFromClasses("display");
 
         if (styleDeclaration != null)
-            return (Display)Enum.Parse(typeof(Display), styleDeclaration.Value, true);
+            return Enum.Parse<Display>(styleDeclaration.Value, true);
 
         return Display;
     }
@@ -201,7 +203,7 @@ public abstract class SvgElement
         StyleDeclaration styleDeclaration = Style?["fill-rule"] ?? GetStyleValueFromClasses("fill-rule");
 
         if (styleDeclaration != null)
-            return (FillRule)Enum.Parse(typeof(FillRule), styleDeclaration.Value, true);
+            return Enum.Parse<FillRule>(styleDeclaration.Value, true);
 
         return FillRule;
     }
@@ -247,7 +249,7 @@ public abstract class SvgElement
         StyleDeclaration styleDeclaration = Style?["stroke-linecap"] ?? GetStyleValueFromClasses("stroke-linecap");
 
         if (styleDeclaration != null)
-            return (StrokeLineCap)Enum.Parse(typeof(StrokeLineCap), styleDeclaration.Value, true);
+            return Enum.Parse<StrokeLineCap>(styleDeclaration.Value, true);
 
         return StrokeLineCap;
     }
@@ -257,7 +259,7 @@ public abstract class SvgElement
         StyleDeclaration styleDeclaration = Style?["stroke-linejoin"] ?? GetStyleValueFromClasses("stroke-linejoin");
 
         if (styleDeclaration != null)
-            return (StrokeLineJoin)Enum.Parse(typeof(StrokeLineJoin), styleDeclaration.Value, true);
+            return Enum.Parse<StrokeLineJoin>(styleDeclaration.Value, true);
 
         return StrokeLineJoin;
     }
@@ -370,8 +372,18 @@ public abstract class SvgElement
         return possibleSelectors;
     }
 
+    public SpacePreservation? ComputeSpacePreservation()
+    {
+        return Space;
+    }
+
     public WhiteSpacePreservation? ComputeWhiteSpacePreservation()
     {
+        StyleDeclaration styleDeclaration = Style?["white-space"] ?? GetStyleValueFromClasses("white-space");
+
+        if (styleDeclaration != null)
+            return Enum.Parse<WhiteSpacePreservation>(styleDeclaration.Value, true);
+
         return WhiteSpace;
     }
 }

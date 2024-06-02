@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Windows.Media;
 using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
 
@@ -40,27 +40,45 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
         ConvertText();
         ConvertFontSize();
         ConvertPosition();
+        ConvertFill();
     }
 
     private void ConvertText()
     {
-        if(SvgElement.Text == null)
+        if (SvgElement.Text == null)
             return;
 
-        string text = SvgElement.Text;
+        TextWhiteSpaceProcessing textWhiteSpaceProcessing = new(SvgElement.Text, ShadowTree);
+        textWhiteSpaceProcessing.Execute();
 
-        WhiteSpacePreservation? whiteSpacePreservation = ShadowTree
-            .Select(x => x.ComputeWhiteSpacePreservation())
+        XamlElement.Text = textWhiteSpaceProcessing.Text;
+    }
+
+    private void ConvertFill()
+    {
+        Paint fill = ShadowTree
+            .Select(x => x.ComputeFill())
             .FirstOrDefault(x => x != null);
 
-        if (whiteSpacePreservation == WhiteSpacePreservation.Default)
+        if (fill == null)
         {
-            text = Regex.Replace(text, @"[\r\n|\r|\n|\t]", " ");
-            text = text.Trim();
-            text = Regex.Replace(text, @"\s+", " ");
         }
+        else if (fill.IsNone)
+        {
+        }
+        else if (fill.Color is { IsEmpty: false })
+        {
+            AlphaValue? fillOpacity = SvgElement.ComputeFillOpacity();
 
-        XamlElement.Text = text;
+            Color color = fillOpacity == null
+                ? fill.Color.ToColor()
+                : fill.Color.ToColor(fillOpacity.Value.NumberValue);
+
+            XamlElement.Foreground = new SolidColorBrush(color);
+        }
+        else if (fill.Url is { IsEmpty: false })
+        {
+        }
     }
 
     private void ConvertFontSize()

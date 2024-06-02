@@ -95,9 +95,14 @@ public class XmlElement
     public string FontSize { get; set; }
 
     [XmlAttribute("space", Namespace = Namespaces.Xml)]
-    public XmlSpacePreservation XmlSpace { get; set; }
+    public XmlSpace XmlSpace { get; set; }
 
     public bool XmlSpaceSpecified { get; set; }
+
+    [XmlAttribute("white-space")]
+    public XmlWhiteSpace WhiteSpace { get; set; }
+
+    public bool WhiteSpaceSpecified { get; set; }
 
     //
 

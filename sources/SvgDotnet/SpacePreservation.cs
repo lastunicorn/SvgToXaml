@@ -16,12 +16,8 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public enum WhiteSpacePreservation
+public enum SpacePreservation
 {
-    Normal,
-    Pre,
-    NoWrap,
-    PreWrap,
-    BreakSpaces,
-    PreLine
+    Default,
+    Preserve
 }

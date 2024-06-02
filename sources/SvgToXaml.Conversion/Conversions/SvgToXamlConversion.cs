@@ -183,7 +183,7 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
     {
         base.OnExecuting();
 
-        if (SvgElement.WhiteSpace != null)
-            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] xml:space property is deprecated.");
+        if (SvgElement.Space != null)
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Deprecated property: xml:space.");
     }
 }
