@@ -21,6 +21,8 @@ namespace DustInTheWind.SvgToXaml.Presentation;
 
 public class ViewModelBase : INotifyPropertyChanged
 {
+    protected bool Initializing { get; set; }
+
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -34,5 +36,19 @@ public class ViewModelBase : INotifyPropertyChanged
         field = value;
         OnPropertyChanged(propertyName);
         return true;
+    }
+
+    protected void Initialize(Action action)
+    {
+        Initializing = true;
+
+        try
+        {
+            action?.Invoke();
+        }
+        finally
+        {
+            Initializing = false;
+        }
     }
 }

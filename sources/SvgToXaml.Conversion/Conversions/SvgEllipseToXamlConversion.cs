@@ -62,7 +62,7 @@ internal class SvgEllipseToXamlConversion : SvgShapeToXamlConversion<SvgEllipse,
 
         bool hasBorder = SvgElement.StrokeWidth != null && SvgElement.StrokeWidth.Value.ComputeValue() != 0;
         if (hasBorder)
-            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Border is present. It will not be correctly translated.");
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] Border will not be correctly translated.");
     }
 
     protected override void OnExecuted()

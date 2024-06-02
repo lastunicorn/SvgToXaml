@@ -14,19 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.SvgToXaml.Application.UseCases.GetOutputInitialization;
+using DustInTheWind.SvgToXaml.Application.UseCases.GetOptionsState;
 using DustInTheWind.SvgToXaml.Application.UseCases.SetApplyOptimizations;
-using DustInTheWind.SvgToXaml.Application.UseCases.SetInputSvg;
+using DustInTheWind.SvgToXaml.Application.UseCases.SetIgnoredNamespaces;
 using DustInTheWind.SvgToXaml.Infrastructure;
 
 namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
-public class OutputPanelViewModel : ViewModelBase
+public class OptionsPanelViewModel : ViewModelBase
 {
+    private bool isEnabled;
     private readonly IRequestBus requestBus;
     private bool applyOptimizations;
-    private bool isEnabled;
-    private bool isErrorPanelVisible;
+    private string ignoredNamespaces;
 
     public bool IsEnabled
     {
@@ -53,39 +53,26 @@ public class OutputPanelViewModel : ViewModelBase
         }
     }
 
-    public bool IsErrorPanelVisible
+    public string IgnoredNamespaces
     {
-        get => isErrorPanelVisible;
+        get => ignoredNamespaces;
         set
         {
-            if (value == isErrorPanelVisible) return;
-            isErrorPanelVisible = value;
+            if (value == ignoredNamespaces) return;
+            ignoredNamespaces = value;
             OnPropertyChanged();
+
+            if (!Initializing)
+                _ = SetIgnoredNamespaces();
         }
     }
 
-    public OutputXamlPanelViewModel OutputXamlPanelViewModel { get; }
-
-    public OutputImagePanelViewModel OutputImagePanelViewModel { get; }
-
-    public OptionsPanelViewModel OptionsPanelViewModel { get; }
-
-    public OutputIssuesPanelViewModel OutputIssuesPanelViewModel { get; }
-
-    public OutputPanelViewModel(IRequestBus requestBus, EventBus eventBus, OutputXamlPanelViewModel outputXamlPanelViewModel,
-        OutputImagePanelViewModel outputImagePanelViewModel, OptionsPanelViewModel optionsPanelViewModel,
-        OutputIssuesPanelViewModel outputIssuesPanelViewModel)
+    public OptionsPanelViewModel(IRequestBus requestBus, EventBus eventBus)
     {
         if (eventBus == null) throw new ArgumentNullException(nameof(eventBus));
         this.requestBus = requestBus ?? throw new ArgumentNullException(nameof(requestBus));
 
-        OutputXamlPanelViewModel = outputXamlPanelViewModel ?? throw new ArgumentNullException(nameof(outputXamlPanelViewModel));
-        OutputImagePanelViewModel = outputImagePanelViewModel ?? throw new ArgumentNullException(nameof(outputImagePanelViewModel));
-        OptionsPanelViewModel = optionsPanelViewModel ?? throw new ArgumentNullException(nameof(optionsPanelViewModel));
-        OutputIssuesPanelViewModel = outputIssuesPanelViewModel ?? throw new ArgumentNullException(nameof(outputIssuesPanelViewModel));
-
         eventBus.Subscribe<ApplyOptimizationsChangeEvent>(HandleApplyOptimizationsChangeEvent);
-        eventBus.Subscribe<XamlTextChangedEvent>(XamlTextChangedEventHandler);
 
         _ = Initialize();
     }
@@ -100,11 +87,17 @@ public class OutputPanelViewModel : ViewModelBase
         return Task.CompletedTask;
     }
 
-    private Task XamlTextChangedEventHandler(XamlTextChangedEvent ev, CancellationToken cancellationToken)
+    private async Task Initialize()
     {
-        IsErrorPanelVisible = ev.Issues.Count > 0;
+        GetOptionsStateRequest request = new();
 
-        return Task.CompletedTask;
+        GetOptionsStateResponse response = await requestBus.Send<GetOptionsStateRequest, GetOptionsStateResponse>(request, CancellationToken.None)
+            .ConfigureAwait(false);
+
+        ApplyOptimizations = response.ApplyOptimizations;
+        IgnoredNamespaces = string.Join(Environment.NewLine, response.IgnoredNamespaces);
+
+        IsEnabled = true;
     }
 
     private async Task SetApplyOptimizations()
@@ -117,15 +110,13 @@ public class OutputPanelViewModel : ViewModelBase
         await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);
     }
 
-    private async Task Initialize()
+    private async Task SetIgnoredNamespaces()
     {
-        GetOutputInitializationRequest request = new();
+        SetIgnoredNamespacesRequest request = new()
+        {
+            IgnoredNamespaces = IgnoredNamespaces.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+        };
 
-        GetOutputInitializationResponse response = await requestBus.Send<GetOutputInitializationRequest, GetOutputInitializationResponse>(request, CancellationToken.None)
-            .ConfigureAwait(false);
-
-        ApplyOptimizations = response.ShouldOptimizeXaml;
-
-        IsEnabled = true;
+        await requestBus.Send(request, CancellationToken.None).ConfigureAwait(false);
     }
 }

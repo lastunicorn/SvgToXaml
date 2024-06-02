@@ -73,5 +73,10 @@ public partial class App : System.Windows.Application
         containerBuilder.RegisterType<MainViewModel>();
         containerBuilder.RegisterType<InputPanelViewModel>();
         containerBuilder.RegisterType<OutputPanelViewModel>();
+        containerBuilder.RegisterType<OutputXamlPanelViewModel>();
+        containerBuilder.RegisterType<OutputImagePanelViewModel>();
+        containerBuilder.RegisterType<OptionsPanelViewModel>();
+        containerBuilder.RegisterType<OptionsPanelViewModel>();
+        containerBuilder.RegisterType<OutputIssuesPanelViewModel>();
     }
 }

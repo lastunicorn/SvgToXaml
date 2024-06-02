@@ -19,25 +19,36 @@ using DustInTheWind.SvgToXaml.Domain;
 using DustInTheWind.SvgToXaml.Infrastructure;
 using MediatR;
 
-namespace DustInTheWind.SvgToXaml.Application.UseCases.SetOptimizeFlag;
+namespace DustInTheWind.SvgToXaml.Application.UseCases.SetApplyOptimizations;
 
-internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
+internal class SetApplyOptimizationsUseCase : IRequestHandler<SetApplyOptimizationsRequest>
 {
-    private readonly EventBus eventBus;
     private readonly ApplicationState applicationState;
+    private readonly EventBus eventBus;
 
-    public SetOptimizeFlagUseCase(EventBus eventBus, ApplicationState applicationState)
+    public SetApplyOptimizationsUseCase(ApplicationState applicationState, EventBus eventBus)
     {
-        this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         this.applicationState = applicationState ?? throw new ArgumentNullException(nameof(applicationState));
+        this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
     }
 
-    public async Task Handle(SetOptimizeFlagRequest request, CancellationToken cancellationToken)
+    public async Task Handle(SetApplyOptimizationsRequest request, CancellationToken cancellationToken)
     {
-        applicationState.ProcessingOptions.OptimizeOutput = request.OptimizeOutputXaml;
+        applicationState.ProcessingOptions.OptimizeOutput = request.ApplyOptimizations;
 
+        await RaiseFlagChangedEvent(cancellationToken);
         PerformTransformation();
         await RaiseXamlEvent(cancellationToken);
+    }
+
+    private async Task RaiseFlagChangedEvent(CancellationToken cancellationToken)
+    {
+        ApplyOptimizationsChangeEvent ev = new()
+        {
+            ApplyOptimizations = applicationState.ProcessingOptions.OptimizeOutput
+        };
+
+        await eventBus.Publish(ev, cancellationToken);
     }
 
     private void PerformTransformation()
@@ -57,7 +68,7 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
 
     private async Task RaiseXamlEvent(CancellationToken cancellationToken)
     {
-        XamlTextChangedEvent xamlTextChangedEvent = new()
+        XamlTextChangedEvent ev = new()
         {
             XamlText = applicationState.OutputXaml,
 
@@ -75,6 +86,6 @@ internal class SetOptimizeFlagUseCase : IRequestHandler<SetOptimizeFlagRequest>
             AlterationTime = applicationState.ProcessingResults.AlterationTime
         };
 
-        await eventBus.Publish(xamlTextChangedEvent, cancellationToken);
+        await eventBus.Publish(ev, cancellationToken);
     }
 }

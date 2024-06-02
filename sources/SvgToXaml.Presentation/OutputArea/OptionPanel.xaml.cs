@@ -14,11 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using MediatR;
+using System.Windows.Controls;
 
-namespace DustInTheWind.SvgToXaml.Application.UseCases.SetOptimizeFlag;
+namespace DustInTheWind.SvgToXaml.Presentation.OutputArea;
 
-public class SetOptimizeFlagRequest : IRequest
+/// <summary>
+/// Interaction logic for OptionPanel.xaml
+/// </summary>
+public partial class OptionPanel : UserControl
 {
-    public bool OptimizeOutputXaml { get; set; }
+    public OptionPanel()
+    {
+        InitializeComponent();
+    }
 }

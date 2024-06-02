@@ -23,16 +23,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:presentation="clr-namespace:DustInTheWind.SvgToXaml.Presentation"
     xmlns:inputArea="clr-namespace:DustInTheWind.SvgToXaml.Presentation.InputArea"
     xmlns:outputArea="clr-namespace:DustInTheWind.SvgToXaml.Presentation.OutputArea"
+    xmlns:mainArea="clr-namespace:DustInTheWind.SvgToXaml.Presentation.MainArea"
 
     mc:Ignorable="d"
     Title="SVG to XAML"
     Height="450"
     Width="800"
     ResizeMode="CanResizeWithGrip"
-    d:DataContext="{d:DesignInstance main:MainViewModel}">
+    d:DataContext="{d:DesignInstance mainArea:MainViewModel}">
 
     <Border
         Padding="8"
