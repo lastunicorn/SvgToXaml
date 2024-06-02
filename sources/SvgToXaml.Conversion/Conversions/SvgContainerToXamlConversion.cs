@@ -93,6 +93,8 @@ internal abstract class SvgContainerToXamlConversion<TSvg, TXaml> : ToXamlConver
             }
 
             case SvgDefinitions:
+                return null;
+
             case SvgLinearGradient:
             case SvgRadialGradient:
             case SvgClipPath:

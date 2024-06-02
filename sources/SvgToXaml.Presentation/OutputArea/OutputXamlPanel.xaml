@@ -1,5 +1,5 @@
 ﻿<!--
-Country Flags
+SvgToXaml
 Copyright (C) 2022-2024 Dust in the Wind
 
 This program is free software: you can redistribute it and/or modify
@@ -53,7 +53,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Command="{Binding CopyToClipboardCommand}"
             CommandParameter="{Binding Path=Text, ElementName=TextBoxResult, Mode=OneWay}"
             VerticalAlignment="Top"
-            HorizontalAlignment="Right" />
+            HorizontalAlignment="Right">
+
+            <ContentControl.Effect>
+                <DropShadowEffect
+                    Color="#000000"
+                    Direction="0"
+                    ShadowDepth="0"
+                    BlurRadius="15"
+                    Opacity="0.4" />
+            </ContentControl.Effect>
+
+        </Button>
 
     </Grid>
 

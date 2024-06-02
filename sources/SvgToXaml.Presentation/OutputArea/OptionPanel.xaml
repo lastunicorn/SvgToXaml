@@ -1,5 +1,5 @@
 ﻿<!--
-Country Flags
+SvgToXaml
 Copyright (C) 2022-2024 Dust in the Wind
 
 This program is free software: you can redistribute it and/or modify
@@ -72,7 +72,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Height="100"
             Margin="0 10 0 0"
             Padding="5"
-            Text="{Binding IgnoredNamespaces}" />
+            Text="{Binding IgnoredNamespaces}"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"/>
 
     </Grid>
 
