@@ -178,4 +178,12 @@ internal class SvgToXamlConversion : SvgContainerToXamlConversion<Svg, Canvas>
 
         return null;
     }
+
+    protected override void OnExecuting()
+    {
+        base.OnExecuting();
+
+        if (SvgElement.WhiteSpace != null)
+            ConversionContext.Issues.AddWarning($"[{SvgElement.ElementName}] xml:space property is deprecated.");
+    }
 }

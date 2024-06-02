@@ -106,6 +106,13 @@ public abstract class SvgElement
 
     public LengthPercentage? FontSize { get; set; }
 
+    /// <summary>
+    /// Deprecated XML attribute to specify whether white space is preserved in character data.
+    /// New content should use the white-space property instead.
+    /// </summary>
+    [Obsolete("Use the white-space property instead.")]
+    public WhiteSpacePreservation? WhiteSpace { get; set; }
+
     // Other Attributes
 
     public TransformCollection Transforms { get; } = new();
@@ -361,5 +368,10 @@ public abstract class SvgElement
         }
 
         return possibleSelectors;
+    }
+
+    public WhiteSpacePreservation? ComputeWhiteSpacePreservation()
+    {
+        return WhiteSpace;
     }
 }

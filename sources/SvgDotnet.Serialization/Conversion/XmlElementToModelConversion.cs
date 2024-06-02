@@ -116,6 +116,21 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
 
         if (XmlElement.ClipPath != null)
             SvgElement.ClipPath = new SvgClipPathReference(XmlElement.ClipPath);
+
+        ConvertPreserveSpace();
+    }
+
+    private void ConvertPreserveSpace()
+    {
+        if (XmlElement.XmlSpaceSpecified)
+        {
+            SvgElement.WhiteSpace = XmlElement.XmlSpace switch
+            {
+                XmlSpacePreservation.Default => WhiteSpacePreservation.Default,
+                XmlSpacePreservation.Preserve => WhiteSpacePreservation.Preserve,
+                _ => throw new ArgumentOutOfRangeException("Invalid value for the Space property.", nameof(XmlElement.XmlSpace))
+            };
+        }
     }
 
     private static FillRule Convert(XmlFillRule value)

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using DustInTheWind.SvgDotnet;
 using TranslateTransform = System.Windows.Media.TranslateTransform;
@@ -36,10 +37,30 @@ internal class SvgTextToXamlConversion : ToXamlConversion<SvgText, TextBlock>
     {
         base.ConvertProperties();
 
-        XamlElement.Text = SvgElement.Text;
-
+        ConvertText();
         ConvertFontSize();
         ConvertPosition();
+    }
+
+    private void ConvertText()
+    {
+        if(SvgElement.Text == null)
+            return;
+
+        string text = SvgElement.Text;
+
+        WhiteSpacePreservation? whiteSpacePreservation = ShadowTree
+            .Select(x => x.ComputeWhiteSpacePreservation())
+            .FirstOrDefault(x => x != null);
+
+        if (whiteSpacePreservation == WhiteSpacePreservation.Default)
+        {
+            text = Regex.Replace(text, @"[\r\n|\r|\n|\t]", " ");
+            text = text.Trim();
+            text = Regex.Replace(text, @"\s+", " ");
+        }
+
+        XamlElement.Text = text;
     }
 
     private void ConvertFontSize()
