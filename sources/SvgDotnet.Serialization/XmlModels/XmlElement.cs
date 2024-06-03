@@ -25,7 +25,7 @@ public class XmlElement
     [XmlAttribute("id")]
     public string Id { get; set; }
 
-    [XmlAttribute("tabIndex")]
+    [XmlAttribute("tabindex")]
     public int TabIndex { get; set; }
 
     public bool TabIndexSpecified { get; set; }
