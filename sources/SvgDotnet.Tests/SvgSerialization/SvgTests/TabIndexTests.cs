@@ -18,7 +18,7 @@ using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgTests;
 
-public class TabIndexTests : TabIndexTestsBase<Svg>
+public class TabindexTests : TabindexTestsBase<Svg>
 {
     protected override Svg SelectElementToTest(Svg svg)
     {

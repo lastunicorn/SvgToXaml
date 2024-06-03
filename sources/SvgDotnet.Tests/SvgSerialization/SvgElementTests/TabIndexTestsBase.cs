@@ -18,7 +18,7 @@ using DustInTheWind.SvgDotnet.Serialization;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
-public abstract class TabIndexTestsBase<T> : SvgFileTestsBase
+public abstract class TabindexTestsBase<T> : SvgFileTestsBase
     where T : SvgElement
 {
     [Fact]

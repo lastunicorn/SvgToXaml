@@ -20,79 +20,31 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RectTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenRectangleContainsDescription()
+    [Theory]
+    [InlineData("rect-desc.svg", typeof(SvgDescription))]
+    [InlineData("rect-title.svg", typeof(SvgTitle))]
+    [InlineData("rect-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("rect-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("rect-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("rect-script.svg", typeof(SvgScript))]
+    [InlineData("rect-style.svg", typeof(SvgStyle))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("rect-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgRectangle svgRectangle = svg.Children[0] as SvgRectangle;
+            SvgRectangle svgRectangle = result.Svg.Children[0] as SvgRectangle;
 
-            svgRectangle.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenRectangleContainsTitle()
-    {
-        ParseSvgFile("rect-title.svg", svg =>
-        {
-            SvgRectangle svgRectangle = svg.Children[0] as SvgRectangle;
-
-            svgRectangle.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenRectangleContainsLinearGradient()
-    {
-        ParseSvgFile("rect-lineargradient.svg", svg =>
-        {
-            SvgRectangle svgRectangle = svg.Children[0] as SvgRectangle;
-
-            svgRectangle.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenRectangleContainsRadialGradient()
-    {
-        ParseSvgFile("rect-radialgradient.svg", svg =>
-        {
-            SvgRectangle svgRectangle = svg.Children[0] as SvgRectangle;
-
-            svgRectangle.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenRectangleContainsClipPath()
-    {
-        ParseSvgFile("rect-clippath.svg", svg =>
-        {
-            SvgRectangle svgRectangle = svg.Children[0] as SvgRectangle;
-
-            svgRectangle.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenRectangleContainsStyle()
-    {
-        ParseSvgFile("rect-style.svg", svg =>
-        {
-            SvgRectangle svgRectangle = svg.Children[0] as SvgRectangle;
-
-            svgRectangle.Children[0].Should().BeOfType<SvgStyle>();
+            svgRectangle.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("rect-invalid.svg", context =>
+        ParseSvgFile("rect-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

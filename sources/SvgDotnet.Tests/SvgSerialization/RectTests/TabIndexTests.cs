@@ -18,6 +18,6 @@ using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RectTests;
 
-public class TabIndexTests : TabIndexTestsBase<SvgRectangle>
+public class TabindexTests : TabindexTestsBase<SvgRectangle>
 {
 }

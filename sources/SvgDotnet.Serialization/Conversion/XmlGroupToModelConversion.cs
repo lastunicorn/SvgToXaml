@@ -48,6 +48,7 @@ internal class XmlGroupToModelConversion : XmlContainerToModelConversion<XmlG, S
             typeof(XmlUse),
 
             typeof(XmlClipPath),
+            typeof(XmlScript),
             typeof(XmlStyle),
             typeof(XmlText)
         });

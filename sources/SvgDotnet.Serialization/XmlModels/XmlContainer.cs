@@ -57,7 +57,7 @@ public class XmlContainer : XmlElement
     //[XmlElement("image", typeof())]
     //[XmlElement("marker", typeof())]
     //[XmlElement("mask", typeof())]
-    //[XmlElement("script", typeof())]
+    [XmlElement("script", typeof(XmlScript))]
     [XmlElement("style", typeof(XmlStyle))]
     //[XmlElement("switch", typeof())]
     [XmlElement("text", typeof(XmlText))]

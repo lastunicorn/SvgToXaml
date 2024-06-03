@@ -39,11 +39,17 @@ internal class XmlStyleToModelConversion : XmlElementToModelConversion<XmlStyle,
     {
         base.ConvertProperties();
 
-        SvgElement.Title = XmlElement.Title;
-        SvgElement.Type = XmlElement.Type;
+        if (XmlElement.Title != null)
+            SvgElement.Title = XmlElement.Title;
 
-        IEnumerable<StyleRuleSet> svgStyleRuleSets = ParseStyles(XmlElement.Value);
-        SvgElement.RuleSets.AddRange(svgStyleRuleSets);
+        if (XmlElement.Type != null)
+            SvgElement.Type = XmlElement.Type;
+
+        if (XmlElement.Value != null)
+        {
+            IEnumerable<StyleRuleSet> svgStyleRuleSets = ParseStyles(XmlElement.Value);
+            SvgElement.RuleSets.AddRange(svgStyleRuleSets);
+        }
     }
 
     private static IEnumerable<StyleRuleSet> ParseStyles(string text)

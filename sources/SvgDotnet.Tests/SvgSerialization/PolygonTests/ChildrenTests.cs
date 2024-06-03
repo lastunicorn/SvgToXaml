@@ -20,69 +20,21 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.PolygonTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenPolygonContainsDescription()
+    [Theory]
+    [InlineData("polygon-desc.svg", typeof(SvgDescription))]
+    [InlineData("polygon-title.svg", typeof(SvgTitle))]
+    [InlineData("polygon-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("polygon-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("polygon-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("polygon-script.svg", typeof(SvgScript))]
+    [InlineData("polygon-style.svg", typeof(SvgStyle))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("polygon-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgPolygon svgPolygon = svg.Children[0] as SvgPolygon;
+            SvgPolygon svgPolygon = result.Svg.Children[0] as SvgPolygon;
 
-            svgPolygon.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenPolygonContainsTitle()
-    {
-        ParseSvgFile("polygon-title.svg", svg =>
-        {
-            SvgPolygon svgPolygon = svg.Children[0] as SvgPolygon;
-
-            svgPolygon.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenPolygonContainsLinearGradient()
-    {
-        ParseSvgFile("polygon-lineargradient.svg", svg =>
-        {
-            SvgPolygon svgPolygon = svg.Children[0] as SvgPolygon;
-
-            svgPolygon.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenPolygonContainsRadialGradient()
-    {
-        ParseSvgFile("polygon-radialgradient.svg", svg =>
-        {
-            SvgPolygon svgPolygon = svg.Children[0] as SvgPolygon;
-
-            svgPolygon.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenPolygonContainsClipPath()
-    {
-        ParseSvgFile("polygon-clippath.svg", svg =>
-        {
-            SvgPolygon svgPolygon = svg.Children[0] as SvgPolygon;
-
-            svgPolygon.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenPolygonContainsStyle()
-    {
-        ParseSvgFile("polygon-style.svg", svg =>
-        {
-            SvgPolygon svgPolygon = svg.Children[0] as SvgPolygon;
-
-            svgPolygon.Children[0].Should().BeOfType<SvgStyle>();
+            svgPolygon.Children[0].Should().BeOfType(svgElementType);
         });
     }
 

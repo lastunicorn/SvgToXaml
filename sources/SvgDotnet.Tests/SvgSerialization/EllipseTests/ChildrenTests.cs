@@ -20,79 +20,31 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.EllipseTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenEllipseContainsDescription()
+    [Theory]
+    [InlineData("ellipse-desc.svg", typeof(SvgDescription))]
+    [InlineData("ellipse-title.svg", typeof(SvgTitle))]
+    [InlineData("ellipse-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("ellipse-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("ellipse-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("ellipse-script.svg", typeof(SvgScript))]
+    [InlineData("ellipse-style.svg", typeof(SvgStyle))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("ellipse-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
+            SvgEllipse svgEllipse = result.Svg.Children[0] as SvgEllipse;
 
-            svgEllipse.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenEllipseContainsTitle()
-    {
-        ParseSvgFile("ellipse-title.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenEllipseContainsLinearGradient()
-    {
-        ParseSvgFile("ellipse-lineargradient.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenEllipseContainsRadialGradient()
-    {
-        ParseSvgFile("ellipse-radialgradient.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenEllipseContainsClipPath()
-    {
-        ParseSvgFile("ellipse-clippath.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenEllipseContainsStyle()
-    {
-        ParseSvgFile("ellipse-style.svg", svg =>
-        {
-            SvgEllipse svgEllipse = svg.Children[0] as SvgEllipse;
-
-            svgEllipse.Children[0].Should().BeOfType<SvgStyle>();
+            svgEllipse.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("ellipse-invalid.svg", context =>
+        ParseSvgFile("ellipse-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

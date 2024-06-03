@@ -20,223 +20,44 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.GTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenGroupContainsDescription()
+    [Theory]
+    [InlineData("g-desc.svg", typeof(SvgDescription))]
+    [InlineData("g-title.svg", typeof(SvgTitle))]
+    [InlineData("g-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("g-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("g-circle.svg", typeof(SvgCircle))]
+    [InlineData("g-ellipse.svg", typeof(SvgEllipse))]
+    [InlineData("g-line.svg", typeof(SvgLine))]
+    [InlineData("g-path.svg", typeof(SvgPath))]
+    [InlineData("g-polygon.svg", typeof(SvgPolygon))]
+    [InlineData("g-polyline.svg", typeof(SvgPolyline))]
+    [InlineData("g-rect.svg", typeof(SvgRectangle))]
+    [InlineData("g-defs.svg", typeof(SvgDefinitions))]
+    [InlineData("g-g.svg", typeof(SvgGroup))]
+    [InlineData("g-svg.svg", typeof(Svg))]
+    [InlineData("g-symbol.svg", typeof(SvgSymbol))]
+    [InlineData("g-use.svg", typeof(SvgUse))]
+    [InlineData("g-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("g-script.svg", typeof(SvgScript))]
+    [InlineData("g-style.svg", typeof(SvgStyle))]
+    [InlineData("g-text.svg", typeof(SvgText))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("g-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
+            SvgGroup svgGroup = result.Svg.Children[0] as SvgGroup;
 
-            svgGroup.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenGroupContainsTitle()
-    {
-        ParseSvgFile("g-title.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenGroupContainsLinearGradient()
-    {
-        ParseSvgFile("g-lineargradient.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenGroupContainsRadialGradient()
-    {
-        ParseSvgFile("g-radialgradient.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingCircleChild_WhenSvgFileIsParsed_ThenGroupContainsCircle()
-    {
-        ParseSvgFile("g-circle.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgCircle>();
-        });
-    }
-
-    [Fact]
-    public void HavingEllipseChild_WhenSvgFileIsParsed_ThenGroupContainsEllipse()
-    {
-        ParseSvgFile("g-ellipse.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgEllipse>();
-        });
-    }
-
-    [Fact]
-    public void HavingLineChild_WhenSvgFileIsParsed_ThenGroupContainsLine()
-    {
-        ParseSvgFile("g-line.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgLine>();
-        });
-    }
-
-    [Fact]
-    public void HavingPathChild_WhenSvgFileIsParsed_ThenGroupContainsPath()
-    {
-        ParseSvgFile("g-path.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingPolygonChild_WhenSvgFileIsParsed_ThenGroupContainsPolygon()
-    {
-        ParseSvgFile("g-polygon.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgPolygon>();
-        });
-    }
-
-    [Fact]
-    public void HavingPolylineChild_WhenSvgFileIsParsed_ThenGroupContainsPolygon()
-    {
-        ParseSvgFile("g-polyline.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgPolyline>();
-        });
-    }
-
-    [Fact]
-    public void HavingRectChild_WhenSvgFileIsParsed_ThenGroupContainsRectangle()
-    {
-        ParseSvgFile("g-rect.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgRectangle>();
-        });
-    }
-
-    [Fact]
-    public void HavingDefsChild_WhenSvgFileIsParsed_ThenGroupContainsDefinitions()
-    {
-        ParseSvgFile("g-defs.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgDefinitions>();
-        });
-    }
-
-    [Fact]
-    public void HavingGChild_WhenSvgFileIsParsed_ThenGroupContainsGroup()
-    {
-        ParseSvgFile("g-g.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgGroup>();
-        });
-    }
-
-    [Fact]
-    public void HavingSvgChild_WhenSvgFileIsParsed_ThenGroupContainsSvg()
-    {
-        ParseSvgFile("g-svg.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<Svg>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolChild_WhenSvgFileIsParsed_ThenGroupContainsSymbol()
-    {
-        ParseSvgFile("g-symbol.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgSymbol>();
-        });
-    }
-
-    [Fact]
-    public void HavingUseChild_WhenSvgFileIsParsed_ThenGroupContainsUse()
-    {
-        ParseSvgFile("g-use.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgUse>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenGroupContainsClipPath()
-    {
-        ParseSvgFile("g-clippath.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenGroupContainsStyle()
-    {
-        ParseSvgFile("g-style.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-            SvgStyle svgStyle = svgGroup.Children[0] as SvgStyle;
-
-            svgStyle.Should().NotBeNull();
-        });
-    }
-
-    [Fact]
-    public void HavingTextChild_WhenSvgFileIsParsed_ThenGroupContainsText()
-    {
-        ParseSvgFile("g-text.svg", svg =>
-        {
-            SvgGroup svgGroup = svg.Children[0] as SvgGroup;
-
-            svgGroup.Children[0].Should().BeOfType<SvgText>();
+            svgGroup.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("g-invalid.svg", context =>
+        ParseSvgFile("g-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

@@ -48,6 +48,7 @@ internal class XmlSymbolToModelConversion : XmlContainerToModelConversion<XmlSym
             typeof(XmlUse),
 
             typeof(XmlClipPath),
+            typeof(XmlScript),
             typeof(XmlStyle),
             typeof(XmlText)
         });
@@ -60,11 +61,15 @@ internal class XmlSymbolToModelConversion : XmlContainerToModelConversion<XmlSym
 
     protected override void ConvertProperties()
     {
-        if (XmlElement == null)
-            return;
-
         base.ConvertProperties();
 
+        ConvertLocation();
+        ConvertSize();
+        ConvertViewBox();
+    }
+
+    private void ConvertLocation()
+    {
         LengthPercentage? x = XmlElement.X;
 
         if (x != null)
@@ -74,13 +79,19 @@ internal class XmlSymbolToModelConversion : XmlContainerToModelConversion<XmlSym
 
         if (y != null)
             SvgElement.Y = y;
+    }
 
+    private void ConvertSize()
+    {
         if (XmlElement.Width != null)
             SvgElement.Width = XmlElement.Width;
 
         if (XmlElement.Height != null)
             SvgElement.Height = XmlElement.Height;
+    }
 
+    private void ConvertViewBox()
+    {
         if (XmlElement.ViewBox != null)
             SvgElement.ViewBox = XmlElement.ViewBox;
     }

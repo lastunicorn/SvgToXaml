@@ -34,6 +34,7 @@ internal abstract class XmlShapeToModelConversion<TXml, TSvg> : XmlContainerToMo
             typeof(XmlRadialGradient),
 
             typeof(XmlClipPath),
+            typeof(XmlScript),
             typeof(XmlStyle)
         });
     }

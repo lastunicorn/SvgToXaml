@@ -48,6 +48,7 @@ internal class XmlDefsToModelConversion : XmlContainerToModelConversion<XmlDefs,
             typeof(XmlUse),
 
             typeof(XmlClipPath),
+            typeof(XmlScript),
             typeof(XmlStyle),
             typeof(XmlText)
         });

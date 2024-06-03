@@ -18,6 +18,6 @@ using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.TitleTests;
 
-public class TabIndexTests : TabIndexTestsBase<SvgTitle>
+public class TabindexTests : TabindexTestsBase<SvgTitle>
 {
 }

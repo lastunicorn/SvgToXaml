@@ -49,6 +49,7 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
             typeof(XmlUse),
 
             typeof(XmlClipPath),
+            typeof(XmlScript),
             typeof(XmlStyle),
             typeof(XmlText)
         });

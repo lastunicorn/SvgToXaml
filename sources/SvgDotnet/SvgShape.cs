@@ -32,6 +32,7 @@ public abstract class SvgShape : SvgContainer
             typeof(SvgRadialGradient),
 
             typeof(SvgClipPath),
+            typeof(SvgScript),
             typeof(SvgStyle)
         };
     }

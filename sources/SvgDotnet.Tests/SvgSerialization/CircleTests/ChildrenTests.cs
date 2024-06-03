@@ -20,79 +20,31 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.CircleTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenCircleContainsDescription()
+    [Theory]
+    [InlineData("circle-desc.svg", typeof(SvgDescription))]
+    [InlineData("circle-title.svg", typeof(SvgTitle))]
+    [InlineData("circle-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("circle-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("circle-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("circle-script.svg", typeof(SvgScript))]
+    [InlineData("circle-style.svg", typeof(SvgStyle))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("circle-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
+            SvgCircle svgCircle = result.Svg.Children[0] as SvgCircle;
 
-            svgCircle.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenCircleContainsTitle()
-    {
-        ParseSvgFile("circle-title.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenCircleContainsLinearGradient()
-    {
-        ParseSvgFile("circle-lineargradient.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenCircleContainsRadialGradient()
-    {
-        ParseSvgFile("circle-radialgradient.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenCircleContainsClipPath()
-    {
-        ParseSvgFile("circle-clippath.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenCircleContainsStyle()
-    {
-        ParseSvgFile("circle-style.svg", svg =>
-        {
-            SvgCircle svgCircle = svg.Children[0] as SvgCircle;
-
-            svgCircle.Children[0].Should().BeOfType<SvgStyle>();
+            svgCircle.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("circle-invalid.svg", context =>
+        ParseSvgFile("circle-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

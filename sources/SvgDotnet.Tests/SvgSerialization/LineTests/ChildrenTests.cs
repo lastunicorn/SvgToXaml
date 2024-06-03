@@ -20,69 +20,21 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.LineTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenRectangleContainsDescription()
+    [Theory]
+    [InlineData("line-desc.svg", typeof(SvgDescription))]
+    [InlineData("line-title.svg", typeof(SvgTitle))]
+    [InlineData("line-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("line-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("line-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("line-script.svg", typeof(SvgScript))]
+    [InlineData("line-style.svg", typeof(SvgStyle))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("line-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgLine svgLine = svg.Children[0] as SvgLine;
+            SvgLine svgLine = result.Svg.Children[0] as SvgLine;
 
-            svgLine.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenRectangleContainsTitle()
-    {
-        ParseSvgFile("line-title.svg", svg =>
-        {
-            SvgLine svgLine = svg.Children[0] as SvgLine;
-
-            svgLine.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingLinearGradientChild_WhenSvgFileIsParsed_ThenLineContainsLinearGradient()
-    {
-        ParseSvgFile("line-lineargradient.svg", svg =>
-        {
-            SvgLine svgLine = svg.Children[0] as SvgLine;
-
-            svgLine.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingRadialGradientChild_WhenSvgFileIsParsed_ThenLineContainsRadialGradient()
-    {
-        ParseSvgFile("line-radialgradient.svg", svg =>
-        {
-            SvgLine svgLine = svg.Children[0] as SvgLine;
-
-            svgLine.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenLineContainsClipPath()
-    {
-        ParseSvgFile("line-clippath.svg", svg =>
-        {
-            SvgLine svgLine = svg.Children[0] as SvgLine;
-
-            svgLine.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenRectangleContainsStyle()
-    {
-        ParseSvgFile("line-style.svg", svg =>
-        {
-            SvgLine svgLine = svg.Children[0] as SvgLine;
-
-            svgLine.Children[0].Should().BeOfType<SvgStyle>();
+            svgLine.Children[0].Should().BeOfType(svgElementType);
         });
     }
 

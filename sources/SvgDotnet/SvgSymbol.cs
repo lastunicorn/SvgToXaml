@@ -55,6 +55,7 @@ public class SvgSymbol : SvgContainer
             typeof(SvgUse),
 
             typeof(SvgClipPath),
+            typeof(SvgScript),
             typeof(SvgStyle),
             typeof(SvgText)
         };

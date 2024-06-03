@@ -18,6 +18,6 @@ using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.ClipPathTests;
 
-public class TabIndexTests : TabIndexNotAllowedTestsBase<SvgClipPath>
+public class TabindexTests : TabindexNotAllowedTestsBase<SvgClipPath>
 {
 }

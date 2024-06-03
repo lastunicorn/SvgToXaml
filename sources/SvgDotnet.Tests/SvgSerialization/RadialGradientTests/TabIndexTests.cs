@@ -18,7 +18,7 @@ using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RadialGradientTests;
 
-public class TabIndexTests : TabIndexTestsBase<SvgRadialGradient>
+public class TabindexTests : TabindexTestsBase<SvgRadialGradient>
 {
     protected override SvgRadialGradient SelectElementToTest(Svg svg)
     {

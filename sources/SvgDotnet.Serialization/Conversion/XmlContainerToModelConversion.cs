@@ -106,6 +106,9 @@ internal abstract class XmlContainerToModelConversion<TXml, TSvg> : XmlElementTo
             case XmlSvg childXmlSvg:
                 return new XmlSvgToModelConversion(childXmlSvg, DeserializationContext);
 
+            case XmlScript xmlScript:
+                return new XmlScriptToModelConversion(xmlScript, DeserializationContext);
+
             case XmlSymbol xmlSymbol:
                 return new XmlSymbolToModelConversion(xmlSymbol, DeserializationContext);
 

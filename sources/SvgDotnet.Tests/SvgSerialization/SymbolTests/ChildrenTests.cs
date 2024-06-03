@@ -20,222 +20,44 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.SymbolTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenSymbolContainsDescription()
+    [Theory]
+    [InlineData("symbol-desc.svg", typeof(SvgDescription))]
+    [InlineData("symbol-title.svg", typeof(SvgTitle))]
+    [InlineData("symbol-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("symbol-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("symbol-circle.svg", typeof(SvgCircle))]
+    [InlineData("symbol-ellipse.svg", typeof(SvgEllipse))]
+    [InlineData("symbol-line.svg", typeof(SvgLine))]
+    [InlineData("symbol-path.svg", typeof(SvgPath))]
+    [InlineData("symbol-polygon.svg", typeof(SvgPolygon))]
+    [InlineData("symbol-polyline.svg", typeof(SvgPolyline))]
+    [InlineData("symbol-rect.svg", typeof(SvgRectangle))]
+    [InlineData("symbol-defs.svg", typeof(SvgDefinitions))]
+    [InlineData("symbol-g.svg", typeof(SvgGroup))]
+    [InlineData("symbol-svg.svg", typeof(Svg))]
+    [InlineData("symbol-symbol.svg", typeof(SvgSymbol))]
+    [InlineData("symbol-use.svg", typeof(SvgUse))]
+    [InlineData("symbol-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("symbol-script.svg", typeof(SvgScript))]
+    [InlineData("symbol-style.svg", typeof(SvgStyle))]
+    [InlineData("symbol-text.svg", typeof(SvgText))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("symbol-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
+            SvgSymbol svgSymbol = result.Svg.Children[0] as SvgSymbol;
 
-            svgSymbol.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithTitleChild_WhenSvgFileIsParsed_ThenSymbolContainsTitle()
-    {
-        ParseSvgFile("symbol-title.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithLinearGradientChild_WhenSvgFileIsParsed_ThenSymbolContainsLinearGradient()
-    {
-        ParseSvgFile("symbol-lineargradient.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgLinearGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithRadialGradientChild_WhenSvgFileIsParsed_ThenSymbolContainsRadialGradient()
-    {
-        ParseSvgFile("symbol-radialgradient.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgRadialGradient>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithCircleChild_WhenSvgFileIsParsed_ThenSymbolContainsCircle()
-    {
-        ParseSvgFile("symbol-circle.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgCircle>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithEllipseChild_WhenSvgFileIsParsed_ThenSymbolContainsEllipse()
-    {
-        ParseSvgFile("symbol-ellipse.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgEllipse>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithLineChild_WhenSvgFileIsParsed_ThenSymbolContainsLine()
-    {
-        ParseSvgFile("symbol-line.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgLine>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithPathChild_WhenSvgFileIsParsed_ThenSymbolContainsPath()
-    {
-        ParseSvgFile("symbol-path.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithPolygonChild_WhenSvgFileIsParsed_ThenSymbolContainsPolygon()
-    {
-        ParseSvgFile("symbol-polygon.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgPolygon>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithPolylineChild_WhenSvgFileIsParsed_ThenSymbolContainsPolygon()
-    {
-        ParseSvgFile("symbol-polyline.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgPolyline>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithRectChild_WhenSvgFileIsParsed_ThenSymbolContainsRectangle()
-    {
-        ParseSvgFile("symbol-rect.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgRectangle>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithDefsChild_WhenSvgFileIsParsed_ThenSymbolContainsDefinitions()
-    {
-        ParseSvgFile("symbol-defs.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgDefinitions>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithGChild_WhenSvgFileIsParsed_ThenSymbolContainsGroup()
-    {
-        ParseSvgFile("symbol-g.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgGroup>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithSvgChild_WhenSvgFileIsParsed_ThenSymbolContainsChildSvg()
-    {
-        ParseSvgFile("symbol-svg.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<Svg>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolChild_WhenSvgFileIsParsed_ThenSymbolContainsSymbol()
-    {
-        ParseSvgFile("symbol-symbol.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgSymbol>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithUseChild_WhenSvgFileIsParsed_ThenSymbolContainsUse()
-    {
-        ParseSvgFile("symbol-use.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgUse>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithClipPathChild_WhenSvgFileIsParsed_ThenSymbolContainsClipPath()
-    {
-        ParseSvgFile("symbol-clippath.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithStyleChild_WhenSvgFileIsParsed_ThenSymbolContainsStyle()
-    {
-        ParseSvgFile("symbol-style.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgStyle>();
-        });
-    }
-
-    [Fact]
-    public void HavingSymbolWithTextChild_WhenSvgFileIsParsed_ThenSymbolContainsText()
-    {
-        ParseSvgFile("symbol-text.svg", svg =>
-        {
-            SvgSymbol svgSymbol = svg.Children[0] as SvgSymbol;
-
-            svgSymbol.Children[0].Should().BeOfType<SvgText>();
+            svgSymbol.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("symbol-invalid.svg", context =>
+        ParseSvgFile("symbol-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

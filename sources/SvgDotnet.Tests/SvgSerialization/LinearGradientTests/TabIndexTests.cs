@@ -18,6 +18,6 @@ using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
 namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.LinearGradientTests;
 
-public class TabIndexTests : TabIndexTestsBase<SvgLinearGradient>
+public class TabindexTests : TabindexTestsBase<SvgLinearGradient>
 {
 }
