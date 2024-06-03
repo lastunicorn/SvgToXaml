@@ -18,13 +18,26 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, SvgUse>
+internal class XmlUseToModelConversion : XmlContainerToModelConversion<XmlUse, SvgUse>
 {
     protected override string ElementName => "use";
 
     public XmlUseToModelConversion(XmlUse xmlElement, DeserializationContext deserializationContext)
         : base(xmlElement, deserializationContext)
     {
+        AllowedChildTypes.AddRange(new[]
+        {
+            // Descriptive elements
+            typeof(XmlDesc),
+            typeof(XmlTitle),
+            //typeof(XmlMetadata),
+            
+            // Other elements
+            typeof(XmlClipPath),
+            //typeof(XmlMask),
+            typeof(XmlScript),
+            typeof(XmlStyle)
+        });
     }
 
     protected override SvgUse CreateSvgElement()
@@ -39,7 +52,6 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
         ConvertPosition();
         ConvertSize();
         ConvertReference();
-        ConvertChildren();
     }
 
     private void ConvertPosition()
@@ -67,42 +79,5 @@ internal class XmlUseToModelConversion : XmlElementToModelConversion<XmlUse, Svg
     private void ConvertReference()
     {
         SvgElement.Href = XmlElement.Href ?? XmlElement.HrefLink;
-    }
-
-    private void ConvertChildren()
-    {
-        if (XmlElement.Children != null)
-        {
-            IEnumerable<SvgElement> elements = XmlElement.Children
-                .Select(CreateConversionFor)
-                .Where(x => x != null)
-                .Select(x => x.Execute());
-
-            foreach (SvgElement svgElement in elements)
-                SvgElement.Children.Add(svgElement);
-        }
-    }
-
-    private IToModelConversion<SvgElement> CreateConversionFor(object objectToConvert)
-    {
-        switch (objectToConvert)
-        {
-            case XmlDesc desc:
-                return new XmlDescToModelConversion(desc, DeserializationContext);
-
-            case XmlTitle title:
-                return new XmlTitleToModelConversion(title, DeserializationContext);
-
-            case XmlClipPath clipPath:
-                return new XmlClipPathToModelConversion(clipPath, DeserializationContext);
-
-            case XmlStyle style:
-                return new XmlStyleToModelConversion(style, DeserializationContext);
-
-            default:
-                string path = DeserializationContext.Path.ToString();
-                DeserializationContext.Issues.AddError(path, $"[{ElementName}] Unknown element type {objectToConvert.GetType().Name}.");
-                return null;
-        }
     }
 }

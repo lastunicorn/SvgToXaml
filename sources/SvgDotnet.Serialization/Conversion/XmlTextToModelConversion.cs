@@ -18,13 +18,25 @@ using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
 
-internal class XmlTextToModelConversion : XmlElementToModelConversion<XmlText, SvgText>
+internal class XmlTextToModelConversion : XmlContainerToModelConversion<XmlText, SvgText>
 {
     protected override string ElementName => "text";
 
     public XmlTextToModelConversion(XmlText xmlElement, DeserializationContext deserializationContext)
         : base(xmlElement, deserializationContext)
     {
+        AllowedChildTypes.AddRange(new[]
+        {
+            typeof(XmlDesc),
+            typeof(XmlTitle),
+
+            typeof(XmlLinearGradient),
+            typeof(XmlRadialGradient),
+
+            typeof(XmlClipPath),
+            typeof(XmlScript),
+            typeof(XmlStyle)
+        });
     }
 
     protected override SvgText CreateSvgElement()

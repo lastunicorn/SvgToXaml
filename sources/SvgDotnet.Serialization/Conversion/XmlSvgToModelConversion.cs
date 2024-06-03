@@ -62,9 +62,6 @@ internal class XmlSvgToModelConversion : XmlContainerToModelConversion<XmlSvg, S
 
     protected override void ConvertProperties()
     {
-        if (XmlElement == null)
-            return;
-
         base.ConvertProperties();
 
         ConvertVersion();

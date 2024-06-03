@@ -14,27 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Xml.Serialization;
+using DustInTheWind.SvgDotnet.Tests.SvgSerialization.SvgElementTests;
 
-namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
+namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.TextTests;
 
-public class XmlUse : XmlContainer
+public class TabindexTests : TabindexTestsBase<SvgText>
 {
-    [XmlAttribute("href")]
-    public string Href { get; set; }
-
-    [XmlAttribute("href", Namespace = Namespaces.XLink)]
-    public string HrefLink { get; set; }
-
-    [XmlAttribute("x")]
-    public string X { get; set; }
-
-    [XmlAttribute("y")]
-    public string Y { get; set; }
-
-    [XmlAttribute("width")]
-    public string Width { get; set; }
-
-    [XmlAttribute("height")]
-    public string Height { get; set; }
 }

@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.SvgDotnet;
 
-public class SvgText : SvgElement
+public class SvgText : SvgContainer
 {
     public override string ElementName => "text";
 
@@ -25,4 +25,20 @@ public class SvgText : SvgElement
     public Length? X { get; set; }
 
     public Length? Y { get; set; }
+
+    public SvgText()
+    {
+        Children.AcceptedTypes = new[]
+        {
+            typeof(SvgDescription),
+            typeof(SvgTitle),
+
+            typeof(SvgLinearGradient),
+            typeof(SvgRadialGradient),
+            
+            typeof(SvgClipPath),
+            typeof(SvgScript),
+            typeof(SvgStyle)
+        };
+    }
 }

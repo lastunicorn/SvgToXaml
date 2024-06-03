@@ -20,57 +20,29 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.UseTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenUseContainsDescription()
+    [Theory]
+    [InlineData("use-desc.svg", typeof(SvgDescription))]
+    [InlineData("use-title.svg", typeof(SvgTitle))]
+    [InlineData("use-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("use-script.svg", typeof(SvgScript))]
+    [InlineData("use-style.svg", typeof(SvgStyle))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("use-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
+            SvgUse svgUse = result.Svg.Children[0] as SvgUse;
 
-            svgUse.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenUseContainsTitle()
-    {
-        ParseSvgFile("use-title.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingClipPathChild_WhenSvgFileIsParsed_ThenUseContainsClipPath()
-    {
-        ParseSvgFile("use-clippath.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Children[0].Should().BeOfType<SvgClipPath>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenUseContainsStyle()
-    {
-        ParseSvgFile("use-style.svg", svg =>
-        {
-            SvgUse svgUse = svg.Children[0] as SvgUse;
-
-            svgUse.Children[0].Should().BeOfType<SvgStyle>();
+            svgUse.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("use-invalid.svg", context =>
+        ParseSvgFile("use-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

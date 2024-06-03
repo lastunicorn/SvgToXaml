@@ -18,7 +18,7 @@ using System.Xml.Serialization;
 
 namespace DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
-public class XmlText : XmlElement
+public class XmlText : XmlContainer
 {
     [XmlText]
     public string Text { get; set; }

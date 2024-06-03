@@ -37,6 +37,7 @@ public class SvgUse : SvgContainer
             typeof(SvgDescription),
             typeof(SvgTitle),
             typeof(SvgClipPath),
+            typeof(SvgScript),
             typeof(SvgStyle)
         };
     }

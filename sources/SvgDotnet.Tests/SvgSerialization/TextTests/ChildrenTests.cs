@@ -16,34 +16,35 @@
 
 using DustInTheWind.SvgDotnet.Serialization;
 
-namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.RadialGradientTests;
+namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.TextTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
     [Theory]
-    [InlineData("radialgradient-desc.svg", typeof(SvgDescription))]
-    [InlineData("radialgradient-title.svg", typeof(SvgTitle))]
-    [InlineData("radialgradient-stop.svg", typeof(SvgStop))]
-    [InlineData("radialgradient-script.svg", typeof(SvgScript))]
-    [InlineData("radialgradient-style.svg", typeof(SvgStyle))]
-    [InlineData("radialgradient-text.svg", typeof(SvgText))]
+    [InlineData("text-desc.svg", typeof(SvgDescription))]
+    [InlineData("text-title.svg", typeof(SvgTitle))]
+    [InlineData("text-lineargradient.svg", typeof(SvgLinearGradient))]
+    [InlineData("text-radialgradient.svg", typeof(SvgRadialGradient))]
+    [InlineData("text-clippath.svg", typeof(SvgClipPath))]
+    [InlineData("text-script.svg", typeof(SvgScript))]
+    [InlineData("text-style.svg", typeof(SvgStyle))]
     public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
         ParseSvgFile(fileName, result =>
         {
-            SvgRadialGradient svgRadialGradient = result.Svg.Children[0] as SvgRadialGradient;
+            SvgText svgText = result.Svg.Children[0] as SvgText;
 
-            svgRadialGradient.Children[0].Should().BeOfType(svgElementType);
+            svgText.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
     [Fact]
     public void HavingInvalidChild_WhenSvgFileIsParsed_ThenReturnsWarning()
     {
-        ParseSvgFile("radialgradient-invalid.svg", context =>
+        ParseSvgFile("text-invalid.svg", result =>
         {
-            context.Issues.Should().HaveCount(1);
-            context.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
+            result.Issues.Should().HaveCount(1);
+            result.Issues[0].Level.Should().Be(DeserializationIssueLevel.Warning);
         });
     }
 }

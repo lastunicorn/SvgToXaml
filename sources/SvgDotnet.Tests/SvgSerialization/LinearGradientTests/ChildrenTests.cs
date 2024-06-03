@@ -20,47 +20,20 @@ namespace DustInTheWind.SvgDotnet.Tests.SvgSerialization.LinearGradientTests;
 
 public class ChildrenTests : SvgFileTestsBase
 {
-    [Fact]
-    public void HavingDescChild_WhenSvgFileIsParsed_ThenLinearGradientContainsDescription()
+    [Theory]
+    [InlineData("lineargradient-desc.svg", typeof(SvgDescription))]
+    [InlineData("lineargradient-title.svg", typeof(SvgTitle))]
+    [InlineData("lineargradient-stop.svg", typeof(SvgStop))]
+    [InlineData("lineargradient-script.svg", typeof(SvgScript))]
+    [InlineData("lineargradient-style.svg", typeof(SvgStyle))]
+    [InlineData("lineargradient-text.svg", typeof(SvgText))]
+    public void HavingOneSpecificChild_WhenSvgFileIsParsed_ThenEllipseContainsCorrectChildType(string fileName, Type svgElementType)
     {
-        ParseSvgFile("lineargradient-desc.svg", svg =>
+        ParseSvgFile(fileName, result =>
         {
-            SvgLinearGradient svgLinearGradient = svg.Children[0] as SvgLinearGradient;
+            SvgLinearGradient svgLinearGradient = result.Svg.Children[0] as SvgLinearGradient;
 
-            svgLinearGradient.Children[0].Should().BeOfType<SvgDescription>();
-        });
-    }
-
-    [Fact]
-    public void HavingTitleChild_WhenSvgFileIsParsed_ThenLinearGradientContainsTitle()
-    {
-        ParseSvgFile("lineargradient-title.svg", svg =>
-        {
-            SvgLinearGradient svgLinearGradient = svg.Children[0] as SvgLinearGradient;
-
-            svgLinearGradient.Children[0].Should().BeOfType<SvgTitle>();
-        });
-    }
-
-    [Fact]
-    public void HavingStopChild_WhenSvgFileIsParsed_ThenLinearGradientContainsStop()
-    {
-        ParseSvgFile("lineargradient-stop.svg", svg =>
-        {
-            SvgLinearGradient svgLinearGradient = svg.Children[0] as SvgLinearGradient;
-
-            svgLinearGradient.Children[0].Should().BeOfType<SvgStop>();
-        });
-    }
-
-    [Fact]
-    public void HavingStyleChild_WhenSvgFileIsParsed_ThenLinearGradientContainsStyle()
-    {
-        ParseSvgFile("lineargradient-style.svg", svg =>
-        {
-            SvgLinearGradient svgLinearGradient = svg.Children[0] as SvgLinearGradient;
-
-            svgLinearGradient.Children[0].Should().BeOfType<SvgStyle>();
+            svgLinearGradient.Children[0].Should().BeOfType(svgElementType);
         });
     }
 
