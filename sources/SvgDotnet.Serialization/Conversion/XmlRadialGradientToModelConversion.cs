@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.IO;
 using DustInTheWind.SvgDotnet.Serialization.XmlModels;
 
 namespace DustInTheWind.SvgDotnet.Serialization.Conversion;
@@ -141,7 +142,26 @@ internal class XmlRadialGradientToModelConversion : XmlElementToModelConversion<
     private void ConvertGradientTransform()
     {
         if (XmlElement.GradientTransform != null)
-            SvgElement.GradientTransforms.ParseAndAdd(XmlElement.GradientTransform);
+        {
+            try
+            {
+                SvgElement.GradientTransforms.ParseAndAdd(XmlElement.GradientTransform);
+            }
+            catch (Exception ex)
+            {
+                DeserializationContext.Path.AddAttribute("gradientTransform");
+                string path = DeserializationContext.Path.ToString();
+                DeserializationContext.Path.RemoveLast();
+
+                DeserializationIssue issue = new()
+                {
+                    Level = DeserializationIssueLevel.Error,
+                    Path = path,
+                    Message = ex.ToString()
+                };
+                DeserializationContext.Issues.Add(issue);
+            }
+        }
     }
 
     private void ConvertHref()

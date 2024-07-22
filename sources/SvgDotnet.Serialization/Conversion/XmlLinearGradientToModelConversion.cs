@@ -112,7 +112,26 @@ internal class XmlLinearGradientToModelConversion : XmlElementToModelConversion<
     private void ConvertGradientTransform()
     {
         if (XmlElement.GradientTransform != null)
-            SvgElement.GradientTransforms.ParseAndAdd(XmlElement.GradientTransform);
+        {
+            try
+            {
+                SvgElement.GradientTransforms.ParseAndAdd(XmlElement.GradientTransform);
+            }
+            catch (Exception ex)
+            {
+                DeserializationContext.Path.AddAttribute("gradientTransform");
+                string path = DeserializationContext.Path.ToString();
+                DeserializationContext.Path.RemoveLast();
+
+                DeserializationIssue issue = new()
+                {
+                    Level = DeserializationIssueLevel.Error,
+                    Path = path,
+                    Message = ex.ToString()
+                };
+                DeserializationContext.Issues.Add(issue);
+            }
+        }
     }
 
     private void ConvertHref()

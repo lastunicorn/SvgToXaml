@@ -109,7 +109,26 @@ internal abstract class XmlElementToModelConversion<TXml, TSvg> : ToModelConvers
             SvgElement.FontSize = XmlElement.FontSize;
 
         if (XmlElement.Transform != null)
-            SvgElement.Transforms.ParseAndAdd(XmlElement.Transform);
+        {
+            try
+            {
+                SvgElement.Transforms.ParseAndAdd(XmlElement.Transform);
+            }
+            catch (Exception ex)
+            {
+                DeserializationContext.Path.AddAttribute("gradientTransform");
+                string path = DeserializationContext.Path.ToString();
+                DeserializationContext.Path.RemoveLast();
+
+                DeserializationIssue issue = new()
+                {
+                    Level = DeserializationIssueLevel.Error,
+                    Path = path,
+                    Message = ex.ToString()
+                };
+                DeserializationContext.Issues.Add(issue);
+            }
+        }
 
         if (XmlElement.OpacitySpecified)
             SvgElement.Opacity = XmlElement.Opacity;
